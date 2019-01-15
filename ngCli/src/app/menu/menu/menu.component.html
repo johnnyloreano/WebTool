@@ -1,0 +1,12 @@
+<div class='text-center container'>
+  <header tabindex='0'>
+    <h5>
+      Nome da molécula : {{pdbContent['identifier']}}
+    </h5>
+  </header>
+  <menu>
+    <!-- <button class='btn bg-primary text-white mb-4' (click)="parseLabels()">Ver estrutura da proteína</button> -->
+    <a class='btn bg-primary text-white' [routerLink]="['/proteinView']">Ver informações gerais</a>
+  </menu>
+    <router-outlet></router-outlet>
+</div>
