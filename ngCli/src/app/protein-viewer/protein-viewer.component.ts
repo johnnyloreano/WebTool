@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
               Proteína: {{proteinName}} 
             </h3>
             <div [ngStyle]="{'position':'relative','background-color': '#ADD8E6', 'min-height': '80vh', 'width': '95%', 'margin':'0 auto'}">
-              <ng-template a-host></ng-template>
+              <ng-template a-host ></ng-template>
             </div>
             `
 })
@@ -43,8 +43,10 @@ export class ProteinViewerComponent implements OnInit {
       if(this.aminoNames.includes(arrLabel[i].initials) ){
         let componentRef = viewContainer.createComponent(componentFactory);
         arrComponent.push(componentRef.instance);
+
         arrComponent[i].setPosition(pos[i][1],pos[i][0]);
         (<LabelComponent>componentRef.instance).name = protein.residues[i].initials;
+        arrComponent[i].notifyParent.subscribe(data => {console.log(data)})
         if(i > 0){
           let aux = this.getTransition(arrComponent[i].getPosArray(),arrComponent[i-1].getPosArray());
           arrComponent[i].downSound = aux[0];
@@ -80,7 +82,6 @@ export class ProteinViewerComponent implements OnInit {
         else arrComponent[i].isFirst = true;
       }
     }
-    console.log(arrComponent)
   }
 
   getTan(pos1:Array<number>, pos2:Array<number>) : number{ 

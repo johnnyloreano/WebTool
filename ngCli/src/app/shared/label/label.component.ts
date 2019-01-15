@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject, Injectable} from '@angular/core';
+import { Component, OnInit, Input,Output, EventEmitter} from '@angular/core';
 @Component({
   selector: 'app-label',
   template: `
@@ -11,6 +11,7 @@ import { Component, OnInit, Input, Inject, Injectable} from '@angular/core';
 })
 export class LabelComponent implements OnInit {
   @Input() name:string;
+  @Output() notifyParent: EventEmitter<any> = new EventEmitter();
   private _y  : number;
   private _x  : number;
   private _upSound: string;
@@ -47,6 +48,9 @@ export class LabelComponent implements OnInit {
     "NH2":"NOTSUPPORTED"
   }
   ngOnInit(){}
+  sendNotification(){
+    return this.notifyParent.emit(this.getName())
+  }
   getPosArray(): Array<number>{
     return [this._x,this._y];
   }
@@ -104,9 +108,10 @@ export class LabelComponent implements OnInit {
   }
   decideSound(event : any){
       if(event.keyCode == 9){
-        if(event.shiftKey)
-         return this.speak(this._downSound);
-      return this.speak(this._upSound );
+        this.sendNotification()
+        //   if(event.shiftKey)
+      //    return this.speak(this._downSound);
+      // return this.speak(this._upSound );
       }
       if(event.keyCode == 32){
         let message = "Posição atual: "+this.ariaDictionary[this.name]

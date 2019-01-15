@@ -16,7 +16,8 @@ export class DataService {
                                         protein['version'],
                                         protein['residues'],
                                         protein['alpha_loc'],
-                                        protein['helix_range']));  
+                                        protein['helix_range'],
+                                        protein['sheet_range']));  
   }
   getProtein(): Protein{
     return this.proteinData.getValue();
