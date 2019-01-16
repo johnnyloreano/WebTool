@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
             </h3>
             <div [ngStyle]="{'position':'relative','background-color': '#ADD8E6', 'min-height': '80vh', 'width': '95%', 'margin':'0 auto'}">
               <ng-template a-host ></ng-template>
+              <button (click)='openModal("aa")'>asd</button>
             </div>
             `
 })
@@ -31,26 +32,33 @@ export class ProteinViewerComponent implements OnInit {
     let protein = this._dataService.getProtein();
     let arrLabel = protein.residues;
     let pos = protein.alphaLoc;
+    
     let helix_range = protein.helix_range;
     let sheet_range = protein.sheet_range;
+    
+    let actualHelix = 0;
+    let actualSheet = 0;
+
     let componentFactory = this._componentFactoryResolver.resolveComponentFactory(LabelComponent);
     let viewContainer = this.host.viewContainerRef;
     let arrComponent = Array<LabelComponent>();
+    
     viewContainer.clear();
-    let actualHelix = 0;
-    let actualSheet = 0;    
     for(let i = 0; i < arrLabel.length;i++){
       if(this.aminoNames.includes(arrLabel[i].initials) ){
         let componentRef = viewContainer.createComponent(componentFactory);
         arrComponent.push(componentRef.instance);
-
+        //Amino's plot
         arrComponent[i].setPosition(pos[i][1],pos[i][0]);
         (<LabelComponent>componentRef.instance).name = protein.residues[i].initials;
-        arrComponent[i].notifyParent.subscribe(data => {console.log(data)})
+        arrComponent[i].openModal.subscribe(this.createText)
+        arrComponent[i].parent = this
         if(i > 0){
-          let aux = this.getTransition(arrComponent[i].getPosArray(),arrComponent[i-1].getPosArray());
-          arrComponent[i].downSound = aux[0];
-          arrComponent[i-1].upSound = aux[1];
+          //Sound placement
+          let transitions = this.getTransition(arrComponent[i].getPosArray(),arrComponent[i-1].getPosArray());
+          arrComponent[i].downSound = transitions[0];
+          arrComponent[i-1].upSound = transitions[1];
+
           //Helix verification
           if(helix_range.length > 0){
             if (arrLabel[i].number == helix_range[actualHelix][0]){
@@ -65,18 +73,18 @@ export class ProteinViewerComponent implements OnInit {
           }
         }
         //Sheet verification
-        if(sheet_range.length > 0){
-          if (arrLabel[i].number == sheet_range[actualSheet][0]){
-            arrComponent[i].isFirstSheet = true
+          if(sheet_range.length > 0){
+            if (arrLabel[i].number == sheet_range[actualSheet][0]){
+              arrComponent[i].isFirstSheet = true
+            }
+            else if (arrLabel[i].number == sheet_range[actualSheet][1]){
+              arrComponent[i].isLastSheet = true
+              actualSheet++
+            }
+            else if (arrLabel[i].number > sheet_range[actualSheet][0]){
+            arrComponent[i].isSheet = true
+            }
           }
-          else if (arrLabel[i].number == sheet_range[actualSheet][1]){
-            arrComponent[i].isLastSheet = true
-            actualSheet++
-          }
-          else if (arrLabel[i].number > sheet_range[actualSheet][0]){
-          arrComponent[i].isSheet = true
-        }
-        }
         }
         else if(i == arrLabel.length) arrComponent[i].isLast = true;
         else arrComponent[i].isFirst = true;
@@ -88,6 +96,7 @@ export class ProteinViewerComponent implements OnInit {
     let val = (pos2[1] - pos1[1]) / (pos2[0] - pos1[0]);
     return val;
   }
+
   getDegree(pos1:Array<number>, pos2:Array<number>) : number{
   let val = this.getTan(pos1,pos2);
   let valInv = 1 / val;
@@ -95,9 +104,11 @@ export class ProteinViewerComponent implements OnInit {
   valInv = Math.atan(valInv) * 180 / Math.PI
     return Math.trunc(Math.abs(val)) ;
   }
+
   getInverseDegree(pos1:Array<number>, pos2:Array<number>) : number{
     return Math.abs(this.getDegree(pos1,pos2) - 90 )
   }
+
   toHour(degree: number): number[]{
     let aux = (degree/30);
     let hour = Math.trunc(aux);
@@ -111,14 +122,17 @@ export class ProteinViewerComponent implements OnInit {
     val.setMinutes(min*100)
     return [hour,min];
   }
+
   round(val:number) : number{
     let newVal = Math.round(val / 10 )
     newVal *= 10
     return newVal 
   }
+
   getDelta(val:number,val2:number) : number{
     return val2 - val;
   }
+
   getQuadrant(pos:number[], posRelative: number[]) : number{ // Pega o quadrante do SEGUNDO parâmetro
     let posX = this.getDelta(pos[0],posRelative[0]);
     let posY = this.getDelta(pos[1],posRelative[1]);
@@ -135,6 +149,7 @@ export class ProteinViewerComponent implements OnInit {
         return 0;
     }
   }
+
   getCalculateDegree(degree:number,quadrant:number){
       let auxMult;
       switch(quadrant){
@@ -145,10 +160,11 @@ export class ProteinViewerComponent implements OnInit {
       }
     return degree + (auxMult * 90);
   }
+
   createText(hour: number, minutes: number) : string{
     let text:string = "";
     //Casos isolados
-    if(hour == 12 || hour == 0)
+    if(hour == 0)
       return "Subindo";
     if(hour == 3)
       return "Indo para a direita"
@@ -173,20 +189,43 @@ export class ProteinViewerComponent implements OnInit {
       text = "Indo para a esquerda "
       break;
     }
+
   }
-    text += hour+" horas e ";
-    text += 100*minutes+" minutos";
+    text += hour + " horas e ";
+    text += 100*minutes + " minutos";
     
     return text;
   }
+
   getTransition(pos:number[], pos2:number[]){//Retorna os dados para o feedback sonoro
 
-    let degrees = [this.getDegree(pos,pos2),this.getInverseDegree(pos2,pos)]; // degrees[0] = grau usando eixo x de pos, degrees[1] = grau usando eixo x de pos2
-    let quadrants = [this.getQuadrant(pos,pos2),this.getQuadrant(pos2,pos)]; // quadrants[0] = quadrante de pos, quadrants[1] = quadrante de pos2
-    let calculateDegrees = [this.getCalculateDegree(degrees[0],quadrants[0]),this.getCalculateDegree(degrees[0],quadrants[1])];
-    let hours = [ this.toHour(calculateDegrees[0]), this.toHour(calculateDegrees[1]) ]
+    let degrees = [ this.getDegree(pos,pos2),
+                    this.getInverseDegree(pos2,pos)]; // degrees[0] = grau usando eixo x de pos, degrees[1] = grau usando eixo x de pos2
+    let quadrants = [ this.getQuadrant(pos,pos2),
+                      this.getQuadrant(pos2,pos)]; // quadrants[0] = quadrante de pos, quadrants[1] = quadrante de pos2
+    let calculateDegrees = [  this.getCalculateDegree(degrees[0],quadrants[0]),
+                              this.getCalculateDegree(degrees[0],quadrants[1])];
+    let hours = [ this.toHour(calculateDegrees[0]), 
+                  this.toHour(calculateDegrees[1]) ]
     let message = [ this.createText(hours[0][0],hours[0][1]),
-                  this.createText(hours[1][0], hours[1][1]) ];
+                    this.createText(hours[1][0], hours[1][1]) ];
+
     return message;
+  }
+
+  openModal(parent){
+    // let disposable = parent._dialogService.addDialog(ConfirmComponent, {
+    //   title: 'Confirm title',
+    //   message: 'Confirm message'
+    // })
+    // .subscribe((isConfirmed)=>{
+    //     //We get modal result
+    //     if(isConfirmed) {
+    //         alert('accepted');
+    //     }
+    //     else {
+    //         alert('declined');
+    //     }
+    // });
   }
 }

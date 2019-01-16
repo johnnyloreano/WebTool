@@ -7,24 +7,20 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { MenuModule} from './menu/menu.module';
 import { ProteinViewerComponent } from './protein-viewer/protein-viewer.component';
-import { ModalAminoAcidComponent } from './modal-amino-acid/modal-amino-acid.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
- 
 @NgModule({
   declarations: [
     AppComponent,
-    ProteinViewerComponent,
-    ModalAminoAcidComponent
-  ],
+    ProteinViewerComponent
+    ],
   imports: [
-    AppProviderRoute, 
+    AppProviderRoute,     
     HttpClientModule,
     SharedModule,
     CoreModule.forRoot(),
     MenuModule,
-    BrowserModule,
-    NgbModule
+    BrowserModule    
   ],
+entryComponents : [],
   bootstrap: [AppComponent]
 })
 

@@ -13,26 +13,4 @@ export class MenuComponent implements OnInit {
     this.dataService.currentProtein.subscribe(pdbContent => this.pdbContent = pdbContent);
     if(this.pdbContent == undefined) this._route.navigate(["/"]);
   }
-  teste(){
-    this._route.navigate(["/proteinView"]);
-  }
-  // parseProtein(){
-  //   this._domService.removeAllChild();
-  //   let res = this.pdbContent.residues;
-  //   for(let i = 0; i < res.length;i++){
-  //     this._domService.addDynamicComponent(res[i])
-  //   }
-  // }
-  // parseLabels(){
-  //   this._domService.removeAllChild();
-  //   let res = this.pdbContent.residues;
-  //   let array: Array<any>;
-  //   array = new Array();
-  //   for(let i = 0; i < res.length;i++)
-  //     array.push(res[i])
-  //   this._domService.addArrayComponent(array);
-  // }
-  // parseInfo(){
-  //   this._domService.removeAllChild();
-  // }
 }

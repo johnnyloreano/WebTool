@@ -11,7 +11,7 @@ import { Component, OnInit, Input,Output, EventEmitter} from '@angular/core';
 })
 export class LabelComponent implements OnInit {
   @Input() name:string;
-  @Output() notifyParent: EventEmitter<any> = new EventEmitter();
+  @Output() openModal: EventEmitter<any> = new EventEmitter();
   private _y  : number;
   private _x  : number;
   private _upSound: string;
@@ -24,6 +24,7 @@ export class LabelComponent implements OnInit {
   private _isSheet: boolean= false;
   private _isFirstSheet: boolean= false;
   private _isLastSheet: boolean = false;
+  private _parent : any;
   private ariaDictionary = {
     "ALA":"Alanina A L A",
     "PHE":"Fenilalanina P H E",
@@ -48,9 +49,6 @@ export class LabelComponent implements OnInit {
     "NH2":"NOTSUPPORTED"
   }
   ngOnInit(){}
-  sendNotification(){
-    return this.notifyParent.emit(this.getName())
-  }
   getPosArray(): Array<number>{
     return [this._x,this._y];
   }
@@ -106,9 +104,12 @@ export class LabelComponent implements OnInit {
   set isLastSheet(isLast : boolean){
     this._isFirstHelix = isLast;
   }
+  set parent(parent:any){
+    this._parent = parent
+  }
   decideSound(event : any){
       if(event.keyCode == 9){
-        this.sendNotification()
+        return this.openModal.emit(this._parent)
         //   if(event.shiftKey)
       //    return this.speak(this._downSound);
       // return this.speak(this._upSound );
