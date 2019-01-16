@@ -3,6 +3,8 @@ import { DataService } from '../core/data-service/data-service.service'
 import { AdDirective } from '../a-host.directive'
 import { LabelComponent } from '../shared/label/label.component'
 import { Router } from '@angular/router';
+import { ConfirmComponent } from '../confirm-component/confirm-component.component'
+import { DialogService } from 'ng2-bootstrap-modal';
 @Component({
   selector: 'app-protein-viewer',
   template: `
@@ -22,7 +24,7 @@ export class ProteinViewerComponent implements OnInit {
   
   private aminoNames = ['ALA','PHE','GLU','CYS','LYS','GLY','ASN','ASP','LEU','ILE','PRO','THR','TYR','ARG','MET','TRP','HIS','LYS','GLN','SER'];
   @ViewChild(AdDirective) host: AdDirective;
-  constructor(private _componentFactoryResolver: ComponentFactoryResolver, private _dataService : DataService, private _route : Router) { }
+  constructor(private _componentFactoryResolver: ComponentFactoryResolver, private _dataService : DataService, private _route : Router, private _dialogService: DialogService) { }
   ngOnInit() {
     if(this._dataService.getProtein() == undefined)
       this._route.navigate(["/"]);
@@ -51,7 +53,7 @@ export class ProteinViewerComponent implements OnInit {
         //Amino's plot
         arrComponent[i].setPosition(pos[i][1],pos[i][0]);
         (<LabelComponent>componentRef.instance).name = protein.residues[i].initials;
-        arrComponent[i].openModal.subscribe(this.createText)
+        //arrComponent[i].openModal.subscribe(this.openModal)
         arrComponent[i].parent = this
         if(i > 0){
           //Sound placement
@@ -213,19 +215,17 @@ export class ProteinViewerComponent implements OnInit {
     return message;
   }
 
-  openModal(parent){
-    // let disposable = parent._dialogService.addDialog(ConfirmComponent, {
-    //   title: 'Confirm title',
-    //   message: 'Confirm message'
-    // })
-    // .subscribe((isConfirmed)=>{
-    //     //We get modal result
-    //     if(isConfirmed) {
-    //         alert('accepted');
-    //     }
-    //     else {
-    //         alert('declined');
-    //     }
-    // });
+  openModal(args){
+    let auxParent: ProteinViewerComponent;
+    auxParent = args['parent'];
+    let disposable = auxParent._dialogService.addDialog(ConfirmComponent, {aminoInitials : args['name']}).subscribe((isConfirmed)=>{
+        //We get modal result
+        if(isConfirmed) {
+            alert('accepted');
+        }
+        else {
+            alert('declined');
+        }
+    });
   }
 }

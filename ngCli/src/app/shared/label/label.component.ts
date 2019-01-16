@@ -11,7 +11,7 @@ import { Component, OnInit, Input,Output, EventEmitter} from '@angular/core';
 })
 export class LabelComponent implements OnInit {
   @Input() name:string;
-  @Output() openModal: EventEmitter<any> = new EventEmitter();
+  //@Output() openModal: EventEmitter<any> = new EventEmitter();
   private _y  : number;
   private _x  : number;
   private _upSound: string;
@@ -109,10 +109,10 @@ export class LabelComponent implements OnInit {
   }
   decideSound(event : any){
       if(event.keyCode == 9){
-        return this.openModal.emit(this._parent)
-        //   if(event.shiftKey)
-      //    return this.speak(this._downSound);
-      // return this.speak(this._upSound );
+        //return this.openModal.emit({parent : this._parent,name:this.name})
+        if(event.shiftKey)
+          return this.speak(this._downSound);
+       return this.speak(this._upSound );
       }
       if(event.keyCode == 32){
         let message = "Posição atual: "+this.ariaDictionary[this.name]
