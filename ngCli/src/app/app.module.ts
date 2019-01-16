@@ -31,11 +31,13 @@ import { SerinaComponent } from './shared/aminoacid/serina/serina.component';
 import { AcidoGlutamicoComponent } from './shared/aminoacid/acido-glutamico/acido-glutamico.component';
 import { AcidoAsparticoComponent } from './shared/aminoacid/acido-aspartico/acido-aspartico.component';
 import { AtomComponent } from './shared/atom/atom.component';
+import { AutofocusDirective } from './auto-focus.directive';
 @NgModule({
   declarations: [
     AppComponent,
     ProteinViewerComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    AutofocusDirective
     ],
   imports: [
     AppProviderRoute,     

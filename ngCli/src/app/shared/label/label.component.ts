@@ -11,11 +11,11 @@ import { Component, OnInit, Input,Output, EventEmitter} from '@angular/core';
 })
 export class LabelComponent implements OnInit {
   @Input() name:string;
-  //@Output() openModal: EventEmitter<any> = new EventEmitter();
-  private _y  : number;
-  private _x  : number;
-  private _upSound: string;
-  private _downSound: string;
+  @Output() openModal: EventEmitter<any> = new EventEmitter();
+  private _y  : number = undefined;
+  private _x  : number = undefined;
+  private _upSound: string = undefined;
+  private _downSound: string = undefined;
   private _isFirst : boolean = false;
   private _isLast : boolean = false;
   private _isFirstHelix: boolean= false;
@@ -108,8 +108,9 @@ export class LabelComponent implements OnInit {
     this._parent = parent
   }
   decideSound(event : any){
+    if(this.upSound != undefined || this.downSound != undefined) 
       if(event.keyCode == 9){
-        //return this.openModal.emit({parent : this._parent,name:this.name})
+        
         if(event.shiftKey)
           return this.speak(this._downSound);
        return this.speak(this._upSound );
@@ -134,6 +135,8 @@ export class LabelComponent implements OnInit {
         message +=". Dentro de Fita"
         return this.speak(message);
       }
+      if(event.keyCode == 81)
+        return this.openModal.emit({parent : this._parent,name:this.name})
     //return this.speak("Comando desconhecido");
     }
   speak(message:string) : void{

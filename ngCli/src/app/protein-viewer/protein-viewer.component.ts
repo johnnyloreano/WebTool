@@ -53,7 +53,7 @@ export class ProteinViewerComponent implements OnInit {
         //Amino's plot
         arrComponent[i].setPosition(pos[i][1],pos[i][0]);
         (<LabelComponent>componentRef.instance).name = protein.residues[i].initials;
-        //arrComponent[i].openModal.subscribe(this.openModal)
+        arrComponent[i].openModal.subscribe(this.openModal)
         arrComponent[i].parent = this
         if(i > 0){
           //Sound placement
@@ -218,14 +218,6 @@ export class ProteinViewerComponent implements OnInit {
   openModal(args){
     let auxParent: ProteinViewerComponent;
     auxParent = args['parent'];
-    let disposable = auxParent._dialogService.addDialog(ConfirmComponent, {aminoInitials : args['name']}).subscribe((isConfirmed)=>{
-        //We get modal result
-        if(isConfirmed) {
-            alert('accepted');
-        }
-        else {
-            alert('declined');
-        }
-    });
+    let disposable = auxParent._dialogService.addDialog(ConfirmComponent, {aminoInitials : args['name']}).subscribe((isConfirmed)=>{});
   }
 }
