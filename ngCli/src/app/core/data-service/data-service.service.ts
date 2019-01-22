@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Protein } from '../../shared/protein';
 import { Label} from '../../shared/label'
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import { LabelComponent } from 'src/app/shared/label/label.component';
 @Injectable()
 export class DataService {
   private proteinData : BehaviorSubject<Protein> = new BehaviorSubject<Protein>(undefined);
@@ -23,15 +22,11 @@ export class DataService {
   getProtein(): Protein{
     return this.proteinData.getValue();
   }
-  parseTag(residues:string[], residues_num:number[]):Array<Label>{
-    let residuesComp : Array<Label>;
-    residuesComp = [];
-    for(let i = 0 ; i <residues.length; i++){
-      const lbl = new Label(); 
-      lbl.initials = residues[i];
-      lbl.number = residues_num[i];
-      residuesComp.push(lbl);
-    }
-      return residuesComp;
+  parseTag(residues:string[], residues_num:number[]):Label[]{
+    let residuesComp : Label[] = [];
+    for(let i = 0 ; i <residues.length; i++)
+      residuesComp.push({initials: residues[i], number: residues_num[i]});
+      
+    return residuesComp;
   }
 }

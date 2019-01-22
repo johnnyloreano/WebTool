@@ -24,6 +24,8 @@ import { AcidoAsparticoComponent } from './aminoacid/acido-aspartico/acido-aspar
 import { LabelComponent } from './label/label.component';
 import { AtomComponent } from './atom/atom.component'
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
+import { LabelAtomComponent } from './label-atom/label-atom.component';
+import { LabelResidueComponent } from './label-residue/label-residue.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -53,7 +55,9 @@ import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
      SerinaComponent,
      AcidoGlutamicoComponent,
      AcidoAsparticoComponent,
-     LabelComponent
+     LabelComponent,
+     LabelAtomComponent,
+     LabelResidueComponent
    ],
   exports: [
     AtomComponent,

@@ -8,11 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AtomComponent implements OnInit {
   constructor() { }
   @Input() type: string;
-  @Input() name: string;
   ariaLabel: string;
   ariaDictionary = {'H':"Hidrogênio",'C':"Carbono",'O':"Oxigênio",'S':"Enxofre",'N':"Nitrogênio"}
   ngOnInit(){
-    this.name = this.type;
     this.ariaLabel =  this.ariaDictionary[this.type];
   }
 

@@ -22,7 +22,7 @@ export class DomService {
     const component = factory
       .create(this.rootViewContainer.parentInjector)
     if(component.instance instanceof LabelComponent){
-      component.instance.name = componentRef.getName();
+      component.instance.initials = componentRef.getInitials()();
     }
     this.rootViewContainer.insert(component.hostView)
   }
