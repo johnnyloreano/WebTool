@@ -23,49 +23,40 @@ import { AcidoGlutamicoComponent } from './aminoacid/acido-glutamico/acido-gluta
 import { AcidoAsparticoComponent } from './aminoacid/acido-aspartico/acido-aspartico.component';
 import { LabelComponent } from './label/label.component';
 import { AtomComponent } from './atom/atom.component'
-import { TableInfoComponent } from './table-info/table-info.component' 
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
-import { BondComponent } from '../bond/bond.component';
-import { DoubleBondComponent } from '../double-bond/double-bond.component';
-import { TripleBondComponent } from '../triple-bond/triple-bond.component';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [ 
-    BondComponent,
-    DoubleBondComponent,
-    TripleBondComponent,
-    AtomComponent,
-    TableInfoComponent,
-    AminoacidComponent,
-    AlaninaComponent,
-    ArgininaComponent,
-    AsparaginaComponent,
-    CisteinaComponent,
-    FenilalaninaComponent,
-    GlicinaComponent,
-    GlutaminaComponent,
-    HistidinaComponent,
-    LeucinaComponent,
-    IsoleucinaComponent,
-    LisinaComponent,
-    MetioninaComponent,
-    TirosinaComponent,
-    TreoninaComponent,
-    TriptofanoComponent,
-    ValinaComponent,
-    ProlinaComponent,
-    SerinaComponent,
-    AcidoGlutamicoComponent,
-    AcidoAsparticoComponent,
-    LabelComponent,
-  ],
+   declarations: [ 
+     AtomComponent,
+     AminoacidComponent,
+     AlaninaComponent,
+     ArgininaComponent,
+     AsparaginaComponent,
+     CisteinaComponent,
+     FenilalaninaComponent,
+     GlicinaComponent,
+     GlutaminaComponent,
+     HistidinaComponent,
+     LeucinaComponent,
+     IsoleucinaComponent,
+     LisinaComponent,
+     MetioninaComponent,
+     TirosinaComponent,
+     TreoninaComponent,
+     TriptofanoComponent,
+     ValinaComponent,
+     ProlinaComponent,
+     SerinaComponent,
+     AcidoGlutamicoComponent,
+     AcidoAsparticoComponent,
+     LabelComponent
+   ],
   exports: [
     AtomComponent,
-    TableInfoComponent,
     AminoacidComponent,
     AlaninaComponent,
     ArgininaComponent,
@@ -89,9 +80,8 @@ import { TripleBondComponent } from '../triple-bond/triple-bond.component';
     AcidoAsparticoComponent,
     LabelComponent
   ],
-  entryComponents: [    
+   entryComponents: [    
     AtomComponent,
-    TableInfoComponent,
     AminoacidComponent,
     AlaninaComponent,
     ArgininaComponent,
@@ -113,6 +103,7 @@ import { TripleBondComponent } from '../triple-bond/triple-bond.component';
     SerinaComponent,
     AcidoGlutamicoComponent,
     AcidoAsparticoComponent,
-    LabelComponent]
+    LabelComponent
+  ]
 })
 export class SharedModule { }

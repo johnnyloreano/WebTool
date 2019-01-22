@@ -13,4 +13,7 @@ export class MenuComponent implements OnInit {
     this.dataService.currentProtein.subscribe(pdbContent => this.pdbContent = pdbContent);
     if(this.pdbContent == undefined) this._route.navigate(["/"]);
   }
+  goProteinView(){
+    this._route.navigate(['/proteinView'])
+  }
 }

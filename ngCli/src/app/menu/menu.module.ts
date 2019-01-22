@@ -3,27 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule} from '@angular/forms';
 import { FormComponent } from './form/form.component';
 import { MenuComponent } from './menu/menu.component';
-import { MenuProviderRoute } from './menu-routing';
-import { LabelComponent } from '../shared/label/label.component';
-import { AdDirective } from '../a-host.directive';
+import { CoreModule } from '../core/core.module'
+import { RouterModule } from '@angular/router';
+import { HttpPdbRequesterService } from '../core/http-pdb/http-pdb-requester.service';
 @NgModule({
   declarations: [
     FormComponent,
-    MenuComponent,
-    AdDirective
+    MenuComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    MenuProviderRoute
+    CoreModule,
+    RouterModule
   ],
-  entryComponents:[
-    FormComponent,
-    MenuComponent,
-    LabelComponent
-  ],
-  exports: [
-    AdDirective
-  ]
+  providers: [HttpPdbRequesterService]
 })
 export class MenuModule {}

@@ -83,7 +83,7 @@ def getHelixData(pdb):
         helix[i].append(pdb[1]['helix_range'][i][5])
     return helix
 def getSheetData(pdb):
-helix = list()
+    helix = list()
     for i in range(len(pdb[1]['sheet_range']) ):
         helix.append(list())
         helix[i].append(pdb[1]['sheet_range'][i][4])

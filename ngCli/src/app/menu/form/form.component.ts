@@ -1,5 +1,5 @@
 import { Component, ɵConsole } from '@angular/core';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router'
 import { DataService } from '../../core/data-service/data-service.service';
 import {HttpPdbRequesterService as pdbRequester} from '../../core/http-pdb/http-pdb-requester.service'
 
@@ -15,9 +15,8 @@ export class FormComponent {
   requestProtein(){
       this._pdbRequester.requestTags(this.pdbFile).subscribe( 
         result => {
-          this.dataService.setProtein(result);
+          this.dataService.setProtein(result);  
           this._router.navigate(['/menu'])
-          // console.log(this.dataService.getProtein().alphaLoc[0][0][0][0])
       }
      )
   }
