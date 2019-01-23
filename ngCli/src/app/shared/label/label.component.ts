@@ -16,16 +16,22 @@ export class LabelComponent implements LabelAuditive {
   static talker : TalkerService;
   static transcripter : TranscripterService;
   // Class properties
-  private _initials :string;
-  private _y  : number = undefined;
-  private _x  : number = undefined;
+  _initials :string;
+  // Plot info's
+  _y  : number = undefined;
+  _x  : number = undefined;
 
-  readonly sounds : string[];
+  _style ;
+  _class;
+  sounds : string[];
   get initials() : string{
   return this.initials;
   }  
   get style() : any{
-    return {'position':'absolute', 'bottom': this._y+"%", 'left': this._x+"%" };
+    return this.style;
+  }
+  get class() : any{
+    return this._class
   }
   get position() : number[]{
     return [this._x,this._y];
@@ -59,6 +65,6 @@ export class LabelComponent implements LabelAuditive {
   }
 }
   speak(message:string) : void{
-  
+    TalkerService.speak(message);
   }
 }
