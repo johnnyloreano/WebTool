@@ -19,13 +19,11 @@ def getGeneralData(pdb):
     return json.dumps(dataParsed)
 def getCoord(pdb):
     listCoord = list()
-    # print(pdb[0].getResindices())
     iterator = iter(pdb[0])
     residue = iterator.next()
     while(True):
         residue = iterator.next()
         listCoord.append(residue.getCoordsets().tolist()[0])
-        #print(residue.getResindex())
         residue = skipResidue(residue.getResindex(),iterator)
         if residue is None:
             break

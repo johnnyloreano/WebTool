@@ -1,12 +1,6 @@
 from prody import *
 import json
-x = parsePDB('1zdd', header=True)
-
-iterator = iter(x[0])
-residue = iterator.next()
-print(residue.getResindex())
-print(residue.getResnum())
-
+x = parsePDB('PHE', header=True)
 
 
 def getResNum(pdb):
@@ -30,5 +24,4 @@ def skipResidue(oldResidue, iterator):
             return None
     return auxRes
 
-print(x[1]['sheet_range'])
-print(x[1]['sheet_range'])
+print(x)
