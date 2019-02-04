@@ -6,7 +6,6 @@ import { LabelComponent } from '../../shared/label/label.component'
 import { DataService } from '../../core/data-service/data-service.service'
 import 'focus-trap/dist/focus-trap';
 import { Aminoacid } from '../../shared/aminoacid';
-import { CombineLatestSubscriber } from 'rxjs/internal/observable/combineLatest';
 import { Atom } from '../../shared/atom';
 
 export interface AminoModel {
@@ -22,10 +21,7 @@ export interface AminoModel {
                  </div>
                  <div class="modal-body">
                    <ng-template a-host></ng-template>
-                   </div>
-                   <div class="modal-footer">
-                   <button type="button" class="btn btn-secondary close" (click)="closeModal()" >Voltar</button>
-                   </div>
+                  </div>
                </div>
             </div>`
 })
@@ -39,29 +35,41 @@ export class AminoModal extends DialogComponent<AminoModel, boolean> implements 
   createFocusTrap = require("focus-trap/dist/focus-trap");
   focusTrap;
   ngOnInit(){
+    this.insertComponent();
+  }
+  insertComponent(){
     let componentFactory = this._componentFactoryResolver.resolveComponentFactory(LabelComponent);
     let viewContainer = this.host.viewContainerRef;
     viewContainer.clear()
-    viewContainer.createComponent(componentFactory)
-    console.log( this.instantiateAmino( this.aminoInitials) );
-
+    this.instantiateAmino(this.aminoInitials).then((data) => {
+      const arrAtoms = data.atoms;
+      for(let x = 0; x < arrAtoms.length;x++){
+      if(arrAtoms[x].initials != "H"){
+        let compRef = viewContainer.createComponent(componentFactory);
+        compRef.instance._x = arrAtoms[x].x;
+        compRef.instance._y = arrAtoms[x].y;
+        compRef.instance.initials = arrAtoms[x].initials.toUpperCase();
+        }
+      }
+    });
     this.setFocus();
-
   }
   async instantiateAmino(aminoName){
     var content = await this._HttpRequester.requestAmino(aminoName);
-    console.log(content)
     var amino = new Aminoacid();
-    amino.name = content['name']
-    for(let i = 0; content.hasOwnProperty("atom"+i); i++){
+    amino.name = content['name'];
+    amino.atoms = new Array<Atom>();
+    console.log(content)
+    for(let i = 1; content.hasOwnProperty(""+i); i++){
       let atom = new Atom();
-      atom.x = content["atom"+i]['x'];
-      atom.y = content["atom"+i]['y'];
-      atom.initials = content["atom"]['symbol'];
+      atom.x = content[""+i]['x'];
+      atom.y = content[""+i]['y'];
+      atom.initials = content[""+i]['symbol'];
       amino.atoms.push(atom);
     }
     return amino;
   }
+  
   setFocus(){
     this.focusTrap = this.createFocusTrap(".modal-content", {
       initialFocus: ".close",
