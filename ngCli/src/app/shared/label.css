@@ -1,0 +1,39 @@
+.atom{
+    height:30px;
+    width:30px;
+    border-radius:45px;
+    background-color:paleturquoise;
+    border-color:white;
+}
+.H{
+    height:25px;
+    width:25px;
+    border-color:white;
+}
+.H, .C, .O, .N, .F, .S {color:white;}
+.H{
+    background-color: white;
+    color:black;
+    border: 1px solid black;
+}
+.C{
+    background-color: gray;
+}
+.O{
+    background-color:red;
+}
+.N{
+    background-color:darkblue;
+}
+.S{
+    background-color:yellow;
+}
+.F{
+    background-color:rgb(224, 241, 197);
+}
+.label{
+    height:40px;
+    width:40px;
+    border-radius:45px;
+    background-color:paleturquoise;
+}
