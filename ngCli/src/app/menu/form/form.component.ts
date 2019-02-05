@@ -1,7 +1,7 @@
 import { Component, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router'
 import { DataService } from '../../core/data-service/data-service.service';
-import {HttpPdbRequesterService as pdbRequester} from '../../core/http-pdb/http-pdb-requester.service'
+import {HttpService as pdbRequester} from '../../core/http-pdb/http-pdb-requester.service'
 
 @Component({
   selector: 'app-form',

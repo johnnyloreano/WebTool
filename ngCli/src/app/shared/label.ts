@@ -1,7 +1,7 @@
 export interface Label{
     initials:string;
-    number?:number;
+    number:number;
     x?:number;
     y?:number;
-    style?(): any;
+    z?:number;
 }

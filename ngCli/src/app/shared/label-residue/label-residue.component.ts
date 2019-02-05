@@ -1,5 +1,4 @@
 import { Component, EventEmitter,Output} from '@angular/core';
-import { LabelAuditive } from '../../shared/label-auditive';
 import { LabelComponent } from '../label/label.component'
 @Component({
   selector: 'app-label-residue',
@@ -7,10 +6,11 @@ import { LabelComponent } from '../label/label.component'
   styleUrls: ['../label.css']
 })
 
-export class LabelResidueComponent extends LabelComponent implements  LabelAuditive {
+export class LabelResidueComponent extends LabelComponent{
 
   @Output() openModal: EventEmitter<any> = new EventEmitter();
 
+  _class : string[] = ["label"];
   //  Structure info's
   _isFirst : boolean = false;
   _isLast : boolean = false;
@@ -23,8 +23,10 @@ export class LabelResidueComponent extends LabelComponent implements  LabelAudit
   //  Sound message text
   //  Parent ref for modal ~ Need improvement...
   _parent : any;
-  
-  decideSound(event : any){
+  class(){
+    return ["label"]
+  }
+  event(event){
       if(event.keyCode == 32){ // Spacekey
         let message = "Posição atual: "
         if(this._isFirst)
@@ -50,5 +52,4 @@ export class LabelResidueComponent extends LabelComponent implements  LabelAudit
       else
         super.decideSound(event)
     }
-  
 }

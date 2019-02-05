@@ -8,13 +8,13 @@ def getAminoData(aminoName):
     elements = list()
     for x in range(1, len(content)):
         elements.append(content[str(x)])
-    return json.dumps( normalizeData(content) )
+    return json.dumps( normalizeData(elements) )
 def normalizeData(array):
-    onlyCoords = normalizer(getCoord(array) )
+    onlyCoords = normalizer(getCoord(array))
     for x in range(1, len(array)):
-        array[str(x)]['x'] = onlyCoords[x-1][0]
-        array[str(x)]['y'] = onlyCoords[x-1][1]
-        array[str(x)]['z'] = onlyCoords[x-1][2]
+        array[x]['x'] = onlyCoords[x-1][0]
+        array[x]['y'] = onlyCoords[x-1][1]
+        array[x]['z'] = onlyCoords[x-1][2]
     return array
 def AminoDataVerifier():
     if not os.path.isdir("sdfFiles/"):

@@ -4,12 +4,8 @@ import {TranscripterService} from '../../core/transcripter/transcripter.service'
 import {TalkerService} from '../../core/talker/talker.service'
 @Component({
   selector: 'app-label',
-  template: `
-              <div tabindex="0" class="d-inline-block text-center label" [ngStyle]="getProperties()" >
-                {{_initials}}
-              </div>
-              `,
-  styleUrls: ['./label.component.css']
+  templateUrl: '../label.html',
+  styleUrls: ['../label.css']
 })
 export class LabelComponent implements LabelAuditive {
   //  Service access
@@ -18,21 +14,19 @@ export class LabelComponent implements LabelAuditive {
   // Class properties
   _initials :string;
   // Plot info's
-  _y  : number = undefined;
-  _x  : number = undefined;
-  _z  : number = undefined;
-  _style ;
-  _class;
-  sounds : string[];
+  _y  : number;
+  _x  : number;
+  _z  : number;
+  sounds : string[] = new Array<string>();
+  style() : any{
+    return {'bottom': this._y+"%", 'left': this._x+"%"};
+  }
+  class() : any{
+    return ["atom", this._initials]
+  }
   get initials() : string{
-  return this.initials;
+  return this._initials;
   }  
-  get style() : any{
-    return this.style;
-  }
-  get class() : any{
-    return this._class
-  }
   get position() : number[]{
     return [this._x,this._y];
   }
@@ -46,8 +40,7 @@ export class LabelComponent implements LabelAuditive {
     this._initials = initials;
   }
   set position(positions : number[]){
-    this._y = positions[1];
-    this._x = positions[0];
+    this._y = positions[1];this._x = positions[0];
   }  
   set upSound(upSound:string){
     this.sounds[1] = upSound;
@@ -55,16 +48,11 @@ export class LabelComponent implements LabelAuditive {
   set downSound(downSound:string){
     this.sounds[0] = downSound;
   }
-  getProperties(){
-    return {'position':'absolute', 'bottom': this._y+"%", 'left': this._x+"%"};
-  }
   decideSound(event : any){
-    if(this.sounds[0] != undefined || this.sounds[1] != undefined) 
     if(event.keyCode == 9){ // Tabkey
       if(event.shiftKey) // Shiftkey AND tabKey
         return this.speak(this.sounds[0]);
-     return this.speak(this.sounds[1] );
-
+     return this.speak(this.sounds[1]);
   }
 }
   speak(message:string) : void{

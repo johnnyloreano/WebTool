@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Protein } from '../../shared/protein';
 import { Label} from '../../shared/label'
-import { Aminoacid } from '../../shared/aminoacid'
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 @Injectable()
 export class DataService {
   private proteinData : BehaviorSubject<Protein> = new BehaviorSubject<Protein>(undefined);
-  private aminoData : BehaviorSubject<Aminoacid> = new BehaviorSubject<Aminoacid>(undefined);
   currentProtein = this.proteinData.asObservable();
-  currentAminoacid = this.aminoData.asObservable();
   setProtein(protein) { 
     protein['residues'] = this.parseTag(protein['residues'],protein['residue_num']);
     this.proteinData.next( new Protein( protein['identifier'],

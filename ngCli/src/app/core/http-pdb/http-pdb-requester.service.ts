@@ -5,7 +5,7 @@ import 'rxjs/add/operator/catch';
 import {Injectable} from "@angular/core";
 
 @Injectable({providedIn:'root'})
-export class HttpPdbRequesterService {
+export class HttpService {
 constructor(private http: HttpClient){}
   requestTags(file : string){
     var config = {

@@ -4,15 +4,24 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TalkerService {
+  static talker = new SpeechSynthesisUtterance();
+  static sayTimeout = setTimeout(function () { speak(message); }, 250);
+
   static speak(message:string) : void{
-    const msg = new SpeechSynthesisUtterance();
-    msg.volume = 0.2; // 0 to 1
-    msg.rate = .8; // 0.1 to 10
-    msg.pitch = 1; // 0 to 2
-    msg.text  = message;
-    const vvalue = 44;
-    msg.lang = speechSynthesis.getVoices()[vvalue].lang;
-    console.log(msg.text)
-  return speechSynthesis.speak(msg);
+    if (speechSynthesis.speaking) {
+      // SpeechSyn is currently speaking, cancel the current utterance(s)
+      speechSynthesis.cancel();
+      // Make sure we don't create more than one timeout...
+      if (TalkerService.sayTimeout !== null)
+          clearTimeout(TalkerService.sayTimeout);
+        }
+      // Good to go
+      const msg = new SpeechSynthesisUtterance(message);
+      msg.volume = 0.5;
+      msg.pitch = 0.7;
+      msg.rate = 0.7;
+      msg.voice = speechSynthesis.getVoices()[4]
+      msg.lang = "pt-BR";
+      speechSynthesis.speak(msg);
   }
 }

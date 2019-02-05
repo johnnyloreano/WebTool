@@ -5,9 +5,10 @@ import { Router } from '@angular/router';
 import { AminoModal } from '../amino-modal/amino-modal.component'
 import { DialogService } from 'ng2-bootstrap-modal';
 import {TranscripterService} from '../../core/transcripter/transcripter.service'
-import { AuditiveLabelComponent } from '../auditive-label/auditive-label.component';
+import { LabelResidueComponent } from '../../shared/label-residue/label-residue.component';
 @Component({
   selector: 'app-protein-viewer',
+  styleUrls : ["./protein.css"],
   template: `
             <h2>
               Visualizador de proteína
@@ -15,7 +16,7 @@ import { AuditiveLabelComponent } from '../auditive-label/auditive-label.compone
             <h3> 
               Proteína: {{proteinName}} 
             </h3>
-            <div [ngStyle]="{'position':'relative','background-color': '#ADD8E6', 'min-height': '120vh', 'width': '100%', 'margin':'0 auto', 'border': '42px #ADD8E6 solid' }">
+            <div>
               <ng-template a-host ></ng-template>
             </div>
             `
@@ -44,67 +45,67 @@ export class ProteinViewerComponent implements OnInit {
     const hasHelix = helix_range.length > 0 ? true:false;
     const hasSheet = sheet_range.length > 0 ? true:false;
 
-    const componentFactory = this._componentFactoryResolver.resolveComponentFactory(AuditiveLabelComponent);
+    const componentFactory = this._componentFactoryResolver.resolveComponentFactory(LabelResidueComponent);
     const viewContainer = this.host.viewContainerRef;
-    let arrComponent = Array<AuditiveLabelComponent>();
+    let arrComponent = Array<LabelResidueComponent>();
     viewContainer.clear();
     for(let i = 0; i < arrLabel.length;i++){
-        console.log("yay")
         let componentRef = viewContainer.createComponent(componentFactory);
         arrComponent.push(componentRef.instance);
         //Amino's plot
-        arrComponent[i].setPosition(pos[i][1],pos[i][0]);
-        (<AuditiveLabelComponent>componentRef.instance).initials = protein.residues[i].initials;
+        arrComponent[i].position = [pos[i][0],pos[i][1]];
+        (<LabelResidueComponent>componentRef.instance).initials = protein.residues[i].initials;
         arrComponent[i].openModal.subscribe(this.openModal)
-        arrComponent[i].parent = this
+        arrComponent[i]._parent = this
         if(i > 0 ){
           // Sound placement
-          let transitions = this._transcripter.getTransition(arrComponent[i].getPosArray(),arrComponent[i-1].getPosArray());
-          arrComponent[i].downSound = transitions[0];
-          arrComponent[i-1].upSound = transitions[1];
+          let transitions = this._transcripter.getTransition(arrComponent[i].position,arrComponent[i-1].position);
+          console.log(arrComponent[i-1].initials+" =>"+arrComponent[i].initials);
+          arrComponent[i].downSound = transitions[1];
+          arrComponent[i-1].upSound = transitions[0];
           // Helix verification
           if(hasHelix && actualHelix < helix_range.length){
             this.helixVerifier(arrComponent[i],arrLabel[i].number,helix_range[actualHelix]);
-            if(arrComponent[i].isLastHelix) actualHelix++;            
+            if(arrComponent[i]._isLastHelix) actualHelix++;            
           }
           //Sheet verification
           if(hasSheet && actualSheet < sheet_range.length){
             this.sheetVerifier(arrComponent[i],arrLabel[i].number,sheet_range[actualSheet])
-            if(arrComponent[i].isLastSheet) actualSheet++;
+            if(arrComponent[i]._isLastSheet) actualSheet++;
           }
             //Last label verification
         if(i == arrLabel.length - 1){ 
-          arrComponent[i].isLast = true;
+          arrComponent[i]._isLast = true;
           arrComponent[i].upSound = "Você saiu da proteína!"
         }  
-      }
+        //Test 
+      }      
         else{ 
-          arrComponent[i].isFirst = true;
+          arrComponent[i]._isFirst = true;
           arrComponent[i].downSound = "Você saiu da proteína!"
         }
     }
-    console.log(viewContainer.length)
   }
-  helixVerifier(res:AuditiveLabelComponent,resNum:number, helixArray: Array<number>){
+  helixVerifier(res:LabelResidueComponent,resNum:number, helixArray: Array<number>){
       if (resNum == helixArray[0]){
-        return res.isFirstHelix = true
+        return res._isFirstHelix = true
       }
       else if (resNum == helixArray[1]){
-        return res.isLastHelix = true
+        return res._isLastHelix = true
       }
         else if (resNum > helixArray[0]){
-          return res.isHelix = true
+          return res._isHelix = true
       }
   }
-  sheetVerifier(res:AuditiveLabelComponent,resNum:number, sheetArray: Array<number>){
+  sheetVerifier(res:LabelResidueComponent,resNum:number, sheetArray: Array<number>){
     if (resNum == sheetArray[0]){
-      return res.isFirstSheet = true
+      return res._isFirstSheet = true
     }
     else if (resNum == sheetArray[1]){
-      return res.isLastSheet = true
+      return res._isLastSheet = true
     }
       else if (resNum > sheetArray[0]){
-        return res.isSheet = true
+        return res._isSheet = true
     }
 }
   openModal(args){

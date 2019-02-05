@@ -1,7 +1,7 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core';
 import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
 import { AdDirective } from '../host/a-host.directive';
-import { HttpPdbRequesterService } from '../../core/http-pdb/http-pdb-requester.service'
+import { HttpService } from '../../core/http-pdb/http-pdb-requester.service'
 import { LabelComponent } from '../../shared/label/label.component'
 import { DataService } from '../../core/data-service/data-service.service'
 import 'focus-trap/dist/focus-trap';
@@ -29,7 +29,7 @@ export class AminoModal extends DialogComponent<AminoModel, boolean> implements 
 
   @ViewChild(AdDirective) host: AdDirective;
   aminoInitials : string
-  constructor(private _componentFactoryResolver: ComponentFactoryResolver,private _dialogService :DialogService,private _HttpRequester : HttpPdbRequesterService, private _dataService : DataService) {
+  constructor(private _componentFactoryResolver: ComponentFactoryResolver,private _dialogService :DialogService,private _HttpRequester : HttpService, private _dataService : DataService) {
     super(_dialogService);
   }
   createFocusTrap = require("focus-trap/dist/focus-trap");
@@ -71,7 +71,6 @@ export class AminoModal extends DialogComponent<AminoModel, boolean> implements 
     }
     return amino;
   }
-  
   setFocus(){
     this.focusTrap = this.createFocusTrap(".modal-content", {
       initialFocus: ".close",

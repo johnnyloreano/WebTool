@@ -55,7 +55,4 @@ export class Protein {
     get sheet_range(): Array<any>{
         return this._sheet_range;
     }
-    public static getProtein(){
-        return new Protein(null,null,null,null,null,null,null,null,null,null);
-    }
 }
