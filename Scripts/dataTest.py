@@ -1,27 +1,34 @@
 from prody import *
 import json
-x = parsePDB('PHE', header=True)
+from dataTag import getGeneralData
+x = parsePDB('3NIR', header=True)
 
+# def getResNum(pdb):
+#     resNumList = list()
+#     iterator = iter(pdb[0])
+#     residue = jumpIterator(iterator)
+#     while(True):
+#         residue = jumpIterator(iterator)
+#         if residue is not None:
+#             resNumList.append(residue.getResnum())
+#         if residue is None:
+#             break
+#         residue = skipResidue(residue.getResindex(),iterator)
+#     return resNumList
+# def jumpIterator(iterator):
+#     try:
+#         return iterator.next()
+#     except StopIteration:
+#         return None
+# def skipResidue(oldResidue, iterator):
+#     auxRes = jumpIterator(iterator)
+#     if auxRes is not None:
+#         while(oldResidue == auxRes.getResindex()):
+#             auxRes = jumpIterator(iterator)
+#             if auxRes is None:
+#                 return auxRes
+#     return None
 
-def getResNum(pdb):
-    resNumList = list()
-    iterator = iter(pdb[0])
-    residue = iterator.next()
-    while(True):
-        residue = iterator.next()
-        resNumList.append(residue.getResnum())
-        residue = skipResidue(residue.getResindex(),iterator)
-        if residue is None:
-            break
-    return resNumList
-
-def skipResidue(oldResidue, iterator):
-    auxRes = iterator.next()
-    while(oldResidue == auxRes.getResindex()):
-        try:
-            auxRes = iterator.next()
-        except StopIteration:
-            return None
-    return auxRes
-
+# print(getResNum(x))
+# print(len(getResNum(x)))
 print(x)

@@ -82,7 +82,7 @@ def parse_mol(lines):
         atom["z"] = a_line["zzz"]
 
         atom["symbol"] = a_line["aaa"]
-        mol["atom"+str((l+1))] = atom
+        mol[str((l+1))] = atom
 
     return mol
 

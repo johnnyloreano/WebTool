@@ -44,10 +44,11 @@ export class AminoModal extends DialogComponent<AminoModel, boolean> implements 
     this.instantiateAmino(this.aminoInitials).then((data) => {
       const arrAtoms = data.atoms;
       for(let x = 0; x < arrAtoms.length;x++){
-      if(arrAtoms[x].initials != "H"){
+      if(arrAtoms[x].initials != "Hz"){
         let compRef = viewContainer.createComponent(componentFactory);
         compRef.instance._x = arrAtoms[x].x;
         compRef.instance._y = arrAtoms[x].y;
+        compRef.instance._z = arrAtoms[x].z;
         compRef.instance.initials = arrAtoms[x].initials.toUpperCase();
         }
       }
@@ -64,6 +65,7 @@ export class AminoModal extends DialogComponent<AminoModel, boolean> implements 
       let atom = new Atom();
       atom.x = content[""+i]['x'];
       atom.y = content[""+i]['y'];
+      atom.z = content[""+i]['z'];
       atom.initials = content[""+i]['symbol'];
       amino.atoms.push(atom);
     }

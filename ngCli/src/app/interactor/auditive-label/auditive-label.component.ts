@@ -74,7 +74,7 @@ export class AuditiveLabelComponent implements OnInit, LabelAuditive  {
     this._isSheet = isSheet;
   }
   set isLastSheet(isLast : boolean){
-    this._isFirstHelix = isLast;
+    this._isLastHelix = isLast;
   }
   set parent(parent:any){
     this._parent = parent
@@ -87,9 +87,6 @@ export class AuditiveLabelComponent implements OnInit, LabelAuditive  {
   }
   get isHelix(){
       return this.isHelix
-  }
-  get isLastSheet(){
-    return this.isLastSheet
   }
   get isFirstSheet(){
     return this.isFirstSheet
@@ -118,7 +115,7 @@ export class AuditiveLabelComponent implements OnInit, LabelAuditive  {
        return TalkerService.speak(this._upSound );
       }
       if(event.keyCode == 32){ // Spacekey
-        let message = "Posição atual: "
+        let message = "Posição atual: " +this.initials
         if(this._isFirst)
         message +=". Primeiro resíduo";
         else if(this._isLast)

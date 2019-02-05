@@ -5,7 +5,7 @@ import {TalkerService} from '../../core/talker/talker.service'
 @Component({
   selector: 'app-label',
   template: `
-              <div tabindex="0" class="d-inline-block text-center label" [ngStyle]="getPosition()" >
+              <div tabindex="0" class="d-inline-block text-center label" [ngStyle]="getProperties()" >
                 {{_initials}}
               </div>
               `,
@@ -20,6 +20,7 @@ export class LabelComponent implements LabelAuditive {
   // Plot info's
   _y  : number = undefined;
   _x  : number = undefined;
+  _z  : number = undefined;
   _style ;
   _class;
   sounds : string[];
@@ -54,8 +55,8 @@ export class LabelComponent implements LabelAuditive {
   set downSound(downSound:string){
     this.sounds[0] = downSound;
   }
-  getPosition(){
-    return {'position':'absolute', 'bottom': this._y+"%", 'left': this._x+"%" };
+  getProperties(){
+    return {'position':'absolute', 'bottom': this._y+"%", 'left': this._x+"%"};
   }
   decideSound(event : any){
     if(this.sounds[0] != undefined || this.sounds[1] != undefined) 

@@ -22,31 +22,30 @@ def getCoord(pdb):
     iterator = iter(pdb[0])
     residue = iterator.next()
     while(True):
-        residue = iterator.next()
-        listCoord.append(residue.getCoordsets().tolist()[0])
-        residue = skipResidue(residue.getResindex(),iterator)
+        residue = jumpIterator(iterator)
         if residue is None:
             break
+        listCoord.append(residue.getCoordsets().tolist()[0])
+        residue = skipResidue(residue.getResindex(),iterator)
     return listCoord
 def getResNum(pdb):
     resNumList = list()
-    iterator = iter(pdb[0])
-    residue = iterator.next()
-    while(True):
-        residue = iterator.next()
-        resNumList.append(residue.getResnum())
-        residue = skipResidue(residue.getResindex(),iterator)
-        if residue is None:
-            break
+    resNumList.append(pdb[1]['A'].dbrefs[0].first[0])
+    resNumList.append(pdb[1]['A'].dbrefs[0].last[0])
     return resNumList
+def jumpIterator(iterator):
+    try:
+        return iterator.next()
+    except StopIteration:
+        return None
 def skipResidue(oldResidue, iterator):
-    auxRes = iterator.next()
-    while(oldResidue == auxRes.getResindex()):
-        try:
-            auxRes = iterator.next()
-        except StopIteration:
-            return None
-    return auxRes
+    auxRes = jumpIterator(iterator)
+    if auxRes is not None:
+        while(oldResidue == auxRes.getResindex()):
+            auxRes = jumpIterator(iterator)
+            if auxRes is None:
+                return auxRes
+    return None
 
 def normalizer(arrayValues):
     minX = np.min(arrayValues, axis = 0)[0]

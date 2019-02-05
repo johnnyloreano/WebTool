@@ -28,14 +28,7 @@ export class DataService {
   parseTag(residues:string[], residues_num:number[]):Label[]{
     let residuesComp : Label[] = [];
     for(let i = 0 ; i <residues.length; i++)
-      residuesComp.push({initials: residues[i], number: residues_num[i]});
-      
+      residuesComp.push({initials: residues[i], number: residues_num[0]+i});      
     return residuesComp;
-  }
-  setAminoacid(aminoacid){
-    console.log(aminoacid)
-  }
-  getAminoacid(): Aminoacid{
-    return this.aminoData.getValue();
   }
 }

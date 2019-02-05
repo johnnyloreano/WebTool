@@ -15,7 +15,7 @@ import { AuditiveLabelComponent } from '../auditive-label/auditive-label.compone
             <h3> 
               Proteína: {{proteinName}} 
             </h3>
-            <div [ngStyle]="{'position':'relative','background-color': '#ADD8E6', 'min-height': '80vh', 'width': '95%', 'margin':'0 auto', 'border': '42px #ADD8E6 solid' }">
+            <div [ngStyle]="{'position':'relative','background-color': '#ADD8E6', 'min-height': '120vh', 'width': '100%', 'margin':'0 auto', 'border': '42px #ADD8E6 solid' }">
               <ng-template a-host ></ng-template>
             </div>
             `
@@ -49,6 +49,7 @@ export class ProteinViewerComponent implements OnInit {
     let arrComponent = Array<AuditiveLabelComponent>();
     viewContainer.clear();
     for(let i = 0; i < arrLabel.length;i++){
+        console.log("yay")
         let componentRef = viewContainer.createComponent(componentFactory);
         arrComponent.push(componentRef.instance);
         //Amino's plot
@@ -82,6 +83,7 @@ export class ProteinViewerComponent implements OnInit {
           arrComponent[i].downSound = "Você saiu da proteína!"
         }
     }
+    console.log(viewContainer.length)
   }
   helixVerifier(res:AuditiveLabelComponent,resNum:number, helixArray: Array<number>){
       if (resNum == helixArray[0]){
