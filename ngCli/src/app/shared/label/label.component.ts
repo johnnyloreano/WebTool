@@ -17,6 +17,7 @@ export class LabelComponent implements LabelAuditive {
   _y  : number;
   _x  : number;
   _z  : number;
+  number: number;
   sounds : string[] = new Array<string>();
   style() : any{
     return {'bottom': this._y+"%", 'left': this._x+"%"};
@@ -40,7 +41,8 @@ export class LabelComponent implements LabelAuditive {
     this._initials = initials;
   }
   set position(positions : number[]){
-    this._y = positions[1];this._x = positions[0];
+    this._x = positions[0];
+    this._y = positions[1];
   }  
   set upSound(upSound:string){
     this.sounds[1] = upSound;

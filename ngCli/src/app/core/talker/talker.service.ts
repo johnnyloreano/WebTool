@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class TalkerService {
   static talker = new SpeechSynthesisUtterance();
-  static sayTimeout = setTimeout(function () { speak(message); }, 250);
+  static sayTimeout = setTimeout(function () { TalkerService.speak(""); }, 250);
 
   static speak(message:string) : void{
     if (speechSynthesis.speaking) {
@@ -18,7 +18,7 @@ export class TalkerService {
       // Good to go
       const msg = new SpeechSynthesisUtterance(message);
       msg.volume = 0.5;
-      msg.pitch = 0.7;
+      msg.pitch = 1.0;
       msg.rate = 0.7;
       msg.voice = speechSynthesis.getVoices()[4]
       msg.lang = "pt-BR";

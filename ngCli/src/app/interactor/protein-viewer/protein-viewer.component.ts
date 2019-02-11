@@ -60,9 +60,10 @@ export class ProteinViewerComponent implements OnInit {
         if(i > 0 ){
           // Sound placement
           let transitions = this._transcripter.getTransition(arrComponent[i].position,arrComponent[i-1].position);
-          console.log(arrComponent[i-1].initials+" =>"+arrComponent[i].initials);
           arrComponent[i].downSound = transitions[1];
           arrComponent[i-1].upSound = transitions[0];
+          console.log(arrComponent[i-1]._initials,"->",arrComponent[i]._initials);
+          console.log([transitions[0], transitions[1] ]);
           // Helix verification
           if(hasHelix && actualHelix < helix_range.length){
             this.helixVerifier(arrComponent[i],arrLabel[i].number,helix_range[actualHelix]);
