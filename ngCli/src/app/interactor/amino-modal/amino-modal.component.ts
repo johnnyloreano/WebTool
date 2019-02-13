@@ -7,7 +7,6 @@ import { DataService } from '../../core/data-service/data-service.service'
 import 'focus-trap/dist/focus-trap';
 import { Aminoacid } from '../../shared/aminoacid';
 import { Atom } from '../../shared/atom';
-
 export interface AminoModel {
 }
 @Component({  
@@ -42,15 +41,16 @@ export class AminoModal extends DialogComponent<AminoModel, boolean> implements 
     let viewContainer = this.host.viewContainerRef;
     viewContainer.clear()
     this.instantiateAmino(this.aminoInitials).then((data) => {
+      console.log(data);
       const arrAtoms = data.atoms;
       for(let x = 0; x < arrAtoms.length;x++){
-      if(arrAtoms[x].initials != "Hz"){
+      
         let compRef = viewContainer.createComponent(componentFactory);
-        compRef.instance._x = arrAtoms[x].x;
-        compRef.instance._y = arrAtoms[x].y;
-        compRef.instance._z = arrAtoms[x].z;
-        compRef.instance.initials = arrAtoms[x].initials.toUpperCase();
-        }
+        let instance = compRef.instance;
+        instance._y = arrAtoms[x].y;
+        instance._x = arrAtoms[x].x;
+        instance._z = arrAtoms[x].z;
+        instance.initials = arrAtoms[x].initials.toUpperCase();
       }
     });
     this.setFocus();

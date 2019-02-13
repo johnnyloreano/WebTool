@@ -17,7 +17,7 @@ import { LabelResidueComponent } from '../../shared/label-residue/label-residue.
               Proteína: {{proteinName}} 
             </h3>
             <div>
-              <ng-template a-host ></ng-template>
+            <ng-template a-host ></ng-template>
             </div>
             `
 })
@@ -62,8 +62,8 @@ export class ProteinViewerComponent implements OnInit {
           let transitions = this._transcripter.getTransition(arrComponent[i].position,arrComponent[i-1].position);
           arrComponent[i].downSound = transitions[1];
           arrComponent[i-1].upSound = transitions[0];
-          console.log(arrComponent[i-1]._initials,"->",arrComponent[i]._initials);
-          console.log([transitions[0], transitions[1] ]);
+          // console.log(arrComponent[i-1]._initials,"->",arrComponent[i]._initials);
+          // console.log([transitions[0], transitions[1] ]);
           // Helix verification
           if(hasHelix && actualHelix < helix_range.length){
             this.helixVerifier(arrComponent[i],arrLabel[i].number,helix_range[actualHelix]);
