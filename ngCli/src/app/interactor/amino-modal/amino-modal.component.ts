@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit, ViewChild,Renderer2, ElementRef } from '@angular/core';
 import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
 import { AdDirective } from '../host/a-host.directive';
 import { HttpService } from '../../core/http-pdb/http-pdb-requester.service'
@@ -7,6 +7,9 @@ import { DataService } from '../../core/data-service/data-service.service'
 import 'focus-trap/dist/focus-trap';
 import { Aminoacid } from '../../shared/aminoacid';
 import { Atom } from '../../shared/atom';
+import { BondComponent } from '../../shared/bond/bond.component'
+import { MathService } from '../../core/math/math.service'
+
 export interface AminoModel {
 }
 @Component({  
@@ -18,17 +21,22 @@ export interface AminoModel {
                    <button type="button" class="close" (click)="closeModal()">&times;</button>
                    <h4 class="modal-title">Close</h4>
                  </div>
-                 <div class="modal-body">
-                   <ng-template a-host></ng-template>
-                  </div>
+                 <div class="modal-body" id="canvas">
+                 <svg #svg>
+                  
+                  Sorry, your browser does not support inline SVG.
+                </svg>
+                 <ng-template a-host></ng-template>
+                   </div>
                </div>
             </div>`
 })
 export class AminoModal extends DialogComponent<AminoModel, boolean> implements AminoModel,OnInit {
 
   @ViewChild(AdDirective) host: AdDirective;
+  @ViewChild('svg') svgHost: ElementRef;
   aminoInitials : string
-  constructor(private _componentFactoryResolver: ComponentFactoryResolver,private _dialogService :DialogService,private _HttpRequester : HttpService, private _dataService : DataService) {
+  constructor(private _renderer : Renderer2,private _math: MathService,private _componentFactoryResolver: ComponentFactoryResolver,private _dialogService :DialogService,private _HttpRequester : HttpService, private _dataService : DataService) {
     super(_dialogService);
   }
   createFocusTrap = require("focus-trap/dist/focus-trap");
@@ -41,10 +49,9 @@ export class AminoModal extends DialogComponent<AminoModel, boolean> implements 
     let viewContainer = this.host.viewContainerRef;
     viewContainer.clear()
     this.instantiateAmino(this.aminoInitials).then((data) => {
-      console.log(data);
       const arrAtoms = data.atoms;
-      for(let x = 0; x < arrAtoms.length;x++){
-      
+      console.log(arrAtoms)
+      for(let x = 0; x < arrAtoms.length;x++){      
         let compRef = viewContainer.createComponent(componentFactory);
         let instance = compRef.instance;
         instance._y = arrAtoms[x].y;
@@ -53,23 +60,47 @@ export class AminoModal extends DialogComponent<AminoModel, boolean> implements 
         instance.initials = arrAtoms[x].initials.toUpperCase();
       }
     });
+
     this.setFocus();
   }
   async instantiateAmino(aminoName){
     var content = await this._HttpRequester.requestAmino(aminoName);
+    console.log(content)
     var amino = new Aminoacid();
     amino.name = content['name'];
     amino.atoms = new Array<Atom>();
-    console.log(content)
-    for(let i = 1; content.hasOwnProperty(""+i); i++){
+    for(let i = 0; content.hasOwnProperty(""+i); i++){
       let atom = new Atom();
       atom.x = content[""+i]['x'];
       atom.y = content[""+i]['y'];
       atom.z = content[""+i]['z'];
       atom.initials = content[""+i]['symbol'];
       amino.atoms.push(atom);
+      console.log(atom)
+    }
+    for(let i = 0;content.hasOwnProperty(""+i); i++){
+      if(content[i]['bond'].length > 0){
+        let arrayBond = content[i]['bond'];
+        for(let x = 0; x < arrayBond.length;x++){
+          let toIndex = arrayBond[x]['to'] - 1
+          let positions = [amino.atoms[i].x,amino.atoms[i].y];
+          let positions2 = [amino.atoms[toIndex].x, amino.atoms[toIndex].y];
+          this.instantiateLine(positions,positions2);
+        }
+      }
     }
     return amino;
+  }
+  instantiateLine(position:number[],position2:number[]) : void{
+    let line = document.createElementNS('http://www.w3.org/2000/svg','line');
+    this._renderer.setAttribute(line,"x1",position[0]+"%");
+    this._renderer.setAttribute(line,"y1",100-position[1]+"%");
+    this._renderer.setAttribute(line,"x2",position2[0]+"%");
+    this._renderer.setAttribute(line,"y2",100-position2[1]+"%");
+    this._renderer.setStyle(line,"stroke-width","1");
+    this._renderer.setStyle(line,"stroke","rgb(255,0,0)")
+    this._renderer.appendChild(this.svgHost.nativeElement, line);
+
   }
   setFocus(){
     this.focusTrap = this.createFocusTrap(".modal-content", {

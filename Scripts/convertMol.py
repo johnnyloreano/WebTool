@@ -8,6 +8,37 @@ h_count_dict = {
     4:"H3",
     5:"H4"
 }
+bond_type_dict = {
+    1:"Single",
+    2:"Double",
+    3:"Triple",
+    4:"Aromatic",
+    5:"Single_or_Double",
+    6:"Single_or_Aromatic",
+    7:"Double_or_Aromatic",
+    8:"Any"
+}
+def parse_bond_line(line):
+    """
+    Parses a line from a bondblock and turns it into a dict
+
+    111222tttsssxxxrrrccc
+    111 = number of atom 1
+    222 = number of atom 2
+    ttt = bond type
+    sss = bond stereo
+    xxx = not used
+    rrr = bond topology
+    ccc = reacting center status
+    """
+    ret = {}
+    ret["111"] = int(float(line[0:3]))
+    ret["222"] = int(float(line[3:6]))
+    ret["ttt"] = int(float(line[6:9]))
+    ret["sss"] = int(float(line[9:12]))
+    ret["xxx"] = int(float(line[12:15]))
+    ret["rrr"] = int(float(line[15:18]))
+    return ret
 
 def parse_counts_line(line):
     """
@@ -29,6 +60,7 @@ def parse_counts_line(line):
     """
     ret = {}
     ret["aaa"] = int(float(line[0:3]))
+    ret["bbb"] = int(float(line[3:7]))
     return ret
 
 def parse_atom_line(line):
@@ -58,6 +90,7 @@ def parse_atom_line(line):
     ret["yyy"] = float(line[10:20])
     ret["zzz"] = float(line[20:30])
     ret["aaa"] = line[31:34].strip()
+    ret["bbb"] = int(float(line[45:48]))
     return ret
 
 def parse_mol(lines):
@@ -67,12 +100,15 @@ def parse_mol(lines):
     """
     mol = {}
     num_atoms = 0
+    num_bonds = 0
     mol["name"] = lines[0]
     ### COUNTS LINE ###
     c_line = parse_counts_line(lines[3])
     num_atoms = c_line["aaa"]
+    num_bonds = c_line["bbb"]
 
     atom_dex = 4 + num_atoms
+    bond_dex = atom_dex + num_bonds 
 
     for l,line in enumerate(lines[4:atom_dex]):
         atom = {}
@@ -80,10 +116,17 @@ def parse_mol(lines):
         atom["x"] = a_line["xxx"]
         atom["y"] = a_line["yyy"]
         atom["z"] = a_line["zzz"]
-
+        atom['bond'] = list()
         atom["symbol"] = a_line["aaa"]
-        mol[str((l+1))] = atom
+        mol[str((l))] = atom
 
+    for l,line in enumerate(lines[atom_dex:bond_dex]):
+        bond = dict()
+        b_line = parse_bond_line(line)
+        bond['type'] = (bond_type_dict[b_line["ttt"]])
+        at = (b_line["111"])
+        bond['to'] = (b_line["222"])
+        mol[str(at)]['bond'].append(bond)
     return mol
 
 def parse_sdf_file(filename,n=-1):

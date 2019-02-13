@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,Output, EventEmitter} from '@angular/core';
+import { Component,ViewChild, ElementRef } from '@angular/core';
 import {LabelAuditive} from '../label-auditive'
 import {TranscripterService} from '../../core/transcripter/transcripter.service'
 import {TalkerService} from '../../core/talker/talker.service'
@@ -19,6 +19,8 @@ export class LabelComponent implements LabelAuditive {
   _z  : number;
   number: number;
   sounds : string[] = new Array<string>();
+  computedStyle
+  constructor() {}
   style() : any{
     return {'bottom': this._y+"%", 'left': this._x+"%"};
   }

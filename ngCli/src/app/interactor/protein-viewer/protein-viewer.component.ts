@@ -30,6 +30,7 @@ export class ProteinViewerComponent implements OnInit {
     if (this._dataService.getProtein() === undefined) {
       this._route.navigate(['/']);
     }
+    
     this.loadComponent();
   }
   loadComponent(){

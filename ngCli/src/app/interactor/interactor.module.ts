@@ -8,15 +8,16 @@ import { SharedModule } from '../shared/shared.module'
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { TranscripterService } from '../core/transcripter/transcripter.service';
 import { TalkerService } from '../core/talker/talker.service';
+import { BondComponent } from '../shared/bond/bond.component';
 @NgModule({
-  declarations: [ProteinViewerComponent,AminoModal,AdDirective],
+  declarations: [ProteinViewerComponent,AminoModal,AdDirective, BondComponent],
   imports: [
     CommonModule,
     CoreModule,
     SharedModule,
     BootstrapModalModule
   ],
-  entryComponents: [AminoModal],
+  entryComponents: [AminoModal, BondComponent],
   providers: [TranscripterService,TalkerService]
 })
 export class InteractorModule { }

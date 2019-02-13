@@ -1,6 +1,9 @@
 from prody import *
 import json
 from dataTag import getGeneralData
+from dataAmino import getAminoData
+from convertMolFUll import *
+from pprint import pprint
 x = parsePDB('3NIR', header=True)
 
 # def getResNum(pdb):
@@ -31,4 +34,4 @@ x = parsePDB('3NIR', header=True)
 
 # print(getResNum(x))
 # print(len(getResNum(x)))
-print(x)
+pprint(getAminoData('PHE'))
