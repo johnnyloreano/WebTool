@@ -34,4 +34,3 @@ x = parsePDB('3NIR', header=True)
 
 # print(getResNum(x))
 # print(len(getResNum(x)))
-pprint(getAminoData('PHE'))

@@ -9,10 +9,11 @@ def getAminoData(aminoName):
     content = parse_sdf_file("sdfFiles/"+aminoName+"_model.sdf",n=25000)[0]
     pprint(content)
     elements = list()
-    for x in range(0, len(content)):
+    lenghtList = len(content)-1
+    for x in range(0, lenghtList):
         elements.append(content[str(x)])
     elements = normalizeData(elements)
-    for x in range(0, len(content)):
+    for x in range(0, lenghtList):
         content[str(x)]['x'] = elements[x]['x']
         content[str(x)]['y'] = elements[x]['y']
         content[str(x)]['z'] = elements[x]['z']
@@ -20,10 +21,10 @@ def getAminoData(aminoName):
     return json.dumps( normalizeData(elements) )
 def normalizeData(array):
     onlyCoords = normalizer(getCoord(array))
-    for x in range(1, len(array)):
-        array[x]['x'] = onlyCoords[x-1][0] * 0.9
-        array[x]['y'] = onlyCoords[x-1][1] * 0.9
-        array[x]['z'] = onlyCoords[x-1][2] * 0.9
+    for x in range(0, len(array)):
+        array[x]['x'] = onlyCoords[x][0] 
+        array[x]['y'] = onlyCoords[x][1] 
+        array[x]['z'] = onlyCoords[x][2]
     return array
 def AminoDataVerifier():
     if not os.path.isdir("sdfFiles/"):

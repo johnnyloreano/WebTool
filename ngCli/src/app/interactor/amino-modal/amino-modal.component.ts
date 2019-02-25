@@ -9,6 +9,7 @@ import { Aminoacid } from '../../shared/aminoacid';
 import { Atom } from '../../shared/atom';
 import { BondComponent } from '../../shared/bond/bond.component'
 import { MathService } from '../../core/math/math.service'
+import { ConsoleReporter } from 'jasmine';
 
 export interface AminoModel {
 }
@@ -50,7 +51,6 @@ export class AminoModal extends DialogComponent<AminoModel, boolean> implements 
     viewContainer.clear()
     this.instantiateAmino(this.aminoInitials).then((data) => {
       const arrAtoms = data.atoms;
-      console.log(arrAtoms)
       for(let x = 0; x < arrAtoms.length;x++){      
         let compRef = viewContainer.createComponent(componentFactory);
         let instance = compRef.instance;
@@ -65,7 +65,6 @@ export class AminoModal extends DialogComponent<AminoModel, boolean> implements 
   }
   async instantiateAmino(aminoName){
     var content = await this._HttpRequester.requestAmino(aminoName);
-    console.log(content)
     var amino = new Aminoacid();
     amino.name = content['name'];
     amino.atoms = new Array<Atom>();
@@ -76,32 +75,32 @@ export class AminoModal extends DialogComponent<AminoModel, boolean> implements 
       atom.z = content[""+i]['z'];
       atom.initials = content[""+i]['symbol'];
       amino.atoms.push(atom);
-      console.log(atom)
     }
     for(let i = 0;content.hasOwnProperty(""+i); i++){
       if(content[i]['bond'].length > 0){
         let arrayBond = content[i]['bond'];
         for(let x = 0; x < arrayBond.length;x++){
-          let toIndex = arrayBond[x]['to'] - 1
+          let toIndex = arrayBond[x]['to']
           let positions = [amino.atoms[i].x,amino.atoms[i].y];
           let positions2 = [amino.atoms[toIndex].x, amino.atoms[toIndex].y];
-          this.instantiateLine(positions,positions2);
+            console.log(positions)
+            console.log(positions2)
+          // this.instantiateLine(positions,positions2);
         }
       }
     }
     return amino;
   }
-  instantiateLine(position:number[],position2:number[]) : void{
-    let line = document.createElementNS('http://www.w3.org/2000/svg','line');
-    this._renderer.setAttribute(line,"x1",position[0]+"%");
-    this._renderer.setAttribute(line,"y1",100-position[1]+"%");
-    this._renderer.setAttribute(line,"x2",position2[0]+"%");
-    this._renderer.setAttribute(line,"y2",100-position2[1]+"%");
-    this._renderer.setStyle(line,"stroke-width","1");
-    this._renderer.setStyle(line,"stroke","rgb(255,0,0)")
-    this._renderer.appendChild(this.svgHost.nativeElement, line);
-
-  }
+  // instantiateLine(position:number[],position2:number[]) : void{
+  //   let line = document.createElementNS('http://www.w3.org/2000/svg','line');
+  //   this._renderer.setAttribute(line,"x1",position[0]+"%");
+  //   this._renderer.setAttribute(line,"y1",position[1]+"%");
+  //   this._renderer.setAttribute(line,"x2",position2[0]+"%");
+  //   this._renderer.setAttribute(line,"y2",position2[1]+"%");
+  //   this._renderer.setStyle(line,"stroke-width","1");
+  //   this._renderer.setStyle(line,"stroke","rgb(255,0,0)")
+  //   this._renderer.appendChild(this.svgHost.nativeElement, line);
+  // }
   setFocus(){
     this.focusTrap = this.createFocusTrap(".modal-content", {
       initialFocus: ".close",

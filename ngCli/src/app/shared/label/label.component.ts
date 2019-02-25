@@ -22,7 +22,17 @@ export class LabelComponent implements LabelAuditive {
   computedStyle
   constructor() {}
   style() : any{
-    return {'bottom': this._y+"%", 'left': this._x+"%"};
+    let bottom = this._y+'%';
+    let left = this._x+'%';
+    if(this._y >= 97)
+      bottom = 'calc('+this._y+'% - 45px)';
+    else if(this._y >= 3)
+      bottom = 'calc('+this._y+'% + 45px)';
+    if(this._x >= 97)
+      left = 'calc('+this._x+'% - 45px)';
+    else if(this._x >= 3)
+      left = 'calc('+this._x+'% + 45px)';
+    return {'bottom': bottom, 'left': left};
   }
   class() : any{
     return ["atom", this._initials]
