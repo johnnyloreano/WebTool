@@ -127,7 +127,7 @@ def parse_mol(lines):
         at = (b_line["111"]-1)
         bond['to'] = (b_line["222"]-1)
         mol[str(at)]['bond'].append(bond)
-    return mol1
+    return mol
 
 def parse_sdf_file(filename,n=-1):
     ret = []

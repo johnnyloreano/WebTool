@@ -22,9 +22,9 @@ def getAminoData(aminoName):
 def normalizeData(array):
     onlyCoords = normalizer(getCoord(array))
     for x in range(0, len(array)):
-        array[x]['x'] = onlyCoords[x][0] 
-        array[x]['y'] = onlyCoords[x][1] 
-        array[x]['z'] = onlyCoords[x][2]
+        array[x]['x'] = onlyCoords[x][0] * 0.6
+        array[x]['y'] = onlyCoords[x][1] * 0.6
+        array[x]['z'] = onlyCoords[x][2] * 0.6
     return array
 def AminoDataVerifier():
     if not os.path.isdir("sdfFiles/"):
