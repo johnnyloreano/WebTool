@@ -9,7 +9,6 @@ import { Aminoacid } from '../../shared/aminoacid';
 import { Atom } from '../../shared/atom';
 import { BondComponent } from '../../shared/bond/bond.component'
 import { MathService } from '../../core/math/math.service'
-import { ConsoleReporter } from 'jasmine';
 
 export interface AminoModel {
 }

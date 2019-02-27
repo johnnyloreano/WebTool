@@ -3,34 +3,30 @@ import SDFDownload
 import os,json
 from pprint import pprint
 from dataTag import normalizer
-
+from sdfUtils import *
 def getAminoData(aminoName):
     AminoDataVerifier()
-    content = parse_sdf_file("sdfFiles/"+aminoName+"_model.sdf",n=25000)[0]
-    pprint(content)
-    elements = list()
-    lenghtList = len(content)-1
-    for x in range(0, lenghtList):
-        elements.append(content[str(x)])
-    elements = normalizeData(elements)
-    for x in range(0, lenghtList):
-        content[str(x)]['x'] = elements[x]['x']
-        content[str(x)]['y'] = elements[x]['y']
-        content[str(x)]['z'] = elements[x]['z']
-        print(content[str(x)])
-    return json.dumps( normalizeData(elements) )
+    sdf = getSDF(aminoName)
+    # elements = list()
+    # lenghtList = len(sdf)-1
+    # for x in range(0, lenghtList):
+    #     elements.append(sdf[str(x)])
+    # elements = normalizeData(elements)
+    # print(elements[0][0])
+    # for x in range(0, lenghtList):
+    #     sdf[str(x)]['x'] = elements[x][0]
+    #     sdf[str(x)]['y'] = elements[x][1]
+    #     sdf[str(x)]['z'] = elements[x][2]
+    return json.dumps( sdf )
 def normalizeData(array):
-    onlyCoords = normalizer(getCoord(array))
-    for x in range(0, len(array)):
-        array[x]['x'] = onlyCoords[x][0] * 0.6
-        array[x]['y'] = onlyCoords[x][1] * 0.6
-        array[x]['z'] = onlyCoords[x][2] * 0.6
+    array = normalizer(getCoord(array) )
     return array
 def AminoDataVerifier():
     if not os.path.isdir("sdfFiles/"):
         os.mkdir("sdfFiles/")
         SDFDownload.downloadAll()
     return
+
 def getCoord(aminoAtoms):
     listCoord = list()
     for x in aminoAtoms:
