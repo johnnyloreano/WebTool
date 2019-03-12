@@ -75,19 +75,19 @@ export class AminoModal extends DialogComponent<AminoModel, boolean> implements 
       atom.initials = content[""+i]['symbol'];
       amino.atoms.push(atom);
     }
-    for(let i = 0;content.hasOwnProperty(""+i); i++){
-      if(content[i]['bond'].length > 0){
-        let arrayBond = content[i]['bond'];
-        for(let x = 0; x < arrayBond.length;x++){
-          let toIndex = arrayBond[x]['to']
-          let positions = [amino.atoms[i].x,amino.atoms[i].y];
-          let positions2 = [amino.atoms[toIndex].x, amino.atoms[toIndex].y];
-            console.log(positions)
-            console.log(positions2)
-          // this.instantiateLine(positions,positions2);
-        }
-      }
-    }
+    // for(let i = 0;content.hasOwnProperty(""+i); i++){
+    //   if(content[i]['bond'].length > 0){
+    //     let arrayBond = content[i]['bond'];
+    //     for(let x = 0; x < arrayBond.length;x++){
+    //       let toIndex = arrayBond[x]['to']
+    //       let positions = [amino.atoms[i].x,amino.atoms[i].y];
+    //       let positions2 = [amino.atoms[toIndex].x, amino.atoms[toIndex].y];
+    //         console.log(positions)
+    //         console.log(positions2)
+    //       // this.instantiateLine(positions,positions2);
+    //     }
+    //   }
+    // }
     return amino;
   }
   // instantiateLine(position:number[],position2:number[]) : void{

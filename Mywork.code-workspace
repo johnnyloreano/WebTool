@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "Scripts"
+		},
+		{
+			"path": "ngCli/src/app"
+		},
+		{
+			"path": "sdfFiles"
+		}
+	],
+	"settings": {}
+}

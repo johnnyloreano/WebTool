@@ -1,31 +1,30 @@
 from convertMol import *
-import SDFDownload
 import os,json
-from pprint import pprint
 from dataTag import normalizer
-from sdfUtils import *
+from CIFTester import getCIF 
+from CIFUtils import downloadAll
 def getAminoData(aminoName):
     AminoDataVerifier()
-    sdf = getSDF(aminoName)
-    # elements = list()
-    # lenghtList = len(sdf)-1
-    # for x in range(0, lenghtList):
-    #     elements.append(sdf[str(x)])
-    # elements = normalizeData(elements)
-    # print(elements[0][0])
-    # for x in range(0, lenghtList):
-    #     sdf[str(x)]['x'] = elements[x][0]
-    #     sdf[str(x)]['y'] = elements[x][1]
-    #     sdf[str(x)]['z'] = elements[x][2]
-    return json.dumps( sdf )
+    cif = getCIF(aminoName)
+    elements = list()
+    lenghtList = len(cif)
+    for x in cif:
+        elements.append(x)
+    elements = normalizeData(elements)
+    for x in range(0, lenghtList):
+        cif[x]['x'] = elements[x][0] 
+        cif[x]['y'] = elements[x][1] 
+        cif[x]['z'] = elements[x][2]
+        print(cif[x])
+    return json.dumps(cif)
+    
 def normalizeData(array):
-    array = normalizer(getCoord(array) )
+    array = normalizer(getCoord(array))
     return array
 def AminoDataVerifier():
-    if not os.path.isdir("sdfFiles/"):
-        os.mkdir("sdfFiles/")
-        SDFDownload.downloadAll()
-    return
+    if not os.path.isdir("cifFiles/"):
+        os.mkdir("cifFiles/")
+        downloadAll()
 
 def getCoord(aminoAtoms):
     listCoord = list()

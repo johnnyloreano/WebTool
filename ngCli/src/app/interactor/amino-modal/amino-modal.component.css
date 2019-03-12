@@ -16,8 +16,10 @@
   text-align: center;
 }
 .modal-body{
-  width: inherit;
-  height: 95%;
+  width: 80%;
+  height: 80%;
+  background-color: burlywood;
+  margin:0 auto !important;
 }
 .modal-header{
   height: 5%;
