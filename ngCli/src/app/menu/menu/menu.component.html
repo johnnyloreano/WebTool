@@ -1,10 +1,10 @@
 <div class='text-center container'>
-  <header tabindex='0'>
-    <h5>
+  <header tabindex='0' id="header">
+    <h2>
       Nome da molécula : {{pdbContent['identifier']}}
-    </h5>
+    </h2>
   </header>
   <menu>
-    <a class='btn bg-primary text-white' (click)="goProteinView()">Abrir navegador</a>
+    <a tabindex='0' class='btn bg-primary text-white' (click)="goProteinView()"  (keydown)="$event.keyCode == 13 ? goProteinView() : null">Abrir navegador</a>
   </menu>
 </div>
