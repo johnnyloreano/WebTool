@@ -22,6 +22,12 @@ export class LabelComponent implements LabelAuditive {
   style(): any {
     return {'bottom': this._y + 'px', 'left': this._x + 'px'};
   }
+  getX(): number {
+    return this._x;
+  }
+  getY(): number {
+    return this._y;
+  }
   class(): any {
     return ['atom', this._initials];
   }

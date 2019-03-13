@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ComponentFactoryResolver, Renderer2, ElementRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentFactoryResolver, Renderer2} from '@angular/core';
 import { DataService } from '../../core/data-service/data-service.service';
 import { AdDirective } from '../host/a-host.directive';
 import { Router } from '@angular/router';
@@ -17,16 +17,14 @@ import { LabelResidueComponent } from '../../shared/label-residue/label-residue.
               (keydown)="$event.keyCode == 13 ? goPrincipal() : null">
                 Voltar ao menu principal
               </a>
-            <div id='viewerHold'>
-              <svg #svg></svg>
-              <ng-template a-host ></ng-template>
-            </div>
+              <div id='viewerHold'>
+                <ng-template a-host ></ng-template>
+              </div>
             `
 })
 export class ProteinViewerComponent implements OnInit {
 
   @ViewChild(AdDirective) host: AdDirective;
-  @ViewChild('svg') svgHost: ElementRef;
   private proteinName: string;
   constructor(private _componentFactoryResolver: ComponentFactoryResolver,
               private _dataService: DataService, private _route: Router,
@@ -72,7 +70,7 @@ export class ProteinViewerComponent implements OnInit {
           this.helixVerifier(arrComponent[i], arrLabel[i].number, helix_range[actualHelix]);
           if (arrComponent[i]._isLastHelix) { actualHelix++; }
           if (arrComponent[i]._isHelix || arrComponent[i]._isLastHelix) {
-            this.sinePlot(arrComponent[i].position, arrComponent[i - 1].position);
+            // this.sinePlot(arrComponent[i].position, arrComponent[i - 1].position);
           }
         }
         // Sheet verification
@@ -117,17 +115,17 @@ export class ProteinViewerComponent implements OnInit {
         return res._isSheet = true;
       }
   }
-  sinePlot(pos1: Array<number>, pos2: Array<number>) {
-    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    this._renderer.setAttribute(line, 'x1', pos1[0] + '');
-    this._renderer.setAttribute(line, 'y1', pos1[1] + '');
-    this._renderer.setAttribute(line, 'x2', pos2[0] + '');
-    this._renderer.setAttribute(line, 'y2', pos2[1] + '');
-    this._renderer.setStyle(line, 'stroke-width', '1');
-    this._renderer.setStyle(line, 'stroke', 'rgb(255,0,0)');
-    this._renderer.setStyle(line, 'position', 'absolute');
-    this._renderer.appendChild(this.svgHost.nativeElement, line);
-  }
+  // sinePlot(pos1: Array<number>, pos2: Array<number>) {
+  //   const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  //   this._renderer.setAttribute(line, 'x1', pos1[0] + '');
+  //   this._renderer.setAttribute(line, 'y1', pos1[1] + '');
+  //   this._renderer.setAttribute(line, 'x2', pos2[0] + '');
+  //   this._renderer.setAttribute(line, 'y2', pos2[1] + '');
+  //   this._renderer.setStyle(line, 'stroke-width', '1');
+  //   this._renderer.setStyle(line, 'stroke', 'rgb(255,0,0)');
+  //   this._renderer.setStyle(line, 'position', 'absolute');
+  //   this._renderer.appendChild(this.svgHost.nativeElement, line);
+  // }
   openModal(args) {
     args['parent']._dialogService.addDialog(AminoModal, {aminoInitials : args['initials']}).subscribe();
   }
