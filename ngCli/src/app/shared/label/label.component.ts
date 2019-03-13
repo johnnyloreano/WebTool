@@ -20,7 +20,7 @@ export class LabelComponent implements LabelAuditive {
   number: number;
   sounds: string[] = new Array<string>();
   style(): any {
-    return {'bottom': this._y + '%', 'left': this._x + '%'};
+    return {'bottom': this._y + 'px', 'left': this._x + 'px'};
   }
   class(): any {
     return ['atom', this._initials];

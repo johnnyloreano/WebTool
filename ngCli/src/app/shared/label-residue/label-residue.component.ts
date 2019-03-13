@@ -54,7 +54,7 @@ export class LabelResidueComponent extends LabelComponent {
     /*}*/super.decideSound(event);
       }
     }
-    getAminoName(AminoName) {
+  getAminoName(AminoName) {
       switch (AminoName) {
         case 'PHE':
           return 'Fenilalanina';
@@ -97,5 +97,5 @@ export class LabelResidueComponent extends LabelComponent {
           case 'GLY':
           return 'Glicina';
       }
-    }
+  }
 }
