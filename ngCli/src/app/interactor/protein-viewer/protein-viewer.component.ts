@@ -18,7 +18,8 @@ import { LabelResidueComponent } from '../../shared/label-residue/label-residue.
                 Voltar ao menu principal
               </a>
               <div id='viewerHold'>
-                <ng-template a-host ></ng-template>
+                <ng-template a-host>
+                </ng-template>
               </div>
             `
 })
@@ -57,7 +58,7 @@ export class ProteinViewerComponent implements OnInit {
       const componentRef = viewContainer.createComponent(componentFactory);
       arrComponent.push(componentRef.instance);
       // Amino's plot
-      const positionPlot = [totalWidth * pos[i][0] / 100, totalHeight * pos[i][1] / 100];
+      const positionPlot = [totalWidth * pos[i][0] / 100 , totalHeight * pos[i][1] / 100];
       arrComponent[i].position = positionPlot;
       (<LabelResidueComponent>componentRef.instance).initials = protein.residues[i].initials;
       // arrComponent[i].openModal.subscribe(this.openModal);
@@ -70,7 +71,6 @@ export class ProteinViewerComponent implements OnInit {
           this.helixVerifier(arrComponent[i], arrLabel[i].number, helix_range[actualHelix]);
           if (arrComponent[i]._isLastHelix) { actualHelix++; }
           if (arrComponent[i]._isHelix || arrComponent[i]._isLastHelix) {
-            // this.sinePlot(arrComponent[i].position, arrComponent[i - 1].position);
           }
         }
         // Sheet verification
@@ -115,17 +115,6 @@ export class ProteinViewerComponent implements OnInit {
         return res._isSheet = true;
       }
   }
-  // sinePlot(pos1: Array<number>, pos2: Array<number>) {
-  //   const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-  //   this._renderer.setAttribute(line, 'x1', pos1[0] + '');
-  //   this._renderer.setAttribute(line, 'y1', pos1[1] + '');
-  //   this._renderer.setAttribute(line, 'x2', pos2[0] + '');
-  //   this._renderer.setAttribute(line, 'y2', pos2[1] + '');
-  //   this._renderer.setStyle(line, 'stroke-width', '1');
-  //   this._renderer.setStyle(line, 'stroke', 'rgb(255,0,0)');
-  //   this._renderer.setStyle(line, 'position', 'absolute');
-  //   this._renderer.appendChild(this.svgHost.nativeElement, line);
-  // }
   openModal(args) {
     args['parent']._dialogService.addDialog(AminoModal, {aminoInitials : args['initials']}).subscribe();
   }
