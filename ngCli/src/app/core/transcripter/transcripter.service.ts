@@ -1,4 +1,4 @@
-import { Injectable, ɵConsole } from '@angular/core';
+import { Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -156,7 +156,7 @@ export class TranscripterService {
     const hours = [ this.toHour(calculateDegrees['predecessor']),
                   this.toHour(calculateDegrees['actual']) ];
     const distance = this.getDistance(actualAmino, predecessorAmino);
-    console.log(calculateDegrees);
+    // console.log(calculateDegrees);
     return [this.createText(hours[1][0], hours[1][1], distance), this.createText(hours[0][0], hours[0][1], distance)];
   }
 }

@@ -26,7 +26,6 @@ export class LabelResidueComponent extends LabelComponent {
   class() {
     return ['label'];
   }
-
   event(event) {
       if (event.keyCode === 32) { // Spacekey
         let message = 'Posição atual: ' + this.getAminoName(this.initials);

@@ -1,5 +1,4 @@
 import { Component, OnInit} from '@angular/core';
-import {DataService} from '../../core/data-service/data-service.service';
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-menu',
@@ -8,13 +7,24 @@ import {Router} from '@angular/router';
 })
 export class MenuComponent implements OnInit {
   private pdbContent: any;
-  constructor(public dataService: DataService, private _route: Router) {}
+  constructor( private _route: Router) {}
   ngOnInit() {
-    this.dataService.currentProtein.subscribe(pdbContent => this.pdbContent = pdbContent);
-    if (this.pdbContent === undefined) { this._route.navigate(['/']); }
-    document.getElementById('header').focus();
   }
-  goProteinView() {
-    this._route.navigate(['/proteinView']);
+
+  goForm() {
+    this._route.navigate(['/buscador']);
+  }
+  goManual() {
+    this._route.navigate(['/manual']);
+  }
+  lastMenuVerify(e){
+    e.preventDefault();
+    console.log(e.keyCode);
+    switch(e.keyCode){
+      case 13:
+        return this.goManual();
+      case 9 :
+        document.getElementById('menuLock').focus();
+    }
   }
 }

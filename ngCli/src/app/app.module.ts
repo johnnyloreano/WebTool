@@ -9,11 +9,13 @@ import { MenuModule} from './menu/menu.module';
 import { InteractorModule } from './interactor/interactor.module';
 import { SimpleModalModule } from 'ngx-simple-modal';
 import { DataService } from './core/data-service/data-service.service';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
     ],
   imports: [
+    NgxPageScrollCoreModule,
     AppProviderRoute,
     HttpClientModule,
     SharedModule,

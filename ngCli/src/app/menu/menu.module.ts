@@ -6,10 +6,12 @@ import { MenuComponent } from './menu/menu.component';
 import { CoreModule } from '../core/core.module'
 import { RouterModule } from '@angular/router';
 import { HttpService } from '../core/http-pdb/http-pdb-requester.service';
+import { ManualComponent } from './manual/manual.component';
 @NgModule({
   declarations: [
     FormComponent,
-    MenuComponent
+    MenuComponent,
+    ManualComponent
   ],
   imports: [
     CommonModule,

@@ -2,3 +2,9 @@ button{
     width: 75%;
     border-radius: 45;
 }
+ul{
+    list-style: none;
+}
+li{
+    margin:10px;
+}

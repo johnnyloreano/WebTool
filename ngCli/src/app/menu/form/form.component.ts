@@ -17,7 +17,7 @@ export class FormComponent {
       this._pdbRequester.requestTags(this.pdbFile).subscribe(
         (result) => {
           this.dataService.setProtein(result);
-          this._router.navigate(['/menu']); },
+          this._router.navigate(['/proteinView']); },
         (error: HttpErrorResponse) => {
           const errEl = document.getElementById('messageError');
           errEl.style.visibility = 'visible';
@@ -28,4 +28,5 @@ export class FormComponent {
         }
       );
   }
+  
 }
