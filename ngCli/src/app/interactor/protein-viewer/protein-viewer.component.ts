@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ComponentFactoryResolver, ElementRef, Ren
 import { DataService } from '../../core/data-service/data-service.service'
 import { AdDirective } from '../host/a-host.directive'
 import { Router } from '@angular/router';
-import { AminoModal } from '../amino-modal/amino-modal.component'
 import { DialogService } from 'ng2-bootstrap-modal';
 import {TranscripterService} from '../../core/transcripter/transcripter.service'
 import { LabelResidueComponent } from '../../shared/label-residue/label-residue.component';
@@ -11,20 +10,30 @@ import { TalkerService} from '../../core/talker/talker.service';
   selector: 'app-protein-viewer',
   styleUrls : ["./protein.css"],
   template: `
-            <h2>
+            <h2 tabindex='0'>
               Visualizador de proteína
             </h2>
-            <h3> 
+            <h3 tabindex='0'> 
               Proteína: {{proteinName}} 
             </h3>
-            <div id="viewerHold" (keydown)="$event.keyCode == 13 ? this._talker.speak('Entrando na proteína') : null">
+            <nav>
+              <ul id="menuList">
+                <li>  
+                  <a tabindex="0" class="btn bg-primary text-white" (click)="focusViewer()" (keydown)="$event.keyCode == 13 ?  focusViewer() : null">Entrar na proteína</a>
+                </li>
+                <li>
+                  <a tabindex="0" class="btn bg-primary text-white" routerLink="/menu" (keydown)="lastBtnVerify($event)">Voltar ao menu anterior</a>
+                </li>
+              </ul>            
+              </nav>
+            <div tabindex='-1' id="viewerHold" aria-label="Visualizador de proteína. Use o tab para começar!" (keydown)="$event.keyCode == 13 ? this._talker.speak('Entrando na proteína') : null">
             <svg #svg></svg>
             <ng-template a-host ></ng-template>
             </div>
             `
 })
 export class ProteinViewerComponent implements OnInit {
-
+  private proteinName : string;
   @ViewChild(AdDirective) host: AdDirective;
   @ViewChild("svg") svgHost: ElementRef;
   constructor(private _componentFactoryResolver: ComponentFactoryResolver,
@@ -32,14 +41,13 @@ export class ProteinViewerComponent implements OnInit {
      private _dialogService: DialogService, private _transcripter: TranscripterService,
      private _renderer : Renderer2, private _talker : TalkerService) { }
   ngOnInit() {
-    if (this._dataService.getProtein() === undefined) {
+    if (this._dataService.getProtein() === undefined) 
       this._route.navigate(['/menu']);
-    }
-    
     this.loadComponent();
   }
   loadComponent(){
     const protein = this._dataService.getProtein();
+    this.proteinName = protein.identifier;
     const arrLabel = protein.residues;
     const pos = protein.alphaLoc;
     const helix_range = protein.helix_range;
@@ -170,8 +178,18 @@ export class ProteinViewerComponent implements OnInit {
         return res._isSheet = true
     }
 }
-
-  openModal(args){
-    args['parent']._dialogService.addDialog(AminoModal, {aminoInitials : args['initials']}).subscribe();
+focusViewer(){
+  document.getElementById('viewerHold').tabIndex = 0;
+  document.getElementById('viewerHold').focus();
+}
+lastBtnVerify(e){
+  if(e.keyCode == 9){
+    e.preventDefault();
+    (document.getElementById("menuList").childNodes[0].childNodes[0] as HTMLElement).focus();
   }
+  else if(e.keyCode == 13){
+    this._route.navigate(['/menu']);
+}
+}
+
 }

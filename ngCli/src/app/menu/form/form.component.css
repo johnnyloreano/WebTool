@@ -5,3 +5,6 @@ button{
 #messageError{
     visibility: hidden
 }
+#messageError:focus{
+    border: 3px dashed black;
+}
