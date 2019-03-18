@@ -8,3 +8,13 @@ button{
 #messageError:focus{
     border: 3px dashed black;
 }
+ul{
+    list-style: none;
+}
+li{
+    margin: 0 10px;
+}
+li a{
+    width: 300px;
+    height: auto;
+}

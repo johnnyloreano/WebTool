@@ -23,6 +23,7 @@ export class MenuComponent implements OnInit {
       e.preventDefault();
       document.getElementById('menuLock').focus();
       }
-    // else if(e.keyCode == )
+    else if(e.keyCode == 13)
+      this.goManual();
   }
 }

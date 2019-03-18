@@ -100,13 +100,13 @@ export class TranscripterService {
   }
   createText(hour: number, minutes: number, distance: number): string {
     let text: string;
-    text = 'Andando uma distância de ' + distance + 'cm';
+    text = 
     text = this.specialText(hour, minutes);
     if (text == null) {
       text = this.commonText(hour);
       text += this.hourMinText(hour, minutes);
     }
-    return text;
+    return text + '.Distância de ' + distance + 'cm';
   }
   specialText(hour: number, minutes: number) {
     if (minutes === 0) {

@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../../core/data-service/data-service.service';
 import {HttpService as pdbRequester} from '../../core/http-pdb/http-pdb-requester.service';
@@ -10,9 +10,12 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./form.component.css']
 })
 
-export class FormComponent {
+export class FormComponent implements OnInit {
     private pdbFile: string;
     constructor(private _pdbRequester: pdbRequester, private _router: Router, public dataService: DataService) {}
+    ngOnInit(){
+      document.getElementById("principalHeader").focus();
+    }
   requestProtein() {
       this._pdbRequester.requestTags(this.pdbFile).subscribe(
         (result) => {
@@ -28,5 +31,18 @@ export class FormComponent {
         }
       );
   }
-  
-}
+  getBack(){
+    this._router.navigate(['/menu']);
+  }
+  backButtonVerify(e){
+      if(e.keyCode == 9){
+        if(!e.shiftKey){
+        e.preventDefault();
+        document.getElementById('principalHeader').focus();
+        }
+        }
+        else if(e.keyCode == 13){
+          this.getBack();
+        }
+    }
+  }

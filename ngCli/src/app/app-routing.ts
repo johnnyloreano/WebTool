@@ -10,7 +10,7 @@ export const routes: Routes = [
   {path: 'buscador', component: FormComponent},
   { path: 'manual', pathMatch: 'full', component: ManualComponent},
   { path: 'proteinView', pathMatch: 'full', component: ProteinViewerComponent},
-  { path: '', redirectTo: 'principal', pathMatch: 'full'}
+  { path: '', redirectTo: 'menu', pathMatch: 'full'}
 ];
 
 export const AppProviderRoute:  ModuleWithProviders = RouterModule.forRoot(routes);
