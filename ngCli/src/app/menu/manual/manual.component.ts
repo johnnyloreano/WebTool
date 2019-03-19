@@ -24,12 +24,12 @@ export class ManualComponent implements OnInit{
       document.getElementById('buttonBack').focus();
       }
     else if(e.keyCode == 13)
-      this.goTo('nav-p');
+      this.goTo('nav-sp');
   }
   backButtonVerify(e){
     if(e.keyCode == 9){
       e.preventDefault();
-      document.getElementById('principalHeader').focus();
+      document.getElementById('intro-h').focus();
       }
       else if(e.keyCode == 13){
         this.getBack();

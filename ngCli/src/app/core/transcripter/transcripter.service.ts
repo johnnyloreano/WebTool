@@ -33,7 +33,9 @@ export class TranscripterService {
   getDistance(pos1: Array<number>, pos2: Array<number>) {
     const deltaX = this.getDelta(pos1[0] , pos2[0]);
     const deltaY = this.getDelta(pos1[1] , pos2[1]);
-    return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+    let result = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+    result = Math.trunc(result); 
+    return this.round(result);
   }
   getQuadrant(pos: number[], posRelative: number[]): number { // Pega o quadrante do PRIMEIRO parâmetro em  relação ao SEGUNDO
     const posX = this.getDelta(pos[0], posRelative[0]);

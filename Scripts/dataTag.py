@@ -70,7 +70,7 @@ def normalizer(arrayValues):
         for j in range(0,3):
             delta = arrayMax[j] - arrayMin[j]
             res = (arrayValues[i][j] - arrayMin[j])/(delta)
-            valuesNormalized[i].append(res*100)
+            valuesNormalized[i].append(res*95)
     return valuesNormalized
 def getHelixData(pdb):
     helix = list()
