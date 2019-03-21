@@ -41,86 +41,65 @@ export class ProteinViewerComponent implements OnInit {
      private _dialogService: DialogService, private _transcripter: TranscripterService,
      private _renderer : Renderer2, private _talker : TalkerService) { }
   ngOnInit() {
-    if (this._dataService.getProtein() === undefined) 
-      this._route.navigate(['/menu']);
-    this.loadComponent();
+    this._dataService.parseAminoData();
+    // this.loadComponent();
   }
-  loadComponent(){
-    const protein = this._dataService.getProtein();
-    this.proteinName = protein.identifier;
-    const arrLabel = protein.residues;
-    const pos = protein.alphaLoc;
-    const helix_range = protein.helix_range;
-    const sheet_range = protein.sheet_range;
+  // loadComponent(){
+  //   const protein = this._dataService.getProtein();
+  //   this.proteinName = protein.identifier;
+  //   const arrLabel = protein.residues;
+  //   const pos = protein.alphaLoc;
+  //   const helix_range = protein.helix_range;
+  //   const sheet_range = protein.sheet_range;
 
-    let actualHelix = 0;
-    let actualSheet = 0;
+  //   let actualHelix = 0;
+  //   let actualSheet = 0;
 
-    const hasHelix = helix_range.length > 0 ? true:false;
-    const hasSheet = sheet_range.length > 0 ? true:false;
+  //   const hasHelix = helix_range.length > 0;
+  //   const hasSheet = sheet_range.length > 0;
+  //   let arrComponent = Array<LabelResidueComponent>();
+  //   for(let i = 0; i < arrLabel.length;i++){
+  //     let component ;
+  //       //Amino's plot
 
-    const componentFactory = this._componentFactoryResolver.resolveComponentFactory(LabelResidueComponent);
-    const viewContainer = this.host.viewContainerRef;
-    let arrComponent = Array<LabelResidueComponent>();
-    viewContainer.clear();
-    for(let i = 0; i < arrLabel.length;i++){
-        let componentRef = viewContainer.createComponent(componentFactory);
-        arrComponent.push(componentRef.instance);
-        //Amino's plot
-        const totalWidth = (document.getElementById('viewerHold').clientWidth);
-        const totalHeight = (document.getElementById('viewerHold').clientHeight);
-        const plotPositions = [totalWidth * pos[i][0] / 100,
-                              totalHeight * pos[i][1] / 100];
-                              //  console.log(plotPositions)
-        arrComponent[i].position = plotPositions;
-        (<LabelResidueComponent>componentRef.instance).initials = protein.residues[i].initials;
-        // arrComponent[i].openModal.subscribe(this.openModal)
-        // arrComponent[i]._parent = this
-        if(i > 0 ){
-          // Sound placement
-          let transitions = this._transcripter.getTransition(arrComponent[i].position,arrComponent[i-1].position);
-          arrComponent[i].downSound = transitions[1];
-          arrComponent[i-1].upSound = transitions[0];
-          // console.log(arrComponent[i-1]._initials,"->",arrComponent[i]._initials);
-          // console.log([transitions[0], transitions[1] ]);
-          // Helix verification
-          if(hasHelix && actualHelix < helix_range.length){
-            this.helixVerifier(arrComponent[i],arrLabel[i].number,helix_range[actualHelix]);
-            if (arrComponent[i]._isHelix)
-            this.plotLine(arrComponent[i - 1].position,arrComponent[i].position,arrComponent[i]._isHelix);
+  //                             //  console.log(plotPositions)
+  //       // arrComponent[i].openModal.subscribe(this.openModal)
+  //       // arrComponent[i]._parent = this
+  //       if(i > 0 ){
+  //         // Sound placement
+  //         let transitions = this._transcripter.getTransition(arrComponent[i].position,arrComponent[i-1].position);
+  //         arrComponent[i].downSound = transitions[1];
+  //         arrComponent[i-1].upSound = transitions[0];
+  //         // console.log(arrComponent[i-1]._initials,"->",arrComponent[i]._initials);
+  //         // console.log([transitions[0], transitions[1] ]);
+  //         // Helix verification
+  //         if(hasHelix && actualHelix < helix_range.length){
+  //           this.helixVerifier(arrComponent[i],arrLabel[i].number,helix_range[actualHelix]);
+  //           if (arrComponent[i]._isHelix)
+  //           this.plotLine(arrComponent[i - 1].position,arrComponent[i].position,arrComponent[i]._isHelix);
 
-            if(arrComponent[i]._isLastHelix) actualHelix++;            
-          }
-          //Sheet verification
-          if(hasSheet && actualSheet < sheet_range.length){
-            this.sheetVerifier(arrComponent[i],arrLabel[i].number,sheet_range[actualSheet])
-            if(arrComponent[i]._isLastSheet) actualSheet++;
-          }
-          if(!arrComponent[i]._isHelix && !arrComponent[i]._isSheet)
-            this.plotLine(arrComponent[i - 1].position,arrComponent[i].position,arrComponent[i]._isHelix);
-            //Last label verification
-        if(i == arrLabel.length - 1){ 
-          arrComponent[i]._isLast = true;
-          arrComponent[i].upSound = "Você saiu da proteína!"
-        }  
-      }      
-        else{ 
-          arrComponent[i]._isFirst = true;
-          arrComponent[i].downSound = "Você saiu da proteína!"
-        }
-    }
-  }
-  helixVerifier(res:LabelResidueComponent,resNum:number, helixArray: Array<number>){
-      if (resNum == helixArray[0]){
-        return res._isFirstHelix = true
-      }
-      else if (resNum == helixArray[1]){
-        return res._isLastHelix = true
-      }
-        else if (resNum > helixArray[0]){
-          return res._isHelix = true
-      }
-  }
+  //           if(arrComponent[i]._isLastHelix) actualHelix++;            
+  //         }
+  //         //Sheet verification
+  //         if(hasSheet && actualSheet < sheet_range.length){
+  //           this.sheetVerifier(arrComponent[i],arrLabel[i].number,sheet_range[actualSheet])
+  //           if(arrComponent[i]._isLastSheet) actualSheet++;
+  //         }
+  //         if(!arrComponent[i]._isHelix && !arrComponent[i]._isSheet)
+  //           this.plotLine(arrComponent[i - 1].position,arrComponent[i].position,arrComponent[i]._isHelix);
+  //           //Last label verification
+  //       if(i == arrLabel.length - 1){ 
+  //         arrComponent[i]._isLast = true;
+  //         arrComponent[i].upSound = "Você saiu da proteína!"
+  //       }  
+  //     }      
+  //       else{ 
+  //         arrComponent[i]._isFirst = true;
+  //         arrComponent[i].downSound = "Você saiu da proteína!"
+  //       }
+  //   }
+  // }
+  // 
   plotLine(position:Array<number>, position2:Array<number>,is_helix : boolean){
     const totalWidth = (document.getElementById('viewerHold').clientWidth) ;
     const totalHeight = (document.getElementById('viewerHold').clientHeight) ;
@@ -167,29 +146,19 @@ export class ProteinViewerComponent implements OnInit {
   //   this._renderer.setStyle(sine,"fill","transparent")
   //   this._renderer.appendChild(this.svgHost.nativeElement, sine);
   // }
-  sheetVerifier(res:LabelResidueComponent,resNum:number, sheetArray: Array<number>){
-    if (resNum == sheetArray[0]){
-      return res._isFirstSheet = true
-    }
-    else if (resNum == sheetArray[1]){
-      return res._isLastSheet = true
-    }
-      else if (resNum > sheetArray[0]){
-        return res._isSheet = true
-    }
-}
-focusViewer(){
-  document.getElementById('viewerHold').tabIndex = 0;
-  document.getElementById('viewerHold').focus();
-}
-lastBtnVerify(e){
-  if(e.keyCode == 9){
-    e.preventDefault();
-    (document.getElementById("menuList").childNodes[0].childNodes[0] as HTMLElement).focus();
-  }
-  else if(e.keyCode == 13){
-    this._route.navigate(['/menu']);
-}
-}
+
+// focusViewer(){
+//   document.getElementById('viewerHold').tabIndex = 0;
+//   document.getElementById('viewerHold').focus();
+// }
+// lastBtnVerify(e){
+//   if(e.keyCode == 9){
+//     e.preventDefault();
+//     (document.getElementById("menuList").childNodes[0].childNodes[0] as HTMLElement).focus();
+//   }
+//   else if(e.keyCode == 13){
+//     this._route.navigate(['/menu']);
+// }
+// }
 
 }

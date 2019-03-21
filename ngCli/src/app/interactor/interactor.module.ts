@@ -9,6 +9,7 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { TranscripterService } from '../core/transcripter/transcripter.service';
 import { TalkerService } from '../core/talker/talker.service';
 import { RouterModule } from '@angular/router';
+
 @NgModule({
   declarations: [ProteinViewerComponent, AminoModal, AdDirective],
   imports: [

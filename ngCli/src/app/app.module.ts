@@ -9,13 +9,15 @@ import { MenuModule} from './menu/menu.module';
 import { InteractorModule } from './interactor/interactor.module';
 import { SimpleModalModule } from 'ngx-simple-modal';
 import { DataService } from './core/data-service/data-service.service';
-import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { ScatterChartComponent } from './scatter-chart/scatter-chart.component';
+import { HighchartsChartComponent} from 'highcharts-angular';
 @NgModule({
   declarations: [
     AppComponent,
+    ScatterChartComponent,
+    HighchartsChartComponent
     ],
   imports: [
-    NgxPageScrollCoreModule,
     AppProviderRoute,
     HttpClientModule,
     SharedModule,
