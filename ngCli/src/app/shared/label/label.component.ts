@@ -1,60 +1,70 @@
-import { Component, OnInit, Input,Output, EventEmitter} from '@angular/core';
-
+import {Component} from '@angular/core';
+import {LabelAuditive} from '../label-auditive';
+import {TranscripterService} from '../../core/transcripter/transcripter.service';
+import {TalkerService} from '../../core/talker/talker.service';
 @Component({
   selector: 'app-label',
-  template: `
-              <div tabindex="0" class="d-inline-block text-center label" >
-                {{name}}
-              </div>
-              `,
-  styleUrls: ['./label.component.css']
+  templateUrl: '../label.html',
+  styleUrls: ['../label.css']
 })
-export class LabelComponent implements OnInit {
-  @Input() name:string;
-  private _y  : number = undefined;
-  private _x  : number = undefined;
- 
-  private ariaDictionary = {
-    "ALA":"Alanina A L A",
-    "PHE":"Fenilalanina P H E",
-    "ASN":"Asparagina A S N",
-    "ARG":"Arginina A R G",
-    "TYR":"Tirosina T Y R",
-    "LEU":"Leucina L E U",
-    "CYS":"Cisteina C Y S",
-    "ILE":"Isoleucina I L E",
-    "GLU":"AcidoGlutamico G L U",
-    "SER":"Serina S E R",
-    "ASP":"AcidoAspartico A S P",
-    "GLY":"Glicina G L Y",
-    "VAL":"Valina V A L",
-    "PRO":"Prolina P R O",
-    "TRP":"Triptofano T R P",
-    "MET":"Metionina M E T",
-    "TRE":"Treonina T R E",
-    "GLN":"Glutamina G L N",
-    "LYS":"Lisina L Y S",
-    "HYS":"Histidina H Y S",
-    "NH2":"NOTSUPPORTED"
+export class LabelComponent implements LabelAuditive {
+  //  Service access
+  static talker: TalkerService;
+  static transcripter: TranscripterService;
+  // Class properties
+  _initials: string;
+  // Plot info's
+  _y: number;
+  _x: number;
+  _z: number;
+  number: number;
+  sounds: string[] = new Array<string>();
+  style(): any {
+    return {'bottom': this._y + 'px', 'left': this._x + 'px'};
   }
-  ngOnInit(){}
-  getPosArray(): Array<number>{
-    return [this._x,this._y];
+  getX(): number {
+    return this._x;
   }
-  getName(){
-  return this.name;
+  getY(): number {
+    return this._y;
   }
-  setName(name:any){
-    this.name = name;
+  class(): any {
+    return ['atom', this._initials];
   }
-  setPosition(y:number,x:number){
-    this._x = x;
-    this._y = y;
+  get initials(): string {
+  return this._initials;
   }
-  getPosition(){
-    return {'position':'absolute', 'bottom': this._y+"%", 'left': this._x+"%" };
+  get position(): number[] {
+    return [this._x, this._y];
   }
-  get Position(){
-    return "X:"+ this._x+"%"+ "\nY:"+ this._y+"%";
+  get upSound(): string {
+    return this.sounds[1];
+  }
+  get downSound(): string {
+    return this.sounds[0];
+  }
+  set initials(initials: string) {
+    this._initials = initials;
+  }
+  set position(positions: number[]) {
+    this._x = positions[0];
+    this._y = positions[1];
+  }
+  set upSound(upSound: string) {
+    this.sounds[1] = upSound;
+  }
+  set downSound(downSound: string) {
+    this.sounds[0] = downSound;
+  }
+  decideSound(event: any) {
+    if (event.keyCode === 9) { // Tabkey
+      if (event.shiftKey) { // Shiftkey AND tabKey
+        return this.speak(this.sounds[0]);
+      }
+     return this.speak(this.sounds[1]);
+  }
+}
+  speak(message: string): void {
+    TalkerService.speak(message);
   }
 }

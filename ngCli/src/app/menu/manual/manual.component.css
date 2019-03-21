@@ -1,0 +1,13 @@
+p{
+    text-align: center;
+    padding:0 10vw;
+    letter-spacing: 1px;
+    font-size: 1.2em;
+}
+nav h3{
+    border-bottom:1px solid black;
+}
+section p {
+    text-align: left;
+    padding:0 1px;
+}

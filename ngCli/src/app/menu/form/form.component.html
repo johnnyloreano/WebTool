@@ -1,10 +1,17 @@
-  <h4>
+  <h2 id="principalHeader" tabindex="0" >
     Buscador de proteínas
-  </h4>
-  <p>
-    Digite abaixo a proteína que você deseja buscar:
+  </h2>
+  <p tabindex="0">
+    Digite abaixo o nome do identificador da proteína que você deseja buscar:
   </p>
-  <label class='mr-2'>Proteína 
-    <input name='pdbFile' [(ngModel)]='pdbFile' type='text' >
+  <label for ="protein"class='mr-2'>
+    Proteína: 
+    <input name='protein' [(ngModel)]='pdbFile' type='text' >
   </label>
-<br><button (click)="requestProtein()" class='bg-primary text-white' >Enviar</button>
+  <nav>
+    <ul>
+  <li><a  tabindex ='0' class=' btn bg-primary text-white' (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</a></li>
+      <p tabindex='0' id="messageError" class="bg-danger text-white w-25 rounded mt-2 ml-auto mr-auto" ></p>
+  <li><a tabindex='0' id="buttonBack" class='btn bg-primary text-white' (click)="getBack()"  (keydown)="backButtonVerify($event)">Voltar para o menu principal</a></li>
+    <ul>
+  <nav>

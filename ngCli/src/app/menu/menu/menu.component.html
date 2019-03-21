@@ -1,10 +1,11 @@
 <div class='text-center container'>
-  <header tabindex='0'>
-    <h5>
-      Nome da molécula : {{pdbContent['identifier']}}
-    </h5>
-  </header>
-  <menu>
-    <a class='btn bg-primary text-white' (click)="goProteinView()">Abrir navegador</a>
-  </menu>
+    <h2 id="menuLock" tabindex="0" aria-label="Menu Principal Use a tecla TAB para navegar entre as opções disponíveis e use ENTER para escolher o botão desejado.">
+      Menu principal 
+    </h2>
+  <nav>
+    <ul id="menuList">
+      <li><a tabindex='0' class='btn bg-primary text-white' (click)="goForm()"  (keydown)="$event.keyCode == 13 ? goForm() : null">Abrir buscador de proteína</a></li>
+      <li><a tabindex='0' class='btn bg-primary text-white' (click)="goManual()"  (keydown)="lastMenuVerify($event)">Abrir manual</a></li>
+  </ul>
+  </nav>
 </div>

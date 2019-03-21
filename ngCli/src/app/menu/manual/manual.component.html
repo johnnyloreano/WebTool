@@ -1,0 +1,53 @@
+<h2 tabindex='0' id="principalTitle">
+  <a>Manual da ferramenta</a>
+</h2>
+<nav class="text-left w-75 mx-auto">
+<h3 tabindex = '0'id="intro-h" (click)="goTo('intro-p')"  (keydown)="$event.keyCode == 13 ? goTo('intro-p') : null">
+  <a tabindex = '-1' href="">Introdução</a>
+</h3>
+<h3 tabindex = '0' id="menu-h"  (click)="goTo('menu-p')"  (keydown)="$event.keyCode == 13 ? goTo('menu-p') : null">
+  <a tabindex = '-1' href="">Menu principal</a>
+</h3>
+<h3 tabindex = '0' id="nav-h"  (click)="goTo('nav-p')"  (keydown)="$event.keyCode == 13 ? goTo('intro-p') : null">
+  <a tabindex = '-1' href="">Navegador</a>
+</h3>
+<h4 tabindex=" 0" id="nav-sh" (click)="goTo('nav-sp')" (keydown)="lastHeaderVerify($event)" class="ml-4">
+    <a tabindex = '-1' href="">Dentro da proteína</a>
+</h4>
+</nav>
+<div>
+<section tabindex="0" id="intro-p">
+  <h2 tabindex="0">Introdução</h2>
+  <p  tabindex="0">
+    Bem-vindos à Ferramenta Educativa LABIO!
+    Essa ferramenta foi construída para que você possa compreender a estrutura de proteínas simples. 
+  </p>
+  <a tabindex="0" (click)="goTo('intro-h')" (keydown)="$event.keyCode == 13 ? goTo('intro-h') : null">Voltar para título INTRODUÇÃO</a>
+</section>
+<section tabindex="0" id="menu-p">
+    <h2 tabindex="0">Manual</h2>
+  <p tabindex="0">
+    No menu principal, você poderá acessar o navegador de proteínas e também o manual.
+  </p>
+  <a tabindex="0" (click)="goTo(menu-h)" (keydown)="$event.keyCode == 13 ? goTo('menu-h') : null">Voltar para título Menu Principal</a>
+</section>
+<section tabindex="0" id="nav-p">
+    <h2 tabindex="0">Navegador de proteína</h2>
+  <p tabindex="0" >
+      Para começar, você deve selecionar a opção ABRIR BUSCADOR DE PROTEÍNA, onde você será redirecionado para uma página onde poderá escolher uma proteína.
+      Para escolher a proteína, você deve digitar o CÓDIGO IDENTIFICADOR de tal. Um exemplo de código é o 1ZDD. Caso ocorra um erro, será informado ao usuário, e ele deverá tentar novamente.
+      É importante notar que o usuário deverá ter acesso a internet, caso seja a primeira vez que busque determinada proteína. Se ela já foi buscada, será salva no seu computador.
+      Uma vez concluída a pesquisa, o usuário será direcionado a uma página onde conterá o título, com o código da proteína buscada, e, logo abaixo, a estrutura da proteína.
+      Será necessário que o usuário desligue, caso possua, o seu leitor de tela, pois a ferramenta já possui um leitor próprio, e use fones de ouvido, para melhor compreensão.
+      Para iniciar a navegação, o usuário precisará clicar no botão "Abrir proteína", e o leitor de tela deverá dizer "Visualizador de proteína. Use o tab para começar!". A partir desse momento, o usuário poderá usar o TAB para se movimentar na proteína.
+  </p>
+  <h2 tabindex="0">Dentro da proteína</h2>
+
+  <p id="nav-sp" tabindex="0">
+      Uma vez que o usuário esteja dentro da proteína, você poderá usar o TAB para movimentar para o próximo aminoácido, e SHIFT + TAB para voltar um aminoácido para trás.
+      Utilize o ESPAÇO para ouvir mais informações sobre o aminoácido. Caso esteja dentro de uma hélice ou fita, o usuário será informado disso.      
+</p>
+  <a tabindex="0"  (click)="goTo(nav-h)" (keydown)="$event.keyCode == 13 ? goTo('nav-h') : null">Voltar para título Navegador</a>
+</section>
+</div>
+<a tabindex='0' id="buttonBack" class='btn bg-primary text-white float-right' (click)="getBack()"  (keydown)="backButtonVerify($event)">Voltar para o menu principal</a>

@@ -6,15 +6,17 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { MenuModule} from './menu/menu.module';
-import { InteractorModule } from './interactor/interactor.module'
+import { InteractorModule } from './interactor/interactor.module';
 import { SimpleModalModule } from 'ngx-simple-modal';
 import { DataService } from './core/data-service/data-service.service';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
     ],
   imports: [
-    AppProviderRoute,     
+    NgxPageScrollCoreModule,
+    AppProviderRoute,
     HttpClientModule,
     SharedModule,
     CoreModule.forRoot(),

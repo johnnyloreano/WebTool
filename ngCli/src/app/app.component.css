@@ -1,0 +1,10 @@
+section{
+    width:95%;
+    margin: 0 auto;
+    text-align: center;
+    min-height:100vh;
+}
+img{
+    width: 30%;
+    height: 50%;
+}
