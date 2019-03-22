@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LabelComponent } from './label/label.component';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
-import { LabelResidueComponent } from './label-residue/label-residue.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -10,15 +9,13 @@ import { LabelResidueComponent } from './label-residue/label-residue.component';
     ReactiveFormsModule
   ],
    declarations: [
-     LabelComponent,
-     LabelResidueComponent
+     LabelComponent     
    ],
   exports: [
     LabelComponent
   ],
    entryComponents: [
-    LabelComponent,
-    LabelResidueComponent
+    LabelComponent
   ]
 })
 export class SharedModule { }
