@@ -7,12 +7,12 @@ import { ManualComponent } from './menu/manual/manual.component';
 import { ScatterChartComponent } from "./scatter-chart/scatter-chart.component";
 
 export const routes: Routes = [
+  { path: '',redirectTo: 'menu', pathMatch : 'full'},
   {path: 'menu', component: MenuComponent},
   {path: 'buscador', component: FormComponent},
   { path: 'manual', pathMatch: 'full', component: ManualComponent},
   { path: 'proteinView', pathMatch: 'full', component: ProteinViewerComponent},
-  { path: 'graph', pathMatch: 'full', component: ScatterChartComponent},
-  { path: '', redirectTo: 'menu', pathMatch: 'full'}
+  { path: 'graph', pathMatch: 'full', component: ScatterChartComponent}
 ];
 
 export const AppProviderRoute:  ModuleWithProviders = RouterModule.forRoot(routes);

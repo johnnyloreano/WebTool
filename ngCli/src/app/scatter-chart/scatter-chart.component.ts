@@ -11,10 +11,13 @@ export class ScatterChartComponent implements AfterViewInit{
    event(keyboard:KeyboardEvent ,values ){
      if(keyboard.keyCode == 9){
       keyboard.preventDefault();
-      if(keyboard.shiftKey)
-
-    }
-
+      if(keyboard.shiftKey){}
+         //backsound
+      else{}
+         //frontsound
+      }
+      if(keyboard.keyCode == 13){}
+         // Info
     // WIP
   }
   ngAfterViewInit(){
