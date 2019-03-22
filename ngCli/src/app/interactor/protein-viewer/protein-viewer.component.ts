@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild, ComponentFactoryResolver, ElementRef, Renderer2} from '@angular/core';
 import { DataService } from '../../core/data-service/data-service.service'
-import { AdDirective } from '../host/a-host.directive'
 import { Router } from '@angular/router';
 import { DialogService } from 'ng2-bootstrap-modal';
 import {TranscripterService} from '../../core/transcripter/transcripter.service'
-import { LabelResidueComponent } from '../../shared/label-residue/label-residue.component';
 import { TalkerService} from '../../core/talker/talker.service';
 @Component({
   selector: 'app-protein-viewer',
@@ -34,7 +32,6 @@ import { TalkerService} from '../../core/talker/talker.service';
 })
 export class ProteinViewerComponent implements OnInit {
   private proteinName : string;
-  @ViewChild(AdDirective) host: AdDirective;
   @ViewChild("svg") svgHost: ElementRef;
   constructor(private _componentFactoryResolver: ComponentFactoryResolver,
      private _dataService: DataService, private _route: Router, 
