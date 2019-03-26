@@ -20,7 +20,8 @@ export class FormComponent implements OnInit {
       this._pdbRequester.requestTags(this.pdbFile).subscribe(
         (result) => {
           this.dataService.setProtein(result);
-          this._router.navigate(['/proteinView']); },
+          this._router.navigate(['/proteinView']); 
+        },
         (error: HttpErrorResponse) => {
           const errEl = document.getElementById('messageError');
           errEl.style.visibility = 'visible';
