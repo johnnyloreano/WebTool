@@ -18,6 +18,9 @@ export class MenuComponent implements OnInit {
   goManual() {
     this._route.navigate(['/manual']);
   }
+  goChart() {
+    this._route.navigate(['/scatter']);
+  }
   lastMenuVerify(e){
     if(e.keyCode == 9 && !e.shiftKey){
       e.preventDefault();

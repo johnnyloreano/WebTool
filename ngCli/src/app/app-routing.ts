@@ -10,6 +10,7 @@ export const routes: Routes = [
   {path: 'buscador', component: FormComponent},
   { path: 'manual', pathMatch: 'full', component: ManualComponent},
   { path: 'proteinView', pathMatch: 'full', component: ProteinViewerComponent},
+  // { path: 'scatter', pathMatch: 'full', component: ScatterGraphComponent},
   { path: '', redirectTo: 'menu', pathMatch: 'full'}
 ];
 

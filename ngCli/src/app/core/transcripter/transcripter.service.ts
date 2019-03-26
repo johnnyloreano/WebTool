@@ -14,7 +14,7 @@ export class TranscripterService {
    * @returns {Object} The degrees.
    * @memberof TranscripterService
    */
-  getDegrees(actualAmino: Array<number>, predecessorAmino: Array<number>): Object {
+  private getDegrees(actualAmino: Array<number>, predecessorAmino: Array<number>): Object {
   const deltaX = this.getDelta(actualAmino[0] , predecessorAmino[0]);
   const deltaY = this.getDelta(actualAmino[1] , predecessorAmino[1]);
   let degree = Math.abs(deltaY) / Math.abs(deltaX);
@@ -30,14 +30,14 @@ export class TranscripterService {
   };
   return aminoDegrees;
   }
-  getDistance(pos1: Array<number>, pos2: Array<number>) {
+  private getDistance(pos1: Array<number>, pos2: Array<number>) {
     const deltaX = this.getDelta(pos1[0] , pos2[0]);
     const deltaY = this.getDelta(pos1[1] , pos2[1]);
     let result = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
     result = Math.trunc(result); 
     return this.round(result);
   }
-  getQuadrant(pos: number[], posRelative: number[]): number { // Pega o quadrante do PRIMEIRO parâmetro em  relação ao SEGUNDO
+  private getQuadrant(pos: number[], posRelative: number[]): number { // Pega o quadrante do PRIMEIRO parâmetro em  relação ao SEGUNDO
     const posX = this.getDelta(pos[0], posRelative[0]);
     const posY = this.getDelta(pos[1], posRelative[1]);
     switch (true) {
@@ -53,13 +53,13 @@ export class TranscripterService {
         return 0;
     }
   }
-  quadrantObject(actual: number[], pred: number[]): Object {
+  private quadrantObject(actual: number[], pred: number[]): Object {
     return {
       'pred': this.getQuadrant(actual, pred),
       'actual': this.getQuadrant(pred, actual)
     };
   }
-  toHour(degree: number): number[] {
+  private toHour(degree: number): number[] {
     const aux = (degree / 30);
     let hour = Math.trunc(aux);
     let min = Math.trunc( (aux - hour) * 60) ;
@@ -67,15 +67,15 @@ export class TranscripterService {
     if (min === 60) {min = 0; hour++; }
     return [hour, min];
   }
-  round(val: number): number {
+  private round(val: number): number {
     return Math.round(val / 10 ) * 10;
   }
 
-  getDelta(val: number, val2: number): number {
+  private getDelta(val: number, val2: number): number {
     return val2 - val;
   }
 
-  getDegreeOnQuadrant(degree: number, quadrant: number) {
+  private getDegreeOnQuadrant(degree: number, quadrant: number) {
       let auxMult: number;
       switch (quadrant) {
         case (1) : auxMult = 0 ; break;
@@ -85,7 +85,7 @@ export class TranscripterService {
       }
     return degree + (auxMult * 90);
   }
-  getCorrectDegree(actual: number[], predecessor: number[], quadrants: Object, degrees: Object) {
+  private getCorrectDegree(actual: number[], predecessor: number[], quadrants: Object, degrees: Object) {
     let result ;
     if (actual[0] > predecessor[0]) {
       result = {
@@ -100,7 +100,7 @@ export class TranscripterService {
     }
     return result;
   }
-  createText(hour: number, minutes: number, distance: number): string {
+  private createText(hour: number, minutes: number, distance: number): string {
     let text: string;
     text = 
     text = this.specialText(hour, minutes);
@@ -110,7 +110,7 @@ export class TranscripterService {
     }
     return text + '.Distância de ' + distance + 'cm';
   }
-  specialText(hour: number, minutes: number) {
+  private specialText(hour: number, minutes: number) {
     if (minutes === 0) {
       if (hour === 0 || hour === 12) {return 'Subindo';
       } else if (hour === 3) {return 'Indo para a direita';
@@ -119,7 +119,7 @@ export class TranscripterService {
     }
     return null;
   }
-  commonText(hour: number) {
+  private commonText(hour: number) {
     if (hour >= 11 || hour <= 2 ) {
     return 'Subindo ';
     } else if (hour > 2 && hour <= 5) {
@@ -131,7 +131,7 @@ export class TranscripterService {
        }
   }
 
-  hourMinText(hours: number, minutes: number): string {
+  private hourMinText(hours: number, minutes: number): string {
     let text = '';
     if (hours !==  0 && minutes !== 0) {text = ' e '; }
     if (hours > 0) {
@@ -151,7 +151,7 @@ export class TranscripterService {
    * @returns the transcription of the transitions
    * @memberof TranscripterService
    */
-  getTransition(actualAmino: number[], predecessorAmino: number[]): string[] {
+  public getTransition(actualAmino: number[], predecessorAmino: number[]): string[] {
     const degrees = this.getDegrees(actualAmino, predecessorAmino);
     const quadrants =  this.quadrantObject(actualAmino, predecessorAmino);
     const calculateDegrees = this.getCorrectDegree(actualAmino, predecessorAmino, quadrants, degrees);
