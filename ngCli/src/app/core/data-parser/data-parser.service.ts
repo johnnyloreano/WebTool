@@ -6,11 +6,14 @@ import { TranscripterService } from '../transcripter/transcripter.service';
   providedIn: 'root'
 })
 export class DataParserService {
-  private protein;
+  private protein = this._dataService.getProtein();
   constructor(private _dataService : DataService, private _transcripter: TranscripterService) { }
 
+  parseStructureInfo(){
+    return {'helix':this.protein['helix_range'],
+            'sheet':this.protein['sheet_range']}
+  }
   parseAminoData(){
-    this.protein = this._dataService.getProtein();
     let aminoData = Array<Aminoacid>();
     const resLen = this.protein['residues'].length
     const hasHelix = this.protein['helix_range'].length > 0;
@@ -50,10 +53,12 @@ export class DataParserService {
     aminoData[0]._downSound = "Você saiu da proteína!";
     aminoData[resLen-1]._upSound = "Você saiu da proteína!";
     return aminoData;
+  
   }
   private getTransitions(aminoActual:Aminoacid,aminoPredecessor:Aminoacid){
     const position01 = [aminoActual.x, aminoActual.y];
     const position02 = [aminoPredecessor.x, aminoPredecessor.y];
     return this._transcripter.getTransition(position01,position02);
   }
+  
 }
