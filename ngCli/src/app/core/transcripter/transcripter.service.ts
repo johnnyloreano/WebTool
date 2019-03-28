@@ -108,7 +108,7 @@ export class TranscripterService {
       text = this.commonText(hour);
       text += this.hourMinText(hour, minutes);
     }
-    return text + '.Distância de ' + distance + 'cm';
+    return text + '.Distância de ' + distance + ' centímetros';
   }
   private specialText(hour: number, minutes: number) {
     if (minutes === 0) {

@@ -12,16 +12,16 @@ export class DataParserService {
   parseAminoData(){
     this.protein = this._dataService.getProtein();
     let aminoData = Array<Aminoacid>();
-    const amountRes = this.protein['residues'].length
+    const resLen = this.protein['residues'].length
     const hasHelix = this.protein['helix_range'].length > 0;
     const hasSheet =  this.protein['sheet_range'].length > 0;
     let actualHelix = 0;
     let actualSheet = 0;
-    for(let x = 0; x < amountRes;x++){
+    for(let x = 0; x < resLen;x++){
       aminoData[x] = new Aminoacid();
       aminoData[x].name = this.protein['residues'][x]['initials'];
       aminoData[x]._isFirst = x == 0;
-      aminoData[x]._isLast = x == amountRes-1;
+      aminoData[x]._isLast = x == resLen-1;
       const pos = this.protein.alphaLoc;
       aminoData[x].x = pos[x][0]
       aminoData[x].y = pos[x][1];
@@ -41,14 +41,14 @@ export class DataParserService {
           actualSheet++;
       }
       aminoData[x].index = x;
-      // if(x > 0){
-      //   const transitions = this.getTransitions(aminoData[x],aminoData[x-1]);
-      //   aminoData[x]._downSound = transitions[1];
-      //   aminoData[x-1]._upSound = transitions[0]
-      // }
+      if(x > 0){
+        const transitions = this.getTransitions(aminoData[x],aminoData[x-1]);
+        aminoData[x]._downSound = transitions[1];
+        aminoData[x-1]._upSound = transitions[0];
+      }
     }
-    // aminoData[0]._downSound = "Você saiu da proteína!";
-    // aminoData[aminoData.length-1]._upSound = "Você saiu da proteína!";
+    aminoData[0]._downSound = "Você saiu da proteína!";
+    aminoData[resLen-1]._upSound = "Você saiu da proteína!";
     return aminoData;
   }
   private getTransitions(aminoActual:Aminoacid,aminoPredecessor:Aminoacid){
