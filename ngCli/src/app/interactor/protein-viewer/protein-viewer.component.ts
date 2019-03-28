@@ -17,17 +17,18 @@ import {
 import {
    Aminoacid
 } from '../../interfaces/aminoacid';
+import * as $ from 'jquery';
 highcharts3D(Highcharts);
 @Component({
    selector: 'app-protein-viewer',
-   styleUrls: ["./protein.css"],
-   template: ` 
+   styleUrls: ['./protein.css'],
+   template: `
            <br><a tabindex = '0'class="btn bg-primary text-white" (click)="enterNavigator()" (keydown) = "keyVerifier($event)">
                Iniciar navegação
             </a>
                <highcharts-chart
-               [Highcharts] = "highcharts" 
-               [options] = "chartOptions" 
+               [Highcharts] = "highcharts"
+               [options] = "chartOptions"
                style = "width: 100%; height: 120vh; display: block;">
                </highcharts-chart>
             `
@@ -47,7 +48,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
             enabled: true,
             alpha: 10,
             beta: 30,
-            depth: 250,
+            depth: 600,
             viewDistance: 5,
             frame: {
                bottom: {
@@ -63,7 +64,8 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
                   color: 'rgba(0, 0, 0, 0.06)'
                }
             }
-         }
+         },
+         zoomtype:'xy'
       },
       title: {
          text: '3D Scatter Plot'
@@ -81,46 +83,83 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          ax: 100
       },
       series: [{
+         dataLabels: {
+            enabled: true,
+            formatter : function() {
+               return this.point.name;
+            }
+         },
          data: this.getData()
       }]
    };
    ngOnInit() {
-      if (this.aminoData === undefined)
+      if (this.aminoData === undefined) {
          this._router.navigate(['/menu']);
+      }
+
    }
+
    ngAfterViewInit() {
-      let plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
+      const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       const objectsPoints = this.highcharts.charts[0].series[0].points;
       for (let x = 0; x < plotPoints.length; x++) {
-         plotPoints[x].addEventListener("keydown", (e) => {
-            let auxIndex = Number(plotPoints[x].getAttribute("tabindex")) - 1;
+         plotPoints[x].addEventListener('keydown', (e) => {
+            const auxIndex = Number(plotPoints[x].getAttribute('tabindex')) - 1;
             this.event(e, objectsPoints[auxIndex]);
          });
       }
+      const chart = this.highcharts.charts[0];
+      $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
+         eStart = chart.pointer.normalize(eStart);
+         const posX = eStart.pageX;
+         const posY = eStart.pageY;
+         const alpha = chart.options.chart.options3d.alpha;
+         const beta = chart.options.chart.options3d.beta;
+         let newAlpha;
+         let newBeta;
+         const sensitivity = 5; // lower is more sensitive
+         $(document).bind({
+           'mousemove.hc touchdrag.hc': function(e) {
+             newBeta = beta + (posX - e.pageX) / sensitivity;
+             chart.options.chart.options3d.beta = newBeta;
+             newAlpha = alpha + (e.pageY - posY) / sensitivity;
+             chart.options.chart.options3d.alpha = newAlpha;
+             chart.redraw(false);
+           },
+           'mouseup touchend': function() {
+             $(document).unbind('.hc');
+           }
+         });
+       });
    }
    getData() {
       return this.aminoData;
    }
    enterNavigator() {
-      let aux = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
-      if (this.firstTab !== undefined)
+      const aux = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
+      if (this.firstTab !== undefined) {
          (aux[this.firstTab] as HTMLElement).focus();
-      for (let index = 0; index != aux.length; index++)
-         if (aux[index].getAttribute("tabindex") == '1') {
+      }
+      for (let index = 0; index !== aux.length; index++) {
+         if (aux[index].getAttribute('tabindex') === '1') {
             (aux[index] as HTMLElement).focus();
             this.firstTab = index;
             break;
          }
+      }
    }
    keyVerifier(event: KeyboardEvent) {
-      if (event.keyCode == 13)
+      if (event.keyCode === 13) {
          this.enterNavigator();
+      }
    }
    event(event, data) {
-      if (event.keyCode === 32 || event.keyCode === 13) // Spacekey
+      if (event.keyCode === 32 || event.keyCode === 13) { // Spacekey
          this.talkGenInfo(data);
-      if(event.keyCode == 9)
-         this.talkTransition(event,data);
+      }
+      if (event.keyCode === 9) {
+         this.talkTransition(event, data);
+      }
    }
    talkGenInfo(data: Aminoacid) {
       let message = 'Posição atual: ' + this.getAminoName(data.name);
@@ -146,14 +185,15 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       return TalkerService.speak(message);
    }
    talkTransition(key: KeyboardEvent, data: any) {
-      let message : string;
-      if(key.keyCode == 9){
-         if(key.shiftKey)
+      let message: string;
+      if (key.keyCode === 9) {
+         if (key.shiftKey) {
             message = data['_downSound'];
-         else
+         } else {
             message = data['_upSound'];
+         }
       }
-         return TalkerService.speak(message)
+         return TalkerService.speak(message);
    }
    getAminoName(AminoName) {
       switch (AminoName) {
