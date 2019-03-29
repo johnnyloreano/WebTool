@@ -11,9 +11,10 @@ export class Protein {
     private _alphaLoc : Array<any>;
     private _helix_range : Array<any>;
     private _sheet_range : Array<any>;
+    private _title : string;
     constructor(identifier:string,authors:string[],experiment:string,classification:string,
                 dep_date:string,version:string,residues : Array<any>, alphaLoc: Array<any>,
-                helix_range: Array<any>, sheet_range: Array<any>){
+                helix_range: Array<any>, sheet_range: Array<any>, title: string){
         this._identifier = identifier;
         this._authors = authors;
         this._experiment = experiment;
@@ -24,6 +25,7 @@ export class Protein {
         this._alphaLoc = alphaLoc;
         this._helix_range = helix_range;
         this._sheet_range = sheet_range;
+        this._title = title;
     }
     get identifier(): string{
         return this._identifier
@@ -54,5 +56,8 @@ export class Protein {
     }
     get sheet_range(): Array<any>{
         return this._sheet_range;
+    }    
+    get title(): string{
+        return this._title;
     }
 }

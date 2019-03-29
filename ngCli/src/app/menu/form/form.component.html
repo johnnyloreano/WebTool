@@ -2,12 +2,25 @@
     Buscador de proteínas
   </h2>
   <p tabindex="0">
-    Digite abaixo o nome do identificador da proteína que você deseja buscar:
+    Digite abaixo o nome do identificador da proteína que você deseja buscar. O código consiste em 4 caracteres, sendo o primeiro um número, seguido de 3 letras:
   </p>
   <label for ="protein"class='mr-2'>
     Proteína: 
     <input name='protein' [(ngModel)]='pdbFile' type='text' >
   </label>
+  <div id="successful" class="bg-success w-50 mx-auto">
+    <p>
+    Você buscou a proteína com sucesso!Favor,confirmar.
+    O ID da proteína buscada é {{pdbFile}}
+    O nome da proteína é {{ proteinName }}
+    </p>
+    <nav>
+      <ul>
+        <li><a class="btn bg-primary text-white">Sim,continuar</a></li>
+        <li><a class="btn bg-primary text-white">Não, não continuar</a></li>
+      </ul>
+    </nav>
+  </div>
   <nav>
     <ul>
   <li><a  tabindex ='0' class=' btn bg-primary text-white' (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</a></li>

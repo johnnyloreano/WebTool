@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export class FormComponent implements OnInit {
     private pdbFile: string;
+    private proteinName: string;
     constructor(private _pdbRequester: pdbRequester, private _router: Router, public dataService: DataService) {}
     ngOnInit(){
       document.getElementById("principalHeader").focus();
@@ -20,7 +21,10 @@ export class FormComponent implements OnInit {
       this._pdbRequester.requestTags(this.pdbFile).subscribe(
         (result) => {
           this.dataService.setProtein(result);
-          this._router.navigate(['/proteinView']); 
+          this.proteinName = this.dataService.getProtein().title;
+          alert(Object.keys(this.dataService.getProtein()));
+          document.getElementById("successful").style.display = 'block';
+          // this._router.navigate(['/proteinView']);
         },
         (error: HttpErrorResponse) => {
           const errEl = document.getElementById('messageError');

@@ -11,6 +11,9 @@ def getGeneralData(pdb):
     dataParsed['classification'] = pdb[1]['classification']
     dataParsed['deposition_date'] = pdb[1]['deposition_date']
     dataParsed['version'] = pdb[1]['version']
+    dataParsed['title'] = pdb[1]['title']
+    print("HELLO")
+    print(dataParsed['title'])
     dataParsed['residues'] = pdb[0]._resList 
     dataParsed['residue_num'] = getResNum(pdb)
     dataParsed['alpha_loc'] = normalizer( getCoord(pdb) )

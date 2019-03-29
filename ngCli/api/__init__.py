@@ -4,7 +4,6 @@ from flask_cors import CORS
 from datetime import timedelta
 from functools import update_wrapper
 sys.path.append('Scripts')
-import dataAmino
 import dataTag
 
 def crossdomain(origin=None, methods=None, headers=None,
@@ -56,13 +55,6 @@ CORS(app)
 def tagReturn():
     json_data = request.args
     return dataTag.getGeneralData(json_data['pdbFile'])
-
-@app.route('/dataAmino', methods=['POST', 'GET', 'OPTIONS'])
-@crossdomain(origin='*')
-def aminoReturn():
-    json_data = request.args
-    return dataAmino.getAminoData(json_data['aminoName'])
-
 
 if __name__ == '__main__':
     app.run(debug=True)

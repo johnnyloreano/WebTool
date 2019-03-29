@@ -18,3 +18,10 @@ li a{
     width: 300px;
     height: auto;
 }
+p{
+    width: 620px;
+    margin : 0 auto;
+}
+#successful{
+    display: none;
+}
