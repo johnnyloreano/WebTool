@@ -56,8 +56,8 @@ export class DataParserService {
   
   }
   private getTransitions(aminoActual:Aminoacid,aminoPredecessor:Aminoacid){
-    const position01 = [aminoActual.x, aminoActual.y];
-    const position02 = [aminoPredecessor.x, aminoPredecessor.y];
+    const position01 = [aminoActual.x, aminoActual.y, aminoActual.z];
+    const position02 = [aminoPredecessor.x, aminoPredecessor.y, aminoActual.z];
     return this._transcripter.getTransition(position01,position02);
   }
   
