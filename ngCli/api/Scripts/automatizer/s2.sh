@@ -1,3 +1,3 @@
 #!usr/bin/bash
-cd ../../ngCli
+cd ../../..
 ng serve --watch

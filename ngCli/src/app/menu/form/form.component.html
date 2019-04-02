@@ -8,7 +8,7 @@
     Proteína: 
     <input name='protein' [(ngModel)]='pdbFile' type='text' >
   </label>
-  <div id="successful" class="bg-success w-50 mx-auto">
+  <div tabindex="0" id="successful" class="bg-success w-50 mx-auto">
     <p>
     Você buscou a proteína com sucesso!Favor,confirmar.
     O ID da proteína buscada é {{pdbFile}}
@@ -16,14 +16,14 @@
     </p>
     <nav>
       <ul>
-        <li><a class="btn bg-primary text-white">Sim,continuar</a></li>
-        <li><a class="btn bg-primary text-white">Não, não continuar</a></li>
+        <li><a tabindex ='0' class="btn bg-primary text-white" (click)="goProtein()" (keydown)="$event.keyCode == 13 ? goProtein() : null">Sim,continuar</a></li>
+        <li><a tabindex ='0' class="btn bg-primary text-white" (click)="rollback()" (keydown)="$event.keyCode == 13 ? rollback() : null">Não, não continuar</a></li>
       </ul>
     </nav>
   </div>
   <nav>
     <ul>
-  <li><a  tabindex ='0' class=' btn bg-primary text-white' (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</a></li>
+  <li id="btnSearch"><a tabindex ='0' class=' btn bg-primary text-white' (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</a></li>
       <p tabindex='0' id="messageError" class="bg-danger text-white w-25 rounded mt-2 ml-auto mr-auto" ></p>
   <li><a tabindex='0' id="buttonBack" class='btn bg-primary text-white' (click)="getBack()"  (keydown)="backButtonVerify($event)">Voltar para o menu principal</a></li>
     <ul>

@@ -23,9 +23,18 @@ highcharts3D(Highcharts);
    selector: 'app-protein-viewer',
    styleUrls: ['./protein.css'],
    template: `
-           <br><a tabindex = '0'class="btn bg-primary text-white" (click)="enterNavigator()" (keydown) = "keyVerifier($event)">
+   <ul>
+         <li>
+            <a tabindex = '0'class="btn bg-primary text-white" (click)="enterNavigator()" (keydown) = "keyVerifier($event)">
                Iniciar navegação
             </a>
+         </li>
+         <li>
+            <a tabindex = '0'class="btn bg-primary text-white" (click)="goMenu()" (keydown) =" $event.keyCode == 13 ? goMenu() : null">
+               Voltar ao menu
+            </a>
+         </li>
+   </ul>
                <highcharts-chart
                [Highcharts] = "highcharts"
                [options] = "chartOptions"
@@ -42,10 +51,9 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    ngOnInit() {
       if(this.chartOptions === undefined) 
          this._router.navigate(['/menu']);
-
    }
    ngAfterViewInit() {
-      this.configureEvents();
+      this.configurePoints();
       this.configureRotation();
    }
    enterNavigator() {
@@ -73,6 +81,9 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       if (event.keyCode === 9) {
          this.talkTransition(event, data);
       }
+   }
+   goMenu(){
+      this._router.navigate(['/menu']);
    }
    talkGenInfo(data: Aminoacid) {
       let message = 'Posição atual: ' + this.getAminoName(data.name);
@@ -177,12 +188,13 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          });
        });
    }
-   configureEvents(){
+   configurePoints(){
       const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       const objectsPoints = this.highcharts.charts[0].series[0].points;
       for (let x = 0; x < plotPoints.length; x++) {
          plotPoints[x].addEventListener('keydown', (e) => {
             const auxIndex = Number(plotPoints[x].getAttribute('tabindex')) - 1;
+            plotPoints[x].setAttribute("aria-hidden", "true");
             this.event(e, objectsPoints[auxIndex]);
          });
       }

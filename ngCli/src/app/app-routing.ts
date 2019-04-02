@@ -6,12 +6,11 @@ import { ProteinViewerComponent } from './interactor/protein-viewer/protein-view
 import { ManualComponent } from './menu/manual/manual.component';
 
 export const routes: Routes = [
-  { path: '',redirectTo: 'menu', pathMatch : 'full'},
   {path: 'menu', component: MenuComponent},
   {path: 'buscador', component: FormComponent},
   { path: 'manual', pathMatch: 'full', component: ManualComponent},
   { path: 'proteinView', pathMatch: 'full', component: ProteinViewerComponent},
-  { path: '', redirectTo: 'menu', pathMatch: 'full'}
+  { path: '**', redirectTo: 'menu'},
 ];
 
 export const AppProviderRoute:  ModuleWithProviders = RouterModule.forRoot(routes);
