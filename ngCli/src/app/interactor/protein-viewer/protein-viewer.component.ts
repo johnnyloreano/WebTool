@@ -33,13 +33,16 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    ngOnInit() {
       if(this.chartOptions === undefined) 
          this._router.navigate(['/menu']);
-
    }
    ngAfterViewInit() {
       this.configureEvents();
       this.configureRotation();
    }
    enterNavigator() {
+      this.setTabindex();
+      this.focusFirstPoint();
+   }
+   focusFirstPoint(){
       const aux = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       if (this.firstTab !== undefined) {
          (aux[this.firstTab] as HTMLElement).focus();
@@ -51,6 +54,14 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
             break;
          }
       }
+   }
+   setTabindex(){
+      const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
+      for(let x = 0; x < plotPoints.length;x++){
+         const auxIndex = plotPoints[x].getAttribute('dataIndex');
+         plotPoints[x].setAttribute("tabindex", String(auxIndex));
+      }
+
    }
    keyVerifier(event: KeyboardEvent) {
       if (event.keyCode === 13) {

@@ -17,3 +17,6 @@ ul{
 li{
     margin:10px;
 }
+.highcharts-point:focus{
+    border:3px solid black;
+}
