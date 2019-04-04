@@ -187,7 +187,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       const objectsPoints = this.highcharts.charts[0].series[0].points;
       for (let x = 0; x < plotPoints.length; x++) {
          plotPoints[x].addEventListener('keydown', (e) => {
-            const dataIndex = Number(plotPoints[x].getAttribute('tabindex')) - 1;
+            const dataIndex = Number(plotPoints[x].getAttribute('dataIndex')) - 1;
             plotPoints[x].setAttribute("aria-hidden", "true");
             this.event(e, objectsPoints[dataIndex]);
          });
