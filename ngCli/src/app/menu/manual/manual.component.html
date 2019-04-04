@@ -50,4 +50,4 @@
   <a tabindex="0"  (click)="goTo(nav-h)" (keydown)="$event.keyCode == 13 ? goTo('nav-h') : null">Voltar para título Navegador</a>
 </section>
 </div>
-<a tabindex='0' id="buttonBack" class='btn bg-primary text-white float-right' (click)="getBack()"  (keydown)="backButtonVerify($event)">Voltar para o menu principal</a>
+<a tabindex='0' id="buttonBack" class='btn bg-primary text-white float-right' routerLink="menu" (keydown)="backButtonVerify($event)">Voltar para o menu principal</a>

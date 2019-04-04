@@ -22,16 +22,7 @@ highcharts3D(Highcharts);
 @Component({
    selector: 'app-protein-viewer',
    styleUrls: ['./protein.css'],
-   template: `
-           <br><a tabindex = '0'class="btn bg-primary text-white" (click)="enterNavigator()" (keydown) = "keyVerifier($event)">
-               Iniciar navegação
-            </a>
-               <highcharts-chart
-               [Highcharts] = "highcharts"
-               [options] = "chartOptions"
-               style = "width: 100%; height: 120vh; display: block;">
-               </highcharts-chart>
-            `
+   templateUrl: 'protein-viewer.html'
 })
 
 export class ProteinViewerComponent implements OnInit, AfterViewInit {

@@ -1,27 +1,27 @@
     <nav>
         <ul>
             <li>
-                <a tabindex = '0'class="btn bg-primary text-white" (click)="enterNavigator()" (keydown) = " $event.keyCode == 13 ? enterNavigator() : null">
+                <button tabindex = '0'class="btn bg-primary text-white" style="width:300px"(click)="enterNavigator()" (keydown) = " $event.keyCode == 13 ? enterNavigator() : null">
                     Iniciar Navegação
-                </a>
+                </button>
             </li>
             <li>
-                <a tabindex = '0'class="btn bg-primary text-white" (click)="goSummary()" (keydown) = " $event.keyCode == 13 ? goSummary() : null">
+                <a tabindex = '0'class="btn bg-primary text-white" routerLink='summary'>
                     Ver informações resumidas
                 </a>
             </li>
             <li>
-                <a tabindex = '0'class="btn bg-primary text-white" (click)="goManual()" (keydown) = " $event.keyCode == 13 ? goManual() : null">
+                <a tabindex = '0'class="btn bg-primary text-white" routerLink='manual'>
                     Ver manual
                 </a>
             </li>
             <li>
-                <a tabindex = '0'class="btn bg-primary text-white" (click)="goSearch()" (keydown) =" $event.keyCode == 13 ? goSearch() : null">
+                <a tabindex = '0'class="btn bg-primary text-white" routerLink='buscador'>
                     Voltar a tela de  pesquisa
                 </a>
             </li>
             <li>
-                <a tabindex = '0'class="btn bg-primary text-white" (click)="goMenu()" (keydown) =" $event.keyCode == 13 ? goMenu() : null">
+                <a tabindex = '0'class="btn bg-primary text-white" routerLink='menu'>
                     Voltar ao menu principal
                 </a>
             </li>

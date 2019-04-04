@@ -11,19 +11,10 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     document.getElementById('menuLock').focus();
   }
-
-  goForm() {
-    this._route.navigate(['/buscador']);
-  }
-  goManual() {
-    this._route.navigate(['/manual']);
-  }
   lastMenuVerify(e){
     if(e.keyCode == 9 && !e.shiftKey){
       e.preventDefault();
       document.getElementById('menuLock').focus();
       }
-    else if(e.keyCode == 13)
-      this.goManual();
   }
 }
