@@ -8,6 +8,10 @@ button{
 #messageError:focus, #successful:focus{
     border: 3px dashed black;
 }
+#successful{
+    padding: 1px;
+    color:white;
+}
 ul{
     list-style: none;
 }

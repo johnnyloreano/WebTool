@@ -7,7 +7,6 @@ import { SummaryComponent } from './interactor/summary/summary.component';
 import { ManualComponent } from './menu/manual/manual.component';
 
 export const routes: Routes = [
-  { path: '',redirectTo: 'menu', pathMatch : 'full'},
   {path: 'menu', component: MenuComponent},
   {path: 'summary', component: SummaryComponent},
   {path: 'buscador', component: FormComponent},
