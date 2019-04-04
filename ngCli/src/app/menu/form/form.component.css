@@ -5,16 +5,28 @@ button{
 #messageError{
     visibility: hidden
 }
-#messageError:focus{
+#messageError:focus, #successful:focus{
     border: 3px dashed black;
+}
+#successful{
+    padding: 1px;
+    color:white;
 }
 ul{
     list-style: none;
 }
-li{
+li, #successful li{
     margin: 0 10px;
 }
 li a{
     width: 300px;
     height: auto;
 }
+p{
+    width: 620px;
+    margin : 0 auto;
+}
+#successful{
+    display: none;
+}
+{}

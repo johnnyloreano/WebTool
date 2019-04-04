@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export class FormComponent implements OnInit {
     private pdbFile: string;
+    private proteinName: string;
     constructor(private _pdbRequester: pdbRequester, private _router: Router, public dataService: DataService) {}
     ngOnInit(){
       document.getElementById("principalHeader").focus();
@@ -20,7 +21,11 @@ export class FormComponent implements OnInit {
       this._pdbRequester.requestTags(this.pdbFile).subscribe(
         (result) => {
           this.dataService.setProtein(result);
-          this._router.navigate(['/proteinView']); },
+          this.proteinName = this.dataService.getProtein().title;
+          document.getElementById("btnSearch").style.display = "none";
+          document.getElementById("successful").style.display = "block";
+          document.getElementById("successful").focus();
+        },
         (error: HttpErrorResponse) => {
           const errEl = document.getElementById('messageError');
           errEl.style.visibility = 'visible';
@@ -31,8 +36,11 @@ export class FormComponent implements OnInit {
         }
       );
   }
-  getBack(){
-    this._router.navigate(['/menu']);
+    cancelSearch(){
+    document.getElementById("btnSearch").style.display = "block";
+    document.getElementById("successful").style.display = "none";
+    document.getElementById("principalHeader").focus();
+
   }
   backButtonVerify(e){
       if(e.keyCode == 9){
@@ -40,9 +48,6 @@ export class FormComponent implements OnInit {
         e.preventDefault();
         document.getElementById('principalHeader').focus();
         }
-        }
-        else if(e.keyCode == 13){
-          this.getBack();
-        }
+      }
     }
   }

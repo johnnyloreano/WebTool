@@ -12,9 +12,6 @@ export class ManualComponent implements OnInit{
   ngOnInit(){
     document.getElementById('principalTitle').focus();
   }
-  getBack(){
-    this._router.navigate(['/menu']);
-  }
   goTo(el: string){
     document.getElementById(el).focus();
   }
@@ -30,9 +27,6 @@ export class ManualComponent implements OnInit{
     if(e.keyCode == 9){
       e.preventDefault();
       document.getElementById('intro-h').focus();
-      }
-      else if(e.keyCode == 13){
-        this.getBack();
       }
   }
 }
