@@ -20,7 +20,9 @@ export class FormComponent implements OnInit {
       this._pdbRequester.requestTags(this.pdbFile).subscribe(
         (result) => {
           this.dataService.setProtein(result);
-          this._router.navigate(['/proteinView']); },
+          this._router.navigate(['/proteinView']);
+        
+        },
         (error: HttpErrorResponse) => {
           const errEl = document.getElementById('messageError');
           errEl.style.visibility = 'visible';
@@ -31,18 +33,12 @@ export class FormComponent implements OnInit {
         }
       );
   }
-  getBack(){
-    this._router.navigate(['/menu']);
-  }
   backButtonVerify(e){
       if(e.keyCode == 9){
         if(!e.shiftKey){
         e.preventDefault();
         document.getElementById('principalHeader').focus();
         }
-        }
-        else if(e.keyCode == 13){
-          this.getBack();
         }
     }
   }

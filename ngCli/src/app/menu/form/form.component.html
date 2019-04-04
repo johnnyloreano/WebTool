@@ -12,6 +12,6 @@
     <ul>
   <li><a  tabindex ='0' class=' btn bg-primary text-white' (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</a></li>
       <p tabindex='0' id="messageError" class="bg-danger text-white w-25 rounded mt-2 ml-auto mr-auto" ></p>
-  <li><a tabindex='0' id="buttonBack" class='btn bg-primary text-white' (click)="getBack()"  (keydown)="backButtonVerify($event)">Voltar para o menu principal</a></li>
+  <li><a tabindex='0' id="buttonBack" class='btn bg-primary text-white' routerLink='/menu'  (keydown)="backButtonVerify($event)">Voltar para o menu principal</a></li>
     <ul>
   <nav>
