@@ -22,7 +22,6 @@ export class FormComponent implements OnInit {
         (result) => {
           this.dataService.setProtein(result);
           this.proteinName = this.dataService.getProtein().title;
-          alert(Object.keys(this.dataService.getProtein()));
           document.getElementById("successful").style.display = 'block';
           // this._router.navigate(['/proteinView']);
         },

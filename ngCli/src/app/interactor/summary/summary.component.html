@@ -1,0 +1,31 @@
+<a tabindex = '0' class="btn bg-primary text-white d-block w-25 mx-auto" (click)="goMenu()" (keydown) =" $event.keyCode == 13 ? goMenu() : null">
+    Voltar ao menu principal
+</a>
+<div tabindex="0">
+  <h2>Identificador da proteína</h2>
+  <p>{{protein['_identifier']}}</p>
+</div>
+<div tabindex="0">
+  <h2>Nome da proteína</h2>
+  <p>{{protein['_title']}}</p>
+
+</div>
+<div tabindex="0">
+  <h2>Autor da proteína</h2>
+  <p>{{protein['identifier']}}</p>
+
+</div>
+<div tabindex="0">
+  <h2>Classificação da proteína</h2>
+  <p>{{protein['_classification']}}</p>
+
+</div>
+<div tabindex="0">
+  <h2>Experimentos realizados</h2>
+  <p>{{protein['_experiment']}}</p>
+
+</div>
+<div tabindex="0">
+  <h2>Versão da proteína</h2>
+  <p>{{protein['_version']}}</p>
+</div>
