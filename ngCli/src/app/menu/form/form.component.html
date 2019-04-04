@@ -6,25 +6,25 @@
   </p>
   <label for ="protein"class='mr-2'>
     Proteína: 
-    <input name='protein' [(ngModel)]='pdbFile' type='text' >
+    <input id='protein' [(ngModel)]='pdbFile' type='text' >
   </label>
-  <div id="successful" class="bg-success w-50 mx-auto">
-    <p>
-    Você buscou a proteína com sucesso!Favor,confirmar.
-    O ID da proteína buscada é {{pdbFile}}
-    O nome da proteína é {{ proteinName }}
+  <div id="successful" class="bg-success w-50 mx-auto" tabindex="0">
+    <p  >
+      Você buscou a proteína com sucesso!Favor,confirmar.
+      O ID da proteína buscada é {{pdbFile}}
+      O nome da proteína é {{ proteinName }}
     </p>
     <nav>
       <ul>
-        <li><a routerLink = "/proteinView" class="btn bg-primary text-white">Sim,continuar</a></li>
-        <li><a class="btn bg-primary text-white">Não, não continuar</a></li>
+        <li><a tabindex="0" routerLink = "/proteinView" class="btn bg-primary text-white mb-2">Sim,continuar</a></li>
+        <li><a tabindex="0" (click) = "cancelSearch()" (keydown) = "$event.keyCode == 13 ? cancelSearch():null " class="btn bg-primary text-white">Não, não continuar</a></li>
       </ul>
     </nav>
   </div>
   <nav>
     <ul>
-  <li><a  tabindex ='0' class=' btn bg-primary text-white' (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</a></li>
-      <p tabindex='0' id="messageError" class="bg-danger text-white w-25 rounded mt-2 ml-auto mr-auto" ></p>
-  <li><a tabindex='0' id="buttonBack" class='btn bg-primary text-white' (click)="getBack()"  (keydown)="backButtonVerify($event)">Voltar para o menu principal</a></li>
-    <ul>
-  <nav>
+      <li><a  tabindex ='0' class=' btn bg-primary text-white' (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</a></li>
+          <p tabindex='0' id="messageError" class="bg-danger text-white w-25 rounded mt-2 ml-auto mr-auto" ></p>
+      <li><a tabindex='0' id="buttonBack" class='btn bg-primary text-white' routerLink="/menu">Voltar para o menu principal</a></li>
+    </ul>
+  </nav>

@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
           this.dataService.setProtein(result);
           this.proteinName = this.dataService.getProtein().title;
           document.getElementById("successful").style.display = 'block';
-          // this._router.navigate(['/proteinView']);
+          document.getElementById("successful").focus();
         },
         (error: HttpErrorResponse) => {
           const errEl = document.getElementById('messageError');
@@ -35,8 +35,10 @@ export class FormComponent implements OnInit {
         }
       );
   }
-  getBack(){
-    this._router.navigate(['/menu']);
+  cancelSearch(){
+    document.getElementById("successful").style.display = 'none';
+    document.getElementById('principalHeader').focus();
+
   }
   backButtonVerify(e){
       if(e.keyCode == 9){
@@ -44,9 +46,6 @@ export class FormComponent implements OnInit {
         e.preventDefault();
         document.getElementById('principalHeader').focus();
         }
-        }
-        else if(e.keyCode == 13){
-          this.getBack();
-        }
+      }
     }
   }

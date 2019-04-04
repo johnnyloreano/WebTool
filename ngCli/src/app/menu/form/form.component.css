@@ -5,13 +5,13 @@ button{
 #messageError{
     visibility: hidden
 }
-#messageError:focus{
+#messageError:focus, #successful:focus{
     border: 3px dashed black;
 }
 ul{
     list-style: none;
 }
-li{
+li, #successful li{
     margin: 0 10px;
 }
 li a{
@@ -25,3 +25,4 @@ p{
 #successful{
     display: none;
 }
+{}
