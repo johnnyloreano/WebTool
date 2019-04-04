@@ -10,9 +10,10 @@
   </label>
   <div id="successful" class="bg-success w-50 mx-auto" tabindex="0">
     <p  >
-      Você buscou a proteína com sucesso!Favor,confirmar.
-      O ID da proteína buscada é {{pdbFile}}
-      O nome da proteína é {{ proteinName }}
+      Você buscou a proteína com sucesso!Favor,confirmar.<br>
+      O ID da proteína buscada é {{pdbFile}}<br>
+      O nome da proteína é {{ proteinName }}<br>
+      Você deseja continuar para o visualizador ?
     </p>
     <nav>
       <ul>
@@ -23,7 +24,7 @@
   </div>
   <nav>
     <ul>
-      <li><a  tabindex ='0' class=' btn bg-primary text-white' (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</a></li>
+      <li><a  tabindex ='0' id="btnSearch" class=' btn bg-primary text-white' (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</a></li>
           <p tabindex='0' id="messageError" class="bg-danger text-white w-25 rounded mt-2 ml-auto mr-auto" ></p>
       <li><a tabindex='0' id="buttonBack" class='btn bg-primary text-white' routerLink="/menu">Voltar para o menu principal</a></li>
     </ul>

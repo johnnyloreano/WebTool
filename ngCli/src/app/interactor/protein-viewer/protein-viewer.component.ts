@@ -58,8 +58,8 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    setTabindex(){
       const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       for(let x = 0; x < plotPoints.length;x++){
-         const auxIndex = plotPoints[x].getAttribute('dataIndex');
-         plotPoints[x].setAttribute("tabindex", String(auxIndex));
+         const dataIndex = plotPoints[x].getAttribute('dataIndex');
+         plotPoints[x].setAttribute("tabindex", String(dataIndex));
       }
 
    }
@@ -187,9 +187,9 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       const objectsPoints = this.highcharts.charts[0].series[0].points;
       for (let x = 0; x < plotPoints.length; x++) {
          plotPoints[x].addEventListener('keydown', (e) => {
-            const auxIndex = Number(plotPoints[x].getAttribute('tabindex')) - 1;
+            const dataIndex = Number(plotPoints[x].getAttribute('tabindex')) - 1;
             plotPoints[x].setAttribute("aria-hidden", "true");
-            this.event(e, objectsPoints[auxIndex]);
+            this.event(e, objectsPoints[dataIndex]);
          });
       }
    }
