@@ -27,14 +27,13 @@ export class FormComponent implements OnInit {
           const errEl = document.getElementById('messageError');
           errEl.style.visibility = 'visible';
           errEl.innerHTML = 'Um erro aconteceu. Verifique se o nome do identificador' +
-                            ' da proteína está correto e/ou se você possui internet. Informações do erro:'
-                            + error.message;
+                            ' da proteína está correto e/ou se você possui internet.';
           errEl.focus();
         }
       );
   }
-  backButtonVerify(e){
-      if(e.keyCode == 9){
+  backButtonVerify(e : KeyboardEvent){
+      if(e.keyCode == 9 || e.keyCode == 40){
         if(!e.shiftKey){
         e.preventDefault();
         document.getElementById('principalHeader').focus();

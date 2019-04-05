@@ -9,7 +9,7 @@ import { TalkerService} from '../../core/talker/talker.service';
   selector: 'app-protein-viewer',
   styleUrls : ["./protein.css"],
   template: `
-            <h2 tabindex='0'>
+            <h2 tabindex='0' id="principalHeader">
               Visualizador de proteína
             </h2>
             <h3 tabindex='0'> 
@@ -18,7 +18,7 @@ import { TalkerService} from '../../core/talker/talker.service';
             <nav>
               <ul id="menuList">
                 <li>  
-                  <a tabindex="0" class="btn bg-primary text-white" (click)="focusViewer()" (keydown)="$event.keyCode == 13 ?  focusViewer() : null">Entrar na proteína</a>
+                  <a tabindex="0" class="btn bg-primary text-white" (click)="enableFocus()" (keydown)="$event.keyCode == 13 ?  enableFocus() : null">Entrar na proteína</a>
                 </li>
                 <li>
                   <a tabindex="0" class="btn bg-primary text-white" routerLink="/menu" (keydown)="lastBtnVerify($event)">Voltar ao menu anterior</a>
@@ -124,8 +124,14 @@ sheetVerifier(res:LabelResidueComponent,resNum:number, sheetArray: Array<number>
       return res._isSheet = true
   }
 }
+  enableFocus(){
+    const labels = document.getElementsByClassName('label');
+    for(let x = 0; x < labels.length;x++)
+      labels[x].setAttribute("tabindex","0");
+    document.getElementById('viewerHold').tabIndex = 0;    
+    document.getElementById('viewerHold').focus();
+  }
   plotLine(position:Array<number>, position2:Array<number>,is_helix : boolean){
-    const totalWidth = (document.getElementById('viewerHold').clientWidth) ;
     const totalHeight = (document.getElementById('viewerHold').clientHeight) ;
     const plotPositionsStart = [  position[0] ,
                                  - position[1] + totalHeight ];
@@ -144,9 +150,12 @@ sheetVerifier(res:LabelResidueComponent,resNum:number, sheetArray: Array<number>
       this._renderer.setStyle(line,"stroke","black");
     this._renderer.appendChild(this.svgHost.nativeElement, line);
   }
-
-  focusViewer(){
-    document.getElementById('viewerHold').tabIndex = 0;    
-    document.getElementById('viewerHold').focus();    
+  lastBtnVerify(e : KeyboardEvent){
+    if(e.keyCode == 9 || e.keyCode == 40){
+      if(!e.shiftKey){
+      e.preventDefault();
+      document.getElementById('principalHeader').focus();
+      }
+      }
   }
 }

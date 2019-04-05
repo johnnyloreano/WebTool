@@ -5,8 +5,8 @@
     Digite abaixo o nome do identificador da proteína que você deseja buscar:
   </p>
   <label for ="protein"class='mr-2'>
-    Proteína: 
-    <input name='protein' [(ngModel)]='pdbFile' type='text' >
+    Nome da Proteína: 
+    <input id = "protein" name='protein' [(ngModel)]='pdbFile' type='text' (keydown) = "$event.keyCode == 13 ? requestProtein(): null" />
   </label>
   <nav>
     <ul>

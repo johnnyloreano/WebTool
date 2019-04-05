@@ -18,8 +18,8 @@ export class MenuComponent implements OnInit {
   goManual() {
     this._route.navigate(['/manual']);
   }
-  lastMenuVerify(e){
-    if(e.keyCode == 9 && !e.shiftKey){
+  lastMenuVerify(e : KeyboardEvent){
+    if((e.keyCode == 9 && !e.shiftKey) || (e.keyCode == 40)){
       e.preventDefault();
       document.getElementById('menuLock').focus();
       }

@@ -59,13 +59,13 @@ export class TranscripterService {
       'actual': this.getQuadrant(pred, actual)
     };
   }
-  toHour(degree: number): number[] {
+  toHour(degree: number): number {
     const aux = (degree / 30);
     let hour = Math.trunc(aux);
     let min = Math.trunc( (aux - hour) * 60) ;
-    min = (this.round( Math.trunc(min) ));
-    if (min === 60) {min = 0; hour++; }
-    return [hour, min];
+    min = (this.round( min ));
+    if (min === 60) hour++;
+    return hour;
   }
   round(val: number): number {
     return Math.round(val / 10 ) * 10;
@@ -100,48 +100,21 @@ export class TranscripterService {
     }
     return result;
   }
-  createText(hour: number, minutes: number, distance: number): string {
-    let text: string;
-    text = 
-    text = this.specialText(hour, minutes);
-    if (text == null) {
-      text = this.commonText(hour);
-      text += this.hourMinText(hour, minutes);
-    }
-    return text + '.Distância de ' + distance + 'cm';
-  }
-  specialText(hour: number, minutes: number) {
-    if (minutes === 0) {
-      if (hour === 0 || hour === 12) {return 'Subindo';
-      } else if (hour === 3) {return 'Indo para a direita';
-      } else if (hour === 9) {return 'Indo para a esquerda';
-      } else if (hour === 6) {return 'Descendo'; }
-    }
-    return null;
-  }
-  commonText(hour: number) {
-    if (hour >= 11 || hour <= 2 ) {
-    return 'Subindo ';
-    } else if (hour > 2 && hour <= 5) {
-    return 'Indo para a direita ';
-       } else if (hour > 5 && hour <= 7) {
-    return 'Descendo ';
-       } else if (hour > 7 && hour < 11) {
-    return 'Indo para a esquerda ';
-       }
-  }
 
-  hourMinText(hours: number, minutes: number): string {
-    let text = '';
-    if (hours !==  0 && minutes !== 0) {text = ' e '; }
-    if (hours > 0) {
-    text = hours + ' horas' + text;
-    }
-    if (minutes > 0) {
-    text += minutes + ' minutos';
-    }
-    return text;
+  createText(hour: number): string {
+    let text: string;
+    if (hour >= 11 || hour <= 2 ) {
+    text = 'Subindo ';
+    } else if (hour > 2 && hour <= 5) {
+    text = 'Indo para a direita ';
+       } else if (hour > 5 && hour <= 7) {
+    text = 'Descendo ';
+       } else if (hour > 7 && hour < 11) {
+    text = 'Indo para a esquerda ';
+       }
+      return text += hour + ' horas.';
   }
+  
   /**
    *  Generate the sounds of each transitions.
    * It takes two sets of coordinates of differents aminoacids and transcript the sound of each transition, to top, and to bottom
@@ -157,8 +130,7 @@ export class TranscripterService {
     const calculateDegrees = this.getCorrectDegree(actualAmino, predecessorAmino, quadrants, degrees);
     const hours = [ this.toHour(calculateDegrees['predecessor']),
                   this.toHour(calculateDegrees['actual']) ];
-    const distance = this.getDistance(actualAmino, predecessorAmino);
-    // console.log(calculateDegrees);
-    return [this.createText(hours[1][0], hours[1][1], distance), this.createText(hours[0][0], hours[0][1], distance)];
+    console.log(hours);
+    return [this.createText(hours[1]), this.createText(hours[0])];
   }
 }
