@@ -25,14 +25,14 @@
     Bem-vindos à Ferramenta Educativa LABIO!
     Essa ferramenta foi construída para que você possa compreender a estrutura de proteínas simples. 
   </p>
-  <a tabindex="0" (click)="goTo('intro-h')" (keydown)="$event.keyCode == 13 ? goTo('intro-h') : null">Voltar para link INTRODUÇÃO</a>
+  <!-- <a tabindex="0" (click)="goTo('intro-h')" (keydown)="$event.keyCode == 13 ? goTo('intro-h') : null">Voltar para link INTRODUÇÃO</a> -->
 </section>
 <section tabindex="0" id="menu-p">
     <h2 tabindex="0">Menu Principal</h2>
   <p tabindex="0">
     No menu principal, você poderá acessar o navegador de proteínas e também o manual.
   </p>
-  <a tabindex="0" (click)="goTo(menu-h)" (keydown)="$event.keyCode == 13 ? goTo('menu-h') : null">Voltar para link Menu Principal</a>
+  <!-- <a tabindex="0" (click)="goTo(menu-h)" (keydown)="$event.keyCode == 13 ? goTo('menu-h') : null">Voltar para link Menu Principal</a> -->
 </section>
 <section tabindex="0" id="nav-p">
   <h2 tabindex="0">Navegador de proteína</h2>
@@ -52,7 +52,7 @@
       Uma vez que o usuário esteja dentro da proteína, você poderá usar o TAB para movimentar para o próximo aminoácido, e SHIFT + TAB para voltar um aminoácido para trás.
       Utilize o CTRL para ouvir mais informações sobre o aminoácido. Caso esteja dentro de uma hélice ou fita, o usuário será informado disso.      
 </p>
-  <a tabindex="0"  (click)="goTo(nav-h)" (keydown)="$event.keyCode == 13 ? goTo('nav-h') : null">Voltar para link Navegador</a>
+  <!-- <a tabindex="0"  (click)="goTo(nav-h)" (keydown)="$event.keyCode == 13 ? goTo('nav-h') : null">Voltar para link Navegador</a> -->
 </section>
 </div>
 <a tabindex='0' id="buttonBack" class='btn bg-primary text-white float-right' routerLink ='/menu'  (keydown)="backButtonVerify($event)">Voltar para o menu principal</a>
