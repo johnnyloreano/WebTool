@@ -7,47 +7,27 @@ export class TranscripterService {
 
   constructor(private _mathS : MathService){}
 
-  private createText(hour: number, minutes: number, distance: number): string {
+  private createText(hour: number): string {
     let text: string;
-    text = 
-    text = this.specialText(hour, minutes);
-    if (text == null) {
       text = this.commonText(hour);
-      text += this.hourMinText(hour, minutes);
-    }
-    return text + '.Distância de ' + distance + ' centímetros';
+      text += this.hourMinText(hour);
+    return text;
   }
-  private specialText(hour: number, minutes: number) {
-    if (minutes === 0) {
-      if (hour === 0 || hour === 12) {return 'Subindo';
-      } else if (hour === 3) {return 'Indo para a direita';
-      } else if (hour === 9) {return 'Indo para a esquerda';
-      } else if (hour === 6) {return 'Descendo'; }
-    }
-    return null;
-  }
+
   private commonText(hour: number) {
     if (hour >= 11 || hour <= 2 ) {
     return 'Subindo ';
-    } else if (hour > 2 && hour <= 5) {
+    } else if (hour > 2 && hour < 5) {
     return 'Indo para a direita ';
-       } else if (hour > 5 && hour <= 7) {
+       } else if (hour >= 5 && hour <= 7) {
     return 'Descendo ';
        } else if (hour > 7 && hour < 11) {
     return 'Indo para a esquerda ';
        }
   }
 
-  private hourMinText(hours: number, minutes: number): string {
-    let text = '';
-    if (hours !==  0 && minutes !== 0) {text = ' e '; }
-    if (hours > 0) {
-    text = hours + ' horas' + text;
-    }
-    if (minutes > 0) {
-    text += minutes + ' minutos';
-    }
-    return text;
+  private hourMinText(hours: number): string {
+    return hours + ' horas';
   }
   /**
    *  Generate the sounds of each transitions.
@@ -60,9 +40,8 @@ export class TranscripterService {
    */
   public getTransition(actualAmino: number[], predecessorAmino: number[]): string[] {
     const info = this._mathS.toJSON(actualAmino,predecessorAmino);
-    const text = [this.createText(info['hour'][1][0],info['hour'][1][1],info['distance']),
-                  this.createText(info['hour'][0][0],info['hour'][0][1],info['distance'])];
-    // console.log(calculateDegrees);
+    const text = [this.createText(info[1]),
+                  this.createText(info[0])];
     return text;
   }
 }

@@ -5,6 +5,7 @@ from datetime import timedelta
 from functools import update_wrapper
 sys.path.append('Scripts')
 import dataTag
+import dataTest
 
 def crossdomain(origin=None, methods=None, headers=None,
                 max_age=21600, attach_to_all=True,
@@ -55,6 +56,12 @@ CORS(app)
 def tagReturn():
     json_data = request.args
     return dataTag.getGeneralData(json_data['pdbFile'])
+
+@app.route('/dataTest', methods=['POST', 'GET', 'OPTIONS'])
+@crossdomain(origin='*')
+def testReturn():
+    # json_data = request.args
+    return dataTest.getTests()
 
 if __name__ == '__main__':
     app.run(debug=True)

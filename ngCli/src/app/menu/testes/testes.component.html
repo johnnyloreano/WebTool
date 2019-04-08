@@ -1,0 +1,10 @@
+<div class='text-center container'>
+  <h2 id="menuLock" tabindex="0" aria-label="Menu Principal Use a tecla TAB para navegar entre as opções disponíveis e use ENTER para escolher o botão desejado.">
+    Menu de Testes 
+  </h2>
+<nav>
+  <ul id="menuList">
+    <li><a  tabindex ='0' id="btnSearch" class=' btn bg-primary text-white' (click)="requestTriangle()"   (keydown)="$event.keyCode == 13 ? requestTriangle() : null">Abrir triangulo</a></li>    
+</ul>
+</nav>
+</div>

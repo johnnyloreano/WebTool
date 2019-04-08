@@ -1,15 +1,12 @@
 import {
   Injectable
 } from '@angular/core';
-import {
-  DataParserService
-} from "../data-parser/data-parser.service";
+import { DataParserService } from '../data-parser/data-parser.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ChartConfiguratorService {
-  private aminoData = this._parserService.parseAminoData();
-  private structureInf = this._parserService.parseStructureInfo();
+  private testData = this.dataService.parseTest();
   chartOptions = {
     chart: {
       tooltip: false,
@@ -48,15 +45,15 @@ export class ChartConfiguratorService {
     },
     xAxis: {
       min: 0,
-      max: 100
+      max: 5
     },
     yAxis: {
       min: 0,
-      max: 100
+      max: 5
     },
     zAxis: {
       min: 0,
-      ax: 100
+      ax: 5
     },
     series: [{
       dataLabels: {
@@ -66,62 +63,14 @@ export class ChartConfiguratorService {
         }
       },
       data: this.getData(),
-      zones: this.markZones()
     }]
 };
-constructor(private _parserService: DataParserService) {}
+constructor(private dataService: DataParserService) {}
 getData() {
-  return this.aminoData;
+  console.table(this.testData)
+  return this.testData;
 }
-markZones(){
-  const helix = this.structureInf['helix'];
-  const sheet = this.structureInf['sheet'];
-  const HELIX_COLOR = "red";
-  const SHEET_COLOR = "orange";
-  const DEFAULT_COLOR = "blue";
-  let zones = [];
-  while(helix.length > 0 || sheet.length > 0){
-     let zoneStart,zoneEnd, colorZone;
-     if(helix.length > 0 && sheet.length > 0){
-        if(helix[0] > sheet[0]){
-           let values = helix.shift() 
-           zoneStart = values[0] 
-           zoneEnd = values[1]
-           colorZone = HELIX_COLOR;
-        }
-        else{
-           let values = helix.shift() 
-           zoneStart = values[0]
-           zoneEnd = values[1]
-           colorZone = SHEET_COLOR;
-        }
-     }
-     else if(helix.length > 0){
-        let values = helix.shift() 
-        zoneStart = values[0]
-        zoneEnd = values[1]
-        colorZone = HELIX_COLOR
-     }
-     else{
-        let values = helix.shift() 
-        zoneStart = values[0]
-        zoneEnd = values[1]
-        colorZone = SHEET_COLOR;
-     }
-     const zoneObj = [{
-        value: zoneStart,
-        color: DEFAULT_COLOR 
-     },
-     {
-        value: zoneEnd,
-        color: colorZone 
-     }
-     ]
-     zones.push(zoneObj[0]);
-     zones.push(zoneObj[1]);
-  }
-  return zones;
-}
+
 getChartConfigurations() {
 
   return this.chartOptions;

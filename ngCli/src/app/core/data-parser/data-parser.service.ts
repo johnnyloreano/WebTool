@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { DataService} from '../data-service/data-service.service';
 import { Aminoacid } from '../../interfaces/aminoacid';
+import { TestPoint } from '../../interfaces/testPoint';
 import { TranscripterService } from '../transcripter/transcripter.service';
 @Injectable({
   providedIn: 'root'
 })
 export class DataParserService {
   private protein = this._dataService.getProtein();
+  private test = this._dataService.getTest();
   constructor(private _dataService : DataService, private _transcripter: TranscripterService) { }
 
   parseStructureInfo(){
@@ -61,4 +63,15 @@ export class DataParserService {
     return this._transcripter.getTransition(position01,position02);
   }
   
+  parseTest(){
+    let testData = Array<TestPoint>();
+    const valuesLoc = this.test.pointLoc
+    for(let x = 0 ; x < valuesLoc.length;x++){
+      testData[x] = new TestPoint();
+      testData[x].x = valuesLoc[x][0]
+      testData[x].y = valuesLoc[x][1]
+      testData[x].z = valuesLoc[x][2]
+    }
+    return testData;
+  }
 }

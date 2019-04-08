@@ -61,13 +61,17 @@ export class MathService {
         'actual': this.getQuadrant(pred, actual)
       };
     }
-    private toHour(degree: number): number[] {
+    private toHour(degree: number) {
       const aux = (degree / 30);
       let hour = Math.trunc(aux);
       let min = Math.trunc( (aux - hour) * 60) ;
       min = (this.round( Math.trunc(min) ));
-      if (min === 60) {min = 0; hour++; }
-      return [hour, min];
+      if (min >= 30)
+        hour++;
+      if (hour == 0)
+        hour = 12;
+        console.log(hour+":"+min);
+      return hour;
     }
     private round(val: number): number {
       return Math.round(val / 10 ) * 10;
@@ -108,10 +112,6 @@ export class MathService {
       const calculateDegrees = this.getCorrectDegree(actualAmino, predecessorAmino, quadrants, degrees);
       const hours = [ this.toHour(calculateDegrees['predecessor']),
                     this.toHour(calculateDegrees['actual']) ];
-      const distance = this.getDistance(actualAmino, predecessorAmino);
-      return {
-        'hour':hours,
-        'distance':distance
-      }
+      return hours 
     }
 }

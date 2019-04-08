@@ -7,11 +7,13 @@ import { CoreModule } from '../core/core.module'
 import { RouterModule } from '@angular/router';
 import { HttpService } from '../core/http-pdb/http-pdb-requester.service';
 import { ManualComponent } from './manual/manual.component';
+import { TestesComponent } from './testes/testes.component';
 @NgModule({
   declarations: [
     FormComponent,
     MenuComponent,
-    ManualComponent
+    ManualComponent,
+    TestesComponent
   ],
   imports: [
     CommonModule,
