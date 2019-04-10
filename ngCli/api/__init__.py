@@ -60,8 +60,8 @@ def tagReturn():
 @app.route('/dataTest', methods=['POST', 'GET', 'OPTIONS'])
 @crossdomain(origin='*')
 def testReturn():
-    # json_data = request.args
-    return dataTest.getTests()
+    json_data = request.args
+    return dataTest.getTests(json_data['name'])
 
 if __name__ == '__main__':
     app.run(debug=True)

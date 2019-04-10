@@ -18,9 +18,6 @@ import {
    Aminoacid
 } from '../../interfaces/aminoacid';
 import * as $ from 'jquery';
-import HighchartsMoreModule from 'highcharts/highcharts-more';//Fix Highcharts error
-import NetworkgraphModule from 'highcharts/modules/networkgraph';//Fix Highcharts error
-import OrganizationModule from 'highcharts/modules/organization';//Fix Highcharts error
 highcharts3D(Highcharts);
 @Component({
    selector: 'app-protein-viewer',
@@ -40,6 +37,9 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    ngAfterViewInit() {
       this.configurePoints();
       this.configureRotation();
+   }
+   destroy(){
+      Highcharts.charts[0].destroy();
    }
    enterNavigator() {
       this.setTabindex();

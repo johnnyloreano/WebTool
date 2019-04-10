@@ -39,6 +39,9 @@ export class ProteinViewerTestComponent implements OnInit, AfterViewInit {
      this.setTabindex();
      this.focusFirstPoint();
   }
+  destroy(){
+     this.highcharts.charts[0].destroy();
+  }
   focusFirstPoint(){
      const aux = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
      if (this.firstTab !== undefined) {
@@ -64,10 +67,19 @@ export class ProteinViewerTestComponent implements OnInit, AfterViewInit {
         this.enterNavigator();
      }
   }
-  event(event, data) {
-     if (event.keyCode === 9) {
-        this.talkTransition(event, data);
+  focus(string){
+   document.getElementById(string).focus();
+  }
+  event(event, data, isLast) {
+     if(isLast){
+        const end = document.getElementById("finished");
+        end.style.display = 'block';
+        end.focus();
      }
+      else if (event.keyCode === 9) {
+        this.talkTransition(event, data);
+      }
+
   }
   talkTransition(key: KeyboardEvent, data: any) {
      let message: string;
@@ -112,8 +124,9 @@ export class ProteinViewerTestComponent implements OnInit, AfterViewInit {
         plotPoints[x].addEventListener('keydown', (e) => {
            const dataIndex = Number(plotPoints[x].getAttribute('dataIndex')) - 1;
            plotPoints[x].setAttribute("aria-hidden", "true");
-           this.event(e, objectsPoints[dataIndex]);
-        });
+           this.event(e, objectsPoints[dataIndex], dataIndex == plotPoints.length-1);
+         });
+         console.log(objectsPoints[x])
      }
   }
 }

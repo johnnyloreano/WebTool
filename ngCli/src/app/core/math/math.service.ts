@@ -19,6 +19,7 @@ export class MathService {
     const deltaX = this.getDelta(actualAmino[0] , predecessorAmino[0]);
     const deltaY = this.getDelta(actualAmino[1] , predecessorAmino[1]);
     let degree = Math.abs(deltaY) / Math.abs(deltaX);
+    if(degree == 0) degree++;
     degree = Math.atan(degree) * 180 / Math.PI;
     degree = Math.abs(degree);
     const degrees = {
@@ -31,14 +32,14 @@ export class MathService {
     };
     return aminoDegrees;
     }
-    private getDistance(pos1: Array<number>, pos2: Array<number>) {
-      const deltaX = this.getDelta(pos1[0] , pos2[0]);
-      const deltaY = this.getDelta(pos1[1] , pos2[1]);
-      const deltaZ = this.getDelta(pos1[2] , pos2[2]);
-      let result = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2) + Math.pow(deltaZ, 2));
-      result = Math.trunc(result); 
-      return this.round(result);
-    }
+    // private getDistance(pos1: Array<number>, pos2: Array<number>) {
+    //   const deltaX = this.getDelta(pos1[0] , pos2[0]);
+    //   const deltaY = this.getDelta(pos1[1] , pos2[1]);
+    //   const deltaZ = this.getDelta(pos1[2] , pos2[2]);
+    //   let result = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2) + Math.pow(deltaZ, 2));
+    //   result = Math.trunc(result); 
+    //   return this.round(result);
+    // }
     private getQuadrant(pos: number[], posRelative: number[]): number {
       const posX = this.getDelta(pos[0], posRelative[0]);
       const posY = this.getDelta(pos[1], posRelative[1]);
@@ -51,7 +52,15 @@ export class MathService {
           return 3;
         case (posX > 0 && posY < 0): //
           return 4;
-        default:
+        case (posX == 0 && posY > 0):
+          return 2;
+        case (posX < 0 && posY == 0):
+          return 2;
+        case (posX == 0 && posY < 0):
+          return 4;
+        case (posX > 0 && posY == 0):
+          return 4;
+        case(posX == 0 && posY == 0):
           return 0;
       }
     }
@@ -66,15 +75,15 @@ export class MathService {
       let hour = Math.trunc(aux);
       let min = Math.trunc( (aux - hour) * 60) ;
       min = (this.round( Math.trunc(min) ));
-      if (min >= 30)
-        hour++;
+      // if (min >= 30)
+      // hour++;
       if (hour == 0)
-        hour = 12;
-        console.log(hour+":"+min);
+      hour = 12;
       return hour;
     }
     private round(val: number): number {
-      return Math.round(val / 10 ) * 10;
+      // return Math.round(val / 10 ) * 10;
+      return val;
     }
   
     private getDelta(val: number, val2: number): number {

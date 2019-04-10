@@ -15,10 +15,10 @@ constructor(private http: HttpClient) {}
   };
   return this.http.get('http://127.0.0.1:5000/dataTags', config);
   }
-  requestTest() {
+  requestTest(name:string) {
     const config = {
       params: {
-          pdbFile: ""
+          name: name
       }
   };
   return this.http.get('http://127.0.0.1:5000/dataTest', config);

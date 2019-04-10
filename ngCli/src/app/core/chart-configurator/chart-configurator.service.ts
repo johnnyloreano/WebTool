@@ -41,7 +41,7 @@ export class ChartConfiguratorService {
       }
     },
     title: {
-      text: '3D Scatter Plot'
+      text: ''
     },
     xAxis: {
       min: 0,
@@ -67,7 +67,6 @@ export class ChartConfiguratorService {
 };
 constructor(private dataService: DataParserService) {}
 getData() {
-  console.table(this.testData)
   return this.testData;
 }
 

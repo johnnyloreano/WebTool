@@ -15,8 +15,8 @@ export class TestesComponent implements OnInit {
   ngOnInit() {
   }
 
-  requestTriangle(){
-    this._pdb.requestTest().subscribe(
+  request(name:string){
+    this._pdb.requestTest(name).subscribe(
       (result) => {
         this._dataS.setTest(result);
         this._router.navigate(['viewTest']);

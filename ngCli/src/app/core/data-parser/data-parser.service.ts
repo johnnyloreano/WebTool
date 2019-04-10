@@ -57,9 +57,9 @@ export class DataParserService {
     return aminoData;
   
   }
-  private getTransitions(aminoActual:Aminoacid,aminoPredecessor:Aminoacid){
-    const position01 = [aminoActual.x, aminoActual.y, aminoActual.z];
-    const position02 = [aminoPredecessor.x, aminoPredecessor.y, aminoActual.z];
+  private getTransitions(firstPoint:any,secondPoint:any){
+    const position01 = [firstPoint.x, firstPoint.y, firstPoint.z];
+    const position02 = [secondPoint.x, secondPoint.y, firstPoint.z];
     return this._transcripter.getTransition(position01,position02);
   }
   
@@ -71,7 +71,14 @@ export class DataParserService {
       testData[x].x = valuesLoc[x][0]
       testData[x].y = valuesLoc[x][1]
       testData[x].z = valuesLoc[x][2]
+      if(x > 0){
+        const trans = this.getTransitions(testData[x],testData[x-1])
+        testData[x]._downSound = trans[1];
+        testData[x-1]._upSound = trans[0];
     }
+  }  
+  testData[0]._downSound = "Você saiu da figura!"
+  testData[valuesLoc.length-1]._upSound = testData[0]._downSound
     return testData;
   }
 }
