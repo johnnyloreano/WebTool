@@ -17,7 +17,7 @@ import {
 import * as $ from 'jquery';
 highcharts3D(Highcharts);
 @Component({
-  selector: 'app-protein-viewer',
+  selector: 'app-protein-viewer-test',
   styleUrls: ['./protein.css'],
   templateUrl: 'protein-viewer.html'
 })

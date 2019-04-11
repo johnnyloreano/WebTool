@@ -12,17 +12,17 @@ export class DataService {
   setProtein(protein) {
     protein['residues'] = this.parseTag(protein['residues'],protein['residue_num']);
     this.proteinData.next( new Protein( protein['identifier'],
-                                        protein['authors'],
-                                        protein['experiment'],
-                                        protein['classification'],
+    protein['authors'],
+    protein['experiment'],
+    protein['classification'],
                                         protein['deposition_date'],
                                         protein['version'],
                                         protein['residues'],
                                         protein['alpha_loc'],
                                         protein['helix_range'],
                                         protein['sheet_range'],
-                                        protein['title']));  
-  }
+                                        protein['title']));
+    }
   setTest(test){
     this.testData.next(new Test(
       test['identifier'], test['authors'],test['pointLoc'],test['title']

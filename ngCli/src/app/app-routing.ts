@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: 'manual', pathMatch: 'full', component: ManualComponent},
   { path: 'proteinView', pathMatch: 'full', component: ProteinViewerComponent},
   { path: 'testes', pathMatch: 'full', component: TestesComponent},
-  { path: 'viewTest', pathMatch: 'full', component: ViewerTest},
+  // { path: 'viewTest', pathMatch: 'full', component: ViewerTest},
   { path: '**', redirectTo: 'menu', pathMatch: 'full'}
 ];
 

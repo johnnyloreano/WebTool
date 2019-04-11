@@ -64,6 +64,8 @@ export class DataParserService {
   }
   
   parseTest(){
+    if (this.test == undefined)
+    return;
     let testData = Array<TestPoint>();
     const valuesLoc = this.test.pointLoc
     for(let x = 0 ; x < valuesLoc.length;x++){

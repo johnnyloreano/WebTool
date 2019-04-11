@@ -7,6 +7,7 @@ import { DataParserService } from '../data-parser/data-parser.service';
 })
 export class ChartConfiguratorService {
   private testData = this.dataService.parseTest();
+  private aminoData = this.dataService.parseAminoData();
   chartOptions = {
     chart: {
       tooltip: false,
@@ -45,15 +46,15 @@ export class ChartConfiguratorService {
     },
     xAxis: {
       min: 0,
-      max: 5
+      max: 100
     },
     yAxis: {
       min: 0,
-      max: 5
+      max: 100
     },
     zAxis: {
       min: 0,
-      ax: 5
+      max: 100
     },
     series: [{
       dataLabels: {
@@ -67,11 +68,10 @@ export class ChartConfiguratorService {
 };
 constructor(private dataService: DataParserService) {}
 getData() {
-  return this.testData;
+  alert("Hello")
+  return this.aminoData;
 }
-
 getChartConfigurations() {
-
   return this.chartOptions;
 }
 }
