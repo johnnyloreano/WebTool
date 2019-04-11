@@ -3,7 +3,7 @@ import json
 import numpy as np
 aminoNames = ['ALA','PHE','GLU','CYS','LYS','GLY','ASN','ASP','LEU','ILE','PRO','THR','TYR','ARG','HIS','MET','TRP','HYS','LYS','GLN']
 def getGeneralData(pdb):
-    pdb = parsePDB(pdb.encode("UTF-8"), header=True)
+    pdb = parsePDB(pdb.encode("UTF-8"), header=True, secondary=True)
     dataParsed = dict()
     dataParsed['identifier'] =      pdb[1]['identifier']
     dataParsed['authors'] =         pdb[1]['authors']
@@ -40,7 +40,7 @@ def getResNum(pdb):
     hv = pdb[0].getHierView()
     resNumList = list()
     for i, residue in enumerate(hv.iterResidues()):
-        resNumList.append(residue.getResindex())
+        resNumList.append(residue.getResnum())
     return resNumList
 
 def normalizer(arrayValues):
@@ -76,11 +76,10 @@ def getHelixData(pdb):
         helix[i].append(pdb[1]['helix_range'][i][4])
         helix[i].append(pdb[1]['helix_range'][i][5])
     return helix
-    
 def getSheetData(pdb):
-    helix = list()
+    sheet = list()
     for i in range(len(pdb[1]['sheet_range']) ):
-        helix.append(list())
-        helix[i].append(pdb[1]['sheet_range'][i][4])
-        helix[i].append(pdb[1]['sheet_range'][i][5])
-    return helix
+        sheet.append(list())
+        sheet[i].append(pdb[1]['sheet_range'][i][4])
+        sheet[i].append(pdb[1]['sheet_range'][i][5])
+    return sheet
