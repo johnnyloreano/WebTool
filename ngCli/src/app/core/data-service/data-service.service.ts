@@ -9,7 +9,7 @@ export class DataService {
   private testData : BehaviorSubject<Test> = new BehaviorSubject<Test>(undefined);
   currentProtein = this.proteinData.asObservable();
   currentTest = this.testData.asObservable();
-  setProtein(protein) { 
+  setProtein(protein) {
     protein['residues'] = this.parseTag(protein['residues'],protein['residue_num']);
     this.proteinData.next( new Protein( protein['identifier'],
                                         protein['authors'],

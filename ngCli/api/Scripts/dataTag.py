@@ -5,48 +5,43 @@ aminoNames = ['ALA','PHE','GLU','CYS','LYS','GLY','ASN','ASP','LEU','ILE','PRO',
 def getGeneralData(pdb):
     pdb = parsePDB(pdb.encode("UTF-8"), header=True)
     dataParsed = dict()
-    dataParsed['identifier'] = pdb[1]['identifier']
-    dataParsed['authors'] = pdb[1]['authors']
-    dataParsed['experiment'] = pdb[1]['experiment']
-    dataParsed['classification'] = pdb[1]['classification']
+    dataParsed['identifier'] =      pdb[1]['identifier']
+    dataParsed['authors'] =         pdb[1]['authors']
+    dataParsed['experiment'] =      pdb[1]['experiment']
+    dataParsed['classification'] =  pdb[1]['classification']
     dataParsed['deposition_date'] = pdb[1]['deposition_date']
-    dataParsed['version'] = pdb[1]['version']
-    dataParsed['title'] = pdb[1]['title']
-    dataParsed['residues'] = pdb[0]._resList 
-    dataParsed['residue_num'] = getResNum(pdb)
-    dataParsed['alpha_loc'] = normalizer( getCoord(pdb) )
-    dataParsed['helix_range'] = getHelixData(pdb)
-    dataParsed['sheet_range'] = getSheetData(pdb)
+    dataParsed['version'] =         pdb[1]['version']
+    dataParsed['title'] =           pdb[1]['title']
+    dataParsed['residues'] =        getResidueList(pdb) 
+    dataParsed['residue_num'] =     getResNum(pdb)
+    dataParsed['alpha_loc'] =       normalizer( getCoord(pdb) )
+    dataParsed['helix_range'] =     getHelixData(pdb)
+    dataParsed['sheet_range'] =     getSheetData(pdb)
     return json.dumps(dataParsed)
 def getCoord(pdb):
-    listCoord = list()
-    iterator = iter(pdb[0])
-    residue = iterator.next()
-    while(True):
-        residue = jumpIterator(iterator)
-        if residue is None:
-            break
-        listCoord.append(residue.getCoordsets().tolist()[0])
-        residue = skipResidue(residue.getResindex(),iterator)
-    return listCoord
+    hv = pdb[0].getHierView()
+    coord_list = list()
+    for i, residue in enumerate(hv.iterResidues()):
+            atom = residue.getAtom("CA")
+            if not atom == None:
+                coord_list.append(atom.getCoords())
+            else:
+                coord_list.append(residue.getCoords()[0])
+    return coord_list
+
+def getResidueList(pdb):
+    hv = pdb[0].getHierView()
+    res_list = list()
+    for i, residue in enumerate(hv.iterResidues()):
+        res_list.append(residue.getResname())
+    return res_list
+
 def getResNum(pdb):
+    hv = pdb[0].getHierView()
     resNumList = list()
-    resNumList.append(pdb[1]['A'].dbrefs[0].first[0])
-    resNumList.append(pdb[1]['A'].dbrefs[0].last[0])
+    for i, residue in enumerate(hv.iterResidues()):
+        resNumList.append(residue.getResindex())
     return resNumList
-def jumpIterator(iterator):
-    try:
-        return iterator.next()
-    except StopIteration:
-        return None
-def skipResidue(oldResidue, iterator):
-    auxRes = jumpIterator(iterator)
-    if auxRes is not None:
-        while(oldResidue == auxRes.getResindex()):
-            auxRes = jumpIterator(iterator)
-            if auxRes is None:
-                return auxRes
-    return None
 
 def normalizer(arrayValues):
     minX = np.min(arrayValues, axis = 0)[0]
@@ -73,6 +68,7 @@ def normalizer(arrayValues):
             res = (arrayValues[i][j] - arrayMin[j])/(delta)
             valuesNormalized[i].append(res*95)
     return valuesNormalized
+
 def getHelixData(pdb):
     helix = list()
     for i in range(len(pdb[1]['helix_range']) ):
@@ -80,6 +76,7 @@ def getHelixData(pdb):
         helix[i].append(pdb[1]['helix_range'][i][4])
         helix[i].append(pdb[1]['helix_range'][i][5])
     return helix
+    
 def getSheetData(pdb):
     helix = list()
     for i in range(len(pdb[1]['sheet_range']) ):
