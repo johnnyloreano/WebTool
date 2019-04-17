@@ -6,12 +6,12 @@
             </button>
         </li>
         <li>
-            <a tabindex = '0'class="btn bg-primary text-white" routerLink='/summary'>
+            <a tabindex = '0'class="btn bg-primary text-white" routerLink='/summary' (onclick)="destroy()" (onkeydown) = "$event.keyCode == 13 ? destroy():null">
                 Ver informações resumidas
             </a>
         </li>
         <li>
-            <a tabindex = '0'class="btn bg-primary text-white" routerLink='/manual'>
+            <a tabindex = '0'class="btn bg-primary text-white" routerLink='/manual' (onclick)="destroy()" (onkeydown) = "$event.keyCode == 13 ? destroy():null">
                 Ver manual
             </a>
         </li>

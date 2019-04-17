@@ -14,7 +14,6 @@ def getTests(name):
     testDatas['version'] = '1.0'
     testDatas['title'] = 'FIGURA TRIDIMENSIONAL DE '+ name.upper()
     testDatas['pointLoc'] = dataSet[name]
-    print(name)
     return json.dumps(testDatas)
 
 # def normalizer(arrayValues):

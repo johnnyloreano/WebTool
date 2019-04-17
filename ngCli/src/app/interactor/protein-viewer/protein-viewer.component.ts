@@ -1,7 +1,8 @@
 import {
    Component,
    OnInit,
-   AfterViewInit
+   AfterViewInit,
+   OnDestroy
 } from '@angular/core';
 import {
    Router
@@ -18,6 +19,7 @@ import {
    Aminoacid
 } from '../../interfaces/aminoacid';
 import * as $ from 'jquery';
+import { DataService } from 'src/app/core/data-service/data-service.service';
 highcharts3D(Highcharts);
 @Component({
    selector: 'app-protein-viewer',
@@ -25,21 +27,25 @@ highcharts3D(Highcharts);
    templateUrl: 'protein-viewer.html'
 })
 
-export class ProteinViewerComponent implements OnInit, AfterViewInit {
-   constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService) {}
+export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy {
+   constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService ) {}
    private firstTab: number;
    highcharts = Highcharts;
-   chartOptions = this._chartConfigurator.getChartConfigurations();
+   seletor = null;
+   chartOptions = null;
    ngOnInit() {
-      if(this.chartOptions === undefined) 
+      this.seletor = this._data.getSeletor();
+      this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
+      if(this.chartOptions === null)
          this._router.navigate(['/menu']);
    }
    ngAfterViewInit() {
       this.configurePoints();
       this.configureRotation();
    }
-   destroy(){
-      Highcharts.charts[0].destroy();
+   ngOnDestroy(){
+      if(Highcharts.charts[0] != undefined)
+         Highcharts.charts[0].destroy();
    }
    enterNavigator() {
       this.setTabindex();

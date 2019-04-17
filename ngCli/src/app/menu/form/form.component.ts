@@ -20,8 +20,8 @@ export class FormComponent implements OnInit {
   requestProtein() {
       this._pdbRequester.requestTags(this.pdbFile).subscribe(
         (result) => {
-          console.log(result);
           this.dataService.setProtein(result);
+          this.dataService.setSeletor('protein');
           this.proteinName = this.dataService.getProtein().title;
           document.getElementById("btnSearch").style.display = "none";
           document.getElementById("successful").style.display = "block";
