@@ -41,7 +41,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy 
    }
    ngAfterViewInit() {
       this.configurePoints();
-      this.configureRotation();
+      // this.configureRotation();
    }
    ngOnDestroy(){
       if(Highcharts.charts[0] != undefined)
@@ -194,8 +194,9 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy 
    configurePoints(){
       const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       const objectsPoints = this.highcharts.charts[0].series[0].points;
-      console.log(objectsPoints);
       for (let x = 0; x < plotPoints.length; x++) {
+         console.table(plotPoints[x]);
+         
          plotPoints[x].addEventListener('keydown', (e) => {
             const dataIndex = Number(plotPoints[x].getAttribute('dataIndex')) - 1;
             plotPoints[x].setAttribute("aria-hidden", "true");
