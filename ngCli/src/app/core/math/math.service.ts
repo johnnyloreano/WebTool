@@ -23,8 +23,8 @@ export class MathService {
     degree = Math.atan(degree) * 180 / Math.PI;
     degree = Math.abs(degree);
     const degrees = {
-      'xAxis': Math.round(degree),
-      'yAxis': Math.round(90 - degree)
+      'xAxis': degree,
+      'yAxis': 90 - degree
     };
     const aminoDegrees = {
       'actual' : {'xAxis' : degrees['yAxis'], 'yAxis' : degrees['xAxis']},
@@ -38,7 +38,7 @@ export class MathService {
     //   const deltaZ = this.getDelta(pos1[2] , pos2[2]);
     //   let result = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2) + Math.pow(deltaZ, 2));
     //   result = Math.trunc(result); 
-    //   return this.round(result);
+    //   return result;
     // }
     private getQuadrant(pos: number[], posRelative: number[]): number {
       const posX = this.getDelta(pos[0], posRelative[0]);
@@ -74,18 +74,13 @@ export class MathService {
       const aux = (degree / 30);
       let hour = Math.trunc(aux);
       let min = Math.trunc( (aux - hour) * 60) ;
-      min = (this.round( Math.trunc(min) ));
-      // if (min >= 30)
-      // hour++;
+      min =  Math.trunc(min);
+      if (min >= 30)
+      hour++;
       if (hour == 0)
       hour = 12;
       return hour;
-    }
-    private round(val: number): number {
-      // return Math.round(val / 10 ) * 10;
-      return val;
-    }
-  
+    }  
     private getDelta(val: number, val2: number): number {
       return val2 - val;
     }
