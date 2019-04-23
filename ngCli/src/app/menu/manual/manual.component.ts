@@ -15,18 +15,4 @@ export class ManualComponent implements OnInit{
   goTo(el: string){
     document.getElementById(el).focus();
   }
-  lastHeaderVerify(e){
-    if(e.keyCode == 9 && !e.shiftKey){
-      e.preventDefault();
-      document.getElementById('buttonBack').focus();
-      }
-    else if(e.keyCode == 13)
-      this.goTo('nav-sp');
-  }
-  backButtonVerify(e){
-    if(e.keyCode == 9){
-      e.preventDefault();
-      document.getElementById('intro-h').focus();
-      }
-  }
 }

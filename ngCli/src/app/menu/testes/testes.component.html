@@ -1,14 +1,15 @@
 <div class='text-center container'>
-  <h2 id="menuLock" tabindex="0" aria-label="Menu Principal Use a tecla TAB para navegar entre as opções disponíveis e use ENTER para escolher o botão desejado.">
+  <h2 tabindex="0" aria-label="Menu Principal Use a tecla TAB para navegar entre as opções disponíveis e use ESPAÇO para escolher o botão desejado.">
     Menu de Testes 
   </h2>
 <nav>
   <ul id="menuList">
-    <li><a   tabindex ='0' id="btnSearch" class=' btn bg-primary text-white' (click)="request('triangulo')"   (keydown)="$event.keyCode == 13 ? request('triangulo') : null">Abrir Triângulo</a></li>    
-    <li><a  tabindex ='0' id="btnSearch" class=' btn bg-primary text-white' (click)="request('quadrado')"   (keydown)="$event.keyCode == 13 ? request('quadrado') : null">Abrir Quadrado</a></li>    
-    <li><a  tabindex ='0' id="btnSearch" class=' btn bg-primary text-white' (click)="request('junina')"   (keydown)="$event.keyCode == 13 ? request('junina') : null">Abrir Bandeira de Festa Junina</a></li>    
-    <li><a  tabindex ='0' id="btnSearch" class=' btn bg-primary text-white' (click)="request('trapezio')"   (keydown)="$event.keyCode == 13 ? request('trapezio') : null">Abrir Trapézio</a></li>    
-    <li><a  tabindex ='0' id="btnSearch" class=' btn bg-primary text-white' (click)="request('losango')"   (keydown)="$event.keyCode == 13 ? request('losango') : null">Abrir Losango</a></li>    
+    <li><button  tabindex ='0' class=' btn bg-primary text-white' (click)="request('triangulo')"  >Abrir Triângulo</button></li>    
+    <li><button  tabindex ='0' class=' btn bg-primary text-white' (click)="request('quadrado')"  >Abrir Quadrado</button></li>    
+    <li><button  tabindex ='0' class=' btn bg-primary text-white' (click)="request('junina')"  >Abrir Bandeira de Festa Junina</button></li>    
+    <li><button  tabindex ='0' class=' btn bg-primary text-white' (click)="request('trapezio')"  >Abrir Trapézio</button></li>    
+    <li><button  tabindex ='0' class=' btn bg-primary text-white' (click)="request('losango')"  >Abrir Losango</button></li>    
+    <li><button  tabindex ='0' class=' btn bg-primary text-white' routerLink='/menu'  >Voltar para menu principal</button></li>    
 </ul>
 </nav>
 </div>

@@ -15,4 +15,5 @@ export class Aminoacid{
     _isLastSheet : boolean;
     _upSound : string;
     _downSound : string;
+    _genInfo : string;
 }

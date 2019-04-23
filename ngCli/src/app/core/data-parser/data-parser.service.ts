@@ -3,11 +3,12 @@ import { DataService} from '../data-service/data-service.service';
 import { Aminoacid } from '../../interfaces/aminoacid';
 import { TestPoint } from '../../interfaces/testPoint';
 import { TranscripterService } from '../transcripter/transcripter.service';
+import { MathService } from '../math/math.service';
 @Injectable({
   providedIn: 'root'
 })
 export class DataParserService {
-  constructor(private _dataService : DataService, private _transcripter: TranscripterService) { }
+  constructor(private _dataService : DataService, private _transcripter: TranscripterService, private _math : MathService) { }
 
   parseStructureInfo(){
     const protein = this._dataService.getProtein();
@@ -47,6 +48,7 @@ export class DataParserService {
           actualSheet++;
       }
       aminoData[x].index = x;
+      aminoData[x]._genInfo = this.parserGenAminoInfo(aminoData[x]);
       if(x > 0){
         const transitions = this.getTransitions(aminoData[x],aminoData[x-1]);
         aminoData[x]._downSound = transitions[1];
@@ -58,12 +60,78 @@ export class DataParserService {
     return aminoData;
   
   }
+  private parserGenAminoInfo(amino : Aminoacid){
+    let message = 'Posição atual: ' + this.getAminoName(amino.name);
+      if (amino._isFirst) {
+         message += '. Primeiro resíduo';
+      } else if (amino._isLast) {
+         message += '. Último resíduo';
+      }
+      if (amino._isFirstHelix) {
+         message += '. Início de Hélice';
+      } else if (amino._isLastHelix) {
+         message += '. Fim de Hélice';
+      } else if (amino._isHelix) {
+         message += '. Dentro de Hélice';
+      }
+      if (amino._isFirstSheet) {
+         message += '. Início de Fita';
+      } else if (amino._isLastSheet) {
+         message += '. Fim de Fita';
+      } else if (amino._isSheet) {
+         message += '. Dentro de Fita';
+      }
+      return message;
+   }
   private getTransitions(firstPoint:any,secondPoint:any){
     const position01 = [firstPoint.x, firstPoint.y, firstPoint.z];
     const position02 = [secondPoint.x, secondPoint.y, firstPoint.z];
     return this._transcripter.getTransition(position01,position02);
   }
-  
+  private getAminoName(AminoName) {
+    switch (AminoName) {
+       case 'PHE':
+          return 'Fenilalanina';
+       case 'ALA':
+          return 'Alanina';
+       case 'MET':
+          return 'Metionina';
+       case 'LYS':
+          return 'Lisina';
+       case 'GLU':
+          return 'Glutamina';
+       case 'PRO':
+          return 'Prolina';
+       case 'SER':
+          return 'Serina';
+       case 'LEU':
+          return 'Leucina';
+       case 'ILE':
+          return 'Isoleucina';
+       case 'THR':
+          return 'Treonina';
+       case 'CYS':
+          return 'Cisteína';
+       case 'TYR':
+          return 'Tirosina';
+       case 'ASN':
+          return 'Asparagina';
+       case 'GLN':
+          return 'Glutamina';
+       case 'GLU':
+          return 'Ácido Glutâmico';
+       case 'ARG':
+          return 'Arginina';
+       case 'HYS':
+          return 'Histidina';
+       case 'TRP':
+          return 'Triptofano';
+       case 'ASP':
+          return 'Ácido Aspártico';
+       case 'GLY':
+          return 'Glicina';
+    }
+ }
   parseTest(){
     const test = this._dataService.getTest();
     let testData = Array<TestPoint>();

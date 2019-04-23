@@ -15,11 +15,9 @@ import highcharts3D from 'highcharts/highcharts-3d.src';
 import {
    TalkerService
 } from '../../core/talker/talker.service';
-import {
-   Aminoacid
-} from '../../interfaces/aminoacid';
 import * as $ from 'jquery';
-import { DataService } from 'src/app/core/data-service/data-service.service';
+import { DataService } from '../../core/data-service/data-service.service';
+import { TranscripterService } from '../../core/transcripter/transcripter.service'
 highcharts3D(Highcharts);
 @Component({
    selector: 'app-protein-viewer',
@@ -28,7 +26,7 @@ highcharts3D(Highcharts);
 })
 
 export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy {
-   constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService ) {}
+   constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService, private _transcripter : TranscripterService ) {}
    private firstTab: number;
    highcharts = Highcharts;
    seletor = null;
@@ -52,6 +50,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy 
       this.focusFirstPoint();
    }
    focusFirstPoint(){
+      // TalkerService.speak(this.tras);
       const aux = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       if (this.firstTab !== undefined) {
          (aux[this.firstTab] as HTMLElement).focus();
@@ -70,7 +69,6 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy 
          const dataIndex = plotPoints[x].getAttribute('dataIndex');
          plotPoints[x].setAttribute("tabindex", String(dataIndex));
       }
-
    }
    keyVerifier(event: KeyboardEvent) {
       if (event.keyCode === 13) {
@@ -85,31 +83,8 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy 
          this.talkTransition(event, data);
       }
    }
-   goMenu(){
-      this._router.navigate(['/menu']);
-   }
-   talkGenInfo(data: Aminoacid) {
-      let message = 'Posição atual: ' + this.getAminoName(data.name);
-      if (data._isFirst) {
-         message += '. Primeiro resíduo';
-      } else if (data._isLast) {
-         message += '. Último resíduo';
-      }
-      if (data._isFirstHelix) {
-         message += '. Início de Hélice';
-      } else if (data._isLastHelix) {
-         message += '. Fim de Hélice';
-      } else if (data._isHelix) {
-         message += '. Dentro de Hélice';
-      }
-      if (data._isFirstSheet) {
-         message += '. Início de Fita';
-      } else if (data._isLastSheet) {
-         message += '. Fim de Fita';
-      } else if (data._isSheet) {
-         message += '. Dentro de Fita';
-      }
-      return TalkerService.speak(message);
+   talkGenInfo(data: any){
+      return TalkerService.speak(data['_genInfo']);
    }
    talkTransition(key: KeyboardEvent, data: any) {
       let message: string;
@@ -121,75 +96,6 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy 
          }
       }
          return TalkerService.speak(message);
-   }
-   getAminoName(AminoName) {
-      switch (AminoName) {
-         case 'PHE':
-            return 'Fenilalanina';
-         case 'ALA':
-            return 'Alanina';
-         case 'MET':
-            return 'Metionina';
-         case 'LYS':
-            return 'Lisina';
-         case 'GLU':
-            return 'Glutamina';
-         case 'PRO':
-            return 'Prolina';
-         case 'SER':
-            return 'Serina';
-         case 'LEU':
-            return 'Leucina';
-         case 'ILE':
-            return 'Isoleucina';
-         case 'THR':
-            return 'Treonina';
-         case 'CYS':
-            return 'Cisteína';
-         case 'TYR':
-            return 'Tirosina';
-         case 'ASN':
-            return 'Asparagina';
-         case 'GLN':
-            return 'Glutamina';
-         case 'GLU':
-            return 'Ácido Glutâmico';
-         case 'ARG':
-            return 'Arginina';
-         case 'HYS':
-            return 'Histidina';
-         case 'TRP':
-            return 'Triptofano';
-         case 'ASP':
-            return 'Ácido Aspártico';
-         case 'GLY':
-            return 'Glicina';
-      }
-   }
-   configureRotation(){
-      const chart = this.highcharts.charts[0];
-      $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
-         eStart = chart.pointer.normalize(eStart);
-         const posX = eStart.pageX;
-         const posY = eStart.pageY;
-         const alpha = chart.options.chart.options3d.alpha;
-         const beta = chart.options.chart.options3d.beta;
-         let newAlpha;
-         let newBeta;
-         const sensitivity = 5; // lower is more sensitive
-         $(document).bind({
-           'mousemove.hc touchdrag.hc': function(e) {
-             newBeta = beta + (posX - e.pageX) / sensitivity;
-             chart.options.chart.options3d.beta = newBeta;
-             newAlpha = alpha + (e.pageY - posY) / sensitivity;
-             chart.options.chart.options3d.alpha = newAlpha;
-             chart.redraw(false);
-           },
-           'mouseup touchend': function() {
-             $(document).unbind('.hc');
-           }
-         });
-       });
    }
    configurePoints(){
       const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
@@ -204,4 +110,29 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy 
          });
       }
    }
+   // configureRotation(){
+   //    const chart = this.highcharts.charts[0];
+   //    $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
+   //       eStart = chart.pointer.normalize(eStart);
+   //       const posX = eStart.pageX;
+   //       const posY = eStart.pageY;
+   //       const alpha = chart.options.chart.options3d.alpha;
+   //       const beta = chart.options.chart.options3d.beta;
+   //       let newAlpha;
+   //       let newBeta;
+   //       const sensitivity = 5; // lower is more sensitive
+   //       $(document).bind({
+   //         'mousemove.hc touchdrag.hc': function(e) {
+   //           newBeta = beta + (posX - e.pageX) / sensitivity;
+   //           chart.options.chart.options3d.beta = newBeta;
+   //           newAlpha = alpha + (e.pageY - posY) / sensitivity;
+   //           chart.options.chart.options3d.alpha = newAlpha;
+   //           chart.redraw(false);
+   //         },
+   //         'mouseup touchend': function() {
+   //           $(document).unbind('.hc');
+   //         }
+   //       });
+   //     });
+   // }
 }

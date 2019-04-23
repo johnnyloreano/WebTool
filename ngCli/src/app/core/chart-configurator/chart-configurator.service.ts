@@ -24,8 +24,8 @@ get(option:string){
         marginRight: 50,
         options3d: {
           enabled: true,
-          alpha: 10,
-          beta: 30,
+          alpha: 0,
+          beta: 0,
           depth: 600,
           viewDistance: 5,
           frame: {
@@ -84,8 +84,8 @@ get(option:string){
         marginRight: 50,
         options3d: {
           enabled: true,
-          alpha: 10,
-          beta: 30,
+          alpha: 0,
+          beta: 0,
           depth: 600,
           viewDistance: 5,
           frame: {

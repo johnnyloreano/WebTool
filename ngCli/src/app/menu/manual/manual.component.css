@@ -11,3 +11,8 @@ section p {
     text-align: left;
     padding:0 1px;
 }
+span {
+    cursor:pointer;
+    color:blue;
+    text-decoration:underline;
+}

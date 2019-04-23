@@ -1,32 +1,32 @@
 <nav>
     <ul>
         <li>
-            <button tabindex = '0'class="btn bg-primary text-white" style="width:300px" (click)="enterNavigator()" (keydown) = " $event.keyCode == 13 ? enterNavigator() : null">
+            <button tabindex = '0'class="btn bg-primary text-white" style="width:300px" (click)="enterNavigator()" >
                 Iniciar Navegação
             </button>
         </li>
         <li>
-            <a tabindex = '0'class="btn bg-primary text-white" routerLink='/summary' (onclick)="destroy()" (onkeydown) = "$event.keyCode == 13 ? destroy():null">
+            <button tabindex = '0'class="btn bg-primary text-white" routerLink='/summary' (onclick)="destroy()" >
                 Ver informações resumidas
-            </a>
+            </button>
         </li>
         <li>
-            <a tabindex = '0'class="btn bg-primary text-white" routerLink='/manual' (onclick)="destroy()" (onkeydown) = "$event.keyCode == 13 ? destroy():null">
+            <button tabindex = '0'class="btn bg-primary text-white" routerLink='/manual' (onclick)="destroy()" >
                 Ver manual
-            </a>
+            </button>
         </li>
         <li>
-            <a tabindex = '0'class="btn bg-primary text-white" routerLink='/buscador' (onclick)="destroy()"  (onkeydown) = "$event.keyCode == 13 ? destroy():null">
+            <button tabindex = '0'class="btn bg-primary text-white" routerLink='/buscador' (onclick)="destroy()"  >
                 Voltar a tela de  pesquisa
-            </a>
+            </button>
         </li>
         <li>
-            <a tabindex = '0'class="btn bg-primary text-white" routerLink='/menu' (onclick)="destroy()" (onkeydown) = "$event.keyCode == 13 ? destroy():null">
+            <button tabindex = '0'class="btn bg-primary text-white" routerLink='/menu' (onclick)="destroy()" >
                 Voltar ao menu principal
-            </a>
+            </button>
         </li>
   </ul>
-  </nav>
+</nav>
            <highcharts-chart
            [Highcharts] = "highcharts"
            [options] = "chartOptions"

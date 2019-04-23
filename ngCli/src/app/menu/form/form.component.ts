@@ -41,14 +41,6 @@ export class FormComponent implements OnInit {
     document.getElementById("btnSearch").style.display = "block";
     document.getElementById("successful").style.display = "none";
     document.getElementById("principalHeader").focus();
-
   }
-  backButtonVerify(e){
-      if(e.keyCode == 9){
-        if(!e.shiftKey){
-        e.preventDefault();
-        document.getElementById('principalHeader').focus();
-        }
-      }
-    }
+
   }

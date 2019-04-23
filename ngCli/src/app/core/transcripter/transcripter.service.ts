@@ -44,4 +44,7 @@ export class TranscripterService {
                   this.createText(info[0])];
     return text;
   }
+  public getFirstPosition(firstAmino: number[]){
+    const info = this._mathS._getQuadrant(firstAmino);
+    }
 }
