@@ -65,12 +65,14 @@ export class MathService {
     private toHour(degree: number) {
       const aux = (degree / 30);
       let hour = Math.trunc(aux);
-      let min = Math.trunc((aux - hour)) * 60;
-      if (min >= 30)hour++;
-      if (hour == 0)hour = 12;
+      let min = Math.trunc( (aux - hour) * 60) ;
+      min =  Math.trunc(min);
+      if (min >= 30)
+      hour++;
+      if (hour == 0)
+      hour = 12;
       return hour;
     }  
-
     private getDelta(val: number, val2: number): number {
       return val2 - val;
     }
@@ -101,16 +103,15 @@ export class MathService {
         }
       } else {
         if(actual[1] < predecessor [1])
-          result = {
-            'actual': this.getDegreeOnQuadrant(degrees['actual']['xAxis'], quadrants['actual']),
-            'predecessor': this.getDegreeOnQuadrant(degrees['pred']['yAxis'], quadrants['pred'])
-          };
-        
+        result = {
+          'actual': this.getDegreeOnQuadrant(degrees['actual']['yAxis'], quadrants['actual']),
+          'predecessor': this.getDegreeOnQuadrant(degrees['pred']['xAxis'], quadrants['pred'])
+        };
         else
-      result = {
-        'actual': this.getDegreeOnQuadrant(degrees['actual']['yAxis'], quadrants['actual']),
-        'predecessor': this.getDegreeOnQuadrant(degrees['pred']['xAxis'], quadrants['pred'])
-      };
+        result = {
+          'actual': this.getDegreeOnQuadrant(degrees['actual']['xAxis'], quadrants['actual']),
+          'predecessor': this.getDegreeOnQuadrant(degrees['pred']['yAxis'], quadrants['pred'])
+        };
       }
       return result;
     }
