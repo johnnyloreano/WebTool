@@ -18,6 +18,7 @@ import {
 import * as $ from 'jquery';
 import { DataService } from '../../core/data-service/data-service.service';
 import { TranscripterService } from '../../core/transcripter/transcripter.service'
+import { destroyView } from '@angular/core/src/view/view';
 highcharts3D(Highcharts);
 @Component({
    selector: 'app-protein-viewer',
@@ -33,15 +34,16 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    chartOptions = null;
    quadrant_init: string;
    ngOnInit() {
-      if(Highcharts.charts[0] != undefined)
-         Highcharts.charts[0].destroy();
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
       this.quadrant_init = "Iniciar no quadrante "+this._chartConfigurator.getQuadrantInit();
       if(this.chartOptions === null)
-         this._router.navigate(['/menu']);
+      this._router.navigate(['/menu']);
    }
    ngAfterViewInit() {
+      if(Highcharts.charts[0] == undefined){
+      Highcharts.charts[0] = Highcharts.chart(this.chartOptions);
+   }
       this.configurePoints();
    }
    init(){
