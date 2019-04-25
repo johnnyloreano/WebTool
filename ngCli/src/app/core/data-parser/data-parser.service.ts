@@ -59,28 +59,21 @@ export class DataParserService {
     return aminoData;
   }
   public getStart(){
+   let positions = {'1':'Superior Direito','2':'Superior Esquerdo',
+                    '3':'Inferior Esquerdo','4':'Inferior Direito'};
    let data;
    data = this._dataService.getProtein();
    let message;
-   if(data != undefined){
-      switch(this._math._getQuadrant([data.alphaLoc[0][0],data.alphaLoc[0][1]],50)) {
-         case 1:message = "Superior Direito";
-         case 2:message = "Superior Esquerdo";
-         case 3:message = "Inferior Esquerdo";
-         case 4:message = "Inferior Direito";
-      } 
-   }
+   if(data != undefined)
+      message = positions[this._math._getQuadrant([data.alphaLoc[0][0],data.alphaLoc[0][1]],50)];
+   
    else{
       data = this._dataService.getTest();
-      switch( this._math._getQuadrant([data.pointLoc[0][0],data.pointLoc[0][1]],2.5) ) {
-         case 1:message = "Superior Direito";
-         case 2:message = "Superior Esquerdo";
-         case 3:message = "Inferior Esquerdo";
-         case 4:message = "Inferior Direito";
-      } 
+      message = positions[this._math._getQuadrant([data.pointLoc[0][0],data.pointLoc[0][1]],2.5)];
    }
    return message;
   }
+  
   private parserGenAminoInfo(amino : Aminoacid){
     let message = 'Posição atual: ' + this.getAminoName(amino.name);
       if (amino._isFirst) {
