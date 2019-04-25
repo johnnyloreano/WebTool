@@ -54,10 +54,8 @@ export class MathService {
       }
     }
     public _getQuadrant(pos : number[]){
-      alert(pos)
       switch (true) {
         case (pos[0] > 50 && pos[1] > 50):
-          alert('here');
           return 1;
         case (pos[0] < 50 && pos[1] > 0):
           return 2;

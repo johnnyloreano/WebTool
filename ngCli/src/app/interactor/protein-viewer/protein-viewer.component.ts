@@ -25,7 +25,7 @@ highcharts3D(Highcharts);
    templateUrl: 'protein-viewer.html'
 })
 
-export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProteinViewerComponent implements OnInit, AfterViewInit {
    constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService, private _transcripter : TranscripterService ) {}
    private firstTab: number;
    highcharts = Highcharts;
@@ -33,6 +33,8 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy 
    chartOptions = null;
    quadrant_init: string;
    ngOnInit() {
+      if(Highcharts.charts[0] != undefined)
+         Highcharts.charts[0].destroy();
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
       this.quadrant_init = "Iniciar no quadrante "+this._chartConfigurator.getQuadrantInit();
@@ -43,16 +45,12 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy 
       this.configurePoints();
       // this.configureRotation();
    }
-   ngOnDestroy(){
-      if(Highcharts.charts[0] != undefined)
-         Highcharts.charts[0].destroy();
-   }
    enterNavigator() {
       this.setTabindex();
+      TalkerService.speak(this.quadrant_init);
       this.focusFirstPoint();
    }
    focusFirstPoint(){
-      // TalkerService.speak(this.tras);
       const aux = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       if (this.firstTab !== undefined) {
          (aux[this.firstTab] as HTMLElement).focus();

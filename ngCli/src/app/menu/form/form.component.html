@@ -17,15 +17,15 @@
     </p>
     <nav>
       <ul>
-        <li><button tabindex="0" routerLink = '/proteinView' class="btn bg-primary text-white mb-2">Sim,continuar</button></li>
-        <li><button tabindex="0" (click) = "cancelSearch()" (keydown) = "$event.keyCode == 13 ? cancelSearch():null " class="btn bg-primary text-white">Não, não continuar</button></li>
+        <li><button tabindex="0" routerLink = '/proteinView' class="btn btn-primary w-25 mb-1" >Sim,continuar</button></li>
+        <li><button tabindex="0" (click) = "cancelSearch()" (keydown) = "$event.keyCode == 13 ? cancelSearch():null " class="btn btn-primary w-25" >Não, não continuar</button></li>
       </ul>
     </nav>
   </div>
   <nav>
     <ul>
-      <li><button  tabindex ='0' id="btnSearch" class=' btn bg-primary text-white' (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</button></li>
+      <li><button  tabindex ='0' id="btnSearch" class="btn btn-primary w-25"  (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</button></li>
           <p tabindex='0' id="messageError" class="bg-danger text-white w-25 rounded mt-2 ml-auto mr-auto" ></p>
-      <li><button tabindex='0' id="buttonBack" class='btn bg-primary text-white' routerLink="/menu">Voltar para o menu principal</button></li>
+      <li><button tabindex='0' id="buttonBack" class="btn btn-primary w-25"  routerLink="/menu">Voltar para o menu principal</button></li>
     </ul>
   </nav>
