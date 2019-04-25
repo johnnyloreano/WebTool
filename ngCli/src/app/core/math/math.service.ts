@@ -19,9 +19,7 @@ export class MathService {
     const deltaX = this.getDelta(actualAmino[0] , predecessorAmino[0]);
     const deltaY = this.getDelta(actualAmino[1] , predecessorAmino[1]);
     let degree = Math.abs(deltaY) / Math.abs(deltaX);
-    if(degree == 0) degree++;
     degree = Math.atan(degree) * 180 / Math.PI;
-    degree = Math.abs(degree);
     const degrees = {
       'xAxis': degree,
       'yAxis': 90 - degree
@@ -32,47 +30,40 @@ export class MathService {
     };
     return aminoDegrees;
     }
-    // private getDistance(pos1: Array<number>, pos2: Array<number>) {
-    //   const deltaX = this.getDelta(pos1[0] , pos2[0]);
-    //   const deltaY = this.getDelta(pos1[1] , pos2[1]);
-    //   const deltaZ = this.getDelta(pos1[2] , pos2[2]);
-    //   let result = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2) + Math.pow(deltaZ, 2));
-    //   result = Math.trunc(result); 
-    //   return result;
-    // }
     private getQuadrant(pos: number[], posRelative: number[]): number {
       const posX = this.getDelta(pos[0], posRelative[0]);
       const posY = this.getDelta(pos[1], posRelative[1]);
       switch (true) {
         case (posX > 0 && posY > 0):
           return 1;
-        case (posX < 0 && posY > 0): //
+        case (posX < 0 && posY > 0):
           return 2;
-        case (posX < 0 && posY < 0): //
+        case (posX < 0 && posY < 0):
           return 3;
-        case (posX > 0 && posY < 0): //
+        case (posX > 0 && posY < 0):
           return 4;
+
         case (posX == 0 && posY > 0):
-          return 2;
+          return 1;
         case (posX < 0 && posY == 0):
-          return 2;
+          return 3;
         case (posX == 0 && posY < 0):
           return 4;
         case (posX > 0 && posY == 0):
           return 4;
-        case(posX == 0 && posY == 0):
-          return 0;
       }
     }
-    public _getQuadrant(pos: number[]) : number{
+    public _getQuadrant(pos : number[]){
+      alert(pos)
       switch (true) {
-        case (pos[0] > 0 && pos[1] > 0):
+        case (pos[0] > 50 && pos[1] > 50):
+          alert('here');
           return 1;
-        case (pos[0] < 0 && pos[1] > 0): //
+        case (pos[0] < 50 && pos[1] > 0):
           return 2;
-        case (pos[0] < 0 && pos[1] < 0): //
+        case (pos[0] < 50 && pos[1] < 50):
           return 3;
-        case (pos[0] > 0 && pos[1] < 0): //
+        case (pos[0] > 50 && pos[1] < 50):
           return 4;
       }
     }
@@ -96,7 +87,7 @@ export class MathService {
     private getDelta(val: number, val2: number): number {
       return val2 - val;
     }
-  
+
     private getDegreeOnQuadrant(degree: number, quadrant: number) {
         let auxMult: number;
         switch (quadrant) {
@@ -104,21 +95,35 @@ export class MathService {
           case (2) : auxMult = 3; break;
           case (3) : auxMult = 2; break;
           case (4) : auxMult = 1; break;
+          case (0) : auxMult = 0; break;
         }
       return degree + (auxMult * 90);
     }
     private getCorrectDegree(actual: number[], predecessor: number[], quadrants: Object, degrees: Object) {
       let result ;
       if (actual[0] > predecessor[0]) {
+        if(actual[1] < predecessor [1])
         result = {
           'actual': this.getDegreeOnQuadrant(degrees['actual']['xAxis'], quadrants['actual']),
           'predecessor': this.getDegreeOnQuadrant(degrees['pred']['yAxis'], quadrants['pred'])
         };
+        else{
+          result = {
+            'actual': this.getDegreeOnQuadrant(degrees['actual']['yAxis'], quadrants['actual']),
+            'predecessor': this.getDegreeOnQuadrant(degrees['pred']['xAxis'], quadrants['pred'])
+          } 
+        }
       } else {
-      result = {
-        'actual': this.getDegreeOnQuadrant(degrees['actual']['yAxis'], quadrants['actual']),
-        'predecessor': this.getDegreeOnQuadrant(degrees['pred']['xAxis'], quadrants['pred'])
-      };
+        if(actual[1] < predecessor [1])
+        result = {
+          'actual': this.getDegreeOnQuadrant(degrees['actual']['yAxis'], quadrants['actual']),
+          'predecessor': this.getDegreeOnQuadrant(degrees['pred']['xAxis'], quadrants['pred'])
+        };
+        else
+        result = {
+          'actual': this.getDegreeOnQuadrant(degrees['actual']['xAxis'], quadrants['actual']),
+          'predecessor': this.getDegreeOnQuadrant(degrees['pred']['yAxis'], quadrants['pred'])
+        };
       }
       return result;
     }

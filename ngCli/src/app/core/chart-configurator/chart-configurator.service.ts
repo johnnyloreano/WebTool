@@ -2,20 +2,21 @@ import {
   Injectable
 } from '@angular/core';
 import { DataParserService } from '../data-parser/data-parser.service';
+import { MathService} from '../math/math.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ChartConfiguratorService {
   chartOptions = null
-constructor(private dataService: DataParserService) {}
-
+constructor(private dataService: DataParserService, private _math : MathService) {}
+  data;
 getChartConfigurations(option:string) {
   this.get(option);   
   return this.chartOptions;
 }
 get(option:string){
   if (option == "test"){
-    
+    this.data = this.dataService.parseTest();
     this.chartOptions = {
       chart: {
         tooltip: false,
@@ -26,8 +27,8 @@ get(option:string){
           enabled: true,
           alpha: 0,
           beta: 0,
-          depth: 600,
-          viewDistance: 5,
+          depth: 0,
+          viewDistance: 0,
           frame: {
             bottom: {
               size: 1,
@@ -71,11 +72,12 @@ get(option:string){
             return this.point.name;
           }
         },
-        data: this.dataService.parseTest()
+        data: this.data
       }]
   };
   }
   else if (option === 'protein'){
+    this.data =  this.dataService.parseAminoData()
     this.chartOptions = {
       chart: {
         tooltip: false,
@@ -131,9 +133,12 @@ get(option:string){
             return this.point.name;
           }
         },
-        data: this.dataService.parseAminoData(),
+        data: this.data[0],
       }]
   };
   }
+}
+getQuadrantInit(){
+  return this.dataService.getStart();
 }
 }

@@ -1,35 +1,36 @@
 <nav>
     <ul>
         <li>
-            <button tabindex = '0'class="btn bg-primary text-white" style="width:300px" (click)="enterNavigator()" >
+            <button tabindex = '0'class="btn bg-primary text-white" style="width:300px" (click)="enterNavigator()"  >
                 Iniciar Navegação
             </button>
         </li>
         <li>
-            <button tabindex = '0'class="btn bg-primary text-white" routerLink='/summary' (onclick)="destroy()" >
+            <button tabindex = '0'class="btn bg-primary text-white" routerLink='/summary' (onclick)="destroy()" (onkeydown)="$event.keyCode == 13 || $event.keyCode == 32 ? destroy() : null">
                 Ver informações resumidas
             </button>
         </li>
         <li>
-            <button tabindex = '0'class="btn bg-primary text-white" routerLink='/manual' (onclick)="destroy()" >
+            <button tabindex = '0'class="btn bg-primary text-white" routerLink='/manual' (onclick)="destroy()" (onkeydown)="$event.keyCode == 13 || $event.keyCode == 32 ? destroy() : null">
                 Ver manual
             </button>
         </li>
         <li>
-            <button tabindex = '0'class="btn bg-primary text-white" routerLink='/buscador' (onclick)="destroy()"  >
+            <button tabindex = '0'class="btn bg-primary text-white" routerLink='/buscador' (onclick)="destroy()"  (onkeydown)="$event.keyCode == 13 || $event.keyCode == 32 ? destroy() : null">
                 Voltar a tela de  pesquisa
             </button>
         </li>
         <li>
-            <button tabindex = '0'class="btn bg-primary text-white" routerLink='/menu' (onclick)="destroy()" >
+            <button tabindex = '0'class="btn bg-primary text-white" routerLink='/menu' (onclick)="destroy()" (onkeydown)="$event.keyCode == 13 || $event.keyCode == 32 ? destroy() : null">
                 Voltar ao menu principal
             </button>
         </li>
   </ul>
 </nav>
+        <div attr.aria-label={{quadrant_init}} >
            <highcharts-chart
            [Highcharts] = "highcharts"
            [options] = "chartOptions"
-           style = "width: 100%; height: 120vh; display: block;">
+           style = "width: 100%; height: 120vh; display: block;" tabindex="0">
            </highcharts-chart>
-        
+        </div>
