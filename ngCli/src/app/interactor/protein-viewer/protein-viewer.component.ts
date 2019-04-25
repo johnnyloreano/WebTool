@@ -43,11 +43,13 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    }
    ngAfterViewInit() {
       this.configurePoints();
-      // this.configureRotation();
+   }
+   init(){
+      TalkerService.speak(this.quadrant_init);
+      this.enterNavigator();
    }
    enterNavigator() {
       this.setTabindex();
-      TalkerService.speak(this.quadrant_init);
       this.focusFirstPoint();
    }
    focusFirstPoint(){

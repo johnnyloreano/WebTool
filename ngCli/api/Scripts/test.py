@@ -18,9 +18,8 @@ def main():
 def generateClass(data):
     delta = max(data) - min(data)
     intervals = delta / 5
-    pprint(data)
-    for x in data:
-        
+    # for x in data:
+
 
 def getDatas():
     pdb_coords = list()

@@ -56,8 +56,7 @@ export class DataParserService {
     }
     aminoData[0]._downSound = "Você saiu da proteína!";
     aminoData[resLen-1]._upSound = "Você saiu da proteína!";
-    const first_position = this._transcripter.getFirstPosition([aminoData[0].x,aminoData[0].y]);
-    return [aminoData,first_position];
+    return aminoData;
   }
   public getStart(){
    let data;
@@ -73,11 +72,11 @@ export class DataParserService {
    }
    else{
       data = this._dataService.getTest();
-      switch( this._math._getQuadrant([data.pointLoc[0][0],data.pointLoc[0][1]],5) ) {
+      switch( this._math._getQuadrant([data.pointLoc[0][0],data.pointLoc[0][1]],2.5) ) {
          case 1:message = "Superior Direito";
          case 2:message = "Superior Esquerdo";
          case 3:message = "Inferior Esquerdo";
-         case 4:message = "Superior Direito";
+         case 4:message = "Inferior Direito";
       } 
    }
    return message;
