@@ -54,15 +54,12 @@ export class MathService {
       }
     }
     public _getQuadrant(pos : number[],value){
-      console.log(pos[0] > value)
-      console.log(pos[1] > value)
       switch (true) {
         case (pos[0] > value && pos[1] > value):
           return 1;
         case (pos[0] < value && pos[1] > value):
           return 2;
         case (pos[0] < value && pos[1] < value):
-          alert('yahoo')
           return 3;
         case (pos[0] > value && pos[1] < value):
           return 4;

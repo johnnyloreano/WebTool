@@ -5,7 +5,7 @@ dataSet['triangulo'] = [[1,1,1],[2,1,1],[1.5,1.72,1], [1,1,1]]
 dataSet['quadrado'] = [[1,1,1],[1,2,1],[2,2,1], [2,1,1], [1,1,1]]
 dataSet['losango'] = [[1,1,1],[2,2,1],[3,1,1], [2,0,1], [1,1,1]]
 dataSet['junina'] = [[0,0,1],[0,3,1],[2,3,1], [2,0,1], [1,1,1], [0,0,1]]
-# dataSet['trapezio'] = [[1,1,1],[2.5,2.5,1],[3,1,1], [2,0,1], [1,1,1]]
+dataSet['trapezio'] = [[1,1,1],[1.5,1.5,1],[2,1.5,1], [2.5,1,1], [1,1,1]]
 def getTests(name):
     testDatas = dict()
     testDatas['identifier'] = 'TRIANGULO'
