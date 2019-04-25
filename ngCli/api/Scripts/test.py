@@ -5,8 +5,24 @@ from dataTag import getGeneralData
 from math import hypot
 from math import trunc
 from utils import normalizer
+from pprint import pprint
 from collections import Counter
 def main():
+    pdb_coords = normalizeAll(getDatas())
+    distances = allDistanceOfPairs(pdb_coords)
+    distance_freq = Counter(allDistanceOfPairs(pdb_coords))
+    pdb_coords = None
+    generateClass(distance_freq)
+
+
+def generateClass(data):
+    delta = max(data) - min(data)
+    intervals = delta / 5
+    pprint(data)
+    for x in data:
+        
+
+def getDatas():
     pdb_coords = list()
     pdb_coords.append(getCoord(parsePDB('1ZDD', header=True, secondary=True)))
     pdb_coords.append(getCoord(parsePDB('3NIR', header=True, secondary=True)))
@@ -22,16 +38,7 @@ def main():
     pdb_coords.append(getCoord(parsePDB('1CTF', header=True, secondary=True)))
     pdb_coords.append(getCoord(parsePDB('2EZK', header=True, secondary=True)))
     pdb_coords.append(getCoord(parsePDB('1K5R', header=True, secondary=True)))
-    pdb_coords = normalizeAll(pdb_coords)
-    distances = allDistanceOfPairs(pdb_coords)
-    distance_freq = Counter(allDistanceOfPairs(pdb_coords))
-
-    size = sum(distance_freq.values())
-    maxV = max(distance_freq)
-    minV = min(distance_freq)
-    delta = maxV - minV
-
-    
+    return pdb_coords
 
 def getCoord(pdb):
     hv = pdb[0].getHierView()

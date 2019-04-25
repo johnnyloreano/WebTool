@@ -64,7 +64,7 @@ export class DataParserService {
    data = this._dataService.getProtein();
    let message;
    if(data != undefined){
-      switch(this._math._getQuadrant([data.alphaLoc[0][0],data.alphaLoc[0][1]])) {
+      switch(this._math._getQuadrant([data.alphaLoc[0][0],data.alphaLoc[0][1]],50)) {
          case 1:message = "Superior Direito";
          case 2:message = "Superior Esquerdo";
          case 3:message = "Inferior Esquerdo";
@@ -73,7 +73,7 @@ export class DataParserService {
    }
    else{
       data = this._dataService.getTest();
-      switch( this._math._getQuadrant([data.pointLoc[0][0],data.pointLoc[0][1]]) ) {
+      switch( this._math._getQuadrant([data.pointLoc[0][0],data.pointLoc[0][1]],5) ) {
          case 1:message = "Superior Direito";
          case 2:message = "Superior Esquerdo";
          case 3:message = "Inferior Esquerdo";

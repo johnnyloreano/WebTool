@@ -3,7 +3,7 @@ import json
 import numpy as np
 aminoNames = ['ALA','PHE','GLU','CYS','LYS','GLY','ASN','ASP','LEU','ILE','PRO','THR','TYR','ARG','HIS','MET','TRP','HYS','LYS','GLN']
 def getGeneralData(pdb):
-    pdb = parsePDB(pdb.encode("UTF-8"), header=True, secondary=True)
+    pdb = parsePDB(pdb, header=True, secondary=True)
     dataParsed = dict()
     dataParsed['identifier'] =      pdb[1]['identifier']
     dataParsed['authors'] =         pdb[1]['authors']
@@ -40,7 +40,7 @@ def getResNum(pdb):
     hv = pdb[0].getHierView()
     resNumList = list()
     for i, residue in enumerate(hv.iterResidues()):
-        resNumList.append(residue.getResnum())
+        resNumList.append(residue.getResnum().item())
     return resNumList
 
 def normalizer(arrayValues):
