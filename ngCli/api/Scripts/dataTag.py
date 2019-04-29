@@ -3,6 +3,7 @@ import json
 import numpy as np
 from math import hypot
 from dataDistances import getClasses
+from math import trunc
 aminoNames = ['ALA','PHE','GLU','CYS','LYS','GLY','ASN','ASP','LEU','ILE','PRO','THR','TYR','ARG','HIS','MET','TRP','HYS','LYS','GLN']
 def getGeneralData(pdb):
     pdb = parsePDB(pdb, header=True, secondary=True)
@@ -22,9 +23,9 @@ def getGeneralData(pdb):
     dataParsed['sheet_range'] =     getSheetData(pdb)
     return json.dumps(dataParsed)
 
-def getDistances(coords):
+def getDistances(coords,file):
     distances_list = list()
-    classes = getClasses()
+    classes = getClasses(file)
     distances_loc = dict()
     distances_loc['front'] = None
     distances_loc['back'] = None
@@ -33,13 +34,15 @@ def getDistances(coords):
     name_distances.append("Pequeno")
     name_distances.append("Medio")
     name_distances.append("Grande")
+    print(classes)
+    print("\n")
     for x in range(1,len(coords) ):
-        distance = hypot(coords[x][0] - coords[x-1][0] , coords[x][1] - coords[x-1][1])
+        distance = trunc( hypot(coords[x][0] - coords[x-1][0] , coords[x][1] - coords[x-1][1]) )
         distances_loc = dict()
         distances_loc['front'] = None
         distances_list.append(distances_loc)
         for y in range(0,len(classes)):
-            if distance > classes[y][0] and distance < classes[y][1]:
+            if distance >= classes[y][0] and distance < classes[y][1]:
                 distances_list[x-1]['front'] = name_distances[y]
                 distances_list[x]['back'] = name_distances[y]
                 break
