@@ -17,6 +17,7 @@ export class DataParserService {
   }
   parseAminoData(){
     const protein = this._dataService.getProtein();
+    const distances = this._dataService.getDistances();
     let aminoData = Array<Aminoacid>();
     const resLen = protein['residues'].length
     const hasHelix = protein['helix_range'].length > 0;

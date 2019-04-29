@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -22,5 +22,8 @@ constructor(private http: HttpClient) {}
       }
   };
   return this.http.get('http://127.0.0.1:5000/dataTest', config);
+  }
+  requestDistances(){
+    return this.http.get('http://127.0.0.1:5000/dataDistances');
   }
 }

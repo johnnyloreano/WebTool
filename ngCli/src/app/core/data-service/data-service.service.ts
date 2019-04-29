@@ -7,6 +7,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 export class DataService {
   private proteinData : BehaviorSubject<Protein> = new BehaviorSubject<Protein>(undefined);
   private testData : BehaviorSubject<Test> = new BehaviorSubject<Test>(undefined);
+  private distancesData : BehaviorSubject<number[]> = new BehaviorSubject<number[]>(undefined);
   private seletorData : BehaviorSubject<string> = new BehaviorSubject<string>(undefined);
   currentProtein = this.proteinData.asObservable();
   currentTest = this.testData.asObservable();
@@ -24,6 +25,9 @@ export class DataService {
                                         protein['sheet_range'],
                                         protein['title']));
     }
+  setDistances(distances){
+    this.distancesData.next(distances);
+  }
   setTest(test){
     this.testData.next(new Test(
       test['identifier'], test['authors'],test['pointLoc'],test['title']
@@ -31,6 +35,9 @@ export class DataService {
   }
   setSeletor(value:string){
     this.seletorData.next(value);
+  }
+  getDistances(){
+    return this.distancesData.getValue();
   }
   getSeletor() : string{
     return this.seletorData.getValue();

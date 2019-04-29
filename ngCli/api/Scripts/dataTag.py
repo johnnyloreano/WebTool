@@ -1,6 +1,8 @@
 from prody import *
 import json
 import numpy as np
+from math import hypot
+from dataDistances import getClasses
 aminoNames = ['ALA','PHE','GLU','CYS','LYS','GLY','ASN','ASP','LEU','ILE','PRO','THR','TYR','ARG','HIS','MET','TRP','HYS','LYS','GLN']
 def getGeneralData(pdb):
     pdb = parsePDB(pdb, header=True, secondary=True)
@@ -15,9 +17,19 @@ def getGeneralData(pdb):
     dataParsed['residues'] =        getResidueList(pdb) 
     dataParsed['residue_num'] =     getResNum(pdb)
     dataParsed['alpha_loc'] =       normalizer( getCoord(pdb) )
+    dataParsed['residues_dist'] =   dataParsed['alpha_loc']
     dataParsed['helix_range'] =     getHelixData(pdb)
     dataParsed['sheet_range'] =     getSheetData(pdb)
     return json.dumps(dataParsed)
+
+def getDistances(coords):
+    distances_list = list()
+    classes = getClasses()
+
+    for x in range(1,len(coords) ):
+        distance = hypot(coords[x][0] - coords[x-1][0] , coords[x][1] - coords[x-1][1])
+        
+
 def getCoord(pdb):
     hv = pdb[0].getHierView()
     coord_list = list()

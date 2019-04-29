@@ -1,27 +1,14 @@
 from prody import *
 import json
-from dataTest import getTests
-from dataTag import getGeneralData
 from math import hypot
 from math import trunc
+from math import ceil
 from utils import normalizer
 from pprint import pprint
 from collections import Counter
-def main():
+def getClasses():
     distances = allDistanceOfPairs(getDatas())
-    generateClass(distances)
-
-def generateClass(data):
-    delta = max(data) - min(data)
-    print(delta/5)
-    intervals = delta / 5 
-    classes = dict()
-    for x in data:
-        interval = trunc(x / 18)
-        if not interval in classes:
-            classes[interval] = list()
-        classes[interval].append(x)
-    print(classes)
+    return generateClass(distances)
 
 def getDatas():
     pdb_coords = list()
@@ -29,17 +16,29 @@ def getDatas():
     pdb_coords.append(getCoord(parsePDB('3NIR', header=True, secondary=True)))
     pdb_coords.append(getCoord(parsePDB('1N09', header=True, secondary=True)))
     pdb_coords.append(getCoord(parsePDB('1A5R', header=True, secondary=True)))
-    # pdb_coords.append(getCoord(parsePDB('2NR2', header=True, secondary=True)))
-    # pdb_coords.append(getCoord(parsePDB('2MOC', header=True, secondary=True)))
-    # pdb_coords.append(getCoord(parsePDB('5LXY', header=True, secondary=True)))
-    # pdb_coords.append(getCoord(parsePDB('1YWD', header=True, secondary=True)))
+    pdb_coords.append(getCoord(parsePDB('2NR2', header=True, secondary=True)))
+    pdb_coords.append(getCoord(parsePDB('2MOC', header=True, secondary=True)))
+    pdb_coords.append(getCoord(parsePDB('1YWD', header=True, secondary=True)))
     # pdb_coords.append(getCoord(parsePDB('1GPT', header=True, secondary=True)))
     # pdb_coords.append(getCoord(parsePDB('1C5A', header=True, secondary=True)))
     # pdb_coords.append(getCoord(parsePDB('1C5P', header=True, secondary=True)))
     # pdb_coords.append(getCoord(parsePDB('1CTF', header=True, secondary=True)))
     # pdb_coords.append(getCoord(parsePDB('2EZK', header=True, secondary=True)))
     # pdb_coords.append(getCoord(parsePDB('1K5R', header=True, secondary=True)))
+    # pdb_coords.append(getCoord(parsePDB('5LXY', header=True, secondary=True)))
     return pdb_coords
+
+def generateClass(data):
+    delta = max(data) - min(data)
+    AMOUNT_INTERVALS = 5.0
+    intervals = ceil(delta / AMOUNT_INTERVALS)
+    classes = list()
+    for x in range(0,int(AMOUNT_INTERVALS)):
+        classes_size = list()
+        classes_size.append( x * intervals)
+        classes_size.push( (x + 1) * intervals)
+        classes.append(classes_size)
+    print(classes)
 
 def getCoord(pdb):
     hv = pdb[0].getHierView()
