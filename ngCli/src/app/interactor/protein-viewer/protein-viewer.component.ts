@@ -26,7 +26,7 @@ highcharts3D(Highcharts);
 })
 
 export class ProteinViewerComponent implements OnInit, AfterViewInit {
-   constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService, private _transcripter : TranscripterService ) {}
+   constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService) {}
    private firstTab: number;
    highcharts = Highcharts;
    seletor = null;
@@ -141,4 +141,4 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    //       });
    //     });
    // }
-}
+} 

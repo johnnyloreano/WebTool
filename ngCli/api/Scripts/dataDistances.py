@@ -1,11 +1,8 @@
 from prody import *
 import json
 from math import hypot
-from math import trunc
 from math import ceil
 from utils import normalizer
-from pprint import pprint
-from collections import Counter
 def getClasses():
     distances = allDistanceOfPairs(getDatas())
     return generateClass(distances)
@@ -14,31 +11,30 @@ def getDatas():
     pdb_coords = list()
     pdb_coords.append(getCoord(parsePDB('1ZDD', header=True, secondary=True)))
     pdb_coords.append(getCoord(parsePDB('3NIR', header=True, secondary=True)))
-    pdb_coords.append(getCoord(parsePDB('1N09', header=True, secondary=True)))
-    pdb_coords.append(getCoord(parsePDB('1A5R', header=True, secondary=True)))
-    pdb_coords.append(getCoord(parsePDB('2NR2', header=True, secondary=True)))
-    pdb_coords.append(getCoord(parsePDB('2MOC', header=True, secondary=True)))
-    pdb_coords.append(getCoord(parsePDB('1YWD', header=True, secondary=True)))
+    pdb_coords.append(getCoord(parsePDB('1K5R', header=True, secondary=True)))
+    # pdb_coords.append(getCoord(parsePDB('1N09', header=True, secondary=True)))
+    # pdb_coords.append(getCoord(parsePDB('1A5R', header=True, secondary=True)))
+    # pdb_coords.append(getCoord(parsePDB('2NR2', header=True, secondary=True)))
+    # pdb_coords.append(getCoord(parsePDB('2MOC', header=True, secondary=True)))
+    # pdb_coords.append(getCoord(parsePDB('1YWD', header=True, secondary=True)))
     # pdb_coords.append(getCoord(parsePDB('1GPT', header=True, secondary=True)))
     # pdb_coords.append(getCoord(parsePDB('1C5A', header=True, secondary=True)))
     # pdb_coords.append(getCoord(parsePDB('1C5P', header=True, secondary=True)))
     # pdb_coords.append(getCoord(parsePDB('1CTF', header=True, secondary=True)))
     # pdb_coords.append(getCoord(parsePDB('2EZK', header=True, secondary=True)))
-    # pdb_coords.append(getCoord(parsePDB('1K5R', header=True, secondary=True)))
-    # pdb_coords.append(getCoord(parsePDB('5LXY', header=True, secondary=True)))
     return pdb_coords
 
 def generateClass(data):
     delta = max(data) - min(data)
-    AMOUNT_INTERVALS = 5.0
-    intervals = ceil(delta / AMOUNT_INTERVALS)
+    AMOUNT_INTERVALS = 3.0
+    intervals = delta / AMOUNT_INTERVALS
     classes = list()
     for x in range(0,int(AMOUNT_INTERVALS)):
         classes_size = list()
         classes_size.append( x * intervals)
-        classes_size.push( (x + 1) * intervals)
+        classes_size.append( (x + 1) * intervals)
         classes.append(classes_size)
-    print(classes)
+    return classes
 
 def getCoord(pdb):
     hv = pdb[0].getHierView()
@@ -52,7 +48,7 @@ def getCoord(pdb):
     return coord_list
 
 def getDistance(point1,point2):
-    return trunc(hypot(point2[0] - point1[0], point2[1] - point1[1]))
+    return hypot(point2[0] - point1[0], point2[1] - point1[1])
 
 def allDistanceOfPairs(pdb):
     pdb_coords = set()
@@ -66,5 +62,3 @@ def normalizeAll(array_pdb):
     for x in array_pdb:
         normalizedData.append(normalizer(x))
     return normalizedData
-
-main()

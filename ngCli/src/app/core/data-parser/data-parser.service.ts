@@ -17,7 +17,6 @@ export class DataParserService {
   }
   parseAminoData(){
     const protein = this._dataService.getProtein();
-    const distances = this._dataService.getDistances();
     let aminoData = Array<Aminoacid>();
     const resLen = protein['residues'].length
     const hasHelix = protein['helix_range'].length > 0;
@@ -51,8 +50,8 @@ export class DataParserService {
       aminoData[x]._genInfo = this.parserGenAminoInfo(aminoData[x]);
       if(x > 0){
         const transitions = this.getTransitions(aminoData[x],aminoData[x-1]);
-        aminoData[x]._downSound = transitions[1];
-        aminoData[x-1]._upSound = transitions[0];
+        aminoData[x]._downSound = transitions[1] + ". Intervalo "+ protein.distances[x]['back'];
+        aminoData[x-1]._upSound = transitions[0] + ". Intervalo "+ protein.distances[x-1]['front'];
       }
     }
     aminoData[0]._downSound = "Você saiu da proteína!";

@@ -23,7 +23,4 @@ constructor(private http: HttpClient) {}
   };
   return this.http.get('http://127.0.0.1:5000/dataTest', config);
   }
-  requestDistances(){
-    return this.http.get('http://127.0.0.1:5000/dataDistances');
-  }
 }
