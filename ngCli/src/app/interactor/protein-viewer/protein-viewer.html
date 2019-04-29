@@ -1,27 +1,27 @@
 <nav>
     <ul>
         <li>
-            <button type="button" tabindex = '0' class="btn btn-primary w-25 " (click)="enterNavigator()"  >
+            <button type="button" tabindex = '0' class="btn btn-primary w-25 " (click)="init()"  >
                 Iniciar Navegação
             </button>
         </li>
         <li>
-            <button type="button" tabindex = '0' class="btn btn-primary w-25"  >
+            <button type="button" tabindex = '0' class="btn btn-primary w-25" >
                 Ver informações resumidas
             </button>
         </li>
         <li>
-            <button type="button" tabindex = '0' class="btn btn-primary w-25" routerLink='/manual' >
+            <button type="button" tabindex = '0' class="btn btn-primary w-25" (click)='goTo("manual")'>
                 Ver manual
             </button>
         </li>
         <li>
-            <button type="button" tabindex = '0' class="btn btn-primary w-25" routerLink='/buscador' >
+            <button type="button" tabindex = '0' class="btn btn-primary w-25" (click)='goTo("buscador")' >
                 Ir para tela de pesquisa de proteína
             </button>
         </li>
         <li>
-            <button type="button" tabindex = '0' class="btn btn-primary w-25" routerLink='/menu'  >
+            <button type="button" tabindex = '0' class="btn btn-primary w-25" (click)='goTo("menu")' >
                 Voltar ao menu principal
             </button>
         </li>
