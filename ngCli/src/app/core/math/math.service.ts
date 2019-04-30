@@ -89,7 +89,7 @@ export class MathService {
     }
     private getCorrectDegree(actual: number[], predecessor: number[], quadrants: Object, degrees: Object) {
       let result ;
-      if (actual[0] > predecessor[0]) {
+      if (actual[0] < predecessor[0]) {
         if(actual[1] < predecessor [1])
         result = {
           'actual': this.getDegreeOnQuadrant(degrees['actual']['xAxis'], quadrants['actual']),
@@ -121,7 +121,6 @@ export class MathService {
       const calculateDegrees = this.getCorrectDegree(actualAmino, predecessorAmino, quadrants, degrees);
       const hours = [ this.toHour(calculateDegrees['predecessor']),
                     this.toHour(calculateDegrees['actual']) ];
-      console.table(hours);
       return hours 
     }
 }

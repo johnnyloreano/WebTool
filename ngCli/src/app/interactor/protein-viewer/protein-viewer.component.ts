@@ -35,7 +35,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    ngOnInit() {
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
-      this.quadrant_init = "Iniciar no quadrante "+this._chartConfigurator.getQuadrantInit();
+      // this.quadrant_init = "Iniciar no quadrante "+this._chartConfigurator.getQuadrantInit();
       if(this.chartOptions === null)
       this._router.navigate(['/menu']);
    }
@@ -107,7 +107,6 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       const objectsPoints = this.highcharts.charts[0].series[0].points;
       for (let x = 0; x < plotPoints.length; x++) {
-         console.table(plotPoints[x]);
          
          plotPoints[x].addEventListener('keydown', (e) => {
             const dataIndex = Number(plotPoints[x].getAttribute('dataIndex')) - 1;

@@ -59,8 +59,7 @@ export class DataParserService {
     const first_position = this._transcripter.getFirstPosition([aminoData[0].x,aminoData[0].y]);
     return [aminoData,first_position];
   }
-  public getStart(){
-     return null}
+  public getStart(){}
 //    let data;
 //    data = this._dataService.getProtein();
 //    let message;
