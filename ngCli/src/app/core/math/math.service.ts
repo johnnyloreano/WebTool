@@ -56,6 +56,18 @@ export class MathService {
           return 0;
       }
     }
+    public _getQuadrant(pos : number[]){
+      switch (true) {
+        case (pos[0] > 50 && pos[1] > 50):
+          return 1;
+        case (pos[0] < 50 && pos[1] > 0):
+          return 2;
+        case (pos[0] < 50 && pos[1] < 50):
+          return 3;
+        case (pos[0] > 50 && pos[1] < 50):
+          return 4;
+      }
+    }
     private quadrantObject(actual: number[], pred: number[]): Object {
       return {
         'pred': this.getQuadrant(actual, pred),

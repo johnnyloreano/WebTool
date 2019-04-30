@@ -35,7 +35,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    ngOnInit() {
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
-      // this.quadrant_init = "Iniciar no quadrante "+this._chartConfigurator.getQuadrantInit();
+      this.quadrant_init = "Iniciar no quadrante "+this._chartConfigurator.getQuadrantInit();
       if(this.chartOptions === null)
       this._router.navigate(['/menu']);
    }

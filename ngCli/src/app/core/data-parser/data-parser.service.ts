@@ -59,29 +59,29 @@ export class DataParserService {
     const first_position = this._transcripter.getFirstPosition([aminoData[0].x,aminoData[0].y]);
     return [aminoData,first_position];
   }
-  public getStart(){}
-//    let data;
-//    data = this._dataService.getProtein();
-//    let message;
-//    if(data != undefined){
-//       switch(this._math._getQuadrant([data.alphaLoc[0][0],data.alphaLoc[0][1]])) {
-//          case 1:message = "Superior Direito";
-//          case 2:message = "Superior Esquerdo";
-//          case 3:message = "Inferior Esquerdo";
-//          case 4:message = "Inferior Direito";
-//       } 
-//    }
-//    else{
-//       data = this._dataService.getTest();
-//       switch( this._math._getQuadrant([data.pointLoc[0][0],data.pointLoc[0][1]]) ) {
-//          case 1:message = "Superior Direito";
-//          case 2:message = "Superior Esquerdo";
-//          case 3:message = "Inferior Esquerdo";
-//          case 4:message = "Superior Direito";
-//       } 
-//    }
-//    return message;
-//   }
+  public getStart(){
+   let data;
+   data = this._dataService.getProtein();
+   let message;
+   if(data != undefined){
+      switch(this._math._getQuadrant([data.alphaLoc[0][0],data.alphaLoc[0][1]])) {
+         case 1:message = "Superior Direito";
+         case 2:message = "Superior Esquerdo";
+         case 3:message = "Inferior Esquerdo";
+         case 4:message = "Inferior Direito";
+      } 
+   }
+   else{
+      data = this._dataService.getTest();
+      switch( this._math._getQuadrant([data.pointLoc[0][0],data.pointLoc[0][1]]) ) {
+         case 1:message = "Superior Direito";
+         case 2:message = "Superior Esquerdo";
+         case 3:message = "Inferior Esquerdo";
+         case 4:message = "Superior Direito";
+      } 
+   }
+   return message;
+  }
   private parserGenAminoInfo(amino : Aminoacid){
     let message = 'Posição atual: ' + this.getAminoName(amino.name);
       if (amino._isFirst) {
