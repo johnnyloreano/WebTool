@@ -45,6 +45,6 @@ export class TranscripterService {
     return text;
   }
   public getFirstPosition(firstAmino: number[]){
-    const info = this._mathS._getQuadrant(firstAmino);
+    // const info = this._mathS._getQuadrant(firstAmino);
     }
 }

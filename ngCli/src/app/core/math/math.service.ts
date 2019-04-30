@@ -19,6 +19,7 @@ export class MathService {
     const deltaX = this.getDelta(actualAmino[0] , predecessorAmino[0]);
     const deltaY = this.getDelta(actualAmino[1] , predecessorAmino[1]);
     let degree = Math.abs(deltaY) / Math.abs(deltaX);
+    if(degree == 0) degree++;
     degree = Math.atan(degree) * 180 / Math.PI;
     const degrees = {
       'xAxis': degree,
@@ -28,7 +29,7 @@ export class MathService {
       'actual' : {'xAxis' : degrees['yAxis'], 'yAxis' : degrees['xAxis']},
       'pred' : degrees
     };
-    return aminoDegrees;
+      return aminoDegrees;
     }
     private getQuadrant(pos: number[], posRelative: number[]): number {
       const posX = this.getDelta(pos[0], posRelative[0]);
@@ -44,25 +45,15 @@ export class MathService {
           return 4;
 
         case (posX == 0 && posY > 0):
-          return 1;
+          return 2;
         case (posX < 0 && posY == 0):
-          return 3;
+          return 2;
         case (posX == 0 && posY < 0):
           return 4;
         case (posX > 0 && posY == 0):
           return 4;
-      }
-    }
-    public _getQuadrant(pos : number[]){
-      switch (true) {
-        case (pos[0] > 50 && pos[1] > 50):
-          return 1;
-        case (pos[0] < 50 && pos[1] > 0):
-          return 2;
-        case (pos[0] < 50 && pos[1] < 50):
-          return 3;
-        case (pos[0] > 50 && pos[1] < 50):
-          return 4;
+        case(posX == 0 && posY == 0):
+          return 0;
       }
     }
     private quadrantObject(actual: number[], pred: number[]): Object {
@@ -93,7 +84,6 @@ export class MathService {
           case (2) : auxMult = 3; break;
           case (3) : auxMult = 2; break;
           case (4) : auxMult = 1; break;
-          case (0) : auxMult = 0; break;
         }
       return degree + (auxMult * 90);
     }
@@ -131,6 +121,7 @@ export class MathService {
       const calculateDegrees = this.getCorrectDegree(actualAmino, predecessorAmino, quadrants, degrees);
       const hours = [ this.toHour(calculateDegrees['predecessor']),
                     this.toHour(calculateDegrees['actual']) ];
+      console.table(hours);
       return hours 
     }
 }
