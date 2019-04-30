@@ -6,6 +6,7 @@ from dataDistances import getClasses
 from math import trunc
 aminoNames = ['ALA','PHE','GLU','CYS','LYS','GLY','ASN','ASP','LEU','ILE','PRO','THR','TYR','ARG','HIS','MET','TRP','HYS','LYS','GLN']
 def getGeneralData(pdb):
+    pdbName = pdb
     pdb = parsePDB(pdb, header=True, secondary=True)
     dataParsed = dict()
     dataParsed['identifier'] =      pdb[1]['identifier']
@@ -18,7 +19,7 @@ def getGeneralData(pdb):
     dataParsed['residues'] =        getResidueList(pdb) 
     dataParsed['residue_num'] =     getResNum(pdb)
     dataParsed['alpha_loc'] =       normalizer( getCoord(pdb) )
-    dataParsed['residues_dist'] =   getDistances( dataParsed['alpha_loc'] )
+    dataParsed['residues_dist'] =   getDistances( dataParsed['alpha_loc'],pdbName )
     dataParsed['helix_range'] =     getHelixData(pdb)
     dataParsed['sheet_range'] =     getSheetData(pdb)
     return json.dumps(dataParsed)
@@ -34,8 +35,6 @@ def getDistances(coords,file):
     name_distances.append("Pequeno")
     name_distances.append("Medio")
     name_distances.append("Grande")
-    print(classes)
-    print("\n")
     for x in range(1,len(coords) ):
         distance = trunc( hypot(coords[x][0] - coords[x-1][0] , coords[x][1] - coords[x-1][1]) )
         distances_loc = dict()
@@ -116,4 +115,4 @@ def getSheetData(pdb):
 
 
 
-print(getGeneralData('1zdd'))
+getGeneralData('1zdd')
