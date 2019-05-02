@@ -56,15 +56,15 @@ export class MathService {
           return 0;
       }
     }
-    public _getQuadrant(pos : number[]){
+    public _getQuadrant(pos : number[],value){
       switch (true) {
-        case (pos[0] > 50 && pos[1] > 50):
+        case (pos[0] > value && pos[1] > value):
           return 1;
-        case (pos[0] < 50 && pos[1] > 0):
+        case (pos[0] < value && pos[1] > value):
           return 2;
-        case (pos[0] < 50 && pos[1] < 50):
+        case (pos[0] < value && pos[1] < value):
           return 3;
-        case (pos[0] > 50 && pos[1] < 50):
+        case (pos[0] > value && pos[1] < value):
           return 4;
       }
     }

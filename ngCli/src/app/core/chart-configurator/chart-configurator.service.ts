@@ -133,7 +133,7 @@ get(option:string){
             return this.point.name;
           }
         },
-        data: this.data[0],
+        data: this.data,
       }]
   };
   }
