@@ -23,6 +23,6 @@ export class TalkerService {
       msg.voice = speechSynthesis.getVoices()[4]
       msg.lang = "pt-BR";
       speechSynthesis.speak(msg);
-      console.log(message)
+      console.log(message);
   }
 }

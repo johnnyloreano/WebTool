@@ -20,5 +20,5 @@ class Residue :
         data['upSound'] =   self.upSound
         data['downSound'] = self.downSound
         data['message'] =   self.message
-
+        data['location'] =  self.location
         return data

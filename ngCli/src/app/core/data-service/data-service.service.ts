@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Protein } from '../../interfaces/protein';
-import { Label} from '../../interfaces/label'
 import { Test} from '../../interfaces/test'
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { Aminoacid } from '../../interfaces/aminoacid';
 @Injectable()
 export class DataService {
   private proteinData : BehaviorSubject<Protein> = new BehaviorSubject<Protein>(undefined);
@@ -11,20 +11,15 @@ export class DataService {
   currentProtein = this.proteinData.asObservable();
   currentTest = this.testData.asObservable();
   setProtein(protein) {
-    console.table(protein)
-    protein['residues'] = this.parseTag(protein['residues'],protein['residue_num']);
-    this.proteinData.next( new Protein( protein['identifier'],
+    protein['residues'] = this.parseAmino(protein['residues']);
+    this.proteinData.next( new Protein( protein['name'],
+                                        protein['title'],
                                         protein['authors'],
                                         protein['experiment'],
                                         protein['classification'],
                                         protein['deposition_date'],
                                         protein['version'],
-                                        protein['residues'],
-                                        protein['alpha_loc'],
-                                        protein['helix_range'],
-                                        protein['sheet_range'],
-                                        protein['title'],
-                                        protein['residues_dist'] )
+                                        protein['residues'])
                                         );
     }
   setTest(test){
@@ -44,10 +39,25 @@ export class DataService {
   getProtein(): Protein{
     return this.proteinData.getValue();
   }
-  parseTag(residues:string[], residues_num:number[]):Label[]{
-    let residuesComp : Label[] = [];
-    for(let i = 0 ; i <residues.length; i++)
-      residuesComp.push({initials: residues[i], number: residues_num[0]+i});
+  getResidues(): Aminoacid[]{
+    return this.getProtein['residues']
+  }
+  parseAmino(residues:any[]):Aminoacid[]{
+    let residuesComp = new Array<Aminoacid>();
+    for(let i = 0 ; i <residues.length; i++){
+      const nAmino = new Aminoacid();
+      nAmino.index = i;
+      nAmino.name = residues[i]['init'];
+      nAmino.upSound = residues[i]['upSound'];
+      nAmino.downSound = residues[i]['downSound'];
+      nAmino.message = residues[i]['message'];
+      const loc = residues[i]['location']
+      nAmino.x = loc[0]
+      nAmino.y = loc[1]
+      nAmino.z = loc[2]
+      residuesComp.push(nAmino)
+    }
+    console.group(residuesComp)
     return residuesComp;
   }
 }

@@ -1,21 +1,12 @@
 from protein import *
 from residue import Residue as Res
-from prody import *
 from prody_utils import *
 from math_utils import normalizer
 from transcripter import generateTransitions
 from transcripter import generateInterval
 import json
-from pprint import pprint
-def getGeneralData(pdb):
-    pdb = parsePDB(pdb, header=True, secondary=True)
-    data = dict()
-    protein = generateProtein(pdb[1])
-    protein.residues = getListResidue(pdb)
-    data['protein'] = protein.toJSON()
-    pprint(data['protein'])
-    return json.dumps(data)
     
+
 def generateProtein(pdb):
     identifier =      pdb['identifier']
     authors =         pdb['authors']
@@ -166,5 +157,3 @@ def getAminoName(initials):
         return 'Acido Aspartico. '
     if  initials == 'GLY':
         return 'Glicina. '
-
-getGeneralData('1zdd')

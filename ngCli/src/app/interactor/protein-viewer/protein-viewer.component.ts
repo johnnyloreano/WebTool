@@ -15,9 +15,8 @@ import highcharts3D from 'highcharts/highcharts-3d.src';
 import {
    TalkerService
 } from '../../core/talker/talker.service';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 import { DataService } from '../../core/data-service/data-service.service';
-import { TranscripterService } from '../../core/transcripter/transcripter.service'
 highcharts3D(Highcharts);
 @Component({
    selector: 'app-protein-viewer',
@@ -35,7 +34,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    ngOnInit() {
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
-      this.quadrant_init = "Iniciar no quadrante "+this._chartConfigurator.getQuadrantInit();
+      // this.quadrant_init = "Iniciar no quadrante "+this._chartConfigurator.getQuadrantInit();
       if(this.chartOptions === null)
       this._router.navigate(['/menu']);
    }
@@ -90,15 +89,15 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       }
    }
    talkGenInfo(data: any){
-      return TalkerService.speak(data['_genInfo']);
+      return TalkerService.speak(data['message']);
    }
    talkTransition(key: KeyboardEvent, data: any) {
       let message: string;
       if (key.keyCode === 9) {
          if (key.shiftKey) {
-            message = data['_downSound'];
+            message = data['downSound'];
          } else {
-            message = data['_upSound'];
+            message = data['upSound'];
          }
       }
          return TalkerService.speak(message);

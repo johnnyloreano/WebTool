@@ -55,7 +55,7 @@ CORS(app)
 @crossdomain(origin='*')
 def tagReturn():
     json_data = request.args
-    return dataTag.getGeneralData(json_data['pdbFile'])
+    return dataTag.getProteinData(json_data['pdbFile'])
 
 @app.route('/dataTest', methods=['POST', 'GET', 'OPTIONS'])
 @crossdomain(origin='*')
