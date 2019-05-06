@@ -15,10 +15,9 @@ export class DataService {
     this.proteinData.next( new Protein( protein['name'],
                                         protein['title'],
                                         protein['authors'],
-                                        protein['experiment'],
-                                        protein['classification'],
-                                        protein['deposition_date'],
                                         protein['version'],
+                                        protein['deposition_date'],
+                                        protein['experiment'],
                                         protein['residues'])
                                         );
     }
@@ -40,7 +39,7 @@ export class DataService {
     return this.proteinData.getValue();
   }
   getResidues(): Aminoacid[]{
-    return this.getProtein['residues']
+    return this.getProtein()['residues']
   }
   parseAmino(residues:any[]):Aminoacid[]{
     let residuesComp = new Array<Aminoacid>();
@@ -57,7 +56,6 @@ export class DataService {
       nAmino.z = loc[2]
       residuesComp.push(nAmino)
     }
-    console.group(residuesComp)
     return residuesComp;
   }
 }

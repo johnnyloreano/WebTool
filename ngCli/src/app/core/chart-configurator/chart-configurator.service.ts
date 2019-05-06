@@ -136,6 +136,7 @@ get(option:string){
       }]
   };
   }
+  console.log(this.dataService.getResidues());
 }
 getQuadrantInit(){
   return '0'

@@ -1,7 +1,7 @@
 
 class Protein:
-    def __init__(self,name,title,author,version,date,experiment,residues):
-        self.name = name
+    def __init__(self,identifier,title,author,version,date,experiment,residues):
+        self.identifier = identifier
         self.title = title
         self.author = author
         self.version = version
@@ -11,7 +11,7 @@ class Protein:
 
     def toJSON(self):
         data = dict()
-        data['name'] = self.name
+        data['identifier'] = self.identifier
         data['title'] = self.title
         data['author'] = self.author
         data['version'] = self.version

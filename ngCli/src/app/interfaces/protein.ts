@@ -9,16 +9,15 @@ export class Protein {
     private _dep_date:string;
     private _version : string;
     private _residues : Array<Aminoacid>;
-    constructor(identifier:string,authors:string[],experiment:string,classification:string,
-                dep_date:string,version:string,residues : Array<any>,title: string){
+    constructor(identifier:string,title: string,authors:string[],version:string,dep_date:string,
+        experiment:string,residues : Array<any>){
         this._identifier = identifier;
-        this._authors = authors;
-        this._experiment = experiment;
-        this._classification = classification;
-        this._dep_date = dep_date;
-        this._version = version;        
-        this._residues = residues;
         this._title = title;
+        this._authors = authors;
+        this._version = version;        
+        this._dep_date = dep_date;
+        this._experiment = experiment;
+        this._residues = residues;
     }
     get identifier(): string{
         return this._identifier
@@ -27,7 +26,8 @@ export class Protein {
         return this._authors;
     } 
     get experiment(): string{
-        return this._experiment;
+        return null;
+        // return this._experiment;
     } 
     get classification(): string{
         return this._classification
