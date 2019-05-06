@@ -4,8 +4,14 @@ from prody_utils import *
 from math_utils import normalizer
 from transcripter import generateTransitions
 from transcripter import generateInterval
-import json
+from json import dumps
+from prody import parsePDB
     
+def toJson(pdb):
+    pdb = parsePDB(pdb, header=True, secondary=True)
+    protein = generateProtein(pdb[1])
+    protein.residues = getListResidue(pdb)
+    return dumps(protein.toJSON())
 
 def generateProtein(pdb):
     identifier =      pdb['identifier']
@@ -39,7 +45,7 @@ def getListResidue(pdb):
     list_residues.append(first_R)
     intervalsDistance = generateInterval(pdb)
 
-    for x in range(1,len(residuesNames)):
+    for x in range(1,3):
         newR = Res()
         newR.num = residuesNumber[x]
         newR.init = residuesNames[x]
@@ -47,7 +53,7 @@ def getListResidue(pdb):
 
         if x == 0:
             newR.isFirst == True
-        elif x == len(residuesNames):
+        if x == len(residuesNames):
             newR.isLast == True
 
         newR.location == residuesLocation[x]
@@ -62,10 +68,9 @@ def getListResidue(pdb):
         if newR.sheetInf == 'E':
             sheetF +=1
 
-        if x > 0:
-            transitions = generateTransitions(newR.location,list_residues[x-1].location)
-            newR.downSound = str(transitions[0]) + ". Intervalo " + str(intervalsDistance[x]['back'])
-            list_residues[x-1].upSound = str(transitions[1]) + ". Intervalo " + str(intervalsDistance[x]['front'])
+        transitions = generateTransitions(newR.location,list_residues[x-1].location)
+        newR.downSound = str(transitions[1]) + ". Intervalo " + str(intervalsDistance[x]['front'])
+        list_residues[x-1].upSound = str(transitions[0]) + ". Intervalo " + str(intervalsDistance[x]['back'])
         
         newR.message = generateMessage(newR)
 

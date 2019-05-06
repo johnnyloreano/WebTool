@@ -5,13 +5,13 @@ from math_intervals import getInfo as intervalInfo
 def generateText(hour):
     message = None
     if hour >= 11 or hour <= 2:
-        message = 'SUBINDO'
+        message = 'Subindo'
     if hour > 2 and hour < 5:
-        message = 'INDO PARA A DIREITA'
+        message = 'Indo para a direita'
     if hour >= 5 and hour <= 7:
-        message = 'DESCENDO'
+        message = 'Descendo'
     if hour > 7 and hour < 11:
-        message = 'INDO PARA A ESQUERDA'
+        message = 'Indo para a esquerda'
     return message + " " +str(hour) +" horas"
 
 def generateTransitions(curr,pred):

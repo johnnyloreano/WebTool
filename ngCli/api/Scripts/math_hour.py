@@ -39,14 +39,13 @@ def degreeOnQuadrant(degree,quadrant):
         auxMult = 2
     elif quadrant == 4:
         auxMult = 1
+    # print(degree)
+    # print(quadrant)
+    # print(degree + (auxMult * 90))
     return degree + (auxMult * 90)
 
 def toHour(degree):
-    wholeHours = degree / 30.0
-    hour = trunc(wholeHours)
-    minutes = wholeHours - hour
-    if minutes > 50:
-        hour += 1
+    hour = int(round(degree / 30.0))
     if hour == 0:
         hour = 12
     return hour
@@ -56,37 +55,34 @@ def fixDegree(curr,pred,quadrants,degrees):
     if(curr[0] < pred[0]):
         if(curr[1] < pred[1]):
             result = {
-                'curr': degreeOnQuadrant(degrees['X'],quadrants['currAmino']),
+                'curr': degreeOnQuadrant(degrees['Y'],quadrants['currAmino']),
                 'pred': degreeOnQuadrant(degrees['Y'],quadrants['predAmino'])
             }
-            return result
         else:
             result = {
-                'curr': degreeOnQuadrant(degrees['Y'],quadrants['currAmino']),
+                'curr': degreeOnQuadrant(degrees['X'],quadrants['currAmino']),
                 'pred': degreeOnQuadrant(degrees['X'],quadrants['predAmino'])
             }
-            return result
     else:
         if(curr[1] < pred[1]):
             result = {
                 'curr': degreeOnQuadrant(degrees['Y'],quadrants['currAmino']),
-                'pred': degreeOnQuadrant(degrees['X'],quadrants['predAmino'])
+                'pred': degreeOnQuadrant(degrees['Y'],quadrants['predAmino'])
             }
-            return result
         else:
             result = {
                 'curr': degreeOnQuadrant(degrees['X'],quadrants['currAmino']),
-                'pred': degreeOnQuadrant(degrees['Y'],quadrants['predAmino'])
+                'pred': degreeOnQuadrant(degrees['X'],quadrants['predAmino'])
             }
-            return result
+    return result
 
 def getInfo(currAmino, predAmino):
     DEGREES = angleIn2Points(currAmino,predAmino)
     QUADRANTS = {
         'currAmino':getRelativeQuadrant(currAmino,predAmino),
-        'predAmino':getRelativeQuadrant(currAmino,predAmino)
+        'predAmino':getRelativeQuadrant(predAmino,currAmino)
         }
     CORRECT_DEGREE = fixDegree(currAmino,predAmino,QUADRANTS,DEGREES)
-    HOURS = [str(toHour(CORRECT_DEGREE['pred'])),
-            str(toHour(CORRECT_DEGREE['curr']))]
+    HOURS = [toHour(CORRECT_DEGREE['pred']),
+            toHour(CORRECT_DEGREE['curr'])]
     return HOURS
