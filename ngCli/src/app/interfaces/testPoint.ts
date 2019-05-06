@@ -1,8 +1,8 @@
-
 export class TestPoint {
+    index: number;
     x : number;
     y : number;
     z : number;
-    _downSound: string;
-    _upSound: string;
+    downSound: string;
+    upSound: string;
 }

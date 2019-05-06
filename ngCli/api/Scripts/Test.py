@@ -1,5 +1,5 @@
 class Test:
-    def __init__(self,coords,index,upSound = None,downSound = None):
+    def __init__(self,coords,upSound = None,downSound = None):
         self.coords = coords
         self.upSound = upSound
         self.downSound = downSound

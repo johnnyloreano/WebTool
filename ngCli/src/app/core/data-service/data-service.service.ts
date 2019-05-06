@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { Protein } from '../../interfaces/protein';
-import { Test} from '../../interfaces/test'
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { Test} from '../../interfaces/test';
 import { Aminoacid } from '../../interfaces/aminoacid';
+import { TestPoint } from '../../interfaces/testPoint';
 @Injectable()
 export class DataService {
   private proteinData : BehaviorSubject<Protein> = new BehaviorSubject<Protein>(undefined);
@@ -22,8 +23,9 @@ export class DataService {
                                         );
     }
   setTest(test){
+    test['pTest'] = this.parsePTest(test['pTest']);
     this.testData.next(new Test(
-      test['identifier'], test['authors'],test['pointLoc'],test['title']
+      test['pTest']
     ))
   }
   setSeletor(value:string){
@@ -57,5 +59,19 @@ export class DataService {
       residuesComp.push(nAmino)
     }
     return residuesComp;
+  }
+  parsePTest(pTest: any[]){
+    const pTestArr = new Array<TestPoint>();
+    for(let x = 0; x < pTest.length;x++){
+      let tp = new TestPoint();
+      tp.index = x;
+      tp.downSound = pTest[x]['downSound'];
+      tp.upSound = pTest[x]['upSound'];
+      const coords = pTest[x]['coords'];
+      tp.x = coords[0];
+      tp.y = coords[1];
+      pTestArr.push(tp);
+    }
+    return pTestArr;
   }
 }

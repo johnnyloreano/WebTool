@@ -15,68 +15,67 @@ getChartConfigurations(option:string) {
   return this.chartOptions;
 }
 get(option:string){
-  // if (option == "test"){
-  //   this.data = null
-  //   this.chartOptions = {
-  //     chart: {
-  //       tooltip: false,
-  //       type: 'scatter',
-  //       marginBottom: 100,
-  //       marginRight: 50,
-  //       options3d: {
-  //         enabled: true,
-  //         alpha: 0,
-  //         beta: 0,
-  //         depth: 0,
-  //         viewDistance: 0,
-  //         frame: {
-  //           bottom: {
-  //             size: 1,
-  //             color: 'rgba(0, 0, 0, 0.02)'
-  //           },
-  //           back: {
-  //             size: 1,
-  //             color: 'rgba(0, 0, 0, 0.04)'
-  //           },
-  //           side: {
-  //             size: 1,
-  //             color: 'rgba(0, 0, 0, 0.06)'
-  //           }
-  //         }
-  //       },
-  //     },
-  //     plotOptions: {
-  //       series: {
-  //         lineWidth: 1
-  //       }
-  //     },
-  //     title: {
-  //       text: ''
-  //     },
-  //     xAxis: {
-  //       min: 0,
-  //       max: 5
-  //     },
-  //     yAxis: {
-  //       min: 0,
-  //       max: 5
-  //     },
-  //     zAxis: {
-  //       min: 0,
-  //       max: 5
-  //     },
-  //     series: [{
-  //       dataLabels: {
-  //         enabled: true,
-  //         formatter: function () {
-  //           return this.point.name;
-  //         }
-  //       },
-  //       data: this.data
-  //     }]
-  // };
-  // }
-  if (true){
+  if (option == "test"){
+    this.chartOptions = {
+      chart: {
+        tooltip: false,
+        type: 'scatter',
+        marginBottom: 100,
+        marginRight: 50,
+        options3d: {
+          enabled: true,
+          alpha: 0,
+          beta: 0,
+          depth: 0,
+          viewDistance: 0,
+          frame: {
+            bottom: {
+              size: 1,
+              color: 'rgba(0, 0, 0, 0.02)'
+            },
+            back: {
+              size: 1,
+              color: 'rgba(0, 0, 0, 0.04)'
+            },
+            side: {
+              size: 1,
+              color: 'rgba(0, 0, 0, 0.06)'
+            }
+          }
+        },
+      },
+      plotOptions: {
+        series: {
+          lineWidth: 1
+        }
+      },
+      title: {
+        text: ''
+      },
+      xAxis: {
+        min: 0,
+        max: 5
+      },
+      yAxis: {
+        min: 0,
+        max: 5
+      },
+      zAxis: {
+        min: 0,
+        max: 5
+      },
+      series: [{
+        dataLabels: {
+          enabled: true,
+          formatter: function () {
+            return this.point.name;
+          }
+        },
+        data: this.dataService.getTest()['pTest']
+      }]
+  };
+  }
+  else{
     this.chartOptions = {
       chart: {
         tooltip: false,
@@ -136,7 +135,7 @@ get(option:string){
       }]
   };
   }
-  console.log(this.dataService.getResidues());
+  console.log(this.dataService.getTest()['pTest']);
 }
 getQuadrantInit(){
   return '0'
