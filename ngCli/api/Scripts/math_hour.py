@@ -3,8 +3,6 @@ from math_utils import *
 def getRelativeQuadrant(pos,posRelative):
     posX = delta(pos[0],posRelative[0])
     posY = delta(pos[1],posRelative[1])
-    print("X = ",posX)
-    print("Y = ",posY)
     if posX < 0:
         if posY < 0:
             return 3
@@ -84,8 +82,6 @@ def fixDegree(curr,pred,quadrants,degrees):
                 'curr': degreeOnQuadrant(degrees['X'],quadrants['currAmino']),
                 'pred': degreeOnQuadrant(degrees['Y'],quadrants['predAmino'])
             }
-    print(result)
-    print('\n')
     return result
 
 def toHour(degree):
@@ -96,14 +92,11 @@ def toHour(degree):
     
 def getInfo(currAmino, predAmino):
     DEGREES = angleIn2Points(currAmino,predAmino)
-    print(DEGREES)
     QUADRANTS = {
         'currAmino':getRelativeQuadrant(currAmino,predAmino),
         'predAmino':getRelativeQuadrant(predAmino,currAmino)
         }
-    print(QUADRANTS)
     CORRECT_DEGREE = fixDegree(currAmino,predAmino,QUADRANTS,DEGREES)
     HOURS = [toHour(CORRECT_DEGREE['curr']),
             toHour(CORRECT_DEGREE['pred'])]
-    print(HOURS)
     return HOURS

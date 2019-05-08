@@ -16,7 +16,7 @@ def angleIn2Points(pos1,pos2):
     return degreesVal
 
 def distanceOfPoints(p1,p2):
-    return trunc( hypot(p2[0] - p1[0] , p2[1] - p1[1]) )
+    return  hypot(p2[0] - p1[0] , p2[1] - p1[1]) 
 
 def normalizer(arrayValues):
     minX = np.min(arrayValues, axis = 0)[0]

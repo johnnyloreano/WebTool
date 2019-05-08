@@ -135,7 +135,6 @@ get(option:string){
       }]
   };
   }
-  console.log(this.dataService.getTest()['pTest']);
 }
 getQuadrantInit(){
   return '0'
