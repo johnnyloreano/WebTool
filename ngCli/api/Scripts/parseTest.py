@@ -1,6 +1,8 @@
 from pprint import pprint
 from Test import Test 
 from transcripter import generateTransitions
+from transcripter import generateFQuadrant
+from math_utils import quadrantOfPoint
 from json import dumps
 from math_utils import distanceOfPoints
 dataSet = dict()
@@ -9,10 +11,6 @@ dataSet['triangulo'] = [[2,0,1],[4,0,1],[3,3,1],[2,0,1]] # OK!
 dataSet['losango'] = [[1,1,1],[2,2,1],[3,1,1], [2,0,1], [1,1,1]] # OK!
 dataSet['junina'] = [[0,0,1],[0,3,1],[2,3,1], [2,0,1], [1,1,1], [0,0,1]] # OK!
 dataSet['trapezio'] = [[1,1,1],[1.5,1.5,1],[2,1.5,1], [2.5,1,1], [1,1,1]] # OK!
-# dataSet['test'] = [[1,3,1], [ 2,2,1]] A < B
-# dataSet['test'] = [[2,2,1],[1,3,1]] A > B
-# dataSet['test'] = [[1,2,1], [ 1,1,1]] #A = B
-# dataSet['test'] = [[1,1,1], [ 1,2,1]] #A = B
 def toJson(name):
     obj = generateTest(name)
     listTest = list()
@@ -20,6 +18,7 @@ def toJson(name):
         listTest.append(x.toJson())
     data = dict()
     data['pTest'] = listTest
+    data['start'] = generateFQuadrant(quadrantOfPoint(obj[0].coords,5))
     return dumps(data)
 
 def generateTest(name):

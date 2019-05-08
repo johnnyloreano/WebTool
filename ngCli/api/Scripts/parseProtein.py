@@ -2,26 +2,29 @@ from protein import *
 from residue import Residue as Res
 from prody_utils import *
 from math_utils import normalizer
+from math_utils import quadrantOfPoint
 from transcripter import generateTransitions
 from transcripter import generateInterval
+from transcripter import generateFQuadrant
 from json import dumps
 from prody import parsePDB
     
 def toJson(pdb):
     pdb = parsePDB(pdb, header=True, secondary=True)
-    protein = generateProtein(pdb[1])
-    protein.residues = getListResidue(pdb)
+    protein = generateProtein(pdb)
     return dumps(protein.toJSON())
 
 def generateProtein(pdb):
-    identifier =      pdb['identifier']
-    authors =         pdb['authors']
-    experiment =      pdb['experiment']
-    classification =  pdb['classification']
-    deposition_date = pdb['deposition_date']
-    version =         pdb['version']
-    title =           pdb['title']
-    return Protein(identifier,title,authors,version,deposition_date,experiment,None)
+    identifier =      pdb[1]['identifier']
+    authors =         pdb[1]['authors']
+    experiment =      pdb[1]['experiment']
+    classification =  pdb[1]['classification']
+    deposition_date = pdb[1]['deposition_date']
+    version =         pdb[1]['version']
+    title =           pdb[1]['title']
+    residues = getListResidue(pdb)
+    start = generateFQuadrant(quadrantOfPoint(residues[0].location,100))
+    return Protein(identifier,title,authors,version,deposition_date,experiment,residues,start)
 
 def getListResidue(pdb):
     residuesNumber = getResNum(pdb)
@@ -45,7 +48,6 @@ def getListResidue(pdb):
     list_residues.append(first_R)
     coords_pdb = getCoord(pdb)
     intervalsDistance = generateInterval(coords_pdb)
-
     for x in range(1,len(residuesNumber)):
         newR = Res()
         newR.num = residuesNumber[x]

@@ -15,6 +15,19 @@ def angleIn2Points(pos1,pos2):
     degreesVal['Y'] = 90 - degreesVal['X']
     return degreesVal
 
+def quadrantOfPoint(point,value):
+    value /= 2
+    if point[0] > value:
+        if point[1] > value:
+                return 1
+        elif point[1] < value:
+                return 4
+    elif point[0] < value:
+        if point[1] > value:
+                return 2
+        elif point[1] < value:
+                return 3
+
 def distanceOfPoints(p1,p2):
     return  hypot(p2[0] - p1[0] , p2[1] - p1[1]) 
 

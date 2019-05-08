@@ -1,6 +1,6 @@
 
 class Protein:
-    def __init__(self,identifier,title,author,version,date,experiment,residues):
+    def __init__(self,identifier,title,author,version,date,experiment,residues,start = None):
         self.identifier = identifier
         self.title = title
         self.author = author
@@ -20,5 +20,5 @@ class Protein:
         data['residues'] = list()
         for x in self.residues:
             data['residues'].append(x.toJSON())
-
+        data['start'] = self.start
         return data

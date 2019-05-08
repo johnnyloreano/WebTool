@@ -13,6 +13,14 @@ def generateText(hour):
     if hour > 7 and hour < 11:
         message = 'Indo para a esquerda'
     return message + " " +str(hour) +" horas"
+def generateFQuadrant(quadrant):
+    if quadrant == 1:
+        return 'Quadrante Superior Direito'
+    elif quadrant == 2:
+        return 'Quadrante Superior Esquerdo'
+    elif quadrant == 3 :
+        return 'Quadrante Inferior Esquerdo'
+    return 'Quadrante Inferior Direito'
 
 def generateTransitions(curr,pred):
     info = getInfo(curr,pred)

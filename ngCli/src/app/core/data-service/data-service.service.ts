@@ -23,6 +23,7 @@ export class DataService {
                                         );
     }
   setTest(test){
+    console.group(test['start'])
     test['pTest'] = this.parsePTest(test['pTest']);
     this.testData.next(new Test(
       test['pTest']
