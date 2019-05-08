@@ -9,9 +9,9 @@ export class DataService {
   private proteinData : BehaviorSubject<Protein> = new BehaviorSubject<Protein>(undefined);
   private testData : BehaviorSubject<Test> = new BehaviorSubject<Test>(undefined);
   private seletorData : BehaviorSubject<string> = new BehaviorSubject<string>(undefined);
-  currentProtein = this.proteinData.asObservable();
-  currentTest = this.testData.asObservable();
+  private startData : BehaviorSubject<string> = new BehaviorSubject<string>(undefined);
   setProtein(protein) {
+    this.startData.next(protein['start']);
     protein['residues'] = this.parseAmino(protein['residues']);
     this.proteinData.next( new Protein( protein['name'],
                                         protein['title'],
@@ -23,7 +23,7 @@ export class DataService {
                                         );
     }
   setTest(test){
-    console.group(test['start'])
+    this.startData.next(test['start']);
     test['pTest'] = this.parsePTest(test['pTest']);
     this.testData.next(new Test(
       test['pTest']
@@ -43,6 +43,9 @@ export class DataService {
   }
   getResidues(): Aminoacid[]{
     return this.getProtein()['residues']
+  }
+  getStart(){
+      return this.startData.getValue();
   }
   parseAmino(residues:any[]):Aminoacid[]{
     let residuesComp = new Array<Aminoacid>();

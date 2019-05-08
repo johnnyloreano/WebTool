@@ -8,6 +8,7 @@ class Protein:
         self.date = date
         self.experiment = experiment
         self.residues = residues
+        self.start = start
 
     def toJSON(self):
         data = dict()
