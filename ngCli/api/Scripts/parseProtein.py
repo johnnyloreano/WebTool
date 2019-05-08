@@ -43,9 +43,10 @@ def getListResidue(pdb):
     first_R.location = residuesLocation[0]
     first_R.message = generateMessage(first_R)
     list_residues.append(first_R)
-    intervalsDistance = generateInterval(pdb)
+    coords_pdb = getCoord(pdb)
+    intervalsDistance = generateInterval(coords_pdb)
 
-    for x in range(1,3):
+    for x in range(1,len(residuesNumber)):
         newR = Res()
         newR.num = residuesNumber[x]
         newR.init = residuesNames[x]

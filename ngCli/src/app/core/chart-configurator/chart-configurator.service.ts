@@ -54,15 +54,15 @@ get(option:string){
       },
       xAxis: {
         min: 0,
-        max: 5
+        max: 10
       },
       yAxis: {
         min: 0,
-        max: 5
+        max: 10
       },
       zAxis: {
         min: 0,
-        max: 5
+        max: 10
       },
       series: [{
         dataLabels: {

@@ -5,11 +5,11 @@ from math import hypot
 import numpy as np
 
 def delta(val1,val2):
-    return abs(val2 - val1)
+    return val2 - val1
 
 def angleIn2Points(pos1,pos2):
-    deltaX = delta(pos1[0],pos2[0])
-    deltaY = delta(pos1[1],pos2[1])
+    deltaX = abs(delta(pos1[0],pos2[0]))
+    deltaY = abs(delta(pos1[1],pos2[1]))
     degreesVal = dict()
     degreesVal['X'] = degrees(atan2(deltaY,deltaX))
     degreesVal['Y'] = 90 - degreesVal['X']

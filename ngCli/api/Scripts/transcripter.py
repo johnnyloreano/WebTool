@@ -18,5 +18,5 @@ def generateTransitions(curr,pred):
     info = getInfo(curr,pred)
     return [generateText(info[1]),generateText(info[0])]
 
-def generateInterval(pdb):
-    return intervalInfo(getCoord(pdb))
+def generateInterval(coords):
+    return intervalInfo(coords)

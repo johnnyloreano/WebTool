@@ -38,7 +38,11 @@ def getInfo(data):
     distances = allDistanceOfPairs(normalizer(data))
     classInfo = getClassInfo(distances)
     return getDistanceLabel(distances,classInfo)
-    
+def getTInfo(data):
+    distances = allDistanceOfPairs(data)
+    classInfo = {'interval': 1, 'start':1}
+    return getDistanceLabel(distances,classInfo)
+
 def getDistancesNames():
     NAME_DISTANCES = list()
     NAME_DISTANCES.append("Pequeno")
