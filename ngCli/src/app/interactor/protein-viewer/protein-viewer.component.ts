@@ -15,7 +15,7 @@ import highcharts3D from 'highcharts/highcharts-3d.src';
 import {
    TalkerService
 } from '../../core/talker/talker.service';
-// import * as $ from 'jquery';
+import * as $ from 'jquery';
 import { DataService } from '../../core/data-service/data-service.service';
 highcharts3D(Highcharts);
 @Component({
@@ -34,7 +34,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    ngOnInit() {
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
-      this.quadrant_init = "Iniciar no quadrante "+this._data.getStart();
+      this.quadrant_init = "Iniciar no "+this._data.getStart();
       if(this.chartOptions === null)
       this._router.navigate(['/menu']);
    }
@@ -45,6 +45,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       if(Highcharts.charts[0] == undefined){
       Highcharts.charts[0] = Highcharts.chart(this.chartOptions);
    }
+      // this.configureRotation();
       this.configurePoints();
    }
    init(){
@@ -114,29 +115,25 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          });
       }
    }
-   // configureRotation(){
-   //    const chart = this.highcharts.charts[0];
-   //    $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
-   //       eStart = chart.pointer.normalize(eStart);
-   //       const posX = eStart.pageX;
-   //       const posY = eStart.pageY;
-   //       const alpha = chart.options.chart.options3d.alpha;
-   //       const beta = chart.options.chart.options3d.beta;
-   //       let newAlpha;
-   //       let newBeta;
-   //       const sensitivity = 5; // lower is more sensitive
-   //       $(document).bind({
-   //         'mousemove.hc touchdrag.hc': function(e) {
-   //           newBeta = beta + (posX - e.pageX) / sensitivity;
-   //           chart.options.chart.options3d.beta = newBeta;
-   //           newAlpha = alpha + (e.pageY - posY) / sensitivity;
-   //           chart.options.chart.options3d.alpha = newAlpha;
-   //           chart.redraw(false);
-   //         },
-   //         'mouseup touchend': function() {
-   //           $(document).unbind('.hc');
-   //         }
-   //       });
-   //     });
-   // }
+   configureRotation(){
+      const chart = this.highcharts.charts[0];
+      $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
+         eStart = chart.pointer.normalize(eStart);
+         const posX = eStart.pageX;
+         const posY = eStart.pageY;
+         const alpha = chart.options.chart.options3d.alpha;
+         const beta = chart.options.chart.options3d.beta;
+         const sensitivity = 5; // lower is more sensitive
+         $(document).bind({
+           'mousemove.hc touchdrag.hc': function(e) {
+             chart.options.chart.options3d.beta = beta + (posX - e.pageX) / sensitivity;
+             chart.options.chart.options3d.alpha = alpha + (e.pageY - posY) / sensitivity;;
+             chart.redraw(false);
+           },
+           'mouseup touchend': function() {
+             $(document).unbind('.hc');
+           }
+         });
+       });
+   }
 } 
