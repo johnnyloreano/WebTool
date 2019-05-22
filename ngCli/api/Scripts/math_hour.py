@@ -3,29 +3,29 @@ from math_utils import *
 def getRelativeQuadrant(pos,posRelative):
     posX = delta(pos[0],posRelative[0])
     posY = delta(pos[1],posRelative[1])
-    if posX < 0:
-        if posY < 0:
-            return 3
-        elif posY > 0:
-            return 2
-        else:
-            return 3 # V
+    if (posX > 0 and posY > 0):
+        return 1
+    if (posX < 0 and posY > 0):
+        return 2
+    if (posX < 0 and posY < 0):
+        return 3
+    if (posX > 0 and posY < 0):
+        return 4
 
-    elif posX > 0:
-        if posY > 0:
-            return 1
-        elif posY < 0:
-            return 4
-        else:
-            return 4 # V
-
-    elif posX == 0:
-        if posY > 0:
-            return 1
-        elif posY < 0:
-            return 4
+    if (posX == 0 and posY > 0):
+        return 2
+    if (posX < 0 and posY == 0):
+        return 2
+    if (posX == 0 and posY < 0):
+        return 4
+    if (posX > 0 and posY == 0):
+        return 4
+    if(posX == 0 and posY == 0):
+        return 0
 
 def degreeOnQuadrant(degree,quadrant):
+    print degree
+    print quadrant
     auxMult = 0
     if quadrant == 1:
         auxMult = 0
@@ -99,4 +99,5 @@ def getInfo(currAmino, predAmino):
     CORRECT_DEGREE = fixDegree(currAmino,predAmino,QUADRANTS,DEGREES)
     HOURS = [toHour(CORRECT_DEGREE['curr']),
             toHour(CORRECT_DEGREE['pred'])]
+    print HOURS
     return HOURS

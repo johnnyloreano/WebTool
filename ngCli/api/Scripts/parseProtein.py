@@ -42,20 +42,18 @@ def getListResidue(pdb):
 
     first_R.num = residuesNumber[0]
     first_R.init = residuesNames[0]
+    first_R.isFirst = True
     first_R.downSound = "Voce saiu da proteina!"
     first_R.location = residuesLocation[0]
     first_R.message = generateMessage(first_R)
     list_residues.append(first_R)
     coords_pdb = getCoord(pdb)
     intervalsDistance = generateInterval(coords_pdb)
-    for x in range(1,len(residuesNumber)):
+    for x in range(1,3):
         newR = Res()
         newR.num = residuesNumber[x]
         newR.init = residuesNames[x]
         newR.location = residuesLocation[x]
-
-        if x == 0:
-            newR.isFirst == True
         if x == len(residuesNames):
             newR.isLast == True
 
@@ -72,12 +70,15 @@ def getListResidue(pdb):
             sheetF +=1
 
         transitions = generateTransitions(newR.location,list_residues[x-1].location)
+        print transitions
         newR.downSound = str(transitions[1]) + ". Intervalo " + str(intervalsDistance[x]['front'])
         list_residues[x-1].upSound = str(transitions[0]) + ". Intervalo " + str(intervalsDistance[x]['back'])
         
         newR.message = generateMessage(newR)
 
         list_residues.append(newR)
+    for x in list_residues:
+        print x.location
 
     list_residues[len(list_residues)-1].upSound = "Voce saiu da proteina!"
 
