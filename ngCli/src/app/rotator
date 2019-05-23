@@ -1,0 +1,21 @@
+   // configureRotation(){
+   //    const chart = this.highcharts.charts[0];
+   //    $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
+   //       eStart = chart.pointer.normalize(eStart);
+   //       const posX = eStart.pageX;
+   //       const posY = eStart.pageY;
+   //       const alpha = chart.options.chart.options3d.alpha;
+   //       const beta = chart.options.chart.options3d.beta;
+   //       const sensitivity = 5; // lower is more sensitive
+   //       $(document).bind({
+   //         'mousemove.hc touchdrag.hc': function(e) {
+   //           chart.options.chart.options3d.beta = beta + (posX - e.pageX) / sensitivity;
+   //           chart.options.chart.options3d.alpha = alpha + (e.pageY - posY) / sensitivity;;
+   //           chart.redraw(false);
+   //         },
+   //         'mouseup touchend': function() {
+   //           $(document).unbind('.hc');
+   //         }
+   //       });
+   //     });
+   // }

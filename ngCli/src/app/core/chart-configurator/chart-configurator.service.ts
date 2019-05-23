@@ -46,7 +46,10 @@ get(option:string){
       },
       plotOptions: {
         series: {
-          lineWidth: 1
+          lineWidth: 1,
+          marker: {
+            radius: 6
+        },
         }
       },
       title: {
@@ -57,6 +60,9 @@ get(option:string){
         max: 10
       },
       yAxis: {
+        title: {
+          text: null
+      },
         min: 0,
         max: 10
       },
@@ -65,6 +71,8 @@ get(option:string){
         max: 10
       },
       series: [{
+        showInLegend: false,
+        color:"black",
         dataLabels: {
           enabled: true,
           formatter: function () {
@@ -106,7 +114,11 @@ get(option:string){
       },
       plotOptions: {
         series: {
-          lineWidth: 1
+          showInLegend: false,
+          lineWidth: 1,
+          marker: {
+            radius: 6
+        },
         }
       },
       title: {
@@ -117,6 +129,9 @@ get(option:string){
         max: 100
       },
       yAxis: {
+        title: {
+          text: null
+      },
         min: 0,
         max: 100
       },
@@ -125,6 +140,8 @@ get(option:string){
         max: 100
       },
       series: [{
+        
+        color:"black",
         dataLabels: {
           enabled: true,
           formatter: function () {
@@ -135,8 +152,5 @@ get(option:string){
       }]
   };
   }
-}
-getQuadrantInit(){
-  return '0'
 }
 }

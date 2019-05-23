@@ -27,10 +27,35 @@
         </li>
   </ul>
 </nav>
-        <div attr.aria-label={{quadrant_init}} tabindex="0" id="pv">
+        <div tabindex="0" id="pv">
            <highcharts-chart
            [Highcharts] = "highcharts"
            [options] = "chartOptions"
            style = "width: 100%; height: 120vh; display: block;">
            </highcharts-chart>
         </div>
+<div hidden ="true" aria-hidden="true" id="finish" >
+    <p>
+        Você chegou no final da proteína! 
+        O que você deseja fazer ?
+    </p>
+    <nav>
+        <ul>
+            <li>
+                <button id = "first" type="button" tabindex = '0' class="btn btn-primary w-25 " (click)="init();disableFinish();"  (keydown) = " trap('first','last', $event)">
+                    Refazer a navegação
+                </button>
+            </li>
+            <li>
+                <button type="button" tabindex = '0' class="btn btn-primary w-25" (click)="init();disableFinish();" >
+                    Voltar ao menu principal
+                </button>
+            </li>
+            <li>
+                <button id = "last" type="button" tabindex = '0' class="btn btn-primary w-25" (click)="init();disableFinish();"  (keydown) = "trap('last','first', $event)">
+                    Ir para tela de pesquisa de proteína
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>

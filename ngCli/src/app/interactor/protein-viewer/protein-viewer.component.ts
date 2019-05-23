@@ -1,8 +1,7 @@
 import {
    Component,
    OnInit,
-   AfterViewInit,
-   OnDestroy
+   AfterViewInit 
 } from '@angular/core';
 import {
    Router
@@ -85,8 +84,10 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       if (event.keyCode === 32 || event.keyCode === 13) { // Spacekey
          this.talkGenInfo(data);
       }
-      if (event.keyCode === 9) {
+      if (event.keyCode === 9) { // TabKey
          this.talkTransition(event, data);
+         if(data['isLast'])
+            this.enableFinish();
       }
    }
    talkGenInfo(data: any){
@@ -107,6 +108,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       const objectsPoints = this.highcharts.charts[0].series[0].points;
       for (let x = 0; x < plotPoints.length; x++) {
+         objectsPoints[x]['isLast'] = x == plotPoints.length - 1;
          
          plotPoints[x].addEventListener('keydown', (e) => {
             const dataIndex = Number(plotPoints[x].getAttribute('dataIndex')) - 1;
@@ -115,25 +117,31 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          });
       }
    }
-   configureRotation(){
-      const chart = this.highcharts.charts[0];
-      $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
-         eStart = chart.pointer.normalize(eStart);
-         const posX = eStart.pageX;
-         const posY = eStart.pageY;
-         const alpha = chart.options.chart.options3d.alpha;
-         const beta = chart.options.chart.options3d.beta;
-         const sensitivity = 5; // lower is more sensitive
-         $(document).bind({
-           'mousemove.hc touchdrag.hc': function(e) {
-             chart.options.chart.options3d.beta = beta + (posX - e.pageX) / sensitivity;
-             chart.options.chart.options3d.alpha = alpha + (e.pageY - posY) / sensitivity;;
-             chart.redraw(false);
-           },
-           'mouseup touchend': function() {
-             $(document).unbind('.hc');
-           }
-         });
-       });
+   trap(position,idFocus, event){
+      if(position == "first"){
+         if(event.keyCode == 9)
+         if (event.keyCode == 13){
+            event.preventDefault();
+            document.getElementById(idFocus).focus();
+         }
+      }
+      else if(position == "last")
+         if(event.keyCode == 9){
+            if(event.keyCode != 13){
+               event.preventDefault();
+               document.getElementById(idFocus).focus();
+         }
+      }
+   }
+   enableFinish(){
+      document.getElementById('finish').hidden = false;
+      document.getElementById('finish').setAttribute("aria-hidden","false");
+      document.getElementById('finish').tabIndex = 0;
+      document.getElementById('finish').focus();
+   }
+   disableFinish(){
+      document.getElementById('finish').hidden = true;
+      document.getElementById('finish').setAttribute("aria-hidden","true");
+      document.getElementById('finish').tabIndex = -1;
    }
 } 
