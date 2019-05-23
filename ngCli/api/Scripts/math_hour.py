@@ -1,86 +1,81 @@
 from math import degrees
 from math_utils import *
-def getRelativeQuadrant(pos,posRelative):
+def getQuadrant(pos,posRelative):
     posX = delta(pos[0],posRelative[0])
     posY = delta(pos[1],posRelative[1])
-    if (posX > 0 and posY > 0):
-        return 1
-    if (posX < 0 and posY > 0):
-        return 2
-    if (posX < 0 and posY < 0):
-        return 3
-    if (posX > 0 and posY < 0):
-        return 4
+    if posX > 0:
+        if posY > 0:
+            return [0,2]
+        elif posY < 0:
+            return [1,3]
+        else:
+            return [1,3]
 
-    if (posX == 0 and posY > 0):
-        return 2
-    if (posX < 0 and posY == 0):
-        return 2
-    if (posX == 0 and posY < 0):
-        return 4
-    if (posX > 0 and posY == 0):
-        return 4
-    if(posX == 0 and posY == 0):
-        return 0
+    if posX < 0:
+        if posY > 0:
+            return [3,1]
+        elif posY < 0:
+            return [2,0]
+        else:
+            return [3,1]
+    else:
+        if posY > 0:
+            return [0,1]
+        if posY < 0:
+            return [1,0]
 
 def degreeOnQuadrant(degree,quadrant):
-    print degree
-    print quadrant
-    auxMult = 0
-    if quadrant == 1:
-        auxMult = 0
-    elif quadrant == 2:
-        auxMult = 3
-    elif quadrant == 3:
-        auxMult = 2
-    elif quadrant == 4:
-        auxMult = 1
-    return degree + auxMult * 90
+    return degree + quadrant * 90
 
 def fixDegree(curr,pred,quadrants,degrees):
     result = None
     if(curr[0] > pred[0]):
         if(curr[1] < pred[1]):
             result = {
-                'curr': degreeOnQuadrant(degrees['X'],quadrants['currAmino']),
-                'pred': degreeOnQuadrant(degrees['X'],quadrants['predAmino'])
+                'curr': degreeOnQuadrant(degrees['X'],quadrants[0]),
+                'pred': degreeOnQuadrant(degrees['X'],quadrants[1])
             }
         elif(curr[1] > pred[1]):
             result = {
-                'curr': degreeOnQuadrant(degrees['Y'],quadrants['currAmino']),
-                'pred': degreeOnQuadrant(degrees['Y'],quadrants['predAmino'])
+                'curr': degreeOnQuadrant(degrees['Y'],quadrants[0]),
+                'pred': degreeOnQuadrant(degrees['Y'],quadrants[1])
             }
         else:
             result = {
-                'curr': degreeOnQuadrant(degrees['Y'],quadrants['currAmino']),
-                'pred': degreeOnQuadrant(degrees['X'],quadrants['predAmino'])
+                'curr': degreeOnQuadrant(degrees['X'],quadrants[0]),
+                'pred': degreeOnQuadrant(degrees['X'],quadrants[1])
             }
-    elif(curr[0] > pred[0]):    
+    elif(curr[0] < pred[0]):    
         if(curr[1] < pred[1]):
             result = {
-                'curr': degreeOnQuadrant(degrees['Y'],quadrants['currAmino']),
-                'pred': degreeOnQuadrant(degrees['Y'],quadrants['predAmino'])
+                'curr': degreeOnQuadrant(degrees['Y'],quadrants[0]),
+                'pred': degreeOnQuadrant(degrees['Y'],quadrants[1])
             }
         elif(curr[1] > pred[1]):
             result = {
-                'curr': degreeOnQuadrant(degrees['X'],quadrants['currAmino']),
-                'pred': degreeOnQuadrant(degrees['X'],quadrants['predAmino'])
+                'curr': degreeOnQuadrant(degrees['X'],quadrants[0]),
+                'pred': degreeOnQuadrant(degrees['X'],quadrants[1])
             }
         else:
             result = {
-                'curr': degreeOnQuadrant(degrees['X'],quadrants['currAmino']),
-                'pred': degreeOnQuadrant(degrees['Y'],quadrants['predAmino'])
+                'curr': degreeOnQuadrant(degrees['X'],quadrants[0]),
+                'pred': degreeOnQuadrant(degrees['X'],quadrants[1])
             }
-    else :
-        if(curr[1] < pred[1]):
+    else:
+        if(curr[1] > pred [1]):
             result = {
-                'curr': degreeOnQuadrant(degrees['Y'],quadrants['currAmino']),
-                'pred': degreeOnQuadrant(degrees['X'],quadrants['predAmino'])
+                'curr': degreeOnQuadrant(degrees['X'],quadrants[0]),
+                'pred': degreeOnQuadrant(degrees['Y'],quadrants[1])
+            }
+        elif(curr[1] < pred [1]):
+            result = {
+                'curr': degreeOnQuadrant(degrees['Y'],quadrants[0]),
+                'pred': degreeOnQuadrant(degrees['X'],quadrants[1])
             }
         else:
             result = {
-                'curr': degreeOnQuadrant(degrees['X'],quadrants['currAmino']),
-                'pred': degreeOnQuadrant(degrees['Y'],quadrants['predAmino'])
+                'curr': degreeOnQuadrant(degrees['X'],quadrants[0]),
+                'pred': degreeOnQuadrant(degrees['X'],quadrants[1])
             }
     return result
 
@@ -92,12 +87,8 @@ def toHour(degree):
     
 def getInfo(currAmino, predAmino):
     DEGREES = angleIn2Points(currAmino,predAmino)
-    QUADRANTS = {
-        'currAmino':getRelativeQuadrant(currAmino,predAmino),
-        'predAmino':getRelativeQuadrant(predAmino,currAmino)
-        }
+    QUADRANTS = getQuadrant(currAmino,predAmino)
     CORRECT_DEGREE = fixDegree(currAmino,predAmino,QUADRANTS,DEGREES)
     HOURS = [toHour(CORRECT_DEGREE['curr']),
             toHour(CORRECT_DEGREE['pred'])]
-    print HOURS
     return HOURS
