@@ -13,11 +13,11 @@ export class DataService {
   setProtein(protein) {
     this.startData.next(protein['start']);
     protein['residues'] = this.parseAmino(protein['residues']);
-    this.proteinData.next( new Protein( protein['name'],
+    this.proteinData.next( new Protein( protein['identifier'],
                                         protein['title'],
-                                        protein['authors'],
+                                        protein['author'],
                                         protein['version'],
-                                        protein['deposition_date'],
+                                        protein['date'],
                                         protein['experiment'],
                                         protein['residues'])
                                         );

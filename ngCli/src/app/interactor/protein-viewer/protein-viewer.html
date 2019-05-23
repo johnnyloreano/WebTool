@@ -1,12 +1,12 @@
 <nav>
     <ul>
         <li>
-            <button type="button" tabindex = '0' class="btn btn-primary w-25 " (click)="init()"  >
+            <button id="init" type="button" tabindex = '0' class="btn btn-primary w-25 " (click)="init()"  (keydown) = "trap('first','back', $event)">
                 Iniciar Navegação
             </button>
         </li>
         <li>
-            <button type="button" tabindex = '0' class="btn btn-primary w-25" >
+        <button type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/resumo">
                 Ver informações resumidas
             </button>
         </li>
@@ -21,17 +21,17 @@
             </button>
         </li>
         <li>
-            <button type="button" tabindex = '0' class="btn btn-primary w-25" (click)='goTo("menu")' >
+            <button id="back" type="button" tabindex = '0' class="btn btn-primary w-25" (click)='goTo("menu")' (keydown) = "trap('last','init', $event)">
                 Voltar ao menu principal
             </button>
         </li>
   </ul>
 </nav>
-        <div tabindex="0" id="pv">
+        <div id="pv">
            <highcharts-chart
            [Highcharts] = "highcharts"
            [options] = "chartOptions"
-           style = "width: 100%; height: 120vh; display: block;">
+           style = "width: 95vw; height: 95vh; display: block;">
            </highcharts-chart>
         </div>
 <div hidden ="true" aria-hidden="true" id="finish" >
@@ -42,7 +42,7 @@
     <nav>
         <ul>
             <li>
-                <button id = "first" type="button" tabindex = '0' class="btn btn-primary w-25 " (click)="init();disableFinish();"  (keydown) = " trap('first','last', $event)">
+                <button id = "first" type="button" tabindex = '0' class="btn btn-primary w-25 " (click)="init();disableFinish();"  (keydown) = "trap('first','last', $event)">
                     Refazer a navegação
                 </button>
             </li>

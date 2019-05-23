@@ -35,7 +35,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
       this.quadrant_init = "Iniciar no "+this._data.getStart();
       if(this.chartOptions === null)
-      this._router.navigate(['/menu']);
+         this._router.navigate(['/menu']);
    }
    goTo(name){
       this._router.navigate([name]).then(()=>{window.location.reload();})
@@ -75,6 +75,13 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          plotPoints[x].setAttribute("tabindex", String(dataIndex));
       }
    }
+   unsetTabindex(){
+      const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
+      for(let x = 0; x < plotPoints.length;x++){
+         const dataIndex = plotPoints[x].getAttribute('dataIndex');
+         plotPoints[x].setAttribute("tabindex", "-1");
+      }
+   }
    keyVerifier(event: KeyboardEvent) {
       if (event.keyCode === 13) {
          this.enterNavigator();
@@ -86,8 +93,10 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       }
       if (event.keyCode === 9) { // TabKey
          this.talkTransition(event, data);
-         if(data['isLast'])
+         if(data['isLast']){
             this.enableFinish();
+            this.unsetTabindex();
+         }
       }
    }
    talkGenInfo(data: any){
@@ -116,18 +125,19 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
             this.event(e, objectsPoints[dataIndex]);
          });
       }
-   }
+   }  
    trap(position,idFocus, event){
       if(position == "first"){
-         if(event.keyCode == 9)
-         if (event.keyCode == 13){
-            event.preventDefault();
-            document.getElementById(idFocus).focus();
+         if(event.keyCode == 9){
+            if( event.keyCode == 16){
+               event.preventDefault();
+               document.getElementById(idFocus).focus();
          }
+      }
       }
       else if(position == "last")
          if(event.keyCode == 9){
-            if(event.keyCode != 13){
+            if(event.keyCode != 16){
                event.preventDefault();
                document.getElementById(idFocus).focus();
          }

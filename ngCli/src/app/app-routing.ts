@@ -9,7 +9,7 @@ import { TestesComponent } from './menu/testes/testes.component';
 
 export const routes: Routes = [
   {path: 'menu', component: MenuComponent},
-  {path: 'summary', component: SummaryComponent},
+  {path: 'resumo', component: SummaryComponent},
   {path: 'buscador', component: FormComponent},
   { path: 'manual', pathMatch: 'full', component: ManualComponent},
   { path: 'proteinView', pathMatch: 'full', component: ProteinViewerComponent},

@@ -26,8 +26,7 @@ export class Protein {
         return this._authors;
     } 
     get experiment(): string{
-        return null;
-        // return this._experiment;
+        return this._experiment;
     } 
     get classification(): string{
         return this._classification
