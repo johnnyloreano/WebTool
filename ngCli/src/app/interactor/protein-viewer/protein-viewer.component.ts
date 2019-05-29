@@ -14,7 +14,7 @@ import highcharts3D from 'highcharts/highcharts-3d.src';
 import {
    TalkerService
 } from '../../core/talker/talker.service';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 import { DataService } from '../../core/data-service/data-service.service';
 highcharts3D(Highcharts);
 @Component({
@@ -80,40 +80,38 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          this.enterNavigator();
       }
    }
-   event(event, data) {
-      if (event.keyCode === 32 || event.keyCode === 13) { // Spacekey
-         this.talkGenInfo(data);
+   event(event:any, data) {
+      let message: string;
+      if (event instanceof KeyboardEvent){
+         if (event.keyCode === 65) 
+            message = data['message'];
+         else if (event.keyCode === 83)
+            message = data['transition'];
       }
-      if (event.keyCode === 9) { // TabKey
-         this.talkTransition(event, data);
-         if(data['isLast'])
-            this.enableFinish();
+      else if(event instanceof FocusEvent){
+         message = data['message'] + data['transition']
       }
+   return TalkerService.speak(message);
    }
    talkGenInfo(data: any){
-      return TalkerService.speak(data['message']);
+      return TalkerService.speak(data['message'] + data['transition']);
    }
-   talkTransition(key: KeyboardEvent, data: any) {
-      let message: string;
-      if (key.keyCode === 9) {
-         if (key.shiftKey) {
-            message = data['downSound'];
-         } else {
-            message = data['upSound'];
-         }
-      }
-         return TalkerService.speak(message);
-   }
+   // talkTransition(key: KeyboardEvent, data: any) {
+
+
+         
+   // }
    configurePoints(){
       const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
-      const objectsPoints = this.highcharts.charts[0].series[0].points;
+      const data = Highcharts.charts[0].series[0].data;
       for (let x = 0; x < plotPoints.length; x++) {
-         objectsPoints[x]['isLast'] = x == plotPoints.length - 1;
-         
          plotPoints[x].addEventListener('keydown', (e) => {
-            const dataIndex = Number(plotPoints[x].getAttribute('dataIndex')) - 1;
             plotPoints[x].setAttribute("aria-hidden", "true");
-            this.event(e, objectsPoints[dataIndex]);
+            this.event(e as KeyboardEvent, data[Number(plotPoints[x].getAttribute('dataIndex'))-1]);
+         });
+         plotPoints[x].addEventListener('focus', (e) => {
+            plotPoints[x].setAttribute("aria-hidden", "true");
+            this.event(e, data[Number(plotPoints[x].getAttribute('dataIndex'))-1]);
          });
       }
    }

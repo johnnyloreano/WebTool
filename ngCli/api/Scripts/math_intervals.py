@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from pprint import pprint
 from math_utils import distanceOfPoints
 from math_utils import normalizer
@@ -7,20 +9,12 @@ def getDistanceLabel(distances,classInfo):
     INTERVAL = classInfo['interval']
     NAME_DISTANCES = getDistancesNames()
     distances_list = list()
-    distances_loc = dict()
-    distances_loc['front'] = None
-    distances_loc['back'] = None
-    distances_list.append(distances_loc)
     for x in range(0,len(distances) ):
-        distances_loc = dict()
-        distances_loc['front'] = None
-        distances_loc['back'] = None
-        distances_list.append(distances_loc)
         distanceIdx = trunc(distances[x] / INTERVAL) - 1
         if(distanceIdx == 3):
             distanceIdx -= 1
-        distances_list[x]['front'] = NAME_DISTANCES[distanceIdx]
-        distances_list[x+1]['back'] = NAME_DISTANCES[distanceIdx]
+        interval = str("Intervalo " + str(NAME_DISTANCES[distanceIdx]))
+        distances_list.append(interval)
     return distances_list
 
 def allDistanceOfPairs(pdb):
@@ -46,6 +40,6 @@ def getTInfo(data):
 def getDistancesNames():
     NAME_DISTANCES = list()
     NAME_DISTANCES.append("Pequeno")
-    NAME_DISTANCES.append("Medio")
+    NAME_DISTANCES.append("Médio")
     NAME_DISTANCES.append("Grande")
     return NAME_DISTANCES

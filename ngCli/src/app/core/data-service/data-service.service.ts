@@ -53,8 +53,7 @@ export class DataService {
       const nAmino = new Aminoacid();
       nAmino.index = i;
       nAmino.name = residues[i]['init'];
-      nAmino.upSound = residues[i]['upSound'];
-      nAmino.downSound = residues[i]['downSound'];
+      nAmino.transition = residues[i]['transition'];
       nAmino.message = residues[i]['message'];
       const loc = residues[i]['location']
       nAmino.x = loc[0]

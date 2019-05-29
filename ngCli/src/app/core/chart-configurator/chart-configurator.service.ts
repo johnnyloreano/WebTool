@@ -71,6 +71,7 @@ get(option:string){
         max: 10
       },
       series: [{
+        enableMouseTracking: false,
         showInLegend: false,
         color:"black",
         dataLabels: {
@@ -140,7 +141,7 @@ get(option:string){
         max: 100
       },
       series: [{
-        
+        enableMouseTracking: false,
         color:"black",
         dataLabels: {
           enabled: true,
