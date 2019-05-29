@@ -28,6 +28,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    private firstTab: number;
    highcharts = Highcharts;
    seletor = null;
+   lastAccess :SVGAElement;
    chartOptions = null;
    quadrant_init: string;
    ngOnInit() {
@@ -53,7 +54,10 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    }
    enterNavigator() {
       this.setTabindex();
-      this.focusFirstPoint();
+      if(this.lastAccess == undefined)
+         this.focusFirstPoint();
+      else
+      this.lastAccess.focus();
    }
    focusFirstPoint(){
       const aux = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
@@ -91,16 +95,9 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       else if(event instanceof FocusEvent){
          message = data['message'] + data['transition']
       }
+      console.log(this.lastAccess)
    return TalkerService.speak(message);
    }
-   talkGenInfo(data: any){
-      return TalkerService.speak(data['message'] + data['transition']);
-   }
-   // talkTransition(key: KeyboardEvent, data: any) {
-
-
-         
-   // }
    configurePoints(){
       const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       const data = Highcharts.charts[0].series[0].data;
@@ -112,9 +109,11 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          plotPoints[x].addEventListener('focus', (e) => {
             plotPoints[x].setAttribute("aria-hidden", "true");
             this.event(e, data[Number(plotPoints[x].getAttribute('dataIndex'))-1]);
+            this.lastAccess = plotPoints[x];
          });
       }
    }
+
    trap(position,idFocus, event){
       if(position == "first"){
          if(event.keyCode == 9)
@@ -131,6 +130,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          }
       }
    }
+
    enableFinish(){
       document.getElementById('finish').hidden = false;
       document.getElementById('finish').setAttribute("aria-hidden","false");
