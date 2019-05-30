@@ -34,7 +34,6 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    ngOnInit() {
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
-      this.quadrant_init = "Iniciar no "+this._data.getStart();
       if(this.chartOptions === null)
       this._router.navigate(['/menu']);
    }
@@ -49,16 +48,15 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       this.configurePoints();
    }
    init(){
-      TalkerService.speak(this.quadrant_init);
-      this.enterNavigator();
-   }
-   enterNavigator() {
       this.setTabindex();
-      if(this.lastAccess == undefined)
+      if(this.lastAccess == undefined){
+         TalkerService.speak("Iniciar no "+this._data.getStart());         
          this.focusFirstPoint();
+      }
       else
-      this.lastAccess.focus();
+         this.lastAccess.focus();
    }
+   
    focusFirstPoint(){
       const aux = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       if (this.firstTab !== undefined) {
@@ -79,11 +77,6 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          plotPoints[x].setAttribute("tabindex", String(dataIndex));
       }
    }
-   keyVerifier(event: KeyboardEvent) {
-      if (event.keyCode === 13) {
-         this.enterNavigator();
-      }
-   }
    event(event:any, data) {
       let message: string;
       if (event instanceof KeyboardEvent){
@@ -91,6 +84,8 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
             message = data['message'];
          else if (event.keyCode === 83)
             message = data['transition'];
+         else if(event.keyCode === 87)
+            message = "Iniciar no "+this._data.getStart();
       }
       else if(event instanceof FocusEvent){
          message = data['message'] + data['transition']
@@ -109,11 +104,10 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          plotPoints[x].addEventListener('focus', (e) => {
             plotPoints[x].setAttribute("aria-hidden", "true");
             this.event(e, data[Number(plotPoints[x].getAttribute('dataIndex'))-1]);
-            this.lastAccess = plotPoints[x];
+            this.lastAccess = (plotPoints[x] as SVGAElement);
          });
       }
    }
-
    trap(position,idFocus, event){
       if(position == "first"){
          if(event.keyCode == 9)

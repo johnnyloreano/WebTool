@@ -42,6 +42,8 @@ export class DataService {
     return this.proteinData.getValue();
   }
   getResidues(): Aminoacid[]{
+    if(this.getProtein() == undefined || this.getProtein() == null)
+      return null
     return this.getProtein()['residues']
   }
   getStart(){
