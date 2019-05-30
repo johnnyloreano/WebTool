@@ -1,3 +1,4 @@
+
 #viewerHold,svg{
     position: relative;
     background-color: #ADD8E6;
@@ -16,7 +17,4 @@ ul{
 }
 li{
     margin:10px;
-}
-.highcharts-point:focus{
-    border:3px solid black;
 }

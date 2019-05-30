@@ -90,7 +90,6 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       else if(event instanceof FocusEvent){
          message = data['message'] + data['transition']
       }
-      console.log(this.lastAccess)
    return TalkerService.speak(message);
    }
    configurePoints(){
@@ -103,7 +102,9 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          });
          plotPoints[x].addEventListener('focus', (e) => {
             plotPoints[x].setAttribute("aria-hidden", "true");
-            this.event(e, data[Number(plotPoints[x].getAttribute('dataIndex'))-1]);
+            let idx = Number(plotPoints[x].getAttribute('dataIndex'))-1
+            this.event(e, data[idx]);
+            // data[idx].update({marker:{fillColor:"blue",radius:10}},false)
             this.lastAccess = (plotPoints[x] as SVGAElement);
          });
       }
