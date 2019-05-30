@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from protein import *
 from residue import Residue as Res
 from prody_utils import *
@@ -42,10 +44,7 @@ def getListResidue(pdb):
 
     first_R.num = residuesNumber[0]
     first_R.init = residuesNames[0]
-    first_R.isFirst = True
-    first_R.downSound = "Voce saiu da proteina!"
     first_R.location = residuesLocation[0]
-    first_R.message = generateMessage(first_R)
     list_residues.append(first_R)
     coords_pdb = getCoord(pdb)
     intervalsDistance = generateInterval(coords_pdb)
@@ -54,8 +53,6 @@ def getListResidue(pdb):
         newR.num = residuesNumber[x]
         newR.init = residuesNames[x]
         newR.location = residuesLocation[x]
-        if x == len(residuesNames):
-            newR.isLast == True
 
         newR.location == residuesLocation[x]
         if not len(helix_lengths) == helixF:
@@ -69,38 +66,37 @@ def getListResidue(pdb):
         if newR.sheetInf == 'E':
             sheetF +=1
 
-        transitions = generateTransitions(newR.location,list_residues[x-1].location)
-        newR.downSound = str(transitions[1]) + ". Intervalo " + str(intervalsDistance[x]['front'])
-        list_residues[x-1].upSound = str(transitions[0]) + ". Intervalo " + str(intervalsDistance[x]['back'])
-        
-        newR.message = generateMessage(newR)
+        transition = generateTransitions(newR.location,list_residues[x-1].location)
+        list_residues[x-1].transition = str(transition +". "+intervalsDistance[x-1])
 
+        list_residues[x-1].message = generateMessage(list_residues[x-1],str(x))
+        
         list_residues.append(newR)
 
-    list_residues[len(list_residues)-1].upSound = "Voce saiu da proteina!"
+    last = len(list_residues)-1
+    list_residues[last].message = generateMessage(list_residues[last],str(last))
+    list_residues[last].message += '. Você chegou ao final da proteína!'
+    list_residues[last].transition = "Não existem mais transições"
 
     return list_residues
-def generateMessage(residue):
-    message = 'Aminoacido atual '+str(getAminoName(residue.init))
+def generateMessage(residue,index):
+    message = 'Resíduo número  ' +index + '. '
 
-    if residue.isFirst:
-        message += "Primeiro aminoacido"
-    elif residue.isLast:
-        message += "Ultimo aminoacido"
+    message += str(getAminoName(residue.init))
 
     if residue.helixInf == 'B':
-        message += "Inicio de Helice"
+        message += "Início de Hélice. "
     elif residue.helixInf == 'E':
-        message += "Fim de Helice"
+        message += "Fim de Hélice. "
     elif residue.helixInf == 'M':
-        message += "Dentro de Helice"
+        message += "Dentro de Hélice. "
 
     if residue.sheetInf == 'B':
-        message += "Inicio de Fita"
+        message += "Inicio de Fita. "
     elif residue.sheetInf == 'E':
-        message += "Fim de Fita"
+        message += "Fim de Fita. "
     elif residue.sheetInf == 'M':
-        message += "Dentro de Fita"
+        message += "Dentro de Fita. "
 
     return message
     
@@ -121,6 +117,8 @@ def verifySheet(rNum,lengthSheet):
     if rNum > lengthSheet[0] and rNum < lengthSheet[1]:
         return 'M'
     return None
+def isAmino(name):
+    return not getAminoName(name) == None
 
 def getAminoName(initials):
     if initials == 'PHE':
@@ -128,7 +126,7 @@ def getAminoName(initials):
     if  initials ==  'ALA':
         return 'Alanina. '
     if  initials == 'MET':
-        return 'Metionina'
+        return 'Metionina. '
     if  initials == 'LYS':
         return 'Lisina. '
     if  initials == 'GLU':
@@ -144,7 +142,7 @@ def getAminoName(initials):
     if  initials == 'THR':
         return 'Treonina. '
     if  initials == 'CYS':
-        return 'Cisteina. '
+        return 'Cisteína. '
     if  initials == 'TYR':
         return 'Tirosina. '
     if  initials == 'ASN':
@@ -152,14 +150,16 @@ def getAminoName(initials):
     if  initials == 'GLN':
         return 'Glutamina. '
     if  initials == 'GLU':
-        return 'Acido Glutamico. '
+        return 'Ácido Glutâmico. '
     if  initials == 'ARG':
         return 'Arginina. '
-    if  initials == 'HYS':
+    if  initials == 'HIS':
         return 'Histidina. '
     if  initials == 'TRP':
         return 'Triptofano. '
     if  initials == 'ASP':
-        return 'Acido Aspartico. '
+        return 'Ácido Aspártico. '
     if  initials == 'GLY':
         return 'Glicina. '
+    if initials == 'NH2':
+        return 'Grupo Amina. '

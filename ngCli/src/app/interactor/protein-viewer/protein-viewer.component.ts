@@ -14,7 +14,7 @@ import highcharts3D from 'highcharts/highcharts-3d.src';
 import {
    TalkerService
 } from '../../core/talker/talker.service';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 import { DataService } from '../../core/data-service/data-service.service';
 highcharts3D(Highcharts);
 @Component({
@@ -28,12 +28,12 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    private firstTab: number;
    highcharts = Highcharts;
    seletor = null;
+   lastAccess :SVGAElement;
    chartOptions = null;
    quadrant_init: string;
    ngOnInit() {
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
-      this.quadrant_init = "Iniciar no "+this._data.getStart();
       if(this.chartOptions === null)
          this._router.navigate(['/menu']);
    }
@@ -48,13 +48,15 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       this.configurePoints();
    }
    init(){
-      TalkerService.speak(this.quadrant_init);
-      this.enterNavigator();
-   }
-   enterNavigator() {
       this.setTabindex();
-      this.focusFirstPoint();
+      if(this.lastAccess == undefined){
+         TalkerService.speak("Iniciar no "+this._data.getStart());         
+         this.focusFirstPoint();
+      }
+      else
+         this.lastAccess.focus();
    }
+   
    focusFirstPoint(){
       const aux = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       if (this.firstTab !== undefined) {
@@ -75,54 +77,35 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          plotPoints[x].setAttribute("tabindex", String(dataIndex));
       }
    }
-   unsetTabindex(){
-      const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
-      for(let x = 0; x < plotPoints.length;x++){
-         const dataIndex = plotPoints[x].getAttribute('dataIndex');
-         plotPoints[x].setAttribute("tabindex", "-1");
-      }
-   }
-   keyVerifier(event: KeyboardEvent) {
-      if (event.keyCode === 13) {
-         this.enterNavigator();
-      }
-   }
-   event(event, data) {
-      if (event.keyCode === 32 || event.keyCode === 13) { // Spacekey
-         this.talkGenInfo(data);
-      }
-      if (event.keyCode === 9) { // TabKey
-         this.talkTransition(event, data);
-         if(data['isLast']){
-            this.enableFinish();
-            this.unsetTabindex();
-         }
-      }
-   }
-   talkGenInfo(data: any){
-      return TalkerService.speak(data['message']);
-   }
-   talkTransition(key: KeyboardEvent, data: any) {
+   event(event:any, data) {
       let message: string;
-      if (key.keyCode === 9) {
-         if (key.shiftKey) {
-            message = data['downSound'];
-         } else {
-            message = data['upSound'];
-         }
+      if (event instanceof KeyboardEvent){
+         if (event.keyCode === 65) 
+            message = data['message'];
+         else if (event.keyCode === 83)
+            message = data['transition'];
+         else if(event.keyCode === 87)
+            message = "Iniciar no "+this._data.getStart();
       }
-         return TalkerService.speak(message);
+      else if(event instanceof FocusEvent){
+         message = data['message'] + data['transition']
+      }
+   return TalkerService.speak(message);
    }
    configurePoints(){
       const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
-      const objectsPoints = this.highcharts.charts[0].series[0].points;
+      const data = Highcharts.charts[0].series[0].data;
       for (let x = 0; x < plotPoints.length; x++) {
-         objectsPoints[x]['isLast'] = x == plotPoints.length - 1;
-         
          plotPoints[x].addEventListener('keydown', (e) => {
-            const dataIndex = Number(plotPoints[x].getAttribute('dataIndex')) - 1;
             plotPoints[x].setAttribute("aria-hidden", "true");
-            this.event(e, objectsPoints[dataIndex]);
+            this.event(e as KeyboardEvent, data[Number(plotPoints[x].getAttribute('dataIndex'))-1]);
+         });
+         plotPoints[x].addEventListener('focus', (e) => {
+            plotPoints[x].setAttribute("aria-hidden", "true");
+            let idx = Number(plotPoints[x].getAttribute('dataIndex'))-1
+            this.event(e, data[idx]);
+            // data[idx].update({marker:{fillColor:"blue",radius:10}},false)
+            this.lastAccess = (plotPoints[x] as SVGAElement);
          });
       }
    }  
@@ -143,6 +126,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          }
       }
    }
+
    enableFinish(){
       document.getElementById('finish').hidden = false;
       document.getElementById('finish').setAttribute("aria-hidden","false");

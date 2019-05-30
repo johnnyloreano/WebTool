@@ -15,75 +15,19 @@ getChartConfigurations(option:string) {
   return this.chartOptions;
 }
 get(option:string){
+  let data;
+  let size;
+
   if (option == "test"){
-    this.chartOptions = {
-      chart: {
-        tooltip: false,
-        type: 'scatter',
-        marginBottom: 100,
-        marginRight: 50,
-        options3d: {
-          enabled: true,
-          alpha: 0,
-          beta: 0,
-          depth: 0,
-          viewDistance: 0,
-          frame: {
-            bottom: {
-              size: 1,
-              color: 'rgba(0, 0, 0, 0.02)'
-            },
-            back: {
-              size: 1,
-              color: 'rgba(0, 0, 0, 0.04)'
-            },
-            side: {
-              size: 1,
-              color: 'rgba(0, 0, 0, 0.06)'
-            }
-          }
-        },
-      },
-      plotOptions: {
-        series: {
-          lineWidth: 1,
-          marker: {
-            radius: 6
-        },
-        }
-      },
-      title: {
-        text: ''
-      },
-      xAxis: {
-        min: 0,
-        max: 10
-      },
-      yAxis: {
-        title: {
-          text: null
-      },
-        min: 0,
-        max: 10
-      },
-      zAxis: {
-        min: 0,
-        max: 10
-      },
-      series: [{
-        showInLegend: false,
-        color:"black",
-        dataLabels: {
-          enabled: true,
-          formatter: function () {
-            return this.point.name;
-          }
-        },
-        data: this.dataService.getTest()['pTest']
-      }]
-  };
+    data = this.dataService.getTest()['pTest']
+    size = 5
   }
-  else{
+  else {
+    data = this.dataService.getResidues()
+    size = 100
+  }
+  if (data === null)
+    return null;
     this.chartOptions = {
       chart: {
         tooltip: false,
@@ -126,21 +70,21 @@ get(option:string){
       },
       xAxis: {
         min: 0,
-        max: 100
+        max: size
       },
       yAxis: {
         title: {
           text: null
       },
         min: 0,
-        max: 100
+        max: size
       },
       zAxis: {
         min: 0,
-        max: 100
+        max: size
       },
       series: [{
-        
+        enableMouseTracking: false,
         color:"black",
         dataLabels: {
           enabled: true,
@@ -148,9 +92,8 @@ get(option:string){
             return this.point.name;
           }
         },
-        data: this.dataService.getResidues(),
+        data: data,
       }]
   };
   }
-}
 }
