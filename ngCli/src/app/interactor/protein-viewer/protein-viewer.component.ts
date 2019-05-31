@@ -1,7 +1,6 @@
 import {
    Component,
-   OnInit,
-   AfterViewInit 
+   OnInit
 } from '@angular/core';
 import {
    Router
@@ -16,17 +15,18 @@ import {
 } from '../../core/talker/talker.service';
 // import * as $ from 'jquery';
 import { DataService } from '../../core/data-service/data-service.service';
+import AccessibilityModule from 'highcharts/modules/accessibility';
 highcharts3D(Highcharts);
+AccessibilityModule(Highcharts);
 @Component({
    selector: 'app-protein-viewer',
    styleUrls: ['./protein.css'],
    templateUrl: 'protein-viewer.html'
 })
 
-export class ProteinViewerComponent implements OnInit, AfterViewInit {
+export class ProteinViewerComponent implements OnInit {
    constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService) {}
-   private firstTab: number;
-   highcharts = Highcharts;
+   private firstTab: number; 
    seletor = null;
    lastAccess :SVGAElement;
    chartOptions = null;
@@ -36,16 +36,8 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
       if(this.chartOptions === null)
          this._router.navigate(['/menu']);
-   }
-   goTo(name){
-      this._router.navigate([name]).then(()=>{window.location.reload();})
-   }
-   ngAfterViewInit() {
-      if(Highcharts.charts[0] == undefined){
-      Highcharts.charts[0] = Highcharts.chart(this.chartOptions);
-   }
-      // this.configureRotation();
-      this.configurePoints();
+      Highcharts.chart('pv', this.chartOptions);
+      this.configurePoints()
    }
    init(){
       this.setTabindex();
@@ -56,7 +48,6 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       else
          this.lastAccess.focus();
    }
-   
    focusFirstPoint(){
       const aux = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       if (this.firstTab !== undefined) {
@@ -93,22 +84,25 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
    return TalkerService.speak(message);
    }
    configurePoints(){
-      const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
       const data = Highcharts.charts[0].series[0].data;
+      const plotPoints = Array.from(document.getElementsByClassName('highcharts-series-group')[0].children[1].children);
+      plotPoints.sort(function(a,b) {
+         var x = a.point['index'];
+         var y = b.point['index'];
+         return x < y ? -1 : x > y ? 1 : 0;
+     });
       for (let x = 0; x < plotPoints.length; x++) {
          plotPoints[x].addEventListener('keydown', (e) => {
             plotPoints[x].setAttribute("aria-hidden", "true");
-            this.event(e as KeyboardEvent, data[Number(plotPoints[x].getAttribute('dataIndex'))-1]);
+            this.event(e as KeyboardEvent, data[x]);
          });
          plotPoints[x].addEventListener('focus', (e) => {
-            plotPoints[x].setAttribute("aria-hidden", "true");
-            let idx = Number(plotPoints[x].getAttribute('dataIndex'))-1
-            this.event(e, data[idx]);
-            // data[idx].update({marker:{fillColor:"blue",radius:10}},false)
+            this.event(e, data[x]);
+            console.log(plotPoints[x])
             this.lastAccess = (plotPoints[x] as SVGAElement);
          });
       }
-   }  
+   }
    trap(position,idFocus, event){
       if(position == "first"){
          if(event.keyCode == 9){
@@ -126,7 +120,6 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
          }
       }
    }
-
    enableFinish(){
       document.getElementById('finish').hidden = false;
       document.getElementById('finish').setAttribute("aria-hidden","false");
@@ -138,4 +131,5 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
       document.getElementById('finish').setAttribute("aria-hidden","true");
       document.getElementById('finish').tabIndex = -1;
    }
+
 } 

@@ -1,3 +1,4 @@
+
 <nav>
     <ul>
         <li>
@@ -11,29 +12,24 @@
             </button>
         </li>
         <li>
-            <button type="button" tabindex = '0' class="btn btn-primary w-25" (click)='goTo("manual")'>
+            <button type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/manual">
                 Ver manual
             </button>
         </li>
         <li>
-            <button type="button" tabindex = '0' class="btn btn-primary w-25" (click)='goTo("buscador")' >
+            <button type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/buscador" >
                 Ir para tela de pesquisa de proteína
             </button>
         </li>
         <li>
-            <button id="back" type="button" tabindex = '0' class="btn btn-primary w-25" (click)='goTo("menu")' (keydown) = "trap('last','init', $event)">
+            <button id="back" type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/menu" >
                 Voltar ao menu principal
             </button>
         </li>
   </ul>
 </nav>
-        <div id="pv">
-           <highcharts-chart
-           [Highcharts] = "highcharts"
-           [options] = "chartOptions"
-           style = "width: 95vw; height: 95vh; display: block;">
-           </highcharts-chart>
-        </div>
+<div id="pv"></div>
+
 <div hidden ="true" aria-hidden="true" id="finish" >
     <p>
         Você chegou no final da proteína! 
