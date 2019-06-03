@@ -27,7 +27,7 @@ AccessibilityModule(Highcharts);
 export class ProteinViewerComponent implements OnInit {
    constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService) {}
    seletor = null;
-   lastAccess :SVGAElement;
+   history = Array<String>();
    chartOptions = null;
    ngOnInit() {
       this.seletor = this._data.getSeletor();
@@ -55,22 +55,23 @@ export class ProteinViewerComponent implements OnInit {
          }
    }
    event(event:any, data) {
-      console.log(data);
       let message: string;
       if (event instanceof KeyboardEvent){
          if (event.keyCode === 65) 
             message = data['message'];
          else if (event.keyCode === 83)
             message = data['transition'];
-         else if(event.keyCode === 87)
-            message = "Iniciar no "+this._data.getStart();
+         else if (event.keyCode === 72){
+            message = "Histórico de aminoácidos navegados :";
+            this.history.forEach(element => {message += element;}); 
       }
-      else if(event instanceof FocusEvent){
+      if(event instanceof FocusEvent){
          message = data['message'] + data['transition']
       }
-
+      console.log(message)
    return TalkerService.speak(message);
    }
+}
    configurePoints(){
       const data = Highcharts.charts[0].series[0].data;
       const plotPoints = Array.from(document.getElementsByClassName('highcharts-series-group')[0].children[1].children);
@@ -85,8 +86,13 @@ export class ProteinViewerComponent implements OnInit {
             this.event(e as KeyboardEvent, data[x]);
          });
          plotPoints[x].addEventListener('focus', (e) => {
-            this.event(e, data[x]);
+            // const name = data[x]['name'];
+            // const index = Number(data[x]['index'])+1;
+            // const message = "Número "+index + ", "+name+" .";
+            // if(!this.history.includes(message))
+            // this.history.push(message);
             // this.lastAccess = (plotPoints[x] as SVGAElement);
+            this.event(e as FocusEvent, data[x]);
          });
       }
    }
