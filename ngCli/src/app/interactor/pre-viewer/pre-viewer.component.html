@@ -1,0 +1,15 @@
+<div id="successful" class="bg-success w-50 mx-auto">
+      <p tabindex="0">
+      Você buscou a proteína com sucesso!Favor,confirmar.<br>
+      O ID da proteína buscada é {{protein['_identifier']}}<br>
+      O nome da proteína é {{ protein['_title'] }}<br>
+      Essa proteina contém {{protein['_residues'].length}} aminoácidos.<br>
+      Você deseja continuar para o visualizador ?
+    </p>
+      <nav>
+        <ul>
+          <li><button tabindex="0" routerLink = '/proteinView' class="btn btn-primary w-25 mb-1" >Sim, desejo continuar</button></li>
+          <li><button tabindex="0" routerLink='/buscador'  class="btn btn-primary w-25" >Não, voltar para pesquisa</button></li>
+        </ul>
+      </nav>
+    </div>

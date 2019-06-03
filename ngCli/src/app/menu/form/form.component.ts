@@ -22,10 +22,7 @@ export class FormComponent implements OnInit {
         (result) => {
           this.dataService.setProtein(result);
           this.dataService.setSeletor('protein');
-          this.proteinName = this.dataService.getProtein().title;
-          document.getElementById("btnSearch").style.display = "none";
-          document.getElementById("successful").style.display = "block";
-          document.getElementById("successful").focus();
+          this._router.navigate(['preView']);
         },
         (error: HttpErrorResponse) => {
           const errEl = document.getElementById('messageError');

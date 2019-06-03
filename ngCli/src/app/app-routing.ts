@@ -6,6 +6,7 @@ import { ProteinViewerComponent } from './interactor/protein-viewer/protein-view
 import { SummaryComponent } from './interactor/summary/summary.component';
 import { ManualComponent } from './menu/manual/manual.component';
 import { TestesComponent } from './menu/testes/testes.component';
+import { PreViewerComponent } from './interactor/pre-viewer/pre-viewer.component';
 
 export const routes: Routes = [
   {path: 'menu', component: MenuComponent},
@@ -13,6 +14,7 @@ export const routes: Routes = [
   {path: 'buscador', component: FormComponent},
   { path: 'manual', pathMatch: 'full', component: ManualComponent},
   { path: 'proteinView', pathMatch: 'full', component: ProteinViewerComponent},
+  { path: 'preView', pathMatch: 'full', component: PreViewerComponent},
   { path: 'testes', pathMatch: 'full', component: TestesComponent},
   { path: 'viewTest', pathMatch: 'full', component: ProteinViewerComponent},
   { path: '**', redirectTo: 'menu', pathMatch: 'full'}

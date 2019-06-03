@@ -25,8 +25,7 @@ def generateProtein(pdb):
     version =         pdb[1]['version']
     title =           pdb[1]['title']
     residues = getListResidue(pdb)
-    start = generateFQuadrant(quadrantOfPoint(residues[0].location,100))
-    return Protein(identifier,title,authors,version,deposition_date,experiment,residues,start)
+    return Protein(identifier,title,authors,version,deposition_date,experiment,residues)
 
 def getListResidue(pdb):
     residuesNumber = getResNum(pdb)
@@ -68,7 +67,7 @@ def getListResidue(pdb):
 
         transition = generateTransitions(newR.location,list_residues[x-1].location)
         list_residues[x-1].transition = str(transition +". "+intervalsDistance[x-1])
-
+        list_residues[x-1].name = getAminoName(list_residues[x-1].init)
         list_residues[x-1].message = generateMessage(list_residues[x-1],str(x))
         
         list_residues.append(newR)
@@ -76,12 +75,13 @@ def getListResidue(pdb):
     last = len(list_residues)-1
     list_residues[last].message = generateMessage(list_residues[last],str(last))
     list_residues[last].message += '. Você chegou ao final da proteína!'
-    list_residues[last].transition = "Não existem mais transições"
-
+    list_residues[last].transition = " Não existem mais transições"
+    list_residues[last].name = getAminoName(list_residues[last].init)
     return list_residues
 def generateMessage(residue,index):
-    message = 'Resíduo número  ' +index + '. '
-
+    message = 'Resíduo número  ' + index + '. '
+    if int(index) == 1:
+        message += "Começando pelo " + str(generateFQuadrant(quadrantOfPoint(residue.location,100))) + ". "
     message += str(getAminoName(residue.init))
 
     if residue.helixInf == 'B':

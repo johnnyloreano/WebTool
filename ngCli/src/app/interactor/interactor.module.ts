@@ -6,8 +6,9 @@ import { TalkerService } from '../core/talker/talker.service';
 import { RouterModule } from '@angular/router';
 import { HighchartsChartComponent } from 'highcharts-angular';
 import { SummaryComponent} from './summary/summary.component';
+import { PreViewerComponent } from './pre-viewer/pre-viewer.component';
 @NgModule({
-  declarations: [ProteinViewerComponent,HighchartsChartComponent,SummaryComponent],
+  declarations: [ProteinViewerComponent,HighchartsChartComponent,SummaryComponent, PreViewerComponent],
   imports: [
     CommonModule,
     CoreModule,

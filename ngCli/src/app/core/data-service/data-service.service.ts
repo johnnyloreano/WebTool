@@ -54,7 +54,8 @@ export class DataService {
     for(let i = 0 ; i <residues.length; i++){
       const nAmino = new Aminoacid();
       nAmino.index = i;
-      nAmino.name = residues[i]['init'];
+      nAmino.init = residues[i]['init'];
+      nAmino.name = residues[i]['name'];
       nAmino.transition = residues[i]['transition'];
       nAmino.message = residues[i]['message'];
       const loc = residues[i]['location']

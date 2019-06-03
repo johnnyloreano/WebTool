@@ -8,20 +8,7 @@
     Proteína: 
     <input id='protein' [(ngModel)]='pdbFile' type='text' >
   </label>
-  <div id="successful" class="bg-success w-50 mx-auto" tabindex="0">
-    <p  >
-      Você buscou a proteína com sucesso!Favor,confirmar.<br>
-      O ID da proteína buscada é {{pdbFile}}<br>
-      O nome da proteína é {{ proteinName }}<br>
-      Você deseja continuar para o visualizador ?
-    </p>
-    <nav>
-      <ul>
-        <li><button tabindex="0" routerLink = '/proteinView' class="btn btn-primary w-25 mb-1" >Sim, desejo continuar</button></li>
-        <li><button tabindex="0" (click) = "cancelSearch()" (keydown) = "$event.keyCode == 13 ? cancelSearch():null " class="btn btn-primary w-25" >Não, não desejo continuar</button></li>
-      </ul>
-    </nav>
-  </div>
+
   <nav>
     <ul>
       <li><button  tabindex ='0' id="btnSearch" class="btn btn-primary w-25"  (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</button></li>

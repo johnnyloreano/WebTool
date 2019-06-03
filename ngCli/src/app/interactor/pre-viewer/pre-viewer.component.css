@@ -1,0 +1,10 @@
+ul{
+    list-style-type: none;
+}
+#successful{
+    padding: 1px;
+    color:white;
+}
+#successful *:focus{
+    border: 3px dashed white;
+}

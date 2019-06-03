@@ -57,6 +57,7 @@ get(option:string){
     },
   accessibility:{
     keyboardNavigation:{
+      mode:"serialize",
       focusBorder:{
         margin: 5,
         style:{
@@ -72,7 +73,13 @@ get(option:string){
           marker: {
               fillColor: 'black',
               radius: 5 // inherit from series
+          },
+          dataLabels: {
+            enabled: true,
+            formatter: function ()  {      
+              return this.point['init'];
           }
+        }
       }
   },
     title : {
@@ -97,7 +104,13 @@ get(option:string){
       lineColor: 'black',
       showInLegend: false,
       data: data,
-      }]
+      }],
+      tooltip:{
+        formatter: function(){
+          console.log(this);
+          return "<b>Nome do aminoácido: "+this.key+"<br>Posição: "+Number(this.point['index']+1) + "</b>";
+        }
+      }
  };
   }
 }

@@ -26,49 +26,36 @@ AccessibilityModule(Highcharts);
 
 export class ProteinViewerComponent implements OnInit {
    constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService) {}
-   private firstTab: number; 
    seletor = null;
    lastAccess :SVGAElement;
    chartOptions = null;
-   quadrant_init: string;
    ngOnInit() {
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
       if(this.chartOptions === null)
          this._router.navigate(['/menu']);
-      Highcharts.chart('pv', this.chartOptions);
-      this.configurePoints()
+         Highcharts.chart('pv', this.chartOptions);
+         this.configurePoints();
    }
    init(){
-      this.setTabindex();
-      if(this.lastAccess == undefined){
-         TalkerService.speak("Iniciar no "+this._data.getStart());         
-         this.focusFirstPoint();
-      }
-      else
-         this.lastAccess.focus();
+      document.getElementById('pv').focus();
+      TalkerService.speak("Aperte TAB para iniciar a navegação!");
+      // if(this.lastAccess == undefined){
+         // this.focusFirstPoint();
+      // }
+      // else
+         // this.lastAccess.focus();
    }
    focusFirstPoint(){
       const aux = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
-      if (this.firstTab !== undefined) {
-         (aux[this.firstTab] as HTMLElement).focus();
-      }
-      for (let index = 0; index !== aux.length; index++) {
-         if (aux[index].getAttribute('tabindex') === '1') {
+      for (let index = 0; index !== aux.length; index++)
+         if ((aux[index] as any).point['index'] == 0) {
             (aux[index] as HTMLElement).focus();
-            this.firstTab = index;
             break;
          }
-      }
-   }
-   setTabindex(){
-      const plotPoints = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
-      for(let x = 0; x < plotPoints.length;x++){
-         const dataIndex = plotPoints[x].getAttribute('dataIndex');
-         plotPoints[x].setAttribute("tabindex", String(dataIndex));
-      }
    }
    event(event:any, data) {
+      console.log(data);
       let message: string;
       if (event instanceof KeyboardEvent){
          if (event.keyCode === 65) 
@@ -81,12 +68,13 @@ export class ProteinViewerComponent implements OnInit {
       else if(event instanceof FocusEvent){
          message = data['message'] + data['transition']
       }
+
    return TalkerService.speak(message);
    }
    configurePoints(){
       const data = Highcharts.charts[0].series[0].data;
       const plotPoints = Array.from(document.getElementsByClassName('highcharts-series-group')[0].children[1].children);
-      plotPoints.sort(function(a,b) {
+      (plotPoints as any).sort(function(a,b) {
          var x = a.point['index'];
          var y = b.point['index'];
          return x < y ? -1 : x > y ? 1 : 0;
@@ -98,8 +86,7 @@ export class ProteinViewerComponent implements OnInit {
          });
          plotPoints[x].addEventListener('focus', (e) => {
             this.event(e, data[x]);
-            console.log(plotPoints[x])
-            this.lastAccess = (plotPoints[x] as SVGAElement);
+            // this.lastAccess = (plotPoints[x] as SVGAElement);
          });
       }
    }
