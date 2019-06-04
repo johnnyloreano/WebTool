@@ -12,7 +12,6 @@ export class PreViewerComponent implements OnInit {
   constructor(private _data : DataService, private _router : Router) { }
   private protein = this._data.getProtein();
   ngOnInit() {
-    console.log(this.protein);
     if(this.protein == undefined)
       this._router.navigate(['/buscador']);
     

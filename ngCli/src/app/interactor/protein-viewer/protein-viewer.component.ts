@@ -29,6 +29,7 @@ export class ProteinViewerComponent implements OnInit {
    seletor = null;
    history = Array<String>();
    chartOptions = null;
+   lastAccess = null;
    ngOnInit() {
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
@@ -38,26 +39,24 @@ export class ProteinViewerComponent implements OnInit {
          this.configurePoints();
    }
    init(){
-      document.getElementById('pv').focus();
-      TalkerService.speak("Aperte TAB para iniciar a navegação!");
-      // if(this.lastAccess == undefined){
-         // this.focusFirstPoint();
-      // }
-      // else
-         // this.lastAccess.focus();
+      if (this.lastAccess != null)
+         this.lastAccess.focus();
+         
+      else{
+         document.getElementById('pv').focus();
+         TalkerService.speak("Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
+      }
    }
-   focusFirstPoint(){
-      const aux = document.getElementsByClassName('highcharts-series-group')[0].children[1].children;
-      for (let index = 0; index !== aux.length; index++)
-         if ((aux[index] as any).point['index'] == 0) {
-            (aux[index] as HTMLElement).focus();
-            break;
-         }
-   }
-   event(event:any, data) {
+   event(event, data) {
+      // console.log(data);
       let message: string;
       if (event instanceof KeyboardEvent){
-         if (event.keyCode === 65) 
+         if (event.keyCode === 39 && data['isLast']){
+            event.preventDefault();
+            this.enableFinish();
+            return;
+         }
+         else if (event.keyCode === 65) 
             message = data['message'];
          else if (event.keyCode === 83)
             message = data['transition'];
@@ -65,37 +64,35 @@ export class ProteinViewerComponent implements OnInit {
             message = "Histórico de aminoácidos navegados :";
             this.history.forEach(element => {message += element;}); 
       }
-      if(event instanceof FocusEvent){
+         else
+            return ;
+   }
+      else if(event instanceof FocusEvent){
+         if(this.lastAccess != null)
+            if(data['index'] == this.lastAccess['index'])
+            return;
          message = data['message'] + data['transition']
       }
-      console.log(message)
+
    return TalkerService.speak(message);
    }
-}
-   configurePoints(){
-      const data = Highcharts.charts[0].series[0].data;
-      const plotPoints = Array.from(document.getElementsByClassName('highcharts-series-group')[0].children[1].children);
-      (plotPoints as any).sort(function(a,b) {
-         var x = a.point['index'];
-         var y = b.point['index'];
-         return x < y ? -1 : x > y ? 1 : 0;
-     });
-      for (let x = 0; x < plotPoints.length; x++) {
-         plotPoints[x].addEventListener('keydown', (e) => {
-            plotPoints[x].setAttribute("aria-hidden", "true");
-            this.event(e as KeyboardEvent, data[x]);
-         });
-         plotPoints[x].addEventListener('focus', (e) => {
-            // const name = data[x]['name'];
-            // const index = Number(data[x]['index'])+1;
-            // const message = "Número "+index + ", "+name+" .";
-            // if(!this.history.includes(message))
-            // this.history.push(message);
-            // this.lastAccess = (plotPoints[x] as SVGAElement);
-            this.event(e as FocusEvent, data[x]);
-         });
-      }
+configurePoints(){
+   const data = Highcharts.charts[0].series[0].data;
+   for (let x = 0; x < data.length; x++) {
+      const html = data[x]["graphic"].element;
+      html.addEventListener('keydown', (e) => {
+         html.setAttribute("aria-hidden", "true");
+         data[Number(html.getAttribute('dataIndex'))-1]['isLast'] = x == data.length-1;
+         this.event(e as KeyboardEvent, data[Number(html.getAttribute('dataIndex'))-1]);
+      });
+      html.addEventListener('focus', (e) => {
+         html.setAttribute("aria-hidden", "true");
+         let idx = Number(html.getAttribute('dataIndex'))-1
+         this.event(e as FocusEvent, data[idx]);
+         this.lastAccess = html;
+      });
    }
+} 
    trap(position,idFocus, event){
       if(position == "first"){
          if(event.keyCode == 9){

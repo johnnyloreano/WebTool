@@ -107,7 +107,6 @@ get(option:string){
       }],
       tooltip:{
         formatter: function(){
-          console.log(this);
           return "<b>Nome do aminoácido: "+this.key+"<br>Posição: "+Number(this.point['index']+1) + "</b>";
         }
       }
