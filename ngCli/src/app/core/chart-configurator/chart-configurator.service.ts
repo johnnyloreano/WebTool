@@ -57,6 +57,7 @@ get(option:string){
     },
   accessibility:{
     keyboardNavigation:{
+      wrapAround:true,
       mode:"serialize",
       focusBorder:{
         margin: 5,

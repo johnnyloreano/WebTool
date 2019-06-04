@@ -30,6 +30,7 @@ export class ProteinViewerComponent implements OnInit {
    history = Array<String>();
    chartOptions = null;
    lastAccess = null;
+   isClear = true;
    ngOnInit() {
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
@@ -39,16 +40,29 @@ export class ProteinViewerComponent implements OnInit {
          this.configurePoints();
    }
    init(){
-      if (this.lastAccess != null)
-         this.lastAccess.focus();
-         
-      else{
-         document.getElementById('pv').focus();
-         TalkerService.speak("Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
+      if (this.lastAccess != null){
+         this.goToPoint(this.lastAccess);
+         TalkerService.speak("Aperte TAB para recomeçar a navegação.");         
       }
+      else
+         TalkerService.speak("Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
+      
+      document.getElementById('pv').focus();
+   }
+   clear(){
+      const data = Highcharts.charts[0].series[0].data;
+      for (let x = 0; x < this.lastAccess['index']; x++)
+         data[x].visible = true;
+      this.isClear = true;      
+   }
+   goToPoint(point){
+      const data = Highcharts.charts[0].series[0].data;
+      for (let x = 0; x < point['index']; x++) {
+         data[x].visible = false;
+      }
+      this.isClear = false;
    }
    event(event, data) {
-      // console.log(data);
       let message: string;
       if (event instanceof KeyboardEvent){
          if (event.keyCode === 39 && data['isLast']){
@@ -62,7 +76,8 @@ export class ProteinViewerComponent implements OnInit {
             message = data['transition'];
          else if (event.keyCode === 72){
             message = "Histórico de aminoácidos navegados :";
-            this.history.forEach(element => {message += element;}); 
+            for(let x = this.history.length - 10; x < this.history.length;x++)
+               message += this.history[x]; 
       }
          else
             return ;
@@ -73,7 +88,6 @@ export class ProteinViewerComponent implements OnInit {
             return;
          message = data['message'] + data['transition']
       }
-
    return TalkerService.speak(message);
    }
 configurePoints(){
@@ -89,9 +103,13 @@ configurePoints(){
          html.setAttribute("aria-hidden", "true");
          let idx = Number(html.getAttribute('dataIndex'))-1
          this.event(e as FocusEvent, data[idx]);
-         this.lastAccess = html;
+         this.lastAccess = data[x];
+         if(!this.isClear)
+            this.clear();
       });
    }
+
+
 } 
    trap(position,idFocus, event){
       if(position == "first"){
