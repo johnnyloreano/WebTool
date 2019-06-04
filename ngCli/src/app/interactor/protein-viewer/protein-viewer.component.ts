@@ -31,6 +31,7 @@ export class ProteinViewerComponent implements OnInit {
    chartOptions = null;
    lastAccess = null;
    isClear = true;
+   visited = new Set();
    ngOnInit() {
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
@@ -39,13 +40,13 @@ export class ProteinViewerComponent implements OnInit {
          Highcharts.chart('pv', this.chartOptions);
          this.configurePoints();
    }
-   init(){
-      if (this.lastAccess != null){
+   init(redo?){
+      if(redo || this.lastAccess == null)
+         TalkerService.speak("Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
+      else{
          this.goToPoint(this.lastAccess);
          TalkerService.speak("Aperte TAB para recomeçar a navegação.");         
       }
-      else
-         TalkerService.speak("Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
       
       document.getElementById('pv').focus();
    }
@@ -65,20 +66,24 @@ export class ProteinViewerComponent implements OnInit {
    event(event, data) {
       let message: string;
       if (event instanceof KeyboardEvent){
-         if (event.keyCode === 39 && data['isLast']){
+         if (data['isLast'] && event.keyCode === 39) {
             event.preventDefault();
             this.enableFinish();
             return;
          }
          else if (event.keyCode === 65) 
-            message = data['message'];
+         message = data['message'];
          else if (event.keyCode === 83)
-            message = data['transition'];
+         message = data['transition'];
+         else if (event.keyCode === 81){
+            return this.enableFinish();
+      }
          else if (event.keyCode === 72){
             message = "Histórico de aminoácidos navegados :";
             for(let x = this.history.length - 10; x < this.history.length;x++)
                message += this.history[x]; 
       }
+         
          else
             return ;
    }
@@ -90,6 +95,7 @@ export class ProteinViewerComponent implements OnInit {
       }
    return TalkerService.speak(message);
    }
+
 configurePoints(){
    const data = Highcharts.charts[0].series[0].data;
    for (let x = 0; x < data.length; x++) {
@@ -104,6 +110,7 @@ configurePoints(){
          let idx = Number(html.getAttribute('dataIndex'))-1
          this.event(e as FocusEvent, data[idx]);
          this.lastAccess = data[x];
+         this.visited.add(data[x]);
          if(!this.isClear)
             this.clear();
       });
