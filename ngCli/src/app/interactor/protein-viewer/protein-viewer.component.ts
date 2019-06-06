@@ -13,11 +13,13 @@ import highcharts3D from 'highcharts/highcharts-3d.src';
 import {
    TalkerService
 } from '../../core/talker/talker.service';
-// import * as $ from 'jquery';
+import * as $ from 'jquery';
 import { DataService } from '../../core/data-service/data-service.service';
 import AccessibilityModule from 'highcharts/modules/accessibility';
+import HC_exporting from 'highcharts/modules/exporting';
 highcharts3D(Highcharts);
 AccessibilityModule(Highcharts);
+HC_exporting(Highcharts)
 @Component({
    selector: 'app-protein-viewer',
    styleUrls: ['./protein.css'],
@@ -39,6 +41,7 @@ export class ProteinViewerComponent implements OnInit {
          this._router.navigate(['/menu']);
          Highcharts.chart('pv', this.chartOptions);
          this.configurePoints();
+         this.configureRotation();
    }
    init(redo?){
       if(redo || this.lastAccess == null)
@@ -146,5 +149,25 @@ configurePoints(){
       document.getElementById('finish').setAttribute("aria-hidden","true");
       document.getElementById('finish').tabIndex = -1;
    }
-
+   configureRotation(){
+   const chart = Highcharts.charts[0];
+   $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
+      eStart = chart.pointer.normalize(eStart);
+      const posX = eStart.pageX;
+      const posY = eStart.pageY;
+      const alpha = chart.options.chart.options3d.alpha;
+      const beta = chart.options.chart.options3d.beta;
+      const sensitivity = 5; // lower is more sensitive
+      $(document).bind({
+         'mousemove.hc touchdrag.hc': function(e) {
+            chart.options.chart.options3d.beta = beta + (posX - e.pageX) / sensitivity;
+            chart.options.chart.options3d.alpha = alpha + (e.pageY - posY) / sensitivity;;
+            chart.redraw(false);
+         },
+         'mouseup touchend': function() {
+            $(document).unbind('.hc');
+         }
+      });
+      });
+}
 } 

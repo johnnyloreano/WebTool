@@ -1,7 +1,7 @@
 
 class Residue :
 
-    def __init__(self,number =None,init=None,transition=None,location=None,message=None,name = None):
+    def __init__(self,number =None,init=None,transition=None,location=None,message=None,name = None, marker = None):
         self.num = number
         self.init = init
         self.transition = transition

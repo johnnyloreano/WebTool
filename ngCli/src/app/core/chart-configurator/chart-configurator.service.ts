@@ -30,7 +30,7 @@ get(option:string){
     return null;
   this.chartOptions = {      
     chart: {         
-       type: 'scatter',
+       type: 'scatter3d',
        marginBottom: 100,
        marginRight: 50,
        options3d: {
