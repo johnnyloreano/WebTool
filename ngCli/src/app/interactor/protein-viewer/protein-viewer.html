@@ -1,4 +1,3 @@
-
 <nav>
     <ul>
         <li>
@@ -28,8 +27,6 @@
         </li>
   </ul>
 </nav>
-<div id="pv" tabindex="1"></div>
-
 <div hidden ="true" aria-hidden="true" id="finish" >
     <p>
         Você saiu da proteína! 
@@ -38,20 +35,21 @@
     <nav>
         <ul>
             <li>
-                <button id = "first" type="button" tabindex = '0' class="btn btn-primary w-25 " (click)="init('redo');disableFinish();"  (keydown) = "trap('first','last', $event)">
+                <button id = "first" type="button" tabindex = '0' class="btn btn-primary w-25 " (keydown.enter)="init();disableFinish();">
                     Refazer a navegação do início
                 </button>
             </li>
             <li>
-                <button type="button" tabindex = '0' class="btn btn-primary w-25" (click)="init();disableFinish();" >
+                <button type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/menu" >
                     Voltar ao menu principal
                 </button>
             </li>
             <li>
-                <button id = "last" type="button" tabindex = '0' class="btn btn-primary w-25" (click)="init();disableFinish();"  (keydown) = "trap('last','first', $event)">
+                <button id = "last" type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/buscador"   (keydown) = "trap('last','first', $event)">
                     Ir para tela de pesquisa de proteína
                 </button>
             </li>
         </ul>
     </nav>
 </div>
+<div id="pv" tabindex="0"></div>

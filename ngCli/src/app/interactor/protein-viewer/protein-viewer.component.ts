@@ -41,29 +41,26 @@ export class ProteinViewerComponent implements OnInit {
          this._router.navigate(['/menu']);
          Highcharts.chart('pv', this.chartOptions);
          this.configurePoints();
-         // this.configureRotation();
    }
-   init(redo?){
-      if(redo || this.lastAccess == null)
-         TalkerService.speak("Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
-      else{
-         this.goToPoint(this.lastAccess);
-         TalkerService.speak("Aperte TAB para recomeçar a navegação.");         
-      }
-      
+   init(){
+      // if(this.lastAccess !== null)
+      //    this.goToPoint(this.lastAccess);
+      console.group(Highcharts.charts[0].series[0].data);
+      TalkerService.speak("Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
       document.getElementById('pv').focus();
    }
    clear(){
       const data = Highcharts.charts[0].series[0].data;
       for (let x = 0; x < this.lastAccess['index']; x++)
-         data[x].visible = true;
-      this.isClear = true;      
+            data[x].visible = true;
+      // this.isClear = true;      
    }
    goToPoint(point){
       const data = Highcharts.charts[0].series[0].data;
       for (let x = 0; x < point['index']; x++) {
          data[x].visible = false;
       }
+      point["graphic"].element.focus();
       this.isClear = false;
    }
    event(event, data) {
@@ -75,19 +72,20 @@ export class ProteinViewerComponent implements OnInit {
             return;
          }
          else if (event.keyCode === 65) 
-         message = data['message'];
+            message = data['message'];
          else if (event.keyCode === 83)
-         message = data['transition'];
-         else if (event.keyCode === 81){
-            return this.enableFinish();
+            message = data['transition'];
+         else if (event.keyCode === 9){
+            // return this.enableFinish();
+            document.getElementById("init").focus();
       }
          else if (event.keyCode === 72){
             message = "Histórico de aminoácidos navegados :";
             for(let x = this.history.length - 10; x < this.history.length;x++)
                message += this.history[x]; 
       }
-         else
-            return ;
+         // else
+         //    return ;
    }
       else if(event instanceof FocusEvent){
          if(this.lastAccess != null)
@@ -109,14 +107,12 @@ configurePoints(){
       });
       html.addEventListener('focus', (e) => {
          this.event(e as FocusEvent, data[x]);
-         this.lastAccess = data[x];
          this.visited.add(data[x]);
-         if(!this.isClear)
-            this.clear();
+         // this.lastAccess = data[x];
+         // if(!this.isClear)
+         //    this.clear();
       });
    }
-
-
 } 
    trap(position,idFocus, event){
       if(position == "first"){
@@ -136,15 +132,12 @@ configurePoints(){
       }
    }
    enableFinish(){
-      document.getElementById('finish').hidden = false;
-      document.getElementById('finish').setAttribute("aria-hidden","false");
-      document.getElementById('finish').tabIndex = 0;
-      document.getElementById('finish').focus();
+      // document.getElementById('finish').hidden = false;
+      // document.getElementById('finish').focus();
    }
    disableFinish(){
-      document.getElementById('finish').hidden = true;
-      document.getElementById('finish').setAttribute("aria-hidden","true");
-      document.getElementById('finish').tabIndex = -1;
+      // document.getElementById('finish').hidden = true;
+      // document.getElementById('finish').tabIndex = -1;
    }
 //    configureRotation(){
 //    const chart = Highcharts.charts[0];

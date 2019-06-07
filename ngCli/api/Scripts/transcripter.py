@@ -5,7 +5,7 @@ from math_hour import *
 from math_intervals import getInfo as intervalInfo
 
 def generateText(hour):
-    message = "Próxima transição : "
+    message = "Transição : "
     if hour >= 11 or hour <= 2:
         message += 'Subindo'
     if hour > 2 and hour < 5:
@@ -14,7 +14,10 @@ def generateText(hour):
         message += 'Descendo'
     if hour > 7 and hour < 11:
         message += 'Indo para a esquerda'
-    return message + " " +str(hour) +" horas"
+    if hour > 1:
+        return message + " " +str(hour) +" horas"
+    else:
+        return message + " " +str(hour) +" hora"
 def generateFQuadrant(quadrant):
     if quadrant == 1:
         return 'Quadrante Superior Direito'
