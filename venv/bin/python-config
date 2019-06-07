@@ -1,4 +1,4 @@
-#!/home/labio/Labio/proj/WebTool/venv/bin/python
+#!/home/labio/Área de Trabalho/WalkingMol/venv/bin/python
 
 import sys
 import getopt

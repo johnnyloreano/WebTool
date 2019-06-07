@@ -13,7 +13,7 @@ import highcharts3D from 'highcharts/highcharts-3d.src';
 import {
    TalkerService
 } from '../../core/talker/talker.service';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 import { DataService } from '../../core/data-service/data-service.service';
 import AccessibilityModule from 'highcharts/modules/accessibility';
 import HC_exporting from 'highcharts/modules/exporting';
@@ -41,7 +41,7 @@ export class ProteinViewerComponent implements OnInit {
          this._router.navigate(['/menu']);
          Highcharts.chart('pv', this.chartOptions);
          this.configurePoints();
-         this.configureRotation();
+         // this.configureRotation();
    }
    init(redo?){
       if(redo || this.lastAccess == null)
@@ -86,7 +86,6 @@ export class ProteinViewerComponent implements OnInit {
             for(let x = this.history.length - 10; x < this.history.length;x++)
                message += this.history[x]; 
       }
-         
          else
             return ;
    }
@@ -103,15 +102,13 @@ configurePoints(){
    const data = Highcharts.charts[0].series[0].data;
    for (let x = 0; x < data.length; x++) {
       const html = data[x]["graphic"].element;
+      html.setAttribute("aria-hidden", "true");
       html.addEventListener('keydown', (e) => {
-         html.setAttribute("aria-hidden", "true");
-         data[Number(html.getAttribute('dataIndex'))-1]['isLast'] = x == data.length-1;
-         this.event(e as KeyboardEvent, data[Number(html.getAttribute('dataIndex'))-1]);
+         data[x]['isLast'] = x == data.length-1;
+         this.event(e as KeyboardEvent, data[x]);
       });
       html.addEventListener('focus', (e) => {
-         html.setAttribute("aria-hidden", "true");
-         let idx = Number(html.getAttribute('dataIndex'))-1
-         this.event(e as FocusEvent, data[idx]);
+         this.event(e as FocusEvent, data[x]);
          this.lastAccess = data[x];
          this.visited.add(data[x]);
          if(!this.isClear)
@@ -149,25 +146,25 @@ configurePoints(){
       document.getElementById('finish').setAttribute("aria-hidden","true");
       document.getElementById('finish').tabIndex = -1;
    }
-   configureRotation(){
-   const chart = Highcharts.charts[0];
-   $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
-      eStart = chart.pointer.normalize(eStart);
-      const posX = eStart.pageX;
-      const posY = eStart.pageY;
-      const alpha = chart.options.chart.options3d.alpha;
-      const beta = chart.options.chart.options3d.beta;
-      const sensitivity = 5; // lower is more sensitive
-      $(document).bind({
-         'mousemove.hc touchdrag.hc': function(e) {
-            chart.options.chart.options3d.beta = beta + (posX - e.pageX) / sensitivity;
-            chart.options.chart.options3d.alpha = alpha + (e.pageY - posY) / sensitivity;;
-            chart.redraw(false);
-         },
-         'mouseup touchend': function() {
-            $(document).unbind('.hc');
-         }
-      });
-      });
-}
+//    configureRotation(){
+//    const chart = Highcharts.charts[0];
+//    $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
+//       eStart = chart.pointer.normalize(eStart);
+//       const posX = eStart.pageX;
+//       const posY = eStart.pageY;
+//       const alpha = chart.options.chart.options3d.alpha;
+//       const beta = chart.options.chart.options3d.beta;
+//       const sensitivity = 5; // lower is more sensitive
+//       $(document).bind({
+//          'mousemove.hc touchdrag.hc': function(e) {
+//             chart.options.chart.options3d.beta = beta + (posX - e.pageX) / sensitivity;
+//             chart.options.chart.options3d.alpha = alpha + (e.pageY - posY) / sensitivity;;
+//             chart.redraw(false);
+//          },
+//          'mouseup touchend': function() {
+//             $(document).unbind('.hc');
+//          }
+//       });
+//       });
+// }
 } 
