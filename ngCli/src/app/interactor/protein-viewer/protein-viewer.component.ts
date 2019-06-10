@@ -1,6 +1,8 @@
 import {
    Component,
-   OnInit
+   OnInit,
+   ViewChild,
+   ElementRef
 } from '@angular/core';
 import {
    Router
@@ -31,9 +33,9 @@ export class ProteinViewerComponent implements OnInit {
    seletor = null;
    history = Array<String>();
    chartOptions = null;
-   lastAccess = null;
-   isClear = true;
+   isFirst = true;
    visited = new Set();
+   lastOne = false;
    ngOnInit() {
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
@@ -43,25 +45,15 @@ export class ProteinViewerComponent implements OnInit {
          this.configurePoints();
    }
    init(){
-      // if(this.lastAccess !== null)
-      //    this.goToPoint(this.lastAccess);
-      console.group(Highcharts.charts[0].series[0].data);
-      TalkerService.speak("Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
+      if(this.isFirst)
+         TalkerService.speak("Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
+      else
+         console.log(this.lastOne)
       document.getElementById('pv').focus();
    }
-   clear(){
-      const data = Highcharts.charts[0].series[0].data;
-      for (let x = 0; x < this.lastAccess['index']; x++)
-            data[x].visible = true;
-      // this.isClear = true;      
-   }
-   goToPoint(point){
-      const data = Highcharts.charts[0].series[0].data;
-      for (let x = 0; x < point['index']; x++) {
-         data[x].visible = false;
-      }
-      point["graphic"].element.focus();
-      this.isClear = false;
+   fakeClick(event: KeyboardEvent){
+      if (event.key == "Enter")
+         document.getElementById("init").click();
    }
    event(event, data) {
       let message: string;
@@ -75,22 +67,23 @@ export class ProteinViewerComponent implements OnInit {
             message = data['message'];
          else if (event.keyCode === 83)
             message = data['transition'];
-         else if (event.keyCode === 9){
-            // return this.enableFinish();
-            document.getElementById("init").focus();
-      }
          else if (event.keyCode === 72){
             message = "Histórico de aminoácidos navegados :";
             for(let x = this.history.length - 10; x < this.history.length;x++)
                message += this.history[x]; 
       }
-         // else
-         //    return ;
+      else if (event.key ==  "q"){
+         this.isFirst = false;
+        return document.getElementById("init").focus();
+      }
+      else if (event.keyCode == 9){
+         event.stopImmediatePropagation();
+         this.isFirst = false;
+         return document.getElementById("init").focus();
+
+      }
    }
       else if(event instanceof FocusEvent){
-         if(this.lastAccess != null)
-            if(data['index'] == this.lastAccess['index'])
-            return;
          message = data['message'] + data['transition']
       }
    return TalkerService.speak(message);
@@ -108,9 +101,7 @@ configurePoints(){
       html.addEventListener('focus', (e) => {
          this.event(e as FocusEvent, data[x]);
          this.visited.add(data[x]);
-         // this.lastAccess = data[x];
-         // if(!this.isClear)
-         //    this.clear();
+         this.lastOne = html;
       });
    }
 } 
