@@ -49,7 +49,7 @@
     No menu principal, você poderá acessar o buscador de proteínas, o manual
      e também poderá visitar a seção de Tutorial, para entender melhor como utilizar essa ferramenta.
   </p>
-  <span tabindex="0" (click)="goTo(menu-h)" (keydown)="$event.keyCode == 13 ? goTo('menu-h') : null">Voltar para título Menu Principal</span>
+  <span tabindex="0" (click)="goTo('menu-h')" (keydown)="$event.keyCode == 13 ? goTo('menu-h') : null">Voltar para título Menu Principal</span>
 </section>
 <section tabindex="0" id="nav-p">
     <h2 tabindex="0">Navegador de proteína</h2>
@@ -76,17 +76,18 @@
     Para repetir informação sobre a próxima posição, utilizar a tecla "S". 
     Caso desejar sair da proteína, utilizar a tecla "Q", ou "TAB".
 </p>
-  <span tabindex="0"  (click)="goTo(nav-h)" (keydown)="$event.keyCode == 13 ? goTo('nav-h') : null">Voltar para título Navegador de proteína</span>
+  <span tabindex="0"  (click)="goTo('nav-h')" (keydown)="$event.keyCode == 13 ? goTo('nav-h') : null">Voltar para título Navegador de proteína</span>
 </section>
 <section tabindex = "0" id="sis-p">
   <h2 tabindex="0">Sistema de navegação</h2>
     <p id="sis-p" tabindex="0">
       Para informar a direção do próximo aminoácido, o WalkingMol utiliza o sistema de navegação por horas. 
-      Imaginando-se um relógio, ao alcançar um determinado aminoácido, deve-se imaginar esse aminoácido posicionado no centro desse relógio.
+      Imagine um relógio.
+      Ao alcançar um determinado aminoácido, deve-se considerar esse aminoácido posicionado no centro desse relógio.
       A partir dele, será dado a direção do próximo aminoácido baseadas em horas. 
       Por exemplo, imagine que o usuário está em um aminoácido, e o próximo aminoácido encontra-se logo a direita dele. Dessa maneira, a ferramenta deverá informar a existência de um novo aminoácido as 3 horas, partindo do aminoácido do início.
     </p>
-  <span tabindex="0"  (click)="goTo(sis-h)" (keydown)="$event.keyCode == 13 ? goTo('sis-h') : null">Voltar para título Sistema de Navegação</span>
+  <span tabindex="0"  (click)="goTo('sis-h')" (keydown)="$event.keyCode == 13 ? goTo('sis-h') : null">Voltar para título Sistema de Navegação</span>
 
 </section>
 <section tabindex = "0" id="conc-p">
@@ -120,7 +121,7 @@
 <p  tabindex="0">
   A corda será usada para amarrar cada par de aminoácido, indicando de onde começa e onde termina o desenho, bem como para indicar como que ele se molda.
 </p>
-  <span tabindex="0"  (click)="goTo(conc-h)" (keydown)="$event.keyCode == 13 ? goTo('conc-h') : null">Voltar para título Material Concreto</span>
+  <span tabindex="0"  (click)="goTo('conc-h')" (keydown)="$event.keyCode == 13 ? goTo('conc-h') : null">Voltar para título Material Concreto</span>
 </section>
 </div>
 <button tabindex='0' id="buttonBack" class='btn bg-primary text-white float-right mr-2 mb-2' routerLink="/menu" >Voltar para o menu principal</button>
