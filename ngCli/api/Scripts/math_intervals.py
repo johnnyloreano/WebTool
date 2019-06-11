@@ -13,7 +13,7 @@ def getDistanceLabel(distances,classInfo):
         distanceIdx = trunc(distances[x] / INTERVAL) - 1
         if(distanceIdx == 3):
             distanceIdx -= 1
-        interval = str("Intervalo " + str(NAME_DISTANCES[distanceIdx]))
+        interval = str("Distância " + str(NAME_DISTANCES[distanceIdx]))
         distances_list.append(interval)
     return distances_list
 

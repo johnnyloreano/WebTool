@@ -2,32 +2,52 @@
   Manual da ferramenta
 </h2>
 <nav class="text-left w-75 mx-auto">
-<h3 tabindex = '0'id="intro-h" (click)="goTo('intro-p')"  (keydown)="$event.keyCode == 13 ? goTo('intro-p') : null">
-  <span tabindex = '-1' href="">Introdução</span>
+<h3 tabindex = '0'id="intro-h" (click)="goTo('intro-p')"  (keydown)="$event.keyCode == 13 ? goTo('intro-p') : null" class="title">
+  Introdução
 </h3>
-<h3 tabindex = '0' id="menu-h"  (click)="goTo('menu-p')"  (keydown)="$event.keyCode == 13 ? goTo('menu-p') : null">
-  <span tabindex = '-1' href="">Menu principal</span>
+<h3 tabindex = '0' id="menu-h"  (click)="goTo('menu-p')"  (keydown)="$event.keyCode == 13 ? goTo('menu-p') : null" class="title">
+  Menu Principal
 </h3>
-<h3 tabindex = '0' id="nav-h"  (click)="goTo('nav-p')"  (keydown)="$event.keyCode == 13 ? goTo('intro-p') : null">
-  <span tabindex = '-1' href="">Navegador</span>
+<h3 tabindex = '0' id="nav-h"  (click)="goTo('nav-p')"  (keydown)="$event.keyCode == 13 ? goTo('nav-p') : null" class="title">
+  Navegador de proteína
 </h3>
-<h4 tabindex=" 0" id="nav-sh" (click)="goTo('nav-sp')"  (keydown)="$event.keyCode == 13 ? goTo('intro-p') : null" class="ml-4">
-    <span tabindex = '-1' href="">Dentro da proteína</span>
+<h4 tabindex=" 0" id="nav-sh" (click)="goTo('nav-sp')"  (keydown)="$event.keyCode == 13 ? goTo('nav-sp') : null" class="subtitle">
+    Dentro da proteína
+</h4>
+<h3 tabindex = '0' id="sis-h"  (click)="goTo('sis-p')"  (keydown)="$event.keyCode == 13 ? goTo('sis-p') : null" class="title">
+  Sistema de navegação
+</h3>
+<h3 tabindex = '0' id="conc-h"  (click)="goTo('conc-p')"  (keydown)="$event.keyCode == 13 ? goTo('conc-p') : null" class="title">
+  Material concreto
+</h3>
+<h4 tabindex=" 0" id="nav-sh" (click)="goTo('conc-sp')"  (keydown)="$event.keyCode == 13 ? goTo('conc-sp') : null" class="subtitle" >
+    Relógio
+</h4>
+<h4 tabindex=" 0" id="nav-sh" (click)="goTo('conc-sp1')"  (keydown)="$event.keyCode == 13 ? goTo('conc-sp1') : null" class="subtitle" >
+    Base de E.V.A
+</h4>
+<h4 tabindex=" 0" id="nav-sh" (click)="goTo('conc-sp2')"  (keydown)="$event.keyCode == 13 ? goTo('conc-sp2') : null" class="subtitle" >
+    Alfinetes
+</h4>
+<h4 tabindex=" 0" id="nav-sh" (click)="goTo('conc-sp3')"  (keydown)="$event.keyCode == 13 ? goTo('conc-sp3') : null" class="subtitle" >
+    Corda
 </h4>
 </nav>
 <div>
 <section tabindex="0" id="intro-p">
   <h2 tabindex="0">Introdução</h2>
   <p  tabindex="0">
-    Bem-vindos à Ferramenta Educativa LABIO!
-    Essa ferramenta foi construída para que você possa compreender a estrutura de proteínas simples. 
+    Bem-vindos à Ferramenta Educativa WalkingMol!
+    Essa ferramenta foi construída para auxiliá-lo no ensino de estrutura de proteínas simples. Também será ensinado o sistema de navegação
+     proposto, bem como a utilização do material concreto.
   </p>
-  <span tabindex="0" (click)="goTo('intro-h')" (keydown)="$event.keyCode == 13 ? goTo('intro-h') : null">Voltar para título INTRODUÇÃO</span>
+  <span tabindex="0" (click)="goTo('intro-h')" (keydown)="$event.keyCode == 13 ? goTo('intro-h') : null">Voltar para título Introdução</span>
 </section>
 <section tabindex="0" id="menu-p">
-    <h2 tabindex="0">Manual</h2>
+    <h2 tabindex="0">Menu Principal</h2>
   <p tabindex="0">
-    No menu principal, você poderá acessar o navegador de proteínas e também o manual.
+    No menu principal, você poderá acessar o buscador de proteínas, o manual
+     e também poderá visitar a seção de Tutorial, para entender melhor como utilizar essa ferramenta.
   </p>
   <span tabindex="0" (click)="goTo(menu-h)" (keydown)="$event.keyCode == 13 ? goTo('menu-h') : null">Voltar para título Menu Principal</span>
 </section>
@@ -35,19 +55,72 @@
     <h2 tabindex="0">Navegador de proteína</h2>
   <p tabindex="0" >
       Para começar, você deve selecionar a opção ABRIR BUSCADOR DE PROTEÍNA, onde você será redirecionado para uma página onde poderá escolher uma proteína.
-      Para escolher a proteína, você deve digitar o CÓDIGO IDENTIFICADOR de tal.Esse código é formado por 4 caracteres, sendo o primeiro um número e, os outros, letras Um exemplo de código é o 1ZDD. Caso ocorra um erro, será informado ao usuário, e ele deverá tentar novamente.
-      É importante notar que o usuário deverá ter acesso a internet, caso seja a primeira vez que busque determinada proteína. Se ela já foi buscada, será salva no seu computador.
-      Uma vez concluída a pesquisa, o usuário será direcionado a uma página onde conterá o título, com o código da proteína buscada, e, logo abaixo, a estrutura da proteína.
-      Para melhor compreensão, usar fones de ouvidos.
-      Para iniciar a navegação, o usuário precisará clicar no botão "Abrir proteína", e o leitor de tela deverá dizer "Visualizador de proteína. Use o tab para começar!". A partir desse momento, o usuário poderá usar o TAB para se movimentar na proteína.
+      Para escolher a proteína, você deve digitar o CÓDIGO IDENTIFICADOR da proteína. 
+      Esse código é formado por 4 caracteres, sendo o primeiro caractér um número e, os outros caracteres, letras. 
+      Um exemplo de código é o 1 Z D D. 
+      Caso ocorra um erro, será informado ao usuário, e ele deverá tentar novamente.
+      É importante que o usuário tenha acesso a internet, caso seja a primeira vez que busque determinada proteína. 
+      Toda vez que uma nova proteína for buscada, essa será salva no seu computador, de modo que possa ser acessado de maneira offline.
+      Uma vez concluída a pesquisa, o usuário será direcionado a uma página onde conterá o título, com o código da proteína buscada, e, logo abaixo, informações iniciais, como a quantidade de aminoácidos a serem percorridos.
+      Para iniciar a navegação, o usuário precisará clicar no botão "Iniciar Navegação". 
+      O leitor deverá dizer "Aperte TAB para iniciar a navegação. 
+      Utilize as setas direita, para avançar, e esquerda, para voltar nos aminoácidos.". A partir desse momento, o usuário poderá usar começar a percorrer a proteína.
   </p>
-  <h2 tabindex="0">Dentro da proteína</h2>
-
-  <p id="nav-sp" tabindex="0">
-      Uma vez que o usuário esteja dentro da proteína, você poderá usar o TAB para movimentar para o próximo aminoácido, e SHIFT + TAB para voltar um aminoácido para trás.
-      Utilize o ESPAÇO para ouvir mais informações sobre o aminoácido. Caso esteja dentro de uma hélice ou fita, o usuário será informado disso.      
+  <h3 tabindex="0" id="nav-sp">Dentro da proteína</h3>
+  <p  tabindex="0">
+    Ao iniciar a navegação, no primeiro aminoácido, será dado a informação da posição inicial onde deverá começar o modelo da proteína.   
+    Após, você deverá ouvir informações sobre o aminoácido atual e sobre a orientação e distância em relação ao próximo aminoácido.
+    A orientação será dada em horas, e a distância será categorizada entre "grande", "médio" ou "pequeno".
+    Para se movimentar ao longo da proteína, deverá ser usado a seta "direita" para movimentar para o próximo aminoácido, e a seta "esquerda" para retornar um aminoácido.
+    Para repetir informação sobre o aminoácido atual, utilizar a tecla "A".
+    Para repetir informação sobre a próxima posição, utilizar a tecla "S". 
+    Caso desejar sair da proteína, utilizar a tecla "Q", ou "TAB".
 </p>
-  <span tabindex="0"  (click)="goTo(nav-h)" (keydown)="$event.keyCode == 13 ? goTo('nav-h') : null">Voltar para título Navegador</span>
+  <span tabindex="0"  (click)="goTo(nav-h)" (keydown)="$event.keyCode == 13 ? goTo('nav-h') : null">Voltar para título Navegador de proteína</span>
+</section>
+<section tabindex = "0" id="sis-p">
+  <h2 tabindex="0">Sistema de navegação</h2>
+    <p id="sis-p" tabindex="0">
+      Para informar a direção do próximo aminoácido, o WalkingMol utiliza o sistema de navegação por horas. 
+      Imaginando-se um relógio, ao alcançar um determinado aminoácido, deve-se imaginar esse aminoácido posicionado no centro desse relógio.
+      A partir dele, será dado a direção do próximo aminoácido baseadas em horas. 
+      Por exemplo, imagine que o usuário está em um aminoácido, e o próximo aminoácido encontra-se logo a direita dele. Dessa maneira, a ferramenta deverá informar a existência de um novo aminoácido as 3 horas, partindo do aminoácido do início.
+    </p>
+  <span tabindex="0"  (click)="goTo(sis-h)" (keydown)="$event.keyCode == 13 ? goTo('sis-h') : null">Voltar para título Sistema de Navegação</span>
+
+</section>
+<section tabindex = "0" id="conc-p">
+  <h2 tabindex="0">Material Concreto</h2>
+  <p id="conc-p" tabindex="0">
+      Para auxiliá-lo na navegação, foi implementado uma solução baseado em material concreto. 
+      Esse material concreto consiste em um Relógio, uma base de E.V.A., alfinetes e uma corda.
+      Veja a seguir maiores detalhes de cada material.      
+  </p>
+  <h3 tabindex="0" id="conc-sp">Relógio</h3>
+  <p  tabindex="0">
+    O relógio servirá para ajudar na orientação dos aminoácidos e no cálculo de distância entre cada um deles.
+    O relógio possui um furo central, onde deverá ser posicionado o aminoácido atual da navegação.
+    O relógio possui as horas indicadas em braille, na parte superior, próximo da borda.
+    Além disso, o relógio possui um ponteiro.
+    Esse ponteiro servirá para indicar a direção desejada, de acordo com as horas, e também indicará a distância, de acordo com um dos três furos escolhido do ponteiro. 
+    Para utilizá-lo, deverá, primeiramente, ser definido o local onde se inicia o desenho da proteína.
+    Feito isso, deverá ser inserido o primeiro aminoácido, e realizado o posicionamento do próximo aminoácido.
+    Após, deverá ser determinado a distância, inserido o próximo aminoácido, e posicionado o novo aminoácido no centro do relógio. 
+    Esse processo se repete até o final da proteína.
+</p>
+<h3 tabindex="0"  id="conc-sp1">Base de E.V.A</h3>
+<p tabindex="0">
+    A base de E.V.A. será usado para fazer o desenho da proteína.
+</p>
+<h3 tabindex="0" id="conc-sp2">Alfinetes</h3>
+<p  tabindex="0">
+  Os alfinetes serão usados para fazer a representação de cada aminoácido, e deverão ser usados para fazer o desenho.
+</p>
+<h3 tabindex="0" id="conc-sp3">Corda</h3>
+<p  tabindex="0">
+  A corda será usada para amarrar cada par de aminoácido, indicando de onde começa e onde termina o desenho, bem como para indicar como que ele se molda.
+</p>
+  <span tabindex="0"  (click)="goTo(conc-h)" (keydown)="$event.keyCode == 13 ? goTo('conc-h') : null">Voltar para título Material Concreto</span>
 </section>
 </div>
-<button tabindex='0' id="buttonBack" class='btn bg-primary text-white float-right' routerLink="/menu" >Voltar para o menu principal</button>
+<button tabindex='0' id="buttonBack" class='btn bg-primary text-white float-right mr-2 mb-2' routerLink="/menu" >Voltar para o menu principal</button>

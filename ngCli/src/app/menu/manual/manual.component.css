@@ -4,15 +4,23 @@ p{
     letter-spacing: 1px;
     font-size: 1.2em;
 }
-nav h3{
-    border-bottom:1px solid black;
+nav * {
+    border-bottom:thin solid black;
+}
+nav{
+    border-left:thin solid black;
+    border-right:thin solid black;
+    padding : 0 0.4em;
+
 }
 section p {
     text-align: left;
     padding:0 1px;
 }
-span {
+.subtitle{
+    text-indent: 1.5em;
+}
+span, .title, .subtitle{
     cursor:pointer;
     color:blue;
-    text-decoration:underline;
 }

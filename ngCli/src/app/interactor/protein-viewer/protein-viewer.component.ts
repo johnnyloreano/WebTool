@@ -35,7 +35,7 @@ export class ProteinViewerComponent implements OnInit {
    chartOptions = null;
    isFirst = true;
    visited = new Set();
-   lastOne = false;
+   lastOne = null;
    ngOnInit() {
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
@@ -48,14 +48,17 @@ export class ProteinViewerComponent implements OnInit {
       if(this.isFirst)
          TalkerService.speak("Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
       else
-         console.log(this.lastOne)
+         TalkerService.speak(this.lastOne["message"] + this.lastOne["transition"]);
       document.getElementById('pv').focus();
    }
    fakeClick(event: KeyboardEvent){
       if (event.key == "Enter")
          document.getElementById("init").click();
+      this.trap('first','back', event);
    }
    event(event, data) {
+      // if (data === this.lastOne)
+      //    return;
       let message: string;
       if (event instanceof KeyboardEvent){
          if (data['isLast'] && event.keyCode === 39) {
@@ -101,26 +104,22 @@ configurePoints(){
       html.addEventListener('focus', (e) => {
          this.event(e as FocusEvent, data[x]);
          this.visited.add(data[x]);
-         this.lastOne = html;
+         this.lastOne = data[x];
       });
    }
 } 
    trap(position,idFocus, event){
       if(position == "first"){
-         if(event.keyCode == 9){
-            if( event.keyCode == 16){
-               event.preventDefault();
-               document.getElementById(idFocus).focus();
+         if(event.shiftKey && event.key == "Tab"){
+            event.preventDefault();
+            document.getElementById(idFocus).focus();
          }
-      }
       }
       else if(position == "last")
-         if(event.keyCode == 9){
-            if(event.keyCode != 16){
-               event.preventDefault();
-               document.getElementById(idFocus).focus();
+         if(!event.shiftKey && event.key == "Tab"){
+            event.preventDefault();
+            document.getElementById(idFocus).focus();
          }
-      }
    }
    enableFinish(){
       // document.getElementById('finish').hidden = false;

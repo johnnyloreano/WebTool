@@ -1,7 +1,7 @@
 <nav>
     <ul>
         <li>
-            <button id="init" type="button" tabindex = '0' class="btn btn-primary w-25 "  (keydown) = "fakeClick($event)" (click)="init()">
+            <button id="init" type="button" tabindex = '0' class="btn btn-primary w-25 " (keydown) = "fakeClick($event)" (click)="init()">
                 Iniciar Navegação
             </button>
         </li>
@@ -21,7 +21,7 @@
             </button>
         </li>
         <li>
-            <button id="back" type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/menu" (keydown) = "trap('back','first', $event)">
+            <button id="back" type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/menu" (keydown) = "trap('last','init', $event)">
                 Voltar ao menu principal
             </button>
         </li>
