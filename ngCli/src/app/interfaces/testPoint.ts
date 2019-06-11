@@ -3,6 +3,7 @@ export class TestPoint {
     x : number;
     y : number;
     z : number;
-    downSound: string;
-    upSound: string;
+    transitions: string;
+    message: string;
+    init: string;
 }

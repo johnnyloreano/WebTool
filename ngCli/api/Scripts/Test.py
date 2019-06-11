@@ -1,13 +1,14 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 class Test:
-    def __init__(self,coords,upSound = None,downSound = None):
+    def __init__(self,coords,transition = None,message = ""):
         self.coords = coords
-        self.upSound = upSound
-        self.downSound = downSound
-
+        self.transition = transition
+        self.message = message
 
     def toJson(self):
         data = dict()
-        data['coords'] = self.coords
-        data['upSound'] = self.upSound
-        data['downSound'] = self.downSound
+        data['location'] = self.coords
+        data['transition'] = self.transition
+        data['message'] = self.message
         return data

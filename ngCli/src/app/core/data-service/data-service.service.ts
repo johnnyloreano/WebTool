@@ -71,13 +71,15 @@ export class DataService {
     for(let x = 0; x < pTest.length;x++){
       let tp = new TestPoint();
       tp.index = x;
-      tp.downSound = pTest[x]['downSound'];
-      tp.upSound = pTest[x]['upSound'];
-      const coords = pTest[x]['coords'];
+      tp.message = pTest[x]['message'];
+      tp.transitions = pTest[x]['transition'];
+      const coords = pTest[x]['location'];
       tp.x = coords[0];
       tp.y = coords[1];
+      tp.init = String(x+1);
       pTestArr.push(tp);
     }
+    console.group(pTestArr)
     return pTestArr;
   }
 }

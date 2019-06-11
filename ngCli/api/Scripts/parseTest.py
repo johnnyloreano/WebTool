@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from pprint import pprint
 from Test import Test 
 from transcripter import generateTransitions
@@ -16,16 +18,14 @@ def toJson(name):
     listTest = list()
     for x in obj:
         listTest.append(x.toJson())
-    data = dict()
-    data['pTest'] = listTest
-    data['start'] = generateFQuadrant(quadrantOfPoint(obj[0].coords,5))
-    return dumps(data)
+
+    return dumps( {'pTest' : listTest} )
 
 def generateTest(name):
     listPointT = list()
     firstCoords = dataSet[name][0]
     firstTest = Test(firstCoords)
-    firstTest.downSound = "Voce saiu da figura!"
+    firstTest.message  = "Iniciando no quadrante "+ str( generateFQuadrant(quadrantOfPoint(firstTest.coords,5)) ) + ". "
     intervals = None
     listPointT.append(firstTest)
 
@@ -36,14 +36,15 @@ def generateTest(name):
         trans =  generateTransitions(listPointT[x].coords, listPointT[x-1].coords)
         distance = distanceOfPoints(listPointT[x].coords, listPointT[x-1].coords)
         interval = None
-        if distance <=1:
-            interval = 'Pequeno'
+        if distance <= 1:
+            interval = 'Pequena'
         elif distance <= 2:
-            interval = 'Medio'
+            interval = 'Média'
         else:
             interval =  'Grande'
-        listPointT[x-1].upSound = trans[0] + ". Intervalo " + interval 
-        listPointT[x].downSound = trans[1] + ". Intervalo " + interval
-
-    listPointT[len(listPointT) - 1].upSound = "Voce saiu da figura!"
+        listPointT[x-1].transition = trans + ". Distância " + interval 
+        listPointT[x-1].message += "Ponto número " + str(x)
+    last = len(listPointT)-1
+    listPointT[last].message = 'Você chegou ao final do desenho!'
+    listPointT[last].transition = " Não existem mais transições"
     return listPointT   
