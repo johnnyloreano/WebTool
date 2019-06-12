@@ -37,9 +37,9 @@
 <section tabindex="0" id="intro-p">
   <h2 tabindex="0">Introdução</h2>
   <p  tabindex="0">
-    Bem-vindos à Ferramenta Educativa WalkingMol!
-    Essa ferramenta foi construída para auxiliá-lo no ensino de estrutura de proteínas simples. Também será ensinado o sistema de navegação
-     proposto, bem como a utilização do material concreto.
+    Bem-vindos à Ferramenta WalkingMol!
+    Essa ferramenta foi construída para ajudar no ensino de estrutura de proteínas simples. Também será ensinado o sistema de navegação
+     proposto, além de como a utilização do material concreto.
   </p>
   <span tabindex="0" (click)="goTo('intro-h')" (keydown)="$event.keyCode == 13 ? goTo('intro-h') : null">Voltar para título Introdução</span>
 </section>
@@ -69,6 +69,8 @@
   <h3 tabindex="0" id="nav-sp">Dentro da proteína</h3>
   <p  tabindex="0">
     Ao iniciar a navegação, no primeiro aminoácido, será dado a informação da posição inicial onde deverá começar o modelo da proteína.   
+    A posição inicial será dada de acordo com o quadrante com o qual ele pertence. 
+    Por exemplo, caso o desenho inicie no canto superior direito, será dito : "Iniciar no quadrante superior direito".
     Após, você deverá ouvir informações sobre o aminoácido atual e sobre a orientação e distância em relação ao próximo aminoácido.
     A orientação será dada em horas, e a distância será categorizada entre "grande", "médio" ou "pequeno".
     Para se movimentar ao longo da proteína, deverá ser usado a seta "direita" para movimentar para o próximo aminoácido, e a seta "esquerda" para retornar um aminoácido.
@@ -84,7 +86,7 @@
       Para informar a direção do próximo aminoácido, o WalkingMol utiliza o sistema de navegação por horas. 
       Imagine um relógio.
       Ao alcançar um determinado aminoácido, deve-se considerar esse aminoácido posicionado no centro desse relógio.
-      A partir dele, será dado a direção do próximo aminoácido baseadas em horas. 
+      A partir dele, será dado a direção do próximo aminoácido baseada em horas. 
       Por exemplo, imagine que o usuário está em um aminoácido, e o próximo aminoácido encontra-se logo a direita dele. Dessa maneira, a ferramenta deverá informar a existência de um novo aminoácido as 3 horas, partindo do aminoácido do início.
     </p>
   <span tabindex="0"  (click)="goTo('sis-h')" (keydown)="$event.keyCode == 13 ? goTo('sis-h') : null">Voltar para título Sistema de Navegação</span>
@@ -94,24 +96,24 @@
   <h2 tabindex="0">Material Concreto</h2>
   <p id="conc-p" tabindex="0">
       Para auxiliá-lo na navegação, foi implementado uma solução baseado em material concreto. 
-      Esse material concreto consiste em um Relógio, uma base de E.V.A., alfinetes e uma corda.
+      Esse material concreto consiste em um Relógio, uma base de E. V. A., alfinetes e uma corda.
       Veja a seguir maiores detalhes de cada material.      
   </p>
   <h3 tabindex="0" id="conc-sp">Relógio</h3>
   <p  tabindex="0">
-    O relógio servirá para ajudar na orientação dos aminoácidos e no cálculo de distância entre cada um deles.
+    O relógio ajudará na orientação dos aminoácidos e no cálculo de distância entre cada um deles.
     O relógio possui um furo central, onde deverá ser posicionado o aminoácido atual da navegação.
     O relógio possui as horas indicadas em braille, na parte superior, próximo da borda.
     Além disso, o relógio possui um ponteiro.
-    Esse ponteiro servirá para indicar a direção desejada, de acordo com as horas, e também indicará a distância, de acordo com um dos três furos escolhido do ponteiro. 
+    Esse ponteiro indicará a direção desejada, de acordo com as horas, e também indicará a distância, de acordo com um dos três furos escolhido do ponteiro. 
     Para utilizá-lo, deverá, primeiramente, ser definido o local onde se inicia o desenho da proteína.
     Feito isso, deverá ser inserido o primeiro aminoácido, e realizado o posicionamento do próximo aminoácido.
     Após, deverá ser determinado a distância, inserido o próximo aminoácido, e posicionado o novo aminoácido no centro do relógio. 
     Esse processo se repete até o final da proteína.
 </p>
-<h3 tabindex="0"  id="conc-sp1">Base de E.V.A</h3>
+<h3 tabindex="0"  id="conc-sp1">Base de E. V. A.</h3>
 <p tabindex="0">
-    A base de E.V.A. será usado para fazer o desenho da proteína.
+    A base de E. V. A. será usado para fazer o desenho da proteína.
 </p>
 <h3 tabindex="0" id="conc-sp2">Alfinetes</h3>
 <p  tabindex="0">

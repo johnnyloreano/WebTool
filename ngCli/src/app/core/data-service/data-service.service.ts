@@ -79,7 +79,6 @@ export class DataService {
       tp.init = String(x+1);
       pTestArr.push(tp);
     }
-    console.group(pTestArr)
     return pTestArr;
   }
 }

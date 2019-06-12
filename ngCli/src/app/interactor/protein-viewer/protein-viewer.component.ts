@@ -1,8 +1,6 @@
 import {
    Component,
-   OnInit,
-   ViewChild,
-   ElementRef
+   OnInit
 } from '@angular/core';
 import {
    Router
@@ -37,6 +35,7 @@ export class ProteinViewerComponent implements OnInit {
    visited = new Set();
    lastOne = null;
    ngOnInit() {
+      document.getElementById("header").focus();
       this.seletor = this._data.getSeletor();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
       if(this.chartOptions === null)
@@ -105,6 +104,8 @@ configurePoints(){
          this.event(e as FocusEvent, data[x]);
          this.visited.add(data[x]);
          this.lastOne = data[x];
+         html.setAttribute("aria-hidden", "true");
+         
       });
    }
 } 
@@ -116,7 +117,7 @@ configurePoints(){
          }
       }
       else if(position == "last")
-         if(!event.shiftKey && event.key == "Tab"){
+         if(!event.shiftKey && (event.key == "Tab"  || event.key == "ArrowDown") ){
             event.preventDefault();
             document.getElementById(idFocus).focus();
          }
