@@ -9,24 +9,24 @@
             </button>
         </li>
         <li>
-        <button type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/resumo" >
+        <a type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/resumo" >
                 Ver informações resumidas
-            </button>
+        </a>
         </li>
         <li>
-            <button type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/manual">
+            <a type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/manual">
                 Ver manual
-            </button>
+            </a>
         </li>
         <li>
-            <button type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/buscador" >
+            <a type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/buscador" >
                 Ir para tela de pesquisa de proteína
-            </button>
+            </a>
         </li>
         <li>
-            <button id="back" type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/menu" (keydown) = "trap('last','init', $event)">
+            <a id="back" type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/menu" (keydown) = "trap('last','init', $event)">
                 Voltar ao menu principal
-            </button>
+            </a>
         </li>
   </ul>
 </nav>
@@ -55,4 +55,4 @@
         </ul>
     </nav>
 </div>
-<div id="pv" tabindex="0" aria-hidden="true"></div>
+<div id="pv" tabindex="0" aria-hidden="true" role="application"></div>

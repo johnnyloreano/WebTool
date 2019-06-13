@@ -4,15 +4,15 @@
   <p tabindex="0">
     Digite abaixo o nome do identificador da proteína que você deseja buscar. O código consiste em 4 caracteres, sendo o primeiro um número, seguido de 3 letras:
   </p>
-  <label for ="protein"class='mr-2'>
+  <label for ="protein" class='mr-2' role="search">
     Proteína: 
-    <input id='protein' [(ngModel)]='pdbFile' type='text' >
+    <input id='protein' [(ngModel)]='pdbFile' type='text'>
   </label>
 
   <nav>
     <ul>
-      <li><button  tabindex ='0' id="btnSearch" class="btn btn-primary w-25"  (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</button></li>
-          <p tabindex='0' id="messageError" class="bg-danger text-white w-25 rounded mt-2 ml-auto mr-auto" ></p>
-      <li><button tabindex='0' id="buttonBack" class="btn btn-primary w-25"  routerLink="/menu">Voltar para o menu principal</button></li>
+      <li><button tabindex ='0' id="btnSearch" class="btn btn-primary w-25"  (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">Procurar proteína</button></li>
+          <p tabindex='0' id="messageError" class="bg-danger text-white w-25 rounded mt-2 ml-auto mr-auto" role="alert"></p>
+      <li><a tabindex='0' id="buttonBack" class="btn btn-primary w-25"  routerLink="/menu">Voltar para o menu principal</a></li>
     </ul>
   </nav>

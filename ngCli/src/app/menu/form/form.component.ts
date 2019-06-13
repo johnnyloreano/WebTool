@@ -12,7 +12,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export class FormComponent implements OnInit {
     private pdbFile: string;
-    private proteinName: string;
     constructor(private _pdbRequester: pdbRequester, private _router: Router, public dataService: DataService) {}
     ngOnInit(){
       document.getElementById("principalHeader").focus();
@@ -28,9 +27,8 @@ export class FormComponent implements OnInit {
           const errEl = document.getElementById('messageError');
           errEl.style.visibility = 'visible';
           errEl.innerHTML = 'Um erro aconteceu. Verifique se o nome do identificador' +
-                            ' da proteína está correto e/ou se você possui internet. Informações do erro:'
-                            + error.message;
-          errEl.focus();
+                            ' da proteína está correto e/ou se você possui internet.'
+          // errEl.focus();
         }
       );
   }

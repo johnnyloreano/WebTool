@@ -1,4 +1,4 @@
-import { Injectable, ɵConsole } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Protein } from '../../interfaces/protein';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { Test} from '../../interfaces/test';
