@@ -34,6 +34,10 @@ export class ProteinViewerComponent implements OnInit {
    isFirst = true;
    visited = new Set();
    lastOne = null;
+   /**
+    * @ignore
+    */
+
    ngOnInit() {
       document.getElementById("header").focus();
       this.seletor = this._data.getSeletor();
@@ -44,6 +48,10 @@ export class ProteinViewerComponent implements OnInit {
       this.configurePoints();
       this.removeDefaultsAria();
    }
+   /**
+    * Realiza a navegação no gráfico.
+    * Fala os comandos básicos do gráfico.
+    */
    init(){
       if(this.isFirst)
          TalkerService.speak("Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
@@ -51,11 +59,27 @@ export class ProteinViewerComponent implements OnInit {
          TalkerService.speak(this.lastOne["message"] + this.lastOne["transition"]);
       document.getElementById('pv').focus();
    }
+   /**
+    * @ignore
+    * Dirtyfix para poder tornar a navegação viável.
+    * Sem essa simulação de clique, NÃO funciona.
+    */
    fakeClick(event: KeyboardEvent){
       if (event.key == "Enter")
          document.getElementById("init").click();
       this.trap('first','back', event);
    }
+   /**
+    * Eventos utilizados durante a navegação.
+    * Em determinado ponto,  o usuário pode saber sobre o ponto atua, usando a tecla A,
+    * pode saber sobre o próximo ponto, usando a tecla S,
+    * pode saber sobre o histórico de pontos, usando a letra H
+    * e pode realizar a saída do gráfico, com TAB ou a letra Q. 
+    * Aqui também é feito a fala de cada ação realizada.
+    * @param event Evento realizado no atual ponto
+    * @param data Dados do atual ponto
+    * @returns Realiza a fala que se deseja obter
+    */
    event(event, data) {
       if (event instanceof KeyboardEvent){
          let message: string;
@@ -76,13 +100,17 @@ export class ProteinViewerComponent implements OnInit {
          else if (event.key.toUpperCase() ==  "Q" || event.keyCode == 9){
             event.stopImmediatePropagation();
             this.isFirst = false;
-         return document.getElementById("init").focus();
+            return document.getElementById("init").focus();
          }
       if(message != undefined)
          return TalkerService.speak(message);
    }
 }
-
+/**
+ * Configura os pontos do gráfico para poder serem navegáveis.
+ * Configura os eventos de teclado de cada ponto
+ * Configura os aria-labels de cada ponto para o leitor de tela
+ */
 configurePoints(){
    const data = Highcharts.charts[0].series[0].data;
    for (let x = 0; x < data.length; x++) {
@@ -99,6 +127,14 @@ configurePoints(){
       });
    }
 } 
+/**
+ * Cria uma trap na navegação de menus.
+ * O usuário fica preso dentro de um determinado fluxo de itens do menu.
+ * @param position Posição do elemento no menu
+ * @param idFocus Id do elemento que deseja-se focar
+ * @param event Evento causado no atual elemento
+ * 
+ */
    trap(position,idFocus, event){
       if(position == "first"){
          if(event.shiftKey && event.key == "Tab"){
@@ -112,8 +148,10 @@ configurePoints(){
             document.getElementById(idFocus).focus();
          }
    }
+   /**
+    * Remove os aria-labels do HighCharts que causam problemas na navegação.
+    */
    removeDefaultsAria(){
-
       document.getElementsByTagName("svg")[0].setAttribute("aria-label", "");
       document.getElementById("highcharts-information-region-0").setAttribute("aria-label", "");
       Array.from(document.getElementsByClassName("highcharts-exit-anchor-wrapper")[0].children).forEach(element =>{element.setAttribute("aria-label", "");});

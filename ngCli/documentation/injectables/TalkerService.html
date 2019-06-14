@@ -56,7 +56,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/core/talker/talker.service.ts</code>
+            <code>src/app/interactor/talker/talker.service.ts</code>
         </p>
 
 
@@ -66,6 +66,25 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#sayTimeout">sayTimeout</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#talker">talker</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -121,8 +140,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="7"
-                            class="link-to-prism">src/app/core/talker/talker.service.ts:7</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="11"
+                            class="link-to-prism">src/app/interactor/talker/talker.service.ts:11</a></div>
                 </td>
             </tr>
 
@@ -170,6 +189,66 @@
         </tbody>
     </table>
 </section>
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sayTimeout"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Static</span>
+                            sayTimeout</b>
+                            <a href="#sayTimeout"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>setTimeout(function () { TalkerService.speak(&quot;&quot;); }, 250)</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/interactor/talker/talker.service.ts:9</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="talker"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Static</span>
+                            talker</b>
+                            <a href="#talker"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new SpeechSynthesisUtterance()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/interactor/talker/talker.service.ts:8</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
 
     </div>
 
@@ -181,16 +260,26 @@
   providedIn: &#x27;root&#x27;
 })
 export class TalkerService {
+  static talker &#x3D; new SpeechSynthesisUtterance();
+  static sayTimeout &#x3D; setTimeout(function () { TalkerService.speak(&quot;&quot;); }, 250);
+
   static speak(message:string) : void{
+    if (speechSynthesis.speaking) {
+      // SpeechSyn is currently speaking, cancel the current utterance(s)
+      speechSynthesis.cancel();
+      // Make sure we don&#x27;t create more than one timeout...
+      if (TalkerService.sayTimeout !&#x3D;&#x3D; null)
+          clearTimeout(TalkerService.sayTimeout);
+        }
       // Good to go
       const msg &#x3D; new SpeechSynthesisUtterance(message);
-      msg.volume &#x3D; 0.8;
+      msg.volume &#x3D; 0.5;
       msg.pitch &#x3D; 1.0;
-      msg.rate &#x3D; 0.8;
-      msg.voice &#x3D; speechSynthesis.getVoices()[14]
+      msg.rate &#x3D; 0.7;
+      msg.voice &#x3D; speechSynthesis.getVoices()[4]
       msg.lang &#x3D; &quot;pt-BR&quot;;
       speechSynthesis.speak(msg);
-      console.log(message);
+      console.log(message)
   }
 }</code></pre>
     </div>

@@ -1,5 +1,4 @@
 import { Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-manual',
@@ -8,10 +7,13 @@ import {Router} from '@angular/router';
 })
 export class ManualComponent implements OnInit{
 
-  constructor(private _router : Router) { }
   ngOnInit(){
     document.getElementById('principalTitle').focus();
   }
+  /**
+   * 
+   * @ignore
+   */
   goTo(el: string){
     document.getElementById(el).focus();
   }

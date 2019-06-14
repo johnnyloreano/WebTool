@@ -150,9 +150,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#cancelSearch">cancelSearch</a>
-                            </li>
-                            <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
@@ -256,45 +253,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="cancelSearch"></a>
-                    <span class="name">
-                        <b>
-                            cancelSearch
-                        </b>
-                        <a href="#cancelSearch"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>cancelSearch()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="35"
-                            class="link-to-prism">src/app/menu/form/form.component.ts:35</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
                         <b>
@@ -352,14 +310,19 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/app/menu/form/form.component.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/app/menu/form/form.component.ts:25</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Faz a busca pela proteína desejada. 
+Caso ocorra algum erro, é escrito na tela.
+Se não, navega para a página para visualizar as informações gerais da proteína.
+O nome usado é o do input &#39;protein&#39;</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -455,6 +418,12 @@ export class FormComponent implements OnInit {
     ngOnInit(){
       document.getElementById(&quot;principalHeader&quot;).focus();
     }
+    /**
+     * Faz a busca pela proteína desejada. 
+     * Caso ocorra algum erro, é escrito na tela.
+     * Se não, navega para a página para visualizar as informações gerais da proteína.
+     * O nome usado é o do input &#x27;protein&#x27;
+     */
   requestProtein() {
       this._pdbRequester.requestTags(this.pdbFile).subscribe(
         (result) &#x3D;&gt; {
@@ -467,14 +436,9 @@ export class FormComponent implements OnInit {
           errEl.style.visibility &#x3D; &#x27;visible&#x27;;
           errEl.innerHTML &#x3D; &#x27;Um erro aconteceu. Verifique se o nome do identificador&#x27; +
                             &#x27; da proteína está correto e/ou se você possui internet.&#x27;
-          // errEl.focus();
+          errEl.focus();
         }
       );
-  }
-    cancelSearch(){
-    document.getElementById(&quot;btnSearch&quot;).style.display &#x3D; &quot;block&quot;;
-    document.getElementById(&quot;successful&quot;).style.display &#x3D; &quot;none&quot;;
-    document.getElementById(&quot;principalHeader&quot;).focus();
   }
 
   }

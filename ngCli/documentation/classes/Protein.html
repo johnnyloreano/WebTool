@@ -440,7 +440,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../classes/Aminoacid.html" target="_self" >Array&lt;Aminoacid&gt;</a></code>
+                            <i>Type : </i>        <code><a href="../classes/Points.html" target="_self" >Array&lt;Points&gt;</a></code>
 
                         </td>
                     </tr>
@@ -702,7 +702,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Aminoacid } from &quot;./aminoacid&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Points } from &quot;./points&quot;;
 
 export class Protein {
     private _title : string;
@@ -712,7 +712,7 @@ export class Protein {
     private _classification : string;
     private _dep_date:string;
     private _version : string;
-    private _residues : Array&lt;Aminoacid&gt;;
+    private _residues : Array&lt;Points&gt;;
     constructor(identifier:string,title: string,authors:string[],version:string,dep_date:string,
         experiment:string,residues : Array&lt;any&gt;){
         this._identifier &#x3D; identifier;
@@ -738,7 +738,7 @@ export class Protein {
     get dep_date(): string{
         return this._dep_date
     } 
-    get residues(): Aminoacid[]{
+    get residues(): Points[]{
         return this._residues
     } 
     get version(): string{

@@ -172,13 +172,10 @@
                                 <a href="#event">event</a>
                             </li>
                             <li>
-                                <a href="#fakeClick">fakeClick</a>
-                            </li>
-                            <li>
                                 <a href="#init">init</a>
                             </li>
                             <li>
-                                <a href="#ngOnInit">ngOnInit</a>
+                                <a href="#removeDefaultsAria">removeDefaultsAria</a>
                             </li>
                             <li>
                                 <a href="#trap">trap</a>
@@ -299,14 +296,18 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="85"
-                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:85</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="114"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:114</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Configura os pontos do gráfico para poder serem navegáveis.
+Configura os eventos de teclado de cada ponto
+Configura os aria-labels de cada ponto para o leitor de tela</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -338,8 +339,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="118"
-                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:118</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="163"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:163</a></div>
                 </td>
             </tr>
 
@@ -377,8 +378,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="114"
-                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:114</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="159"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:159</a></div>
                 </td>
             </tr>
 
@@ -416,14 +417,21 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:58</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:83</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Eventos utilizados durante a navegação.
+Em determinado ponto,  o usuário pode saber sobre o ponto atua, usando a tecla A,
+pode saber sobre o próximo ponto, usando a tecla S,
+pode saber sobre o histórico de pontos, usando a letra H
+e pode realizar a saída do gráfico, com TAB ou a letra Q. 
+Aqui também é feito a fala de cada ação realizada.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -432,6 +440,7 @@
                                 <tr>
                                     <td>Name</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -443,6 +452,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>Evento realizado no atual ponto</p>
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>data</td>
@@ -452,6 +465,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>Dados do atual ponto</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -463,77 +480,8 @@
 
                     </div>
                     <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="fakeClick"></a>
-                    <span class="name">
-                        <b>
-                            fakeClick
-                        </b>
-                        <a href="#fakeClick"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>fakeClick(event: KeyboardEvent)</code>
-                </td>
-            </tr>
+                        <p>Realiza a fala que se deseja obter</p>
 
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:53</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>event</td>
-                                    <td>
-                                            <code>KeyboardEvent</code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
                     </div>
                 </td>
             </tr>
@@ -561,14 +509,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="46"
-                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:46</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:55</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Realiza a navegação no gráfico.\n
+Fala os comandos básicos do gráfico.</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -582,32 +533,34 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ngOnInit"></a>
+                    <a name="removeDefaultsAria"></a>
                     <span class="name">
                         <b>
-                            ngOnInit
+                            removeDefaultsAria
                         </b>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        <a href="#removeDefaultsAria"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngOnInit()</code>
+<code>removeDefaultsAria()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:37</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="154"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:154</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Remove os aria-labels do HighCharts que causam problemas na navegação.</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -639,14 +592,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="101"
-                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:101</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="138"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:138</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Cria uma trap na navegação de menus.
+O usuário fica preso dentro de um determinado fluxo de itens do menu.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -655,6 +611,7 @@
                                 <tr>
                                     <td>Name</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -666,6 +623,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>Posição do elemento no menu</p>
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>idFocus</td>
@@ -675,6 +636,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>Id do elemento que deseja-se focar</p>
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>event</td>
@@ -684,6 +649,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>Evento causado no atual elemento</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -896,12 +865,12 @@ import {
 } from &#x27;@angular/router&#x27;;
 import {
    ChartConfiguratorService
-} from &quot;../../core/chart-configurator/chart-configurator.service&quot;;
+} from &quot;../chart-configurator/chart-configurator.service&quot;;
 import * as Highcharts from &#x27;highcharts&#x27;;
 import highcharts3D from &#x27;highcharts/highcharts-3d.src&#x27;;
 import {
    TalkerService
-} from &#x27;../../core/talker/talker.service&#x27;;
+} from &#x27;../talker/talker.service&#x27;;
 // import * as $ from &#x27;jquery&#x27;;
 import { DataService } from &#x27;../../core/data-service/data-service.service&#x27;;
 import AccessibilityModule from &#x27;highcharts/modules/accessibility&#x27;;
@@ -923,15 +892,24 @@ export class ProteinViewerComponent implements OnInit {
    isFirst &#x3D; true;
    visited &#x3D; new Set();
    lastOne &#x3D; null;
+   /**
+    * @ignore
+    */
+
    ngOnInit() {
       document.getElementById(&quot;header&quot;).focus();
       this.seletor &#x3D; this._data.getSeletor();
       this.chartOptions &#x3D; this._chartConfigurator.getChartConfigurations(this.seletor);
       if(this.chartOptions &#x3D;&#x3D;&#x3D; null)
          this._router.navigate([&#x27;/menu&#x27;]);
-         Highcharts.chart(&#x27;pv&#x27;, this.chartOptions);
-         this.configurePoints();
+      Highcharts.chart(&#x27;pv&#x27;, this.chartOptions);
+      this.configurePoints();
+      this.removeDefaultsAria();
    }
+   /**
+    * Realiza a navegação no gráfico.\n
+    * Fala os comandos básicos do gráfico.
+    */
    init(){
       if(this.isFirst)
          TalkerService.speak(&quot;Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.&quot;);
@@ -939,11 +917,27 @@ export class ProteinViewerComponent implements OnInit {
          TalkerService.speak(this.lastOne[&quot;message&quot;] + this.lastOne[&quot;transition&quot;]);
       document.getElementById(&#x27;pv&#x27;).focus();
    }
+   /**
+    * @ignore
+    * Dirtyfix para poder tornar a navegação viável.
+    * Sem essa simulação de clique, NÃO funciona.
+    */
    fakeClick(event: KeyboardEvent){
       if (event.key &#x3D;&#x3D; &quot;Enter&quot;)
          document.getElementById(&quot;init&quot;).click();
       this.trap(&#x27;first&#x27;,&#x27;back&#x27;, event);
    }
+   /**
+    * Eventos utilizados durante a navegação.
+    * Em determinado ponto,  o usuário pode saber sobre o ponto atua, usando a tecla A,
+    * pode saber sobre o próximo ponto, usando a tecla S,
+    * pode saber sobre o histórico de pontos, usando a letra H
+    * e pode realizar a saída do gráfico, com TAB ou a letra Q. 
+    * Aqui também é feito a fala de cada ação realizada.
+    * @param event Evento realizado no atual ponto
+    * @param data Dados do atual ponto
+    * @returns Realiza a fala que se deseja obter
+    */
    event(event, data) {
       if (event instanceof KeyboardEvent){
          let message: string;
@@ -964,13 +958,17 @@ export class ProteinViewerComponent implements OnInit {
          else if (event.key.toUpperCase() &#x3D;&#x3D;  &quot;Q&quot; || event.keyCode &#x3D;&#x3D; 9){
             event.stopImmediatePropagation();
             this.isFirst &#x3D; false;
-         return document.getElementById(&quot;init&quot;).focus();
+            return document.getElementById(&quot;init&quot;).focus();
          }
       if(message !&#x3D; undefined)
          return TalkerService.speak(message);
    }
 }
-
+/**
+ * Configura os pontos do gráfico para poder serem navegáveis.
+ * Configura os eventos de teclado de cada ponto
+ * Configura os aria-labels de cada ponto para o leitor de tela
+ */
 configurePoints(){
    const data &#x3D; Highcharts.charts[0].series[0].data;
    for (let x &#x3D; 0; x &lt; data.length; x++) {
@@ -987,6 +985,14 @@ configurePoints(){
       });
    }
 } 
+/**
+ * Cria uma trap na navegação de menus.
+ * O usuário fica preso dentro de um determinado fluxo de itens do menu.
+ * @param position Posição do elemento no menu
+ * @param idFocus Id do elemento que deseja-se focar
+ * @param event Evento causado no atual elemento
+ * 
+ */
    trap(position,idFocus, event){
       if(position &#x3D;&#x3D; &quot;first&quot;){
          if(event.shiftKey &amp;&amp; event.key &#x3D;&#x3D; &quot;Tab&quot;){
@@ -1000,13 +1006,21 @@ configurePoints(){
             document.getElementById(idFocus).focus();
          }
    }
+   /**
+    * Remove os aria-labels do HighCharts que causam problemas na navegação.
+    */
+   removeDefaultsAria(){
+      document.getElementsByTagName(&quot;svg&quot;)[0].setAttribute(&quot;aria-label&quot;, &quot;&quot;);
+      document.getElementById(&quot;highcharts-information-region-0&quot;).setAttribute(&quot;aria-label&quot;, &quot;&quot;);
+      Array.from(document.getElementsByClassName(&quot;highcharts-exit-anchor-wrapper&quot;)[0].children).forEach(element &#x3D;&gt;{element.setAttribute(&quot;aria-label&quot;, &quot;&quot;);});
+   }
    enableFinish(){
-      document.getElementById(&#x27;finish&#x27;).hidden &#x3D; false;
-      document.getElementById(&#x27;finish&#x27;).focus();
+      // document.getElementById(&#x27;finish&#x27;).hidden &#x3D; false;
+      // document.getElementById(&#x27;finish&#x27;).focus();
    }
    disableFinish(){
-      document.getElementById(&#x27;finish&#x27;).hidden &#x3D; true;
-      document.getElementById(&#x27;finish&#x27;).tabIndex &#x3D; -1;
+      // document.getElementById(&#x27;finish&#x27;).hidden &#x3D; true;
+      // document.getElementById(&#x27;finish&#x27;).tabIndex &#x3D; -1;
    }
 //    configureRotation(){
 //    const chart &#x3D; Highcharts.charts[0];
@@ -1068,7 +1082,7 @@ configurePoints(){
 
 &lt;div id&#x3D;&quot;pv&quot; tabindex&#x3D;&quot;0&quot; aria-hidden&#x3D;&quot;true&quot; role&#x3D;&quot;application&quot;&gt;&lt;/div&gt;
 
-&lt;div hidden &#x3D;&quot;true&quot; aria-hidden&#x3D;&quot;true&quot; id&#x3D;&quot;finish&quot; &gt;
+&lt;!-- &lt;div hidden &#x3D;&quot;true&quot; aria-hidden&#x3D;&quot;true&quot; id&#x3D;&quot;finish&quot; &gt;
     &lt;p&gt;
         Você saiu da proteína! 
         O que você deseja fazer ?
@@ -1092,7 +1106,7 @@ configurePoints(){
             &lt;/li&gt;
         &lt;/ul&gt;
     &lt;/nav&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt; --&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
@@ -1146,7 +1160,7 @@ li{
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h2 tabindex="0" id="header">    Visualizador</h2><nav>    <ul>        <li>            <button id="init" type="button" tabindex = \'0\' class="btn btn-primary w-25 " (keydown) = "fakeClick($event)" (click)="init()">                Iniciar Navegação            </button>        </li>        <li>        <a type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/resumo" >                Ver informações resumidas        </a>        </li>        <li>            <a type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/manual">                Ver manual            </a>        </li>        <li>            <a type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/buscador" >                Ir para tela de pesquisa de proteína            </a>        </li>        <li>            <a id="back" type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/menu" (keydown) = "trap(\'last\',\'init\', $event)">                Voltar ao menu principal            </a>        </li>  </ul></nav><div id="pv" tabindex="0" aria-hidden="true" role="application"></div><div hidden ="true" aria-hidden="true" id="finish" >    <p>        Você saiu da proteína!         O que você deseja fazer ?    </p>    <nav>        <ul>            <li>                <button id = "first" type="button" tabindex = \'0\' class="btn btn-primary w-25 " (keydown.enter)="init();disableFinish();">                    Refazer a navegação do início                </button>            </li>            <li>                <button type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/menu" >                    Voltar ao menu principal                </button>            </li>            <li>                <button id = "last" type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/buscador"   (keydown) = "trap(\'last\',\'first\', $event)">                    Ir para tela de pesquisa de proteína                </button>            </li>        </ul>    </nav></div></div>'
+        var COMPONENT_TEMPLATE = '<div><h2 tabindex="0" id="header">    Visualizador</h2><nav>    <ul>        <li>            <button id="init" type="button" tabindex = \'0\' class="btn btn-primary w-25 " (keydown) = "fakeClick($event)" (click)="init()">                Iniciar Navegação            </button>        </li>        <li>        <a type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/resumo" >                Ver informações resumidas        </a>        </li>        <li>            <a type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/manual">                Ver manual            </a>        </li>        <li>            <a type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/buscador" >                Ir para tela de pesquisa de proteína            </a>        </li>        <li>            <a id="back" type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/menu" (keydown) = "trap(\'last\',\'init\', $event)">                Voltar ao menu principal            </a>        </li>  </ul></nav><div id="pv" tabindex="0" aria-hidden="true" role="application"></div><!-- <div hidden ="true" aria-hidden="true" id="finish" >    <p>        Você saiu da proteína!         O que você deseja fazer ?    </p>    <nav>        <ul>            <li>                <button id = "first" type="button" tabindex = \'0\' class="btn btn-primary w-25 " (keydown.enter)="init();disableFinish();">                    Refazer a navegação do início                </button>            </li>            <li>                <button type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/menu" >                    Voltar ao menu principal                </button>            </li>            <li>                <button id = "last" type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/buscador"   (keydown) = "trap(\'last\',\'first\', $event)">                    Ir para tela de pesquisa de proteína                </button>            </li>        </ul>    </nav></div> --></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'FormComponent', 'selector': 'app-form'},{'name': 'ManualComponent', 'selector': 'app-manual'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'PreViewerComponent', 'selector': 'app-pre-viewer'},{'name': 'ProteinViewerComponent', 'selector': 'app-protein-viewer'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TestesComponent', 'selector': 'app-testes'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ProteinViewerComponent'};

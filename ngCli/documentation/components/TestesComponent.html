@@ -243,14 +243,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="16"
-                            class="link-to-prism">src/app/menu/testes/testes.component.ts:16</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">src/app/menu/testes/testes.component.ts:20</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Recebe o nome da figura geométrica desejada ,faz a busca por ela no Python e navega à página do gráfico</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -311,7 +313,11 @@ export class TestesComponent {
 
   constructor(private _pdb: pdbRequester, private _router: Router, private _dataS : DataService) { }
 
-
+/**
+ * Recebe o nome da figura geométrica desejada ,faz a busca por ela no Python e navega à página do gráfico
+ * @param name 
+ * 
+ */
   request(name:string){
     this._pdb.requestTest(name).subscribe(
       (result) &#x3D;&gt; {

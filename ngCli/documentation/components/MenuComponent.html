@@ -146,9 +146,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#lastMenuVerify">lastMenuVerify</a>
-                            </li>
-                            <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                         </ul>
@@ -225,72 +222,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="lastMenuVerify"></a>
-                    <span class="name">
-                        <b>
-                            lastMenuVerify
-                        </b>
-                        <a href="#lastMenuVerify"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>lastMenuVerify(e)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">src/app/menu/menu/menu.component.ts:14</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>e</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
                         <b>
@@ -309,8 +240,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="11"
-                            class="link-to-prism">src/app/menu/menu/menu.component.ts:11</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="15"
+                            class="link-to-prism">src/app/menu/menu/menu.component.ts:15</a></div>
                 </td>
             </tr>
 
@@ -376,9 +307,16 @@ import {Router} from &#x27;@angular/router&#x27;;
 export class MenuComponent implements OnInit {
   private pdbContent: any;
   constructor( private _route: Router) {}
+    /**
+   * @ignore
+   */
+  lastMenuV
   ngOnInit() {
     document.getElementById(&#x27;menuLock&#x27;).focus();
   }
+  /**
+   * @ignore
+   */
   lastMenuVerify(e){
     if(e.keyCode &#x3D;&#x3D; 9 &amp;&amp; !e.shiftKey){
       e.preventDefault();

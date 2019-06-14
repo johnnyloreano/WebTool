@@ -12,7 +12,11 @@ export class TestesComponent {
 
   constructor(private _pdb: pdbRequester, private _router: Router, private _dataS : DataService) { }
 
-
+/**
+ * Recebe o nome da figura geométrica desejada ,faz a busca por ela no Python e navega à página do gráfico
+ * @param name 
+ * 
+ */
   request(name:string){
     this._pdb.requestTest(name).subscribe(
       (result) => {

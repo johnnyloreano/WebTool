@@ -16,6 +16,12 @@ export class FormComponent implements OnInit {
     ngOnInit(){
       document.getElementById("principalHeader").focus();
     }
+    /**
+     * Faz a busca pela proteína desejada. 
+     * Caso ocorra algum erro, é escrito na tela.
+     * Se não, navega para a página para visualizar as informações gerais da proteína.
+     * O nome usado é o do input 'protein'
+     */
   requestProtein() {
       this._pdbRequester.requestTags(this.pdbFile).subscribe(
         (result) => {
@@ -28,14 +34,9 @@ export class FormComponent implements OnInit {
           errEl.style.visibility = 'visible';
           errEl.innerHTML = 'Um erro aconteceu. Verifique se o nome do identificador' +
                             ' da proteína está correto e/ou se você possui internet.'
-          // errEl.focus();
+          errEl.focus();
         }
       );
-  }
-    cancelSearch(){
-    document.getElementById("btnSearch").style.display = "block";
-    document.getElementById("successful").style.display = "none";
-    document.getElementById("principalHeader").focus();
   }
 
   }
