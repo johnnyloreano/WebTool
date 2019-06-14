@@ -56,10 +56,8 @@ export class ProteinViewerComponent implements OnInit {
       this.trap('first','back', event);
    }
    event(event, data) {
-      // if (data === this.lastOne)
-      //    return;
-      let message: string;
       if (event instanceof KeyboardEvent){
+         let message: string;
          if (data['isLast'] && event.keyCode === 39) {
             event.preventDefault();
             this.enableFinish();
@@ -74,37 +72,29 @@ export class ProteinViewerComponent implements OnInit {
             for(let x = this.history.length - 10; x < this.history.length;x++)
                message += this.history[x]; 
       }
-      else if (event.key ==  "q"){
+      else if (event.key ==  "q" || event.keyCode == 9){
+         event.stopImmediatePropagation();
          this.isFirst = false;
         return document.getElementById("init").focus();
       }
-      else if (event.keyCode == 9){
-         event.stopImmediatePropagation();
-         this.isFirst = false;
-         return document.getElementById("init").focus();
-
-      }
+      if(message != undefined)
+         return TalkerService.speak(message);
    }
-      else if(event instanceof FocusEvent){
-         message = data['message'] + data['transition']
-      }
-   return TalkerService.speak(message);
-   }
+}
 
 configurePoints(){
    const data = Highcharts.charts[0].series[0].data;
    for (let x = 0; x < data.length; x++) {
       const html = data[x]["graphic"].element;
       html.setAttribute("aria-hidden", "true");
+      html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
       html.addEventListener('keydown', (e) => {
          data[x]['isLast'] = x == data.length-1;
          this.event(e as KeyboardEvent, data[x]);
       });
       html.addEventListener('focus', (e) => {
-         this.event(e as FocusEvent, data[x]);
          this.visited.add(data[x]);
          this.lastOne = data[x];
-         html.setAttribute("aria-hidden", "true");
          
       });
    }

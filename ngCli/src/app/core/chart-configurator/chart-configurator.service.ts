@@ -81,6 +81,7 @@ get(option:string){
               return this.point['init'];
           }
         }
+
       }
   },
     title : {
