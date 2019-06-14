@@ -26,9 +26,9 @@ def generateTest(name):
     firstCoords = dataSet[name][0]
     firstTest = Test(firstCoords)
     firstTest.message  = "Iniciando no quadrante "+ str( generateFQuadrant(quadrantOfPoint(firstTest.coords,5)) ) + ". "
+    firstTest.init = 1
     intervals = None
     listPointT.append(firstTest)
-
     for x in range(1,len(dataSet[name])):
         coords  = dataSet[name][x]
         nTest = Test(coords)
@@ -44,6 +44,7 @@ def generateTest(name):
             interval =  'Grande'
         listPointT[x-1].transition = trans + ". Distância " + interval 
         listPointT[x-1].message += "Ponto número " + str(x)
+
     last = len(listPointT)-1
     listPointT[last].message = 'Você chegou ao final do desenho!'
     listPointT[last].transition = " Não existem mais transições"

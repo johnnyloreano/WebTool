@@ -7,19 +7,19 @@ import {
 } from '@angular/router';
 import {
    ChartConfiguratorService
-} from "../../core/chart-configurator/chart-configurator.service";
+} from "../chart-configurator/chart-configurator.service";
 import * as Highcharts from 'highcharts';
 import highcharts3D from 'highcharts/highcharts-3d.src';
 import {
    TalkerService
-} from '../../core/talker/talker.service';
+} from '../talker/talker.service';
 // import * as $ from 'jquery';
 import { DataService } from '../../core/data-service/data-service.service';
 import AccessibilityModule from 'highcharts/modules/accessibility';
 import HC_exporting from 'highcharts/modules/exporting';
 highcharts3D(Highcharts);
 AccessibilityModule(Highcharts);
-HC_exporting(Highcharts)
+// HC_exporting(Highcharts)
 @Component({
    selector: 'app-protein-viewer',
    styleUrls: ['./protein.css'],
@@ -40,8 +40,9 @@ export class ProteinViewerComponent implements OnInit {
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
       if(this.chartOptions === null)
          this._router.navigate(['/menu']);
-         Highcharts.chart('pv', this.chartOptions);
-         this.configurePoints();
+      Highcharts.chart('pv', this.chartOptions);
+      this.configurePoints();
+      this.removeDefaultsAria();
    }
    init(){
       if(this.isFirst)
@@ -63,20 +64,20 @@ export class ProteinViewerComponent implements OnInit {
             this.enableFinish();
             return;
          }
-         else if (event.keyCode === 65) 
+         else if (event.key.toUpperCase() === "A") 
             message = data['message'];
-         else if (event.keyCode === 83)
+         else if (event.key.toUpperCase() === "S")
             message = data['transition'];
-         else if (event.keyCode === 72){
+         else if (event.key.toUpperCase() === "H"){
             message = "Histórico de aminoácidos navegados :";
             for(let x = this.history.length - 10; x < this.history.length;x++)
                message += this.history[x]; 
-      }
-      else if (event.key ==  "q" || event.keyCode == 9){
-         event.stopImmediatePropagation();
-         this.isFirst = false;
-        return document.getElementById("init").focus();
-      }
+         }
+         else if (event.key.toUpperCase() ==  "Q" || event.keyCode == 9){
+            event.stopImmediatePropagation();
+            this.isFirst = false;
+         return document.getElementById("init").focus();
+         }
       if(message != undefined)
          return TalkerService.speak(message);
    }
@@ -92,10 +93,9 @@ configurePoints(){
          data[x]['isLast'] = x == data.length-1;
          this.event(e as KeyboardEvent, data[x]);
       });
-      html.addEventListener('focus', (e) => {
+      html.addEventListener('focus', () => {
          this.visited.add(data[x]);
          this.lastOne = data[x];
-         
       });
    }
 } 
@@ -111,6 +111,12 @@ configurePoints(){
             event.preventDefault();
             document.getElementById(idFocus).focus();
          }
+   }
+   removeDefaultsAria(){
+
+      document.getElementsByTagName("svg")[0].setAttribute("aria-label", "");
+      document.getElementById("highcharts-information-region-0").setAttribute("aria-label", "");
+      Array.from(document.getElementsByClassName("highcharts-exit-anchor-wrapper")[0].children).forEach(element =>{element.setAttribute("aria-label", "");});
    }
    enableFinish(){
       // document.getElementById('finish').hidden = false;

@@ -1,4 +1,4 @@
-import { Aminoacid } from "./aminoacid";
+import { Points } from "./points";
 
 export class Protein {
     private _title : string;
@@ -8,7 +8,7 @@ export class Protein {
     private _classification : string;
     private _dep_date:string;
     private _version : string;
-    private _residues : Array<Aminoacid>;
+    private _residues : Array<Points>;
     constructor(identifier:string,title: string,authors:string[],version:string,dep_date:string,
         experiment:string,residues : Array<any>){
         this._identifier = identifier;
@@ -34,7 +34,7 @@ export class Protein {
     get dep_date(): string{
         return this._dep_date
     } 
-    get residues(): Aminoacid[]{
+    get residues(): Points[]{
         return this._residues
     } 
     get version(): string{

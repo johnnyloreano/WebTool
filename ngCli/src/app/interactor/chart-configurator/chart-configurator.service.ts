@@ -1,7 +1,7 @@
 import {
   Injectable
 } from '@angular/core';
-import {DataService} from "../data-service/data-service.service";
+import {DataService} from "../../core/data-service/data-service.service";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ get(option:string){
   let size;
 
   if (option == "test"){
-    data = this.dataService.getTest()['pTest']
+    data = this.dataService.getTest().points
     size = 5
   }
   else {
@@ -31,6 +31,7 @@ get(option:string){
   this.chartOptions = {      
     chart: {         
        type: 'scatter3d',
+       description: '',
        marginBottom: 100,
        marginRight: 50,
        options3d: {
@@ -69,6 +70,11 @@ get(option:string){
       }
     }
   },
+  lang: {
+    accessibility: {
+      chartContainerLabel: ""
+    }
+  },
     plotOptions: {
       series: {
           marker: {
@@ -90,12 +96,20 @@ get(option:string){
     xAxis:{
        min:0,
        max:size,
-       title:{text: undefined}
+       title:{text: undefined},
+       labels:
+      {
+        enabled: false
+      }
     }, 
     yAxis:{
        min:0,
        max:size,
-       title:{text: undefined}
+       title:{text: undefined},
+       labels:
+{
+  enabled: false
+}
     },
     zAxis:{
        min:0,

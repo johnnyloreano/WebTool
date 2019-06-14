@@ -1,0 +1,1217 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ng-cl-i documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ng-cl-i documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>ProteinViewerComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/interactor/protein-viewer/protein-viewer.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-protein-viewer</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./protein.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>protein-viewer.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#chartOptions">chartOptions</a>
+                            </li>
+                            <li>
+                                <a href="#history">history</a>
+                            </li>
+                            <li>
+                                <a href="#isFirst">isFirst</a>
+                            </li>
+                            <li>
+                                <a href="#lastOne">lastOne</a>
+                            </li>
+                            <li>
+                                <a href="#seletor">seletor</a>
+                            </li>
+                            <li>
+                                <a href="#visited">visited</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#configurePoints">configurePoints</a>
+                            </li>
+                            <li>
+                                <a href="#disableFinish">disableFinish</a>
+                            </li>
+                            <li>
+                                <a href="#enableFinish">enableFinish</a>
+                            </li>
+                            <li>
+                                <a href="#event">event</a>
+                            </li>
+                            <li>
+                                <a href="#fakeClick">fakeClick</a>
+                            </li>
+                            <li>
+                                <a href="#init">init</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#trap">trap</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(_router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, _chartConfigurator: <a href="../injectables/ChartConfiguratorService.html">ChartConfiguratorService</a>, _data: <a href="../injectables/DataService.html">DataService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>_router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_chartConfigurator</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ChartConfiguratorService.html" target="_self" >ChartConfiguratorService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_data</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DataService.html" target="_self" >DataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configurePoints"></a>
+                    <span class="name">
+                        <b>
+                            configurePoints
+                        </b>
+                        <a href="#configurePoints"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>configurePoints()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="85"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:85</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="disableFinish"></a>
+                    <span class="name">
+                        <b>
+                            disableFinish
+                        </b>
+                        <a href="#disableFinish"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>disableFinish()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:118</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="enableFinish"></a>
+                    <span class="name">
+                        <b>
+                            enableFinish
+                        </b>
+                        <a href="#enableFinish"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>enableFinish()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="114"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:114</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="event"></a>
+                    <span class="name">
+                        <b>
+                            event
+                        </b>
+                        <a href="#event"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>event(event, data)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="58"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:58</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>data</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fakeClick"></a>
+                    <span class="name">
+                        <b>
+                            fakeClick
+                        </b>
+                        <a href="#fakeClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fakeClick(event: KeyboardEvent)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:53</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                            <code>KeyboardEvent</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="init"></a>
+                    <span class="name">
+                        <b>
+                            init
+                        </b>
+                        <a href="#init"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>init()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:46</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:37</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="trap"></a>
+                    <span class="name">
+                        <b>
+                            trap
+                        </b>
+                        <a href="#trap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>trap(position, idFocus, event)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="101"
+                            class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:101</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>position</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>idFocus</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>event</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="chartOptions"></a>
+                        <span class="name">
+                            <b>
+                            chartOptions</b>
+                            <a href="#chartOptions"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>null</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="history"></a>
+                        <span class="name">
+                            <b>
+                            history</b>
+                            <a href="#history"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>Array&lt;String&gt;()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isFirst"></a>
+                        <span class="name">
+                            <b>
+                            isFirst</b>
+                            <a href="#isFirst"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>true</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="lastOne"></a>
+                        <span class="name">
+                            <b>
+                            lastOne</b>
+                            <a href="#lastOne"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>null</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:36</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="seletor"></a>
+                        <span class="name">
+                            <b>
+                            seletor</b>
+                            <a href="#seletor"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>null</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="visited"></a>
+                        <span class="name">
+                            <b>
+                            visited</b>
+                            <a href="#visited"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Set()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/interactor/protein-viewer/protein-viewer.component.ts:35</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+   Component,
+   OnInit
+} from &#x27;@angular/core&#x27;;
+import {
+   Router
+} from &#x27;@angular/router&#x27;;
+import {
+   ChartConfiguratorService
+} from &quot;../../core/chart-configurator/chart-configurator.service&quot;;
+import * as Highcharts from &#x27;highcharts&#x27;;
+import highcharts3D from &#x27;highcharts/highcharts-3d.src&#x27;;
+import {
+   TalkerService
+} from &#x27;../../core/talker/talker.service&#x27;;
+// import * as $ from &#x27;jquery&#x27;;
+import { DataService } from &#x27;../../core/data-service/data-service.service&#x27;;
+import AccessibilityModule from &#x27;highcharts/modules/accessibility&#x27;;
+import HC_exporting from &#x27;highcharts/modules/exporting&#x27;;
+highcharts3D(Highcharts);
+AccessibilityModule(Highcharts);
+// HC_exporting(Highcharts)
+@Component({
+   selector: &#x27;app-protein-viewer&#x27;,
+   styleUrls: [&#x27;./protein.css&#x27;],
+   templateUrl: &#x27;protein-viewer.html&#x27;
+})
+
+export class ProteinViewerComponent implements OnInit {
+   constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService) {}
+   seletor &#x3D; null;
+   history &#x3D; Array&lt;String&gt;();
+   chartOptions &#x3D; null;
+   isFirst &#x3D; true;
+   visited &#x3D; new Set();
+   lastOne &#x3D; null;
+   ngOnInit() {
+      document.getElementById(&quot;header&quot;).focus();
+      this.seletor &#x3D; this._data.getSeletor();
+      this.chartOptions &#x3D; this._chartConfigurator.getChartConfigurations(this.seletor);
+      if(this.chartOptions &#x3D;&#x3D;&#x3D; null)
+         this._router.navigate([&#x27;/menu&#x27;]);
+         Highcharts.chart(&#x27;pv&#x27;, this.chartOptions);
+         this.configurePoints();
+   }
+   init(){
+      if(this.isFirst)
+         TalkerService.speak(&quot;Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.&quot;);
+      else
+         TalkerService.speak(this.lastOne[&quot;message&quot;] + this.lastOne[&quot;transition&quot;]);
+      document.getElementById(&#x27;pv&#x27;).focus();
+   }
+   fakeClick(event: KeyboardEvent){
+      if (event.key &#x3D;&#x3D; &quot;Enter&quot;)
+         document.getElementById(&quot;init&quot;).click();
+      this.trap(&#x27;first&#x27;,&#x27;back&#x27;, event);
+   }
+   event(event, data) {
+      if (event instanceof KeyboardEvent){
+         let message: string;
+         if (data[&#x27;isLast&#x27;] &amp;&amp; event.keyCode &#x3D;&#x3D;&#x3D; 39) {
+            event.preventDefault();
+            this.enableFinish();
+            return;
+         }
+         else if (event.key.toUpperCase() &#x3D;&#x3D;&#x3D; &quot;A&quot;) 
+            message &#x3D; data[&#x27;message&#x27;];
+         else if (event.key.toUpperCase() &#x3D;&#x3D;&#x3D; &quot;S&quot;)
+            message &#x3D; data[&#x27;transition&#x27;];
+         else if (event.key.toUpperCase() &#x3D;&#x3D;&#x3D; &quot;H&quot;){
+            message &#x3D; &quot;Histórico de aminoácidos navegados :&quot;;
+            for(let x &#x3D; this.history.length - 10; x &lt; this.history.length;x++)
+               message +&#x3D; this.history[x]; 
+         }
+         else if (event.key.toUpperCase() &#x3D;&#x3D;  &quot;Q&quot; || event.keyCode &#x3D;&#x3D; 9){
+            event.stopImmediatePropagation();
+            this.isFirst &#x3D; false;
+         return document.getElementById(&quot;init&quot;).focus();
+         }
+      if(message !&#x3D; undefined)
+         return TalkerService.speak(message);
+   }
+}
+
+configurePoints(){
+   const data &#x3D; Highcharts.charts[0].series[0].data;
+   for (let x &#x3D; 0; x &lt; data.length; x++) {
+      const html &#x3D; data[x][&quot;graphic&quot;].element;
+      html.setAttribute(&quot;aria-hidden&quot;, &quot;true&quot;);
+      html.setAttribute(&quot;aria-label&quot;, data[x][&quot;message&quot;] + data[x][&quot;transition&quot;])
+      html.addEventListener(&#x27;keydown&#x27;, (e) &#x3D;&gt; {
+         data[x][&#x27;isLast&#x27;] &#x3D; x &#x3D;&#x3D; data.length-1;
+         this.event(e as KeyboardEvent, data[x]);
+      });
+      html.addEventListener(&#x27;focus&#x27;, () &#x3D;&gt; {
+         this.visited.add(data[x]);
+         this.lastOne &#x3D; data[x];
+      });
+   }
+} 
+   trap(position,idFocus, event){
+      if(position &#x3D;&#x3D; &quot;first&quot;){
+         if(event.shiftKey &amp;&amp; event.key &#x3D;&#x3D; &quot;Tab&quot;){
+            event.preventDefault();
+            document.getElementById(idFocus).focus();
+         }
+      }
+      else if(position &#x3D;&#x3D; &quot;last&quot;)
+         if(!event.shiftKey &amp;&amp; (event.key &#x3D;&#x3D; &quot;Tab&quot;  || event.key &#x3D;&#x3D; &quot;ArrowDown&quot;) ){
+            event.preventDefault();
+            document.getElementById(idFocus).focus();
+         }
+   }
+   enableFinish(){
+      document.getElementById(&#x27;finish&#x27;).hidden &#x3D; false;
+      document.getElementById(&#x27;finish&#x27;).focus();
+   }
+   disableFinish(){
+      document.getElementById(&#x27;finish&#x27;).hidden &#x3D; true;
+      document.getElementById(&#x27;finish&#x27;).tabIndex &#x3D; -1;
+   }
+//    configureRotation(){
+//    const chart &#x3D; Highcharts.charts[0];
+//    $(chart.container).bind(&#x27;mousedown.hc touchstart.hc&#x27;, function(eStart) {
+//       eStart &#x3D; chart.pointer.normalize(eStart);
+//       const posX &#x3D; eStart.pageX;
+//       const posY &#x3D; eStart.pageY;
+//       const alpha &#x3D; chart.options.chart.options3d.alpha;
+//       const beta &#x3D; chart.options.chart.options3d.beta;
+//       const sensitivity &#x3D; 5; // lower is more sensitive
+//       $(document).bind({
+//          &#x27;mousemove.hc touchdrag.hc&#x27;: function(e) {
+//             chart.options.chart.options3d.beta &#x3D; beta + (posX - e.pageX) / sensitivity;
+//             chart.options.chart.options3d.alpha &#x3D; alpha + (e.pageY - posY) / sensitivity;;
+//             chart.redraw(false);
+//          },
+//          &#x27;mouseup touchend&#x27;: function() {
+//             $(document).unbind(&#x27;.hc&#x27;);
+//          }
+//       });
+//       });
+// }
+} </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;h2 tabindex&#x3D;&quot;0&quot; id&#x3D;&quot;header&quot;&gt;
+    Visualizador
+&lt;/h2&gt;
+&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;
+            &lt;button id&#x3D;&quot;init&quot; type&#x3D;&quot;button&quot; tabindex &#x3D; &#x27;0&#x27; class&#x3D;&quot;btn btn-primary w-25 &quot; (keydown) &#x3D; &quot;fakeClick($event)&quot; (click)&#x3D;&quot;init()&quot;&gt;
+                Iniciar Navegação
+            &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+        &lt;a type&#x3D;&quot;button&quot; tabindex &#x3D; &#x27;0&#x27; class&#x3D;&quot;btn btn-primary w-25&quot; routerLink&#x3D;&quot;/resumo&quot; &gt;
+                Ver informações resumidas
+        &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;a type&#x3D;&quot;button&quot; tabindex &#x3D; &#x27;0&#x27; class&#x3D;&quot;btn btn-primary w-25&quot; routerLink&#x3D;&quot;/manual&quot;&gt;
+                Ver manual
+            &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;a type&#x3D;&quot;button&quot; tabindex &#x3D; &#x27;0&#x27; class&#x3D;&quot;btn btn-primary w-25&quot; routerLink&#x3D;&quot;/buscador&quot; &gt;
+                Ir para tela de pesquisa de proteína
+            &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;a id&#x3D;&quot;back&quot; type&#x3D;&quot;button&quot; tabindex &#x3D; &#x27;0&#x27; class&#x3D;&quot;btn btn-primary w-25&quot; routerLink&#x3D;&quot;/menu&quot; (keydown) &#x3D; &quot;trap(&#x27;last&#x27;,&#x27;init&#x27;, $event)&quot;&gt;
+                Voltar ao menu principal
+            &lt;/a&gt;
+        &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+
+&lt;div id&#x3D;&quot;pv&quot; tabindex&#x3D;&quot;0&quot; aria-hidden&#x3D;&quot;true&quot; role&#x3D;&quot;application&quot;&gt;&lt;/div&gt;
+
+&lt;div hidden &#x3D;&quot;true&quot; aria-hidden&#x3D;&quot;true&quot; id&#x3D;&quot;finish&quot; &gt;
+    &lt;p&gt;
+        Você saiu da proteína! 
+        O que você deseja fazer ?
+    &lt;/p&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;button id &#x3D; &quot;first&quot; type&#x3D;&quot;button&quot; tabindex &#x3D; &#x27;0&#x27; class&#x3D;&quot;btn btn-primary w-25 &quot; (keydown.enter)&#x3D;&quot;init();disableFinish();&quot;&gt;
+                    Refazer a navegação do início
+                &lt;/button&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;button type&#x3D;&quot;button&quot; tabindex &#x3D; &#x27;0&#x27; class&#x3D;&quot;btn btn-primary w-25&quot; routerLink&#x3D;&quot;/menu&quot; &gt;
+                    Voltar ao menu principal
+                &lt;/button&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;button id &#x3D; &quot;last&quot; type&#x3D;&quot;button&quot; tabindex &#x3D; &#x27;0&#x27; class&#x3D;&quot;btn btn-primary w-25&quot; routerLink&#x3D;&quot;/buscador&quot;   (keydown) &#x3D; &quot;trap(&#x27;last&#x27;,&#x27;first&#x27;, $event)&quot;&gt;
+                    Ir para tela de pesquisa de proteína
+                &lt;/button&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./protein.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">#pv{
+    position: relative;
+    background-color: #ADD8E6;
+    min-height: 120vh;
+    width: 100%;
+    margin:0 auto;
+    box-sizing: border-box;
+}
+svg{
+    width:inherit;
+    height: inherit;
+}
+ul{
+    list-style: none;
+   
+}
+li{
+    margin:10px;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><h2 tabindex="0" id="header">    Visualizador</h2><nav>    <ul>        <li>            <button id="init" type="button" tabindex = \'0\' class="btn btn-primary w-25 " (keydown) = "fakeClick($event)" (click)="init()">                Iniciar Navegação            </button>        </li>        <li>        <a type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/resumo" >                Ver informações resumidas        </a>        </li>        <li>            <a type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/manual">                Ver manual            </a>        </li>        <li>            <a type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/buscador" >                Ir para tela de pesquisa de proteína            </a>        </li>        <li>            <a id="back" type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/menu" (keydown) = "trap(\'last\',\'init\', $event)">                Voltar ao menu principal            </a>        </li>  </ul></nav><div id="pv" tabindex="0" aria-hidden="true" role="application"></div><div hidden ="true" aria-hidden="true" id="finish" >    <p>        Você saiu da proteína!         O que você deseja fazer ?    </p>    <nav>        <ul>            <li>                <button id = "first" type="button" tabindex = \'0\' class="btn btn-primary w-25 " (keydown.enter)="init();disableFinish();">                    Refazer a navegação do início                </button>            </li>            <li>                <button type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/menu" >                    Voltar ao menu principal                </button>            </li>            <li>                <button id = "last" type="button" tabindex = \'0\' class="btn btn-primary w-25" routerLink="/buscador"   (keydown) = "trap(\'last\',\'first\', $event)">                    Ir para tela de pesquisa de proteína                </button>            </li>        </ul>    </nav></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'FormComponent', 'selector': 'app-form'},{'name': 'ManualComponent', 'selector': 'app-manual'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'PreViewerComponent', 'selector': 'app-pre-viewer'},{'name': 'ProteinViewerComponent', 'selector': 'app-protein-viewer'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TestesComponent', 'selector': 'app-testes'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ProteinViewerComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProteinViewerComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
