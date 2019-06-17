@@ -155,6 +155,8 @@ configurePoints(){
       document.getElementsByTagName("svg")[0].setAttribute("aria-label", "");
       document.getElementById("highcharts-information-region-0").setAttribute("aria-label", "");
       Array.from(document.getElementsByClassName("highcharts-exit-anchor-wrapper")[0].children).forEach(element =>{element.setAttribute("aria-label", "");});
+      document.getElementById("pv").setAttribute("role", "application");      
+      document.getElementById("pv").setAttribute("aria-hidden", "true");      
    }
    enableFinish(){
       // document.getElementById('finish').hidden = false;
