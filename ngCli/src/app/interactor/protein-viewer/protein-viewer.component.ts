@@ -16,7 +16,6 @@ import {
 } from '../talker/talker.service';
 import { DataService } from '../../core/data-service/data-service.service';
 import AccessibilityModule from 'highcharts/modules/accessibility';
-import { browser } from 'protractor';
 // import HC_exporting from 'highcharts/modules/exporting';
 highcharts3D(Highcharts);
 AccessibilityModule(Highcharts);
@@ -34,7 +33,6 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
    chartOptions = null;
    isFirst = true;
    visited = new Set();
-   lastOne = null;
    /**
     * @ignore
     */
@@ -55,11 +53,12 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
     * Fala os comandos básicos do gráfico.
     */
    init(){  
-      if(this.lastOne != null)
-      document.getElementById('pv').setAttribute("aria-label", "Utilize apenas as teclas para navegar!");
+      if(!this.isFirst)
+         document.getElementById('pv').setAttribute("aria-label", "Utilize apenas as teclas para navegar!");
       else
-      document.getElementById('pv').setAttribute("aria-label", "Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
+         document.getElementById('pv').setAttribute("aria-label", "Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
       document.getElementById('pv').focus();
+
    }
    /**
     * @ignore
@@ -71,10 +70,17 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
          document.getElementById("init").click();
       this.trap('first','back', event);
    }
+
    goTo(page){
       this._router.navigateByUrl(page).then(() => {
          window.location.reload();
    });
+   }
+   tmpRemSVG(){
+      document.getElementsByTagName("svg")[0].setAttribute("aria-hidden", "true");
+      setTimeout(() => {
+         document.getElementsByTagName("svg")[0].setAttribute("aria-hidden", "false");
+      }, 100);
    }
    /**
     * Eventos utilizados durante a navegação.
@@ -104,15 +110,15 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
             for(let x = this.history.length - 10; x < this.history.length;x++)
                message += this.history[x]; 
          }
-         else if (event.key.toUpperCase() ==  "Q" || event.keyCode == 9){
+         else if (event.key.toUpperCase() ==  "W" || event.keyCode == 9){
             event.stopImmediatePropagation();
-            this.isFirst = false;
             return document.getElementById("init").focus();
          }
       if(message != undefined)
          return TalkerService.speak(message);
+      }
    }
-}
+
 /**
  * Configura os pontos do gráfico para poder serem navegáveis.
  * Configura os eventos de teclado de cada ponto
@@ -120,10 +126,8 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
  */
 configurePoints(){
    const data = Highcharts.charts[0].series[0].data;
-   console.log(Highcharts.charts[0]);
    for (let x = 0; x < data.length; x++) {
       const html = data[x]["graphic"].element;
-      html.setAttribute("aria-hidden", "false");
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
       html.addEventListener('keydown', (e) => {
          data[x]['isLast'] = x == data.length-1;
@@ -131,7 +135,6 @@ configurePoints(){
       });
       html.addEventListener('focus', () => {
          this.visited.add(data[x]);
-         this.lastOne = data[x];
       });
    }
 } 
@@ -168,7 +171,7 @@ configurePoints(){
       if (document.getElementById("highcharts-information-region-1") != null)
          document.getElementById("highcharts-information-region-1").setAttribute("aria-hidden", "true");
       if (document.getElementById("highcharts-information-region-0") != null)
-         document.getElementById("highcharts-information-region-0").setAttribute("visibility", "hidden");
+         document.getElementById("highcharts-information-region-0").remove();
 
    }
    // enableFinish(){

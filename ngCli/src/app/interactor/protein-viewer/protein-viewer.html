@@ -9,26 +9,26 @@
             </button>
         </li>
         <li>
-            <a type="link" tabindex = '0' class="btn btn-primary w-25"  (keydown.enter) = "goTo('resumo')">
+            <button type="link" tabindex = '0' class="btn btn-primary w-25"  (click) = "goTo('resumo')">
                     Ver informações resumidas
-            </a>
+            </button>
         </li>
         <li>
-            <a type="link" tabindex = '0' class="btn btn-primary w-25" (keydown.enter) = "goTo('manual')">
+            <button type="link" tabindex = '0' class="btn btn-primary w-25" (click) = "goTo('manual')">
                 Ver manual
-            </a>
+            </button>
         </li>
         <li>
-            <a type="link" tabindex = '0' class="btn btn-primary w-25" (keydown.enter) = "goTo('buscador')">
+            <button type="link" tabindex = '0' class="btn btn-primary w-25" (click) = "goTo('buscador')">
                 Ir para tela de pesquisa de proteína
-            </a>
+            </button>
         </li>
         <li>
-            <a id="back" type="link" tabindex = '0' class="btn btn-primary w-25" (keydown.enter) = "goTo('menu')" (keydown) = "trap('last','init', $event)">
+            <button id="back" type="link" tabindex = '0' class="btn btn-primary w-25" (click) = "goTo('menu')" (keydown) = "trap('last','init', $event)">
                 Voltar ao menu principal
-            </a>
+            </button>
         </li>
   </ul>
 </nav>
 
-<div id="pv" tabindex="0" role="application" aria-label="Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos."></div>
+<div id="pv" (focus)="tmpRemSVG()" tabindex="0" role="application" aria-label="Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos."></div>

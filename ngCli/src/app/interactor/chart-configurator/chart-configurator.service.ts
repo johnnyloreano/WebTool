@@ -56,6 +56,14 @@ get(option:string){
           }
        },
     },
+
+    title: {
+      text: undefined
+  },
+
+  subtitle: {
+      text: undefined
+  },
   accessibility:{
     keyboardNavigation:{
       wrapAround:true,
