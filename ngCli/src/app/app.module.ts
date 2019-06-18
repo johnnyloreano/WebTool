@@ -7,11 +7,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MenuModule} from './menu/menu.module';
 import { InteractorModule } from './interactor/interactor.module';
 import { DataService } from './core/data-service/data-service.service';
-import { BlankComponent } from './blank/blank.component';
 @NgModule({
   declarations: [
-    AppComponent,
-    BlankComponent
+    AppComponent
     ],
   imports: [
     AppProviderRoute,
