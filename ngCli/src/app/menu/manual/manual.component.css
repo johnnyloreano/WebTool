@@ -4,23 +4,36 @@ p{
     letter-spacing: 1px;
     font-size: 1.2em;
 }
-nav * {
+nav *,span {
     border-bottom:thin solid black;
+    color:blue;
+    cursor:pointer;    
 }
 nav{
     border-left:thin solid black;
     border-right:thin solid black;
     padding : 0 0.4em;
-
+}
+nav ul {
+    list-style-type: none;
 }
 section p {
     text-align: left;
     padding:0 1px;
 }
-.subtitle{
-    text-indent: 1.5em;
+.title{
+    font-size: 1.5em;
 }
-span, .title, .subtitle{
-    cursor:pointer;
-    color:blue;
+.subtitle{
+    font-size: 1.2em;
+    margin-left: 0.6em;
+}
+.submenu, .submenu *{
+    border-left:none;
+    border-right:none;
+    padding : none;
+    border-bottom: none;
+}
+a{
+    border-bottom:none !important;
 }

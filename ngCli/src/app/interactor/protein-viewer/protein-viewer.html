@@ -9,52 +9,26 @@
             </button>
         </li>
         <li>
-        <a type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/resumo" >
-                Ver informações resumidas
-        </a>
+            <a type="link" tabindex = '0' class="btn btn-primary w-25"  (keydown.enter) = "goTo('resumo')">
+                    Ver informações resumidas
+            </a>
         </li>
         <li>
-            <a type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/manual">
+            <a type="link" tabindex = '0' class="btn btn-primary w-25" (keydown.enter) = "goTo('manual')">
                 Ver manual
             </a>
         </li>
         <li>
-            <a type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/buscador" >
+            <a type="link" tabindex = '0' class="btn btn-primary w-25" (keydown.enter) = "goTo('buscador')">
                 Ir para tela de pesquisa de proteína
             </a>
         </li>
         <li>
-            <a id="back" type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/menu" (keydown) = "trap('last','init', $event)">
+            <a id="back" type="link" tabindex = '0' class="btn btn-primary w-25" (keydown.enter) = "goTo('menu')" (keydown) = "trap('last','init', $event)">
                 Voltar ao menu principal
             </a>
         </li>
   </ul>
 </nav>
 
-<div id="pv" tabindex="0" aria-hidden="true" role="application"></div>
-
-<!-- <div hidden ="true" aria-hidden="true" id="finish" >
-    <p>
-        Você saiu da proteína! 
-        O que você deseja fazer ?
-    </p>
-    <nav>
-        <ul>
-            <li>
-                <button id = "first" type="button" tabindex = '0' class="btn btn-primary w-25 " (keydown.enter)="init();disableFinish();">
-                    Refazer a navegação do início
-                </button>
-            </li>
-            <li>
-                <button type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/menu" >
-                    Voltar ao menu principal
-                </button>
-            </li>
-            <li>
-                <button id = "last" type="button" tabindex = '0' class="btn btn-primary w-25" routerLink="/buscador"   (keydown) = "trap('last','first', $event)">
-                    Ir para tela de pesquisa de proteína
-                </button>
-            </li>
-        </ul>
-    </nav>
-</div> -->
+<div id="pv" tabindex="0" role="application" aria-label="Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos."></div>

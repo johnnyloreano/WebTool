@@ -1,6 +1,7 @@
 import {
    Component,
-   OnInit
+   OnInit,
+   AfterViewInit
 } from '@angular/core';
 import {
    Router
@@ -13,10 +14,10 @@ import highcharts3D from 'highcharts/highcharts-3d.src';
 import {
    TalkerService
 } from '../talker/talker.service';
-// import * as $ from 'jquery';
 import { DataService } from '../../core/data-service/data-service.service';
 import AccessibilityModule from 'highcharts/modules/accessibility';
-import HC_exporting from 'highcharts/modules/exporting';
+import { browser } from 'protractor';
+// import HC_exporting from 'highcharts/modules/exporting';
 highcharts3D(Highcharts);
 AccessibilityModule(Highcharts);
 // HC_exporting(Highcharts)
@@ -26,7 +27,7 @@ AccessibilityModule(Highcharts);
    templateUrl: 'protein-viewer.html'
 })
 
-export class ProteinViewerComponent implements OnInit {
+export class ProteinViewerComponent implements OnInit, AfterViewInit{
    constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService) {}
    seletor = null;
    history = Array<String>();
@@ -40,23 +41,24 @@ export class ProteinViewerComponent implements OnInit {
 
    ngOnInit() {
       document.getElementById("header").focus();
-      this.seletor = this._data.getSeletor();
-      this.chartOptions = this._chartConfigurator.getChartConfigurations(this.seletor);
+      this.chartOptions = this._chartConfigurator.getChartConfigurations(this._data.getSeletor());
       if(this.chartOptions === null)
          this._router.navigate(['/menu']);
       Highcharts.chart('pv', this.chartOptions);
       this.configurePoints();
+   }
+   ngAfterViewInit(){
       this.removeDefaultsAria();
    }
    /**
     * Realiza a navegação no gráfico.
     * Fala os comandos básicos do gráfico.
     */
-   init(){
-      if(this.isFirst)
-         TalkerService.speak("Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
+   init(){  
+      if(this.lastOne != null)
+      document.getElementById('pv').setAttribute("aria-label", "Utilize apenas as teclas para navegar!");
       else
-         TalkerService.speak(this.lastOne["message"] + this.lastOne["transition"]);
+      document.getElementById('pv').setAttribute("aria-label", "Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
       document.getElementById('pv').focus();
    }
    /**
@@ -68,6 +70,11 @@ export class ProteinViewerComponent implements OnInit {
       if (event.key == "Enter")
          document.getElementById("init").click();
       this.trap('first','back', event);
+   }
+   goTo(page){
+      this._router.navigateByUrl(page).then(() => {
+         window.location.reload();
+   });
    }
    /**
     * Eventos utilizados durante a navegação.
@@ -85,7 +92,7 @@ export class ProteinViewerComponent implements OnInit {
          let message: string;
          if (data['isLast'] && event.keyCode === 39) {
             event.preventDefault();
-            this.enableFinish();
+            // this.enableFinish();
             return;
          }
          else if (event.key.toUpperCase() === "A") 
@@ -113,9 +120,10 @@ export class ProteinViewerComponent implements OnInit {
  */
 configurePoints(){
    const data = Highcharts.charts[0].series[0].data;
+   console.log(Highcharts.charts[0]);
    for (let x = 0; x < data.length; x++) {
       const html = data[x]["graphic"].element;
-      html.setAttribute("aria-hidden", "true");
+      html.setAttribute("aria-hidden", "false");
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
       html.addEventListener('keydown', (e) => {
          data[x]['isLast'] = x == data.length-1;
@@ -153,38 +161,22 @@ configurePoints(){
     */
    removeDefaultsAria(){
       document.getElementsByTagName("svg")[0].setAttribute("aria-label", "");
-      document.getElementById("highcharts-information-region-0").setAttribute("aria-label", "");
       Array.from(document.getElementsByClassName("highcharts-exit-anchor-wrapper")[0].children).forEach(element =>{element.setAttribute("aria-label", "");});
       document.getElementById("pv").setAttribute("role", "application");      
-      document.getElementById("pv").setAttribute("aria-hidden", "true");      
+      document.getElementById("pv").setAttribute("aria-hidden", "true");     
+      document.getElementsByTagName("desc")[0].setAttribute("aria-hidden", "true");
+      if (document.getElementById("highcharts-information-region-1") != null)
+         document.getElementById("highcharts-information-region-1").setAttribute("aria-hidden", "true");
+      if (document.getElementById("highcharts-information-region-0") != null)
+         document.getElementById("highcharts-information-region-0").setAttribute("aria-hidden", "true");
    }
-   enableFinish(){
-      // document.getElementById('finish').hidden = false;
-      // document.getElementById('finish').focus();
-   }
-   disableFinish(){
-      // document.getElementById('finish').hidden = true;
-      // document.getElementById('finish').tabIndex = -1;
-   }
-//    configureRotation(){
-//    const chart = Highcharts.charts[0];
-//    $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
-//       eStart = chart.pointer.normalize(eStart);
-//       const posX = eStart.pageX;
-//       const posY = eStart.pageY;
-//       const alpha = chart.options.chart.options3d.alpha;
-//       const beta = chart.options.chart.options3d.beta;
-//       const sensitivity = 5; // lower is more sensitive
-//       $(document).bind({
-//          'mousemove.hc touchdrag.hc': function(e) {
-//             chart.options.chart.options3d.beta = beta + (posX - e.pageX) / sensitivity;
-//             chart.options.chart.options3d.alpha = alpha + (e.pageY - posY) / sensitivity;;
-//             chart.redraw(false);
-//          },
-//          'mouseup touchend': function() {
-//             $(document).unbind('.hc');
-//          }
-//       });
-//       });
-// }
+   // enableFinish(){
+   //    // document.getElementById('finish').hidden = false;
+   //    // document.getElementById('finish').focus();
+   // }
+   // disableFinish(){
+   //    // document.getElementById('finish').hidden = true;
+   //    // document.getElementById('finish').tabIndex = -1;
+   // }
+
 } 

@@ -14,7 +14,10 @@ export class ManualComponent implements OnInit{
    * 
    * @ignore
    */
-  goTo(el: string){
+  goTo(event:KeyboardEvent,el: string){
+    event.preventDefault();
+    document.getElementById(el).focus();
     document.getElementById(el).focus();
   }
+
 }
