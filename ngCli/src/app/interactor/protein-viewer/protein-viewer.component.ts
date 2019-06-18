@@ -97,7 +97,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
          }
          else if (event.key.toUpperCase() === "A") 
             message = data['message'];
-         else if (event.key.toUpperCase() === "S")
+         else if (event.key.toUpperCase() === "Z")
             message = data['transition'];
          else if (event.key.toUpperCase() === "H"){
             message = "Histórico de aminoácidos navegados :";
@@ -168,7 +168,8 @@ configurePoints(){
       if (document.getElementById("highcharts-information-region-1") != null)
          document.getElementById("highcharts-information-region-1").setAttribute("aria-hidden", "true");
       if (document.getElementById("highcharts-information-region-0") != null)
-         document.getElementById("highcharts-information-region-0").setAttribute("aria-hidden", "true");
+         document.getElementById("highcharts-information-region-0").setAttribute("visibility", "hidden");
+
    }
    // enableFinish(){
    //    // document.getElementById('finish').hidden = false;
