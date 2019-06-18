@@ -32,8 +32,6 @@ get(option:string){
     chart: {         
        type: 'scatter3d',
        description: '',
-       marginBottom: 100,
-       marginRight: 50,
        options3d: {
           enabled: true,
           alpha: 0,
@@ -113,9 +111,9 @@ get(option:string){
        max:size,
        title:{text: undefined},
        labels:
-{
-  enabled: false
-}
+        {
+          enabled: false
+        }
     },
     zAxis:{
        min:0,

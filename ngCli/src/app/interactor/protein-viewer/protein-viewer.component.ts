@@ -1,6 +1,7 @@
 import {
    Component,
    OnInit,
+   OnDestroy,
    AfterViewInit
 } from '@angular/core';
 import {
@@ -26,7 +27,7 @@ AccessibilityModule(Highcharts);
    templateUrl: 'protein-viewer.html'
 })
 
-export class ProteinViewerComponent implements OnInit, AfterViewInit{
+export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy{
    constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService) {}
    seletor = null;
    history = Array<String>();
@@ -36,17 +37,23 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
    /**
     * @ignore
     */
-
-   ngOnInit() {
+   ngOnInit() {      
       document.getElementById("header").focus();
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this._data.getSeletor());
       if(this.chartOptions === null)
          this._router.navigate(['/menu']);
-      Highcharts.chart('pv', this.chartOptions);
+      console.log(Highcharts.charts);
+      // if(Highcharts.charts[0] == undefined)
+      //    Highcharts.charts[0] = new Highcharts.Chart('pv',this.chartOptions);
+      // else
+         Highcharts.chart('pv', this.chartOptions);
       this.configurePoints();
    }
    ngAfterViewInit(){
       this.removeDefaultsAria();
+   }
+   ngOnDestroy(){
+      // Highcharts.charts[0].destroy();
    }
    /**
     * Realiza a navegação no gráfico.
@@ -72,9 +79,10 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
    }
 
    goTo(page){
-      this._router.navigateByUrl(page).then(() => {
-         window.location.reload();
-   });
+      this._router.navigate(['menu']);
+   //    this._router.navigateByUrl(page).then(() => {
+   //       // window.location.reload();
+   // });
    }
    tmpRemSVG(){
       document.getElementsByTagName("svg")[0].setAttribute("aria-hidden", "true");
@@ -125,7 +133,8 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
  * Configura os aria-labels de cada ponto para o leitor de tela
  */
 configurePoints(){
-   const data = Highcharts.charts[0].series[0].data;
+   const last = Highcharts.charts.length;
+   const data = Highcharts.charts[last-1].series[0].data;
    for (let x = 0; x < data.length; x++) {
       const html = data[x]["graphic"].element;
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
@@ -135,6 +144,7 @@ configurePoints(){
       });
       html.addEventListener('focus', () => {
          this.visited.add(data[x]);
+         this.history.push(data[x]['name']);
       });
    }
 } 
