@@ -98,9 +98,7 @@ get(option:string){
 
       }
   },
-    title : {
-       text: undefined
-    },
+
     xAxis:{
        min:0,
        max:size,
