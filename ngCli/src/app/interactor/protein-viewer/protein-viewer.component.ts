@@ -42,11 +42,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy{
       this.chartOptions = this._chartConfigurator.getChartConfigurations(this._data.getSeletor());
       if(this.chartOptions === null)
          this._router.navigate(['/menu']);
-      console.log(Highcharts.charts);
-      // if(Highcharts.charts[0] == undefined)
-      //    Highcharts.charts[0] = new Highcharts.Chart('pv',this.chartOptions);
-      // else
-         Highcharts.chart('pv', this.chartOptions);
+      Highcharts.chart('pv', this.chartOptions);
       this.configurePoints();
    }
    ngAfterViewInit(){
@@ -79,10 +75,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy{
    }
 
    goTo(page){
-      this._router.navigate(['menu']);
-   //    this._router.navigateByUrl(page).then(() => {
-   //       // window.location.reload();
-   // });
+      this._router.navigate([page]);
    }
    tmpRemSVG(){
       document.getElementsByTagName("svg")[0].setAttribute("aria-hidden", "true");
@@ -104,12 +97,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy{
    event(event, data) {
       if (event instanceof KeyboardEvent){
          let message: string;
-         if (data['isLast'] && event.keyCode === 39) {
-            event.preventDefault();
-            // this.enableFinish();
-            return;
-         }
-         else if (event.key.toUpperCase() === "A") 
+         if (event.key.toUpperCase() === "A") 
             message = data['message'];
          else if (event.key.toUpperCase() === "Z")
             message = data['transition'];
@@ -173,24 +161,16 @@ configurePoints(){
     * Remove os aria-labels do HighCharts que causam problemas na navegação.
     */
    removeDefaultsAria(){
+
       document.getElementsByTagName("svg")[0].setAttribute("aria-label", "");
-      Array.from(document.getElementsByClassName("highcharts-exit-anchor-wrapper")[0].children).forEach(element =>{element.setAttribute("aria-label", "");});
       document.getElementById("pv").setAttribute("role", "application");      
       document.getElementById("pv").setAttribute("aria-hidden", "true");     
-      document.getElementsByTagName("desc")[0].setAttribute("aria-hidden", "true");
+      document.getElementsByClassName("highcharts-exit-anchor-wrapper")[0].remove();
+      document.getElementsByTagName("desc")[0].remove();
       if (document.getElementById("highcharts-information-region-1") != null)
-         document.getElementById("highcharts-information-region-1").setAttribute("aria-hidden", "true");
+         document.getElementById("highcharts-information-region-1").remove();
       if (document.getElementById("highcharts-information-region-0") != null)
          document.getElementById("highcharts-information-region-0").remove();
 
    }
-   // enableFinish(){
-   //    // document.getElementById('finish').hidden = false;
-   //    // document.getElementById('finish').focus();
-   // }
-   // disableFinish(){
-   //    // document.getElementById('finish').hidden = true;
-   //    // document.getElementById('finish').tabIndex = -1;
-   // }
-
 } 
