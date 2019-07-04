@@ -86,6 +86,7 @@ get(option:string){
           marker: {
               fillColor: 'black',
               radius: 5 // inherit from series
+              
           },
           dataLabels: {
             enabled: true,

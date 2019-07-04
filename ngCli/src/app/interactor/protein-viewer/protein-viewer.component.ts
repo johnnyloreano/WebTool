@@ -1,7 +1,6 @@
 import {
    Component,
    OnInit,
-   OnDestroy,
    AfterViewInit
 } from '@angular/core';
 import {
@@ -17,17 +16,17 @@ import {
 } from '../talker/talker.service';
 import { DataService } from '../../core/data-service/data-service.service';
 import AccessibilityModule from 'highcharts/modules/accessibility';
-// import HC_exporting from 'highcharts/modules/exporting';
+
 highcharts3D(Highcharts);
 AccessibilityModule(Highcharts);
-// HC_exporting(Highcharts)
+
 @Component({
    selector: 'app-protein-viewer',
    styleUrls: ['./protein.css'],
    templateUrl: 'protein-viewer.html'
 })
 
-export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy{
+export class ProteinViewerComponent implements OnInit, AfterViewInit{
    constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService) {}
    seletor = null;
    history = Array<String>();
@@ -47,9 +46,6 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy{
    }
    ngAfterViewInit(){
       this.removeDefaultsAria();
-   }
-   ngOnDestroy(){
-      // Highcharts.charts[0].destroy();
    }
    /**
     * Realiza a navegação no gráfico.
@@ -114,7 +110,6 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit, OnDestroy{
          return TalkerService.speak(message);
       }
    }
-
 /**
  * Configura os pontos do gráfico para poder serem navegáveis.
  * Configura os eventos de teclado de cada ponto
@@ -125,6 +120,7 @@ configurePoints(){
    const data = Highcharts.charts[last-1].series[0].data;
    for (let x = 0; x < data.length; x++) {
       const html = data[x]["graphic"].element;
+      console.log(data[x]['marker']);
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
       html.addEventListener('keydown', (e) => {
          data[x]['isLast'] = x == data.length-1;
@@ -135,7 +131,7 @@ configurePoints(){
          this.history.push(data[x]['name']);
       });
    }
-} 
+}
 /**
  * Cria uma trap na navegação de menus.
  * O usuário fica preso dentro de um determinado fluxo de itens do menu.
@@ -165,8 +161,11 @@ configurePoints(){
       document.getElementsByTagName("svg")[0].setAttribute("aria-label", "");
       document.getElementById("pv").setAttribute("role", "application");      
       document.getElementById("pv").setAttribute("aria-hidden", "true");     
-      document.getElementsByClassName("highcharts-exit-anchor-wrapper")[0].remove();
-      document.getElementsByTagName("desc")[0].remove();
+      for(let i = 0; true; i++)
+      if (document.getElementsByTagName("desc")[i] != null)
+         document.getElementsByTagName("desc")[i].remove();
+      else
+         break;
       if (document.getElementById("highcharts-information-region-1") != null)
          document.getElementById("highcharts-information-region-1").remove();
       if (document.getElementById("highcharts-information-region-0") != null)
