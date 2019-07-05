@@ -1,4 +1,4 @@
-import { HttpClient} from '@angular/common/http';
+import { HttpClient,HttpParams,HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -22,5 +22,15 @@ constructor(private http: HttpClient) {}
       }
   };
   return this.http.get('http://127.0.0.1:5000/dataTest', config);
+  }
+  requestRotation(points:Array<Array<Number>>){
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    const config = {
+      params: {
+          points: JSON.stringify(points)
+      }
+  };
+    return this.http.get('http://127.0.0.1:5000/dataRotation', config)
   }
 }

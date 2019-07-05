@@ -2,6 +2,8 @@ from math import degrees
 from math import atan2
 from math import trunc
 from math import hypot
+from math import cos
+from math import sin
 import numpy as np
 
 def delta(val1,val2):
@@ -54,4 +56,5 @@ def normalizer(arrayValues):
             delta = arrayMax[j] - arrayMin[j]
             res = (arrayValues[i][j] - arrayMin[j])/(delta)
             valuesNormalized[i].append(res*100)
+
     return valuesNormalized

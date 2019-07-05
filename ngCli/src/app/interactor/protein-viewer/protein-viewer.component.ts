@@ -10,12 +10,14 @@ import {
    ChartConfiguratorService
 } from "../chart-configurator/chart-configurator.service";
 import * as Highcharts from 'highcharts';
+import * as $ from 'jquery';
 import highcharts3D from 'highcharts/highcharts-3d.src';
 import {
    TalkerService
 } from '../talker/talker.service';
 import { DataService } from '../../core/data-service/data-service.service';
 import AccessibilityModule from 'highcharts/modules/accessibility';
+import { HttpService } from '../../core/http-pdb/http-pdb-requester.service';
 
 highcharts3D(Highcharts);
 AccessibilityModule(Highcharts);
@@ -27,7 +29,7 @@ AccessibilityModule(Highcharts);
 })
 
 export class ProteinViewerComponent implements OnInit, AfterViewInit{
-   constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService) {}
+   constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService, private _http : HttpService) {}
    seletor = null;
    history = Array<String>();
    chartOptions = null;
@@ -43,6 +45,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
          this._router.navigate(['/menu']);
       Highcharts.chart('pv', this.chartOptions);
       this.configurePoints();
+      this.configureRotation();
    }
    ngAfterViewInit(){
       this.removeDefaultsAria();
@@ -120,7 +123,7 @@ configurePoints(){
    const data = Highcharts.charts[last-1].series[0].data;
    for (let x = 0; x < data.length; x++) {
       const html = data[x]["graphic"].element;
-      console.log(data[x]['marker']);
+      // console.log(data[x]['marker']);
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
       html.addEventListener('keydown', (e) => {
          data[x]['isLast'] = x == data.length-1;
@@ -172,4 +175,43 @@ configurePoints(){
          document.getElementById("highcharts-information-region-0").remove();
 
    }
+
+   configureRotation(){
+   const component = this;
+   const chart = Highcharts.charts[0];
+   $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
+      eStart = chart.pointer.normalize(eStart);
+      const posX = eStart.pageX;
+      const posY = eStart.pageY;
+      const alpha = chart.options.chart.options3d.alpha;
+      const beta = chart.options.chart.options3d.beta;
+      const sensitivity = 5; // lower is more sensitive
+      $(document).bind({
+         'mousemove.hc touch.hc': function(e) {
+            chart.options.chart.options3d.beta = beta + (posX - e.pageX) / sensitivity;
+            chart.options.chart.options3d.alpha = alpha + (e.pageY - posY) / sensitivity;;
+            chart.redraw(false);
+         },
+         'mouseup touchend': function() {
+            $(document).unbind('.hc');
+            let newPlot = new Array<Array<Number>>();
+            for (let i = 0; i < chart.series[0].data.length; i++){
+               const x = chart.series[0].data[i]['graphic']['x'] + 5;
+               const y = chart.series[0].data[i]['graphic']['y'] + 10;
+               const z = chart.series[0].data[i]['z'];
+               const arrAux = [x,y,z];
+               newPlot.push(arrAux);
+            }
+            component._http.requestRotation(newPlot).subscribe(
+               (result) => {
+                 console.log("sucess!");
+               },
+               (error) => {
+                  console.log("not success...");                 
+               }
+             );;
+         }
+      });
+      });
+}
 } 
