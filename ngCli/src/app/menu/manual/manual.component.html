@@ -4,65 +4,65 @@
 <header>
   <nav class="text-left w-75 mx-auto">
     <ul>
-      <li>
-        <a tabindex = '0' id="intro-h" (click)="goTo($event,'intro-p')"  (keydown)="$event.keyCode == 13 ? goTo($event,'intro-p') : null" class="title" (keydown.shift.tab) = "goTo($event,'lastMenu')">
+      <li class = "title">
+        <a tabindex = '0' id="intro-h" (click)="goTo($event,'intro-p')"  (keydown)="$event.keyCode == 13 ? goTo($event,'intro-p') : null" (keydown.shift.tab) = "goTo($event,'lastMenu')">
           Introdução
         </a>
       </li>
-      <li>
-        <a tabindex = '0' id="menu-h"  (click)="goTo($event,'menu-p')"  (keydown)="$event.keyCode == 13 ? goTo($event,'menu-p') : null" class="title">
+      <li class = "title">
+        <a tabindex = '0' id="menu-h"  (click)="goTo($event,'menu-p')"  (keydown)="$event.keyCode == 13 ? goTo($event,'menu-p') : null" >
           Menu Principal    
         </a>
       </li>      
-      <li>
-          <a tabindex = '0' id="nav-h"  (click)="goTo($event,'nav-p')"  (keydown)="$event.keyCode == 13 ? goTo($event,'nav-p') : null" class="title">
+      <li class = "title">
+          <a tabindex = '0' id="nav-h"  (click)="goTo($event,'nav-p')"  (keydown)="$event.keyCode == 13 ? goTo($event,'nav-p') : null" >
               Navegador de proteína
             </a>
       </li>
       <nav class="submenu">
         <ul>
-          <li>
-              <a tabindex=" 0" id="nav-sh" (click)="goTo($event,'nav-sp')"  (keydown)="$event.keyCode == 13 ? goTo($event,'nav-sp') : null" class="subtitle">
+          <li class = "subtitle">
+              <a tabindex=" 0" id="nav-sh" (click)="goTo($event,'nav-sp')"  (keydown)="$event.keyCode == 13 ? goTo($event,'nav-sp') : null">
                   Dentro da proteína
                 </a>       
           </li>
         </ul>
       </nav>
-  <li>
-    <a tabindex = '0' id="sis-h"  (click)="goTo($event,'sis-p')"  (keydown)="$event.keyCode == 13 ? goTo($event,'sis-p') : null" class="title">
+  <li class = "title">
+    <a tabindex = '0' id="sis-h"  (click)="goTo($event,'sis-p')"  (keydown)="$event.keyCode == 13 ? goTo($event,'sis-p') : null" >
       Sistema de navegação
     </a>
   </li>
-  <li>
-    <a tabindex = '0' id="conc-h"  (click)="goTo($event,'conc-p')"  (keydown)="$event.keyCode == 13 ? goTo($event,'conc-p') : null" class="title">
+  <li class = "title">
+    <a tabindex = '0' id="conc-h"  (click)="goTo($event,'conc-p')"  (keydown)="$event.keyCode == 13 ? goTo($event,'conc-p') : null" >
       Material concreto
     </a>
   </li>
     <nav class="submenu">
       <ul>
-        <li>
-          <a tabindex=" 0" id="nav-sh" (click)="goTo($event,'conc-sp')"  (keydown)="$event.keyCode == 13 ? goTo($event,'conc-sp') : null" class="subtitle" >
+        <li class = "subtitle">
+          <a tabindex=" 0" id="nav-sh" (click)="goTo($event,'conc-sp')"  (keydown)="$event.keyCode == 13 ? goTo($event,'conc-sp') : null">
             Relógio
           </a>
         </li>
-        <li>
-          <a tabindex=" 0" id="nav-sh" (click)="goTo($event,'conc-sp1')"  (keydown)="$event.keyCode == 13 ? goTo($event,'conc-sp1') : null" class="subtitle" >
+        <li class = "subtitle">
+          <a tabindex=" 0" id="nav-sh" (click)="goTo($event,'conc-sp1')"  (keydown)="$event.keyCode == 13 ? goTo($event,'conc-sp1') : null">
             Base de E V A
           </a>
         </li>
-        <li>
-          <a tabindex=" 0" id="nav-sh" (click)="goTo($event,'conc-sp2')"  (keydown)="$event.keyCode == 13 ? goTo($event,'conc-sp2') : null" class="subtitle" >
+        <li class = "subtitle">
+          <a tabindex=" 0" id="nav-sh" (click)="goTo($event,'conc-sp2')"  (keydown)="$event.keyCode == 13 ? goTo($event,'conc-sp2') : null">
             Alfinetes
           </a>
         </li>
-        <li>
-          <a tabindex=" 0" id="nav-sh" (click)="goTo($event,'conc-sp3')"  (keydown)="$event.keyCode == 13 ? goTo($event,'conc-sp3') : null" class="subtitle" >
+        <li class = "subtitle">
+          <a tabindex=" 0" id="nav-sh" (click)="goTo($event,'conc-sp3')"  (keydown)="$event.keyCode == 13 ? goTo($event,'conc-sp3') : null">
             Corda
           </a>
         </li>
       </ul>
   </nav>
-  <li>
+  <li class = "title">
     <a tabindex='0' id="lastMenu"  routerLink="/menu" (keydown.tab) = "goTo($event,'intro-h')">
       Voltar para o menu principal
     </a>

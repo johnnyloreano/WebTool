@@ -9,13 +9,12 @@ nav *,span {
     cursor:pointer;    
 }
 nav{
-    border-left:thin solid black;
-    border-right:thin solid black;
-    border-top:thin solid black;
-    padding : 0 0.4em;
+    border:thin solid black;
+    border-bottom:none;
 }
-nav ul {
+nav ul, .submenu ul {
     list-style-type: none;
+    padding : 0;
 }
 section p {
     text-align: left;
@@ -24,17 +23,13 @@ section p {
 .title{
     font-size: 1.5em;
     border-bottom:thin solid black;
+    text-indent: 2em;
 }
 .subtitle{
-    font-size: 1.2em;
-    margin-left: 0.6em;
+    font-size: 1.1em;
+    text-indent: 3.5em;
+    border-bottom:thin solid black;
 }
-.submenu, .submenu *{
-    border-left:none;
-    border-right:none;
-    padding : none;
-    border-bottom: none;
-}
-a{
-    border-bottom:none !important;
-}
+.submenu{
+    border:none;
+}   
