@@ -16,5 +16,4 @@ export class PreViewerComponent implements OnInit {
       this._router.navigate(['/buscador']);
     
   }
-
 }

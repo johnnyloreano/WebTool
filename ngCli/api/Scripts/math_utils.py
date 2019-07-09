@@ -54,7 +54,10 @@ def normalizer(arrayValues):
         valuesNormalized.append(list())
         for j in range(0,3):
             delta = arrayMax[j] - arrayMin[j]
-            res = (arrayValues[i][j] - arrayMin[j])/(delta)
-            valuesNormalized[i].append(res*100)
+            if delta == 0:
+                valuesNormalized[i].append(0)
+            else:
+                res = (arrayValues[i][j] - arrayMin[j])/(delta)
+                valuesNormalized[i].append(res*100)
 
     return valuesNormalized

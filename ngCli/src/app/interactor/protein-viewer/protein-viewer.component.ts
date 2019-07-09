@@ -175,43 +175,44 @@ configurePoints(){
          document.getElementById("highcharts-information-region-0").remove();
 
    }
-
-   configureRotation(){
-   const component = this;
-   const chart = Highcharts.charts[0];
-   $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
-      eStart = chart.pointer.normalize(eStart);
-      const posX = eStart.pageX;
-      const posY = eStart.pageY;
-      const alpha = chart.options.chart.options3d.alpha;
-      const beta = chart.options.chart.options3d.beta;
-      const sensitivity = 5; // lower is more sensitive
-      $(document).bind({
-         'mousemove.hc touch.hc': function(e) {
-            chart.options.chart.options3d.beta = beta + (posX - e.pageX) / sensitivity;
-            chart.options.chart.options3d.alpha = alpha + (e.pageY - posY) / sensitivity;;
-            chart.redraw(false);
-         },
-         'mouseup touchend': function() {
-            $(document).unbind('.hc');
+ configureRotation(){
+      const component = this;
+      const chart = Highcharts.charts[0];
+      $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
+         eStart = chart.pointer.normalize(eStart);
+         const posX = eStart.pageX;
+         const posY = eStart.pageY;
+         const alpha = chart.options.chart.options3d.alpha;
+         const beta = chart.options.chart.options3d.beta;
+         const sensitivity = 5; // lower is more sensitive
+         $(document).bind({
+           'mousemove.hc touchdrag.hc': function(e) {
+             chart.options.chart.options3d.beta = beta + (posX - e.pageX) / sensitivity;
+             chart.options.chart.options3d.alpha = alpha + (e.pageY - posY) / sensitivity;;
+             chart.redraw(false);
+           },
+           'mouseup touchend': function() {
+             $(document).unbind('.hc');
             let newPlot = new Array<Array<Number>>();
+            const RADIUS  = 5;
             for (let i = 0; i < chart.series[0].data.length; i++){
-               const x = chart.series[0].data[i]['graphic']['x'] + 5;
-               const y = chart.series[0].data[i]['graphic']['y'] + 10;
-               const z = chart.series[0].data[i]['z'];
+               const x = chart.series[0].data[i]['graphic']['x'] + RADIUS;
+               const y = chart.series[0].data[i]['graphic']['y'] + RADIUS * 2;
+               let z = chart.series[0].data[i]['z'];
+               if (z == 0) z = 1;
                const arrAux = [x,y,z];
                newPlot.push(arrAux);
             }
             component._http.requestRotation(newPlot).subscribe(
                (result) => {
-                 console.log("sucess!");
+               console.log("sucess!");
                },
                (error) => {
                   console.log("not success...");                 
                }
-             );;
-         }
+               );
+           }
+         });
       });
-      });
-}
+   }
 } 
