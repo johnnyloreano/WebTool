@@ -157,15 +157,12 @@ configurePoints(){
     * Remove os aria-labels do HighCharts que causam problemas na navegação.
     */
    removeDefaultsAria(){
-
       document.getElementsByTagName("svg")[0].setAttribute("aria-label", "");
-      document.getElementById("pv").setAttribute("role", "application");      
-      document.getElementById("pv").setAttribute("aria-hidden", "true");     
+      document.getElementById("pv").setAttribute("role", "application");   
       for(let i = 0; true; i++)
       if (document.getElementsByTagName("desc")[i] != null)
          document.getElementsByTagName("desc")[i].remove();
-      else
-         break;
+      else break;
       if (document.getElementById("highcharts-information-region-1") != null)
          document.getElementById("highcharts-information-region-1").remove();
       if (document.getElementById("highcharts-information-region-0") != null)
