@@ -99,8 +99,8 @@
       Caso ocorra um erro, será informado ao usuário, e ele deverá tentar novamente.
       É importante que o usuário tenha acesso a internet, caso seja a primeira vez que busque determinada proteína. 
       Toda vez que uma nova proteína for buscada, essa será salva no seu computador, de modo que possa ser acessado de maneira offline.
-      Uma vez concluída a pesquisa, o usuário será direcionado a uma página onde conterá o título, com o código da proteína buscada, e, logo abaixo, informações iniciais, como a quantidade de aminoácidos a serem percorridos.
-      Nessa página, poderá ser confirmado esses dados, e visitado o navegador, ou poderá voltar para procurar alguma outra proteína.
+      Uma vez concluída a pesquisa, o usuário será direcionado a uma página onde conterá o título, com o código da proteína buscada, e, logo abaixo, a quantidade de aminoácidos a serem percorridos.
+      Nessa página, poderá ser confirmado e visitado o navegador, ou poderá voltar para procurar alguma outra proteína.
       Para iniciar a navegação, o usuário precisará clicar no botão "Iniciar Navegação". 
       O leitor deverá dizer "Aperte TAB para iniciar a navegação. 
       Utilize as setas direita, para avançar, e esquerda, para voltar nos aminoácidos.". A partir desse momento, o usuário poderá usar começar a percorrer a proteína.
@@ -108,14 +108,14 @@
   <h3 tabindex="0" id="nav-sp">Dentro da proteína</h3>
   <p  tabindex="0">
     Ao iniciar a navegação, no primeiro aminoácido, será dado a informação da posição inicial onde deverá começar o modelo da proteína.   
-    A posição inicial será dada de acordo com o quadrante com o qual ele pertence. 
+    A posição inicial será dada de acordo com o quadrante com o qual ele está. 
     Por exemplo, caso o desenho inicie no canto superior direito, será dito : "Iniciar no quadrante superior direito".
     Após, você deverá ouvir informações sobre o aminoácido atual e sobre a orientação e distância em relação ao próximo aminoácido.
     A orientação será dada em horas, e a distância será categorizada entre "grande", "médio" ou "pequeno".
     Para se movimentar ao longo da proteína, deverá ser usado a seta "direita" para movimentar para o próximo aminoácido, e a seta "esquerda" para retornar um aminoácido.
     Para repetir informação sobre o aminoácido atual, utilizar a tecla "A".
     Para repetir informação sobre a próxima posição, utilizar a tecla "Z". 
-    Caso desejar sair da proteína, utilizar a tecla "ESC", ou "TAB".
+    Caso desejar sair da proteína, utilizar a tecla "Q", ou "TAB".
 </p>
   <a tabindex="0"  (click)="goTo($event,'nav-h')" (keydown)="$event.keyCode == 13 ? goTo($event,'nav-h') : null">Voltar para título Navegador de proteína</a>
 </section>
@@ -125,17 +125,17 @@
       Para informar a direção do próximo aminoácido, o WalkingMol utiliza o sistema de navegação por horas. 
       Imagine um relógio.
       Ao alcançar um determinado aminoácido, deve-se considerar esse aminoácido posicionado no centro desse relógio.
-      A partir dele, será dado a direção do próximo aminoácido baseada em horas. 
+      A partir dele, será dado a direção do próximo aminoácido, baseada em horas. 
       Por exemplo, imagine que o usuário está em um aminoácido, e o próximo aminoácido encontra-se logo a direita dele. Dessa maneira, a ferramenta deverá informar a existência de um novo aminoácido as 3 horas, partindo do aminoácido do início.
     </p>
   <a tabindex="0"  (click)="goTo($event,'sis-h')" (keydown)="$event.keyCode == 13 ? goTo($event,'sis-h') : null">Voltar para título Sistema de Navegação</a>
 
 </section>
-<section tabindex = "0" >
+<section>
   <h2 tabindex="0" id="conc-p">Material Concreto</h2>
   <p id="conc-p" tabindex="0">
       Para auxiliá-lo na navegação, foi implementado uma solução baseado em material concreto. 
-      Esse material concreto consiste em um Relógio, uma base de E V A, alfinetes e uma corda.
+      Esse material concreto consiste em um Relógio, uma base de E. V. A., alfinetes e uma corda.
       Veja a seguir maiores detalhes de cada material.      
   </p>
   <h3 tabindex="0" id="conc-sp">Relógio</h3>
@@ -145,9 +145,9 @@
     O relógio possui as horas indicadas em braille, na parte superior, próximo da borda.
     Além disso, o relógio possui um ponteiro.
     Esse ponteiro indicará a direção desejada, de acordo com as horas, e também indicará a distância, de acordo com um dos três furos escolhido do ponteiro. 
-    Para utilizá-lo, deverá, primeiramente, ser definido o local onde se inicia o desenho da proteína.
+    Para utilizar, deverá, primeiramente, ser definido o local onde se inicia o desenho da proteína.
     Feito isso, deverá ser inserido o primeiro aminoácido, e realizado o posicionamento do próximo aminoácido.
-    Após, deverá ser determinado a distância, inserido o próximo aminoácido, e posicionado o novo aminoácido no centro do relógio. 
+    Após, deverá ser determinado a distância, inserindo o próximo aminoácido, e posicionado o novo aminoácido no centro do relógio. 
     Esse processo se repete até o final da proteína.
 </p>
 <h3 tabindex="0"  id="conc-sp1">Base de E V A</h3>
@@ -160,7 +160,7 @@
 </p>
 <h3 tabindex="0" id="conc-sp3">Corda</h3>
 <p  tabindex="0">
-  A corda será usada para amarrar cada par de aminoácido, indicando de onde começa e onde termina o desenho, bem como para indicar como que ele se molda.
+  A corda será usada para amarrar cada par de aminoácido, indicando de onde começa e onde termina o desenho, e também para indicar como que ele se molda.
 </p>
   <a tabindex="0"  (click)="goTo($event,'conc-h')" (keydown)="$event.keyCode == 13 ? goTo($event,'conc-h') : null">Voltar para título Material Concreto</a>
 </section>

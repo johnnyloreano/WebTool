@@ -12,6 +12,7 @@ nav *,span {
 nav{
     border-left:thin solid black;
     border-right:thin solid black;
+    border-top:thin solid black;
     padding : 0 0.4em;
 }
 nav ul {
