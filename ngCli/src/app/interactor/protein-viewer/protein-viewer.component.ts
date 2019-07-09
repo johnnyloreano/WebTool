@@ -31,7 +31,6 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
    seletor = null;
    history = Array<String>();
    chartOptions = null;
-   isFirst = true;
    visited = new Set();
    /**
     * @ignore
@@ -52,14 +51,8 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
     * Fala os comandos básicos do gráfico.
     */
    init(){  
-      if(!this.isFirst)
-         document.getElementById('pv').setAttribute("aria-label", "Utilize apenas as teclas para navegar!");
-      else{
-         document.getElementById('pv').setAttribute("aria-label", "Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
-         this.isFirst = false;
-      }
+      document.getElementById('pv').setAttribute("aria-label", "Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
       document.getElementById('pv').focus();
-
    }
    /**
     * @ignore
