@@ -6,7 +6,7 @@
   </p>
   <label for ="protein" class='mr-2' role="search">
     Proteína: 
-    <input id='protein' [(ngModel)]='pdbFile' type='text' (click)="requestProtein()"   (keydown)="$event.keyCode == 13 ? requestProtein() : null">
+    <input id='protein' [(ngModel)]='pdbFile' type='text' (keydown)="$event.keyCode == 13 ? requestProtein() : null">
   </label>
 
   <nav>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/core/data-service/data-service.service';
+import { DataService } from '../../core/data-service/data-service.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,10 +10,11 @@ import { Router } from '@angular/router';
 export class PreViewerComponent implements OnInit {
 
   constructor(private _data : DataService, private _router : Router) { }
+  private protein = this._data.getProtein()
   ngOnInit() {
-    if(this._data.getProtein() == undefined)
+    if(this.protein == undefined)
       this._router.navigate(['/buscador']);
-    document.getElementById("successful").focus();
+    document.getElementById("focus").focus();
   }
 
 }

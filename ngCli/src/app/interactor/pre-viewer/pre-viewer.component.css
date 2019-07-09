@@ -5,6 +5,10 @@ ul{
     padding: 1px;
     color:white;
 }
+#successful p{
+    width:80%;
+    margin: 1% auto;
+}
 #successful *:focus{
     border: 3px dashed white;
 }

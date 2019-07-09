@@ -11,5 +11,6 @@ export class SummaryComponent{
   constructor(private _dataS : DataService,private _router : Router) { }
   goMenu(){
     this._router.navigate(['/menu']);
+    document.getElementById("header").focus();
   }
 }
