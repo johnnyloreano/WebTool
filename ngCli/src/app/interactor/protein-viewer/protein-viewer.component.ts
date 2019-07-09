@@ -42,9 +42,16 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
          this._router.navigate(['/menu']);
       Highcharts.chart('pv', this.chartOptions);
       this.configurePoints();
+      if(this._data.getSeletor() == "test")
+         this.configureTestHTML();
    }
    ngAfterViewInit(){
       this.removeDefaultsAria();
+   }
+   configureTestHTML(){
+      const list = document.getElementsByTagName("ul")[0];
+      list.children[1].remove();
+      list.children[2].remove();
    }
    /**
     * Realiza a navegação no gráfico.
