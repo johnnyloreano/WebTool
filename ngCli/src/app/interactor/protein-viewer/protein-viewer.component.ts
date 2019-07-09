@@ -123,7 +123,23 @@ configurePoints(){
    const data = Highcharts.charts[last-1].series[0].data;
    for (let x = 0; x < data.length; x++) {
       const html = data[x]["graphic"].element;
-      // console.log(data[x]['marker']);
+      html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
+      html.addEventListener('keydown', (e) => {
+         data[x]['isLast'] = x == data.length-1;
+         this.event(e as KeyboardEvent, data[x]);
+      });
+      html.addEventListener('focus', () => {
+         this.visited.add(data[x]);
+         this.history.push(data[x]['name']);
+      });
+   }
+}
+reconfigurePoints(data){
+   const last = Highcharts.charts.length;
+   const htmls = Highcharts.charts[last-1].series[0].data;
+   for (let x = 0; x < data.length; x++) {
+      const html = htmls[x]["graphic"].element;
+      
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
       html.addEventListener('keydown', (e) => {
          data[x]['isLast'] = x == data.length-1;
@@ -178,6 +194,7 @@ configurePoints(){
  configureRotation(){
       const component = this;
       const chart = Highcharts.charts[0];
+      chart.series[0].data[0]['graphic'].element.outerHTML = "";
       $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
          eStart = chart.pointer.normalize(eStart);
          const posX = eStart.pageX;
@@ -196,9 +213,12 @@ configurePoints(){
             let newPlot = new Array<Array<Number>>();
             const RADIUS  = 5;
             for (let i = 0; i < chart.series[0].data.length; i++){
+               // const index = chart.series[0].data[i]['index'];
+               // console.log(index)
                const x = chart.series[0].data[i]['graphic']['x'] + RADIUS;
                const y = chart.series[0].data[i]['graphic']['y'] + RADIUS * 2;
                let z = chart.series[0].data[i]['z'];
+
                if (z == 0) z = 1;
                const arrAux = [x,y,z];
                newPlot.push(arrAux);
