@@ -54,8 +54,10 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
    init(){  
       if(!this.isFirst)
          document.getElementById('pv').setAttribute("aria-label", "Utilize apenas as teclas para navegar!");
-      else
+      else{
          document.getElementById('pv').setAttribute("aria-label", "Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
+         this.isFirst = false;
+      }
       document.getElementById('pv').focus();
 
    }
@@ -120,7 +122,6 @@ configurePoints(){
    const data = Highcharts.charts[last-1].series[0].data;
    for (let x = 0; x < data.length; x++) {
       const html = data[x]["graphic"].element;
-      console.log(data[x]['marker']);
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
       html.addEventListener('keydown', (e) => {
          data[x]['isLast'] = x == data.length-1;

@@ -10,11 +10,10 @@ import { Router } from '@angular/router';
 export class PreViewerComponent implements OnInit {
 
   constructor(private _data : DataService, private _router : Router) { }
-  private protein = this._data.getProtein();
   ngOnInit() {
-    if(this.protein == undefined)
+    if(this._data.getProtein() == undefined)
       this._router.navigate(['/buscador']);
-    
+    document.getElementById("successful").focus();
   }
 
 }
