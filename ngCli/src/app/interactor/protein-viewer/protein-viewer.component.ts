@@ -122,8 +122,9 @@ configurePoints(){
    const last = Highcharts.charts.length;
    const data = Highcharts.charts[last-1].series[0].data;
    for (let x = 0; x < data.length; x++) {
-      const html = data[x]["graphic"].element;
+      const html = data[x]["graphic"].element as SVGAElement;
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
+      console.log(html.getAttribute("aria-label"));
       html.addEventListener('keydown', (e) => {
          data[x]['isLast'] = x == data.length-1;
          this.event(e as KeyboardEvent, data[x]);
@@ -138,17 +139,9 @@ reconfigurePoints(data){
    const last = Highcharts.charts.length;
    const htmls = Highcharts.charts[last-1].series[0].data;
    for (let x = 0; x < data.length; x++) {
-      const html = htmls[x]["graphic"].element;
-      
-      html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
-      html.addEventListener('keydown', (e) => {
-         data[x]['isLast'] = x == data.length-1;
-         this.event(e as KeyboardEvent, data[x]);
-      });
-      html.addEventListener('focus', () => {
-         this.visited.add(data[x]);
-         this.history.push(data[x]['name']);
-      });
+      const html = htmls[x]["graphic"].element as SVGAElement;
+      html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"]);
+      console.log(html.getAttribute("aria-label"));
    }
 }
 /**
@@ -193,8 +186,8 @@ reconfigurePoints(data){
    }
  configureRotation(){
       const component = this;
-      const chart = Highcharts.charts[0];
-      chart.series[0].data[0]['graphic'].element.outerHTML = "";
+      const last = Highcharts.charts.length - 1 ;
+      const chart = Highcharts.charts[last];
       $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
          eStart = chart.pointer.normalize(eStart);
          const posX = eStart.pageX;
@@ -210,25 +203,25 @@ reconfigurePoints(data){
            },
            'mouseup touchend': function() {
              $(document).unbind('.hc');
-            let newPlot = new Array<Array<Number>>();
+            let newPlot = new Array<Object>();
             const RADIUS  = 5;
             for (let i = 0; i < chart.series[0].data.length; i++){
-               // const index = chart.series[0].data[i]['index'];
-               // console.log(index)
                const x = chart.series[0].data[i]['graphic']['x'] + RADIUS;
                const y = chart.series[0].data[i]['graphic']['y'] + RADIUS * 2;
                let z = chart.series[0].data[i]['z'];
-
+               const message = chart.series[0].data[i]['message'];
                if (z == 0) z = 1;
                const arrAux = [x,y,z];
-               newPlot.push(arrAux);
+               const dictionary = { message : message, position : arrAux};
+               newPlot.push(dictionary);
             }
-            component._http.requestRotation(newPlot).subscribe(
+            const type = component._data.getSeletor();
+            component._http.requestRotation(newPlot, type).subscribe(
                (result) => {
-               console.log("sucess!");
+                  // component.reconfigurePoints(result);
                },
                (error) => {
-                  console.log("not success...");                 
+                  console.log("not success...");
                }
                );
            }

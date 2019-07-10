@@ -1,4 +1,12 @@
+from json import dumps
 from parseRotation import fixPoints
-def getRotation(points):
-    fixPoints(points)
-    return "yes"
+def getRotation(points,types):
+    print(points)
+    if types == "\"test\"":
+        result = fixPoints(points)
+        listJson = list()
+        for x in result:
+            listJson.append(x.toJson())
+        return dumps( listJson)
+    elif types == '\"protein\"':
+        return 'hello'
