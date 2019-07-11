@@ -58,7 +58,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
     * Fala os comandos básicos do gráfico.
     */
    init(){  
-      document.getElementById('pv').setAttribute("aria-label", "Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
+      document.getElementById('pv').setAttribute("aria-label", "Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos. Utilize a tecla 'A' para repetir a posição atual, e  a letra 'Z' para repetir a próxima posição. Utilize a tecla 'W', ou 'TAB' para sair do visualizador.");
       document.getElementById('pv').focus();
    }
    /**
