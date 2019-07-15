@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./summary.component.css']
 })
 export class SummaryComponent{
-  private protein = this._dataS.getProtein();
+  protein = this._dataS.getProtein();
   constructor(private _dataS : DataService,private _router : Router) { }
   goMenu(){
     this._router.navigate(['/menu']);
