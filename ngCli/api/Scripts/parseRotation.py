@@ -31,14 +31,12 @@ def recreatePoints(points):
     listPointT = list()
     firstCoords = points[0]
     firstTest = Test(firstCoords)
-    firstTest.message  = "Iniciando no "+ str( generateFQuadrant(quadrantOfPoint(firstTest.coords,5)) ) + ". "
-    firstTest.init = 1
+    firstTest.message  = "Começando pelo "+ str( generateFQuadrant(quadrantOfPoint(firstTest.coords,5)) ) + ". "
     intervals = None
     listPointT.append(firstTest)
     for x in range(1,len(points)):
         coords  = points[x]
         nTest = Test(coords)
-        listPointT.append(nTest)        
         trans =  generateTransitions(listPointT[x].coords, listPointT[x-1].coords)
         distance = distanceOfPoints(listPointT[x].coords, listPointT[x-1].coords)
         interval = None
@@ -51,36 +49,44 @@ def recreatePoints(points):
         listPointT[x-1].transition = trans + ". Distância " + interval 
         listPointT[x-1].message += "Ponto número " + str(x)+". "
 
+        listPointT.append(nTest)        
+
     last = len(listPointT)-1
     listPointT[last].message = 'Você chegou ao final do desenho!'
-    listPointT[last].transition = " Não existem mais transições"
+    listPointT[last].transition = " Não existem mais transições."
+
     return listPointT
 
 def recreateProtein(points):
     listPointR = list()
-    residues = recreateRes(points)
+    firstRes = Test(points[0]['position'])
+    firstRes.message = defineMessage(points[0]['message']) + generateFQuadrant(quadrantOfPoint(firstRes.coords,50))
+    listPointR.append(firstRes)
     for x in range(1,len(points)):
-        coords  = points[x]
-        newRes = dict()
-        newRes['position'] = points[x]['position']
-        listPointR.append(newRes)  
-        trans =  generateTransitions(listPointR[x]['position'], listPointR[x-1]['position'])
-        distance = distanceOfPoints(listPointR[x]['position'], listPointR[x-1]['position'])
-            interval = None
+        newRes = Test(points[x]['position'])
+
+        trans =  generateTransitions(points[x]['position'], points[x-1]['position'])
+        distance = distanceOfPoints( points[x]['position'], points[x-1]['position'])
+
+        interval = None
         if distance <= 1:
             interval = 'Pequena'
         elif distance <= 2:
             interval = 'Média'
         else:
             interval =  'Grande'
-        listPointT[x-1]['transition'] = trans + ". Distância " + interval 
-        listPointT[x-1]['message'] += "Ponto número " + str(x)+". "
-    return residues
 
-def recreateRes(point):
-    firstMessage = defineMessage(point[0]['message'])
-    firstPosition = generateFQuadrant(quadrantOfPoint(point[0]['position'],50))
-    firstMessage += firstPosition
+        listPointR[x-1].transition = trans + ". Distância " + interval 
+        listPointR[x-1].message += defineMessage(points[x-1]['message'])
+
+        listPointR.append(newRes)
+
+    
+    last = len(listPointR)-1
+    listPointR[last].message = 'Você chegou ao final da proteína!'
+    listPointR[last].transition = " Não existem mais transições."
+
+    return listPointR
 
 def defineMessage(message):
     number = getNumberRes(message)   
@@ -89,21 +95,18 @@ def defineMessage(message):
     if structure == "":
         structure = verifySheet(message)
     message = "Resíduo número " + str(number) +  ". "
-    message += structure
     message += aminoacid
+    message += structure
+    print(message)
     return message
 
 def getNumberRes(message):
     return int(findall('\d+', message)[0])
 
 def getAminoName(name):
-    result = "."
-    name = name[:-2]
-    for x in name[::-1]:
-        if x == ".":
-            break
-        result += x
-    return result[::-1]
+    firstDot = name.index(".")+1
+    finalDot = name.index(".",firstDot)
+    return name[firstDot:finalDot] + ". "
 
 def verifyHelix(message):
     if "Dentro de Hélice" in message:

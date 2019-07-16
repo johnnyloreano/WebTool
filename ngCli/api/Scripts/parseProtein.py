@@ -76,10 +76,11 @@ def getListResidue(pdb):
     list_residues[last].message = generateMessage(list_residues[last],str(last))
     list_residues[last].message += '. Você chegou ao final da proteína!'
     list_residues[last].transition = " Não existem mais transições"
-    list_residues[last].name = getAminoName(list_residues[last].init)
     return list_residues
 def generateMessage(residue,index):
     message = 'Resíduo número  ' + index + '. '
+
+    message += str(getAminoName(residue.init))
 
     if residue.helixInf == 'B':
         message += "Início de Hélice. "
@@ -95,9 +96,9 @@ def generateMessage(residue,index):
     elif residue.sheetInf == 'M':
         message += "Dentro de Fita. "
 
-    message += str(getAminoName(residue.init))
     if int(index) == 1:
         message += "Começando pelo " + str(generateFQuadrant(quadrantOfPoint(residue.location,100))) + ". "
+        
     return message
     
 def verifyHelix(rNum,lengthHelix):
