@@ -218,7 +218,7 @@ reconfigurePoints(data){
             const type = component._data.getSeletor();
             component._http.requestRotation(newPlot, type).subscribe(
                (result) => {
-                  // component.reconfigurePoints(result);
+                  component.reconfigurePoints(result);
                },
                (error) => {
                   console.log("not success...");
