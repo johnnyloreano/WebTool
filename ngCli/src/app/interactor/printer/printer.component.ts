@@ -13,7 +13,8 @@ declare var iCn3DUI : any;
 export class PrinterComponent implements OnInit {
 
   constructor(private _dataService : DataService, private _router: Router) { }
-
+  bonds = 'no';
+  stabilizer = false;
   ngOnInit() {
     if(this._dataService.getProtein() == undefined)
       this._router.navigate(['/menu']);
@@ -30,8 +31,8 @@ export class PrinterComponent implements OnInit {
        opts['chemicals'] = 'nothing';              //line, stick, ball and stick, schematic, sphere, nothing
        opts['water']   = 'nothing';            //sphere, dot, nothing
        opts['ions']    = 'nothing'; 
-       opts['hbonds']  = 'no';                 //yes, no
-       opts['ssbonds'] = 'no';                //yes, no
+       opts['hbonds']  = component.bonds;                 //yes, no
+       opts['ssbonds'] = component.bonds;                //yes, no
        var cfg = {
            divid: 'icn3dwrap',
            width: '100%',
@@ -44,6 +45,8 @@ export class PrinterComponent implements OnInit {
        
        //communicate with the 3D viewer with chained functions
        $.when(icn3dui.show3DStructure()).then(function() {
+         if(component.stabilizer) icn3dui.addStabilizer();
+
           icn3dui.exportStlFile("");
           document.getElementById("icn3dwrap").remove();
        });
