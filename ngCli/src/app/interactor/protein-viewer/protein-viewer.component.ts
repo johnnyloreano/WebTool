@@ -30,8 +30,8 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
    constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService) {}
    seletor = null;
    history = Array<String>();
-   chartOptions = null;
    visited = new Set();
+   chartOptions = null;
    /**
     * @ignore
     */

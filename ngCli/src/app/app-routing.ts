@@ -7,6 +7,7 @@ import { SummaryComponent } from './interactor/summary/summary.component';
 import { ManualComponent } from './menu/manual/manual.component';
 import { TestesComponent } from './menu/testes/testes.component';
 import { PreViewerComponent } from './interactor/pre-viewer/pre-viewer.component';
+import { PrinterComponent } from './interactor/printer/printer.component';
 
 export const routes: Routes = [
   {path: 'menu', component: MenuComponent},
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'preView', pathMatch: 'full', component: PreViewerComponent},
   { path: 'testes', pathMatch: 'full', component: TestesComponent},
   { path: 'viewTest', pathMatch: 'full', component: ProteinViewerComponent},
+  { path: 'printer', pathMatch: 'full', component: PrinterComponent},
   { path: '**', redirectTo: 'menu', pathMatch: 'full'}
 ];
 

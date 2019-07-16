@@ -7,8 +7,9 @@ import { RouterModule } from '@angular/router';
 // import { HighchartsChartComponent } from 'highcharts-angular';
 import { SummaryComponent} from './summary/summary.component';
 import { PreViewerComponent } from './pre-viewer/pre-viewer.component';
+import { PrinterComponent } from './printer/printer.component';
 @NgModule({
-  declarations: [ProteinViewerComponent,SummaryComponent, PreViewerComponent],
+  declarations: [ProteinViewerComponent,SummaryComponent, PreViewerComponent,PrinterComponent],
   imports: [
     CommonModule,
     CoreModule,
