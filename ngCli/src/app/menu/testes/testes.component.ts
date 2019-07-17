@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {HttpService as pdbRequester} from '../../core/http-pdb/http-pdb-requester.service';
 import {DataService} from '../../core/data-service/data-service.service';
 import { Router } from '@angular/router';
@@ -8,10 +8,12 @@ import { Router } from '@angular/router';
   templateUrl: './testes.component.html',
   styleUrls: ['./testes.component.css']
 })
-export class TestesComponent {
+export class TestesComponent implements OnInit {
 
   constructor(private _pdb: pdbRequester, private _router: Router, private _dataS : DataService) { }
-
+  ngOnInit(){
+    document.getElementById("header").focus();
+  }
 /**
  * Recebe o nome da figura geométrica desejada ,faz a busca por ela no Python e navega à página do gráfico
  * @param name 

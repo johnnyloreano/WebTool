@@ -32,9 +32,8 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
    constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService, private _http : HttpService) {}
    seletor = null;
    history = Array<String>();
-   chartOptions = null;
-   isFirst = true;
    visited = new Set();
+   chartOptions = null;
    /**
     * @ignore
     */
@@ -45,22 +44,25 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
          this._router.navigate(['/menu']);
       Highcharts.chart('pv', this.chartOptions);
       this.configurePoints();
-      this.configureRotation();
+      if(this._data.getSeletor() == "test")
+         this.configureTestHTML();
    }
    ngAfterViewInit(){
       this.removeDefaultsAria();
+   }
+   configureTestHTML(){
+      const list = document.getElementsByTagName("ul")[0];
+      list.children[4].remove();
+      list.children[2].remove();
+      list.children[1].remove();
    }
    /**
     * Realiza a navegação no gráfico.
     * Fala os comandos básicos do gráfico.
     */
    init(){  
-      if(!this.isFirst)
-         document.getElementById('pv').setAttribute("aria-label", "Utilize apenas as teclas para navegar!");
-      else
-         document.getElementById('pv').setAttribute("aria-label", "Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos.");
+      document.getElementById('pv').setAttribute("aria-label", "Aperte TAB para iniciar a navegação. Utilize as setas DIREITA, para avançar, e ESQUERDA, para voltar nos aminoácidos. Utilize a tecla 'A' para repetir a posição atual, e  a letra 'Z' para repetir a próxima posição. Utilize a tecla 'W', ou 'TAB' para sair do visualizador.");
       document.getElementById('pv').focus();
-
    }
    /**
     * @ignore
@@ -124,7 +126,6 @@ configurePoints(){
    for (let x = 0; x < data.length; x++) {
       const html = data[x]["graphic"].element as SVGAElement;
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
-      console.log(html.getAttribute("aria-label"));
       html.addEventListener('keydown', (e) => {
          data[x]['isLast'] = x == data.length-1;
          this.event(e as KeyboardEvent, data[x]);
@@ -141,7 +142,7 @@ reconfigurePoints(data){
    for (let x = 0; x < data.length; x++) {
       const html = htmls[x]["graphic"].element as SVGAElement;
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"]);
-      console.log(html.getAttribute("aria-label"));
+      // console.log(html.getAttribute("aria-label"));
    }
 }
 /**
@@ -169,15 +170,12 @@ reconfigurePoints(data){
     * Remove os aria-labels do HighCharts que causam problemas na navegação.
     */
    removeDefaultsAria(){
-
       document.getElementsByTagName("svg")[0].setAttribute("aria-label", "");
-      document.getElementById("pv").setAttribute("role", "application");      
-      document.getElementById("pv").setAttribute("aria-hidden", "true");     
+      document.getElementById("pv").setAttribute("role", "application");   
       for(let i = 0; true; i++)
       if (document.getElementsByTagName("desc")[i] != null)
          document.getElementsByTagName("desc")[i].remove();
-      else
-         break;
+      else break;
       if (document.getElementById("highcharts-information-region-1") != null)
          document.getElementById("highcharts-information-region-1").remove();
       if (document.getElementById("highcharts-information-region-0") != null)

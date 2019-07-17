@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 
 export class FormComponent implements OnInit {
-    private pdbFile: string;
+    pdbFile: string;
     constructor(private _pdbRequester: pdbRequester, private _router: Router, public dataService: DataService) {}
     ngOnInit(){
       document.getElementById("principalHeader").focus();

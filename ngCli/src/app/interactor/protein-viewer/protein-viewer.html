@@ -1,4 +1,4 @@
-<h2 tabindex="0" id="header">
+<h2 tabindex="0" id="header" >
     Visualizador
 </h2>
 <nav>
@@ -6,6 +6,11 @@
         <li>
             <button id="init" type="button" tabindex = '0' class="btn btn-primary w-25 " (keydown) = "fakeClick($event)" (click)="init()">
                 Iniciar Navegação
+            </button>
+        </li>
+        <li>
+            <button id="back" type="link" tabindex = '0' class="btn btn-primary w-25" (click) = "goTo('printer')">
+                Gerar arquivo para impressão em 3D
             </button>
         </li>
         <li>
@@ -18,6 +23,7 @@
                 Ver manual
             </button>
         </li>
+
         <li>
             <button type="link" tabindex = '0' class="btn btn-primary w-25" (click) = "goTo('buscador')">
                 Ir para tela de pesquisa de proteína
@@ -30,5 +36,5 @@
         </li>
   </ul>
 </nav>
-
+<div id="icn3dwrap"></div>
 <div id="pv" (focus)="tmpRemSVG()" tabindex="0" role="application" ></div>

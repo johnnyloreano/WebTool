@@ -1,0 +1,27 @@
+<nav>
+  <ul>
+    <li>
+      <button type="button" class="btn btn-primary w-25 "  (click)="generateFile()"> Gerar Arquivo</button>
+    </li>
+    <!-- <li>
+      <button type="button" class="btn btn-primary w-25 " > Ver configuração do arquivo</button>
+    </li> -->
+    <li>
+      <button type="link" class="btn btn-primary w-25" [ngClass]="{'active': stabilizer}"  (click) = "stabilizer = !stabilizer"> Adicionar Estabilizador</button>
+    </li>
+    <li>
+      <button type="link" class="btn btn-primary w-25" [ngClass]="{'active': bonds == 'yes'}"  (click) = "bonds = bonds == 'no' ? 'yes':'no' "> Adicionar Ligações</button>
+    </li>
+    <li>
+      <button type="link" class="btn btn-primary w-25 " routerLink = "/proteinView"> Voltar para a proteína</button>
+    </li>
+
+  </ul>
+</nav>
+<!-- <div>
+  <h2>
+    Informações do Arquivo:
+  </h2>
+    O arquivo <ng-template ngIf = "!stabilizer">não</ng-template> conterá os estabilizadores.
+    O arquivo <ng-template ngIf = "bonds == 'no'">não</ng-template> conterá átomos de hidrogênio e de enxofre além de aminoácidos.
+</div> -->
