@@ -90,7 +90,7 @@ get(option:string){
           dataLabels: {
             enabled: true,
             formatter: function ()  {      
-              return this.point['init'];
+              return this.point['label'];
           }
         }
       }

@@ -1,13 +1,19 @@
 from math_utils import normalizer
-from Test import Test 
-from protein import *
-from residue import Residue as Res
+from Point import Point 
+from Protein import *
 from transcripter import generateTransitions
 from transcripter import generateFQuadrant
 from math_utils import quadrantOfPoint
 from math_utils import distanceOfPoints
 from re import findall
-
+from json import dumps,loads
+def toJSON(points,types):
+    points = loads(points)
+    result = fixPoints(points,types.replace("\"", ""))
+    listJson = list()
+    for data in result:
+        listJson.append(data.toJSON())
+    return dumps( listJson )
 def fixPoints(points,types):
     pointsList = list()
     for x in points:
@@ -30,26 +36,26 @@ def invert(points):
 def recreatePoints(points):
     listPointT = list()
     firstCoords = points[0]
-    firstTest = Test(firstCoords)
+    firstTest = Point(firstCoords)
     firstTest.message  = "Começando pelo "+ str( generateFQuadrant(quadrantOfPoint(firstTest.coords,5)) ) + ". "
     intervals = None
     listPointT.append(firstTest)
     for x in range(1,len(points)):
         coords  = points[x]
-        listPointT.append(Test(coords))
+        listPointT.append(Point(coords))
 
         trans =  generateTransitions(listPointT[x].coords, listPointT[x-1].coords)
 
         distance = distanceOfPoints(listPointT[x].coords, listPointT[x-1].coords)
         interval = None
         if distance <= 1:
-            interval = 'Pequena'
+            interval = 'Pequena.'
         elif distance <= 2:
-            interval = 'Média'
+            interval = 'Média.'
         else:
-            interval =  'Grande'
+            interval =  'Grande.'
 
-        listPointT[x-1].transition = trans + ". Distância " + interval 
+        listPointT[x-1].transition = trans + "Distância " + interval 
         listPointT[x-1].message += "Ponto número " + str(x)+". "
 
 
@@ -61,31 +67,30 @@ def recreatePoints(points):
 
 def recreateProtein(points):
     listPointR = list()
-    firstRes = Test(points[0]['position'])
-    firstRes.message  = "Começando pelo "+ str( generateFQuadrant(quadrantOfPoint(firstRes.coords,50)) ) + ". "
-    listPointR.append(firstRes)
+    listPointR.append(Point(points[0]['position']))
+
     for x in range(1,len(points)):
-        newRes = Test(points[x]['position'])
+        newRes = Point(points[x]['position'])
         listPointR.append(newRes)
 
-        trans =  generateTransitions(points[x]['position'], points[x-1]['position'])
+        trans =  generateTransitions(listPointR[x].coords, listPointR[x-1].coords)
 
-        distance = distanceOfPoints( points[x]['position'], points[x-1]['position'])
+        distance = distanceOfPoints( listPointR[x].coords, listPointR[x-1].coords)
         interval = None
         if distance <= 1:
-            interval = 'Pequena'
+            interval = 'Pequena.'
         elif distance <= 2:
-            interval = 'Média'
+            interval = 'Média.'
         else:
-            interval =  'Grande'
+            interval =  'Grande.'
 
-        listPointR[x-1].transition = trans + ". Distância " + interval 
+        listPointR[x-1].transition = trans + "Distância " + interval 
         listPointR[x-1].message += defineMessage(points[x-1]['message'])
     
     last = len(listPointR)-1
     listPointR[last].message = 'Você chegou ao final da proteína!'
     listPointR[last].transition = " Não existem mais transições."
-
+    listPointR[0].message += "Começando pelo "+ str( generateFQuadrant(quadrantOfPoint(listPointR[0].coords,100)) )
     return listPointR
 
 def defineMessage(message):
@@ -97,7 +102,6 @@ def defineMessage(message):
     message = "Resíduo número " + str(number) +  ". "
     message += aminoacid
     message += structure
-    # print(message)
     return message
 
 def getNumberRes(message):

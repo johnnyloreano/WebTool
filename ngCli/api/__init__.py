@@ -4,9 +4,9 @@ from flask_cors import CORS
 from datetime import timedelta
 from functools import update_wrapper
 sys.path.append('Scripts')
-import dataTag
-import dataRotator
-import dataTest
+import parseProtein
+import parseRotation
+import parseTest
 
 def crossdomain(origin=None, methods=None, headers=None,
                 max_age=21600, attach_to_all=True,
@@ -55,20 +55,17 @@ CORS(app)
 @app.route('/dataTags', methods=['POST', 'GET', 'OPTIONS'])
 @crossdomain(origin='*')
 def tagReturn():
-    json_data = request.args
-    return dataTag.getProteinData(json_data['pdbFile'])
+    return parseProtein.toJSON(request.args['pdbFile'])
 
 @app.route('/dataTest', methods=['POST', 'GET', 'OPTIONS'])
 @crossdomain(origin='*')
 def testReturn():
-    json_data = request.args
-    return dataTest.getTests(json_data['name'])
+    return parseTest.toJSON(request.args['name'])
 
 @app.route('/dataRotation', methods=['POST', 'GET', 'OPTIONS'])
 @crossdomain(origin='*')
 def rotationReturn():
-    json_data = request.args
-    return dataRotator.getRotation(json_data['data'],json_data['type'])
+    return parseRotation.toJSON(request.args['data'],request.args['type'])
 
 if __name__ == '__main__':
     app.run(debug=True)

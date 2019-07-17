@@ -1,6 +1,6 @@
 export class Points{
     index:number;
-    init?: string;
+    label: string;
     name?: string;
     transition : string;
     message : string

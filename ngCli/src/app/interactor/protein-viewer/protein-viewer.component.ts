@@ -141,6 +141,7 @@ reconfigurePoints(data){
    for (let x = 0; x < data.length; x++) {
       const html = htmls[x]["graphic"].element as SVGAElement;
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"]);
+      console.log(html.getAttribute("aria-label"));
    }
 }
 /**

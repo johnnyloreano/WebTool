@@ -47,7 +47,7 @@ export class DataService {
     for(let i = 0 ; i <residues.length; i++){
       const nAmino = new Points();
       nAmino.index = i;
-      nAmino.init = residues[i]['init'];
+      nAmino.label = residues[i]['label'];
       nAmino.name = residues[i]['name'];
       nAmino.transition = residues[i]['transition'];
       nAmino.message = residues[i]['message'];
@@ -65,7 +65,7 @@ export class DataService {
     for(let x = 0; x < pTest.length;x++){
       let tp = new Points();
       tp.index = x;
-      tp.init = String(x+1);
+      tp.label = String(x+1);
       tp.transition = pTest[x]['transition'];
       tp.message = pTest[x]['message'];
       const coords = pTest[x]['location'];

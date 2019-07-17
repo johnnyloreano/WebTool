@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from pprint import pprint
 from math_utils import distanceOfPoints
 from math_utils import normalizer
 from math import trunc
@@ -39,7 +38,7 @@ def getTInfo(data):
 
 def getDistancesNames():
     NAME_DISTANCES = list()
-    NAME_DISTANCES.append("Pequeno")
-    NAME_DISTANCES.append("Médio")
-    NAME_DISTANCES.append("Grande")
+    NAME_DISTANCES.append("Pequena.")
+    NAME_DISTANCES.append("Média.")
+    NAME_DISTANCES.append("Grande.")
     return NAME_DISTANCES

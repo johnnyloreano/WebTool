@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from prody_utils import getCoord
 from math_hour import *
 from math_intervals import getInfo as intervalInfo
 
@@ -15,17 +14,17 @@ def generateText(hour):
     if hour > 7 and hour < 11:
         message += 'Indo para a esquerda'
     if hour > 1:
-        return message + " " +str(hour) +" horas"
+        return message + " " +str(hour) +" horas."
     else:
-        return message + " " +str(hour) +" hora"
+        return message + " " +str(hour) +" hora."
 def generateFQuadrant(quadrant):
     if quadrant == 1:
-        return 'Quadrante Superior Direito'
+        return 'Quadrante Superior Direito.'
     elif quadrant == 2:
-        return 'Quadrante Superior Esquerdo'
+        return 'Quadrante Superior Esquerdo.'
     elif quadrant == 3 :
-        return 'Quadrante Inferior Esquerdo'
-    return 'Quadrante Inferior Direito'
+        return 'Quadrante Inferior Esquerdo.'
+    return 'Quadrante Inferior Direito.'
 
 def generateTransitions(curr,pred):
     info = getInfo(curr,pred)
