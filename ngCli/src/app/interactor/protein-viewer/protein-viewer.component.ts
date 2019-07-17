@@ -10,12 +10,14 @@ import {
    ChartConfiguratorService
 } from "../chart-configurator/chart-configurator.service";
 import * as Highcharts from 'highcharts';
+import * as $ from 'jquery';
 import highcharts3D from 'highcharts/highcharts-3d.src';
 import {
    TalkerService
 } from '../talker/talker.service';
 import { DataService } from '../../core/data-service/data-service.service';
 import AccessibilityModule from 'highcharts/modules/accessibility';
+import { HttpService } from '../../core/http-pdb/http-pdb-requester.service';
 
 highcharts3D(Highcharts);
 AccessibilityModule(Highcharts);
@@ -27,7 +29,7 @@ AccessibilityModule(Highcharts);
 })
 
 export class ProteinViewerComponent implements OnInit, AfterViewInit{
-   constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService) {}
+   constructor(private _router: Router, private _chartConfigurator : ChartConfiguratorService, private _data : DataService, private _http : HttpService) {}
    seletor = null;
    history = Array<String>();
    chartOptions = null;
@@ -43,6 +45,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
          this._router.navigate(['/menu']);
       Highcharts.chart('pv', this.chartOptions);
       this.configurePoints();
+      this.configureRotation();
    }
    ngAfterViewInit(){
       this.removeDefaultsAria();
@@ -119,9 +122,9 @@ configurePoints(){
    const last = Highcharts.charts.length;
    const data = Highcharts.charts[last-1].series[0].data;
    for (let x = 0; x < data.length; x++) {
-      const html = data[x]["graphic"].element;
-      console.log(data[x]['marker']);
+      const html = data[x]["graphic"].element as SVGAElement;
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"])
+      console.log(html.getAttribute("aria-label"));
       html.addEventListener('keydown', (e) => {
          data[x]['isLast'] = x == data.length-1;
          this.event(e as KeyboardEvent, data[x]);
@@ -130,6 +133,14 @@ configurePoints(){
          this.visited.add(data[x]);
          this.history.push(data[x]['name']);
       });
+   }
+}
+reconfigurePoints(data){
+   const last = Highcharts.charts.length;
+   const htmls = Highcharts.charts[last-1].series[0].data;
+   for (let x = 0; x < data.length; x++) {
+      const html = htmls[x]["graphic"].element as SVGAElement;
+      html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"]);
    }
 }
 /**
@@ -171,5 +182,49 @@ configurePoints(){
       if (document.getElementById("highcharts-information-region-0") != null)
          document.getElementById("highcharts-information-region-0").remove();
 
+   }
+ configureRotation(){
+      const component = this;
+      const last = Highcharts.charts.length - 1 ;
+      const chart = Highcharts.charts[last];
+      $(chart.container).bind('mousedown.hc touchstart.hc', function(eStart) {
+         eStart = chart.pointer.normalize(eStart);
+         const posX = eStart.pageX;
+         const posY = eStart.pageY;
+         const alpha = chart.options.chart.options3d.alpha;
+         const beta = chart.options.chart.options3d.beta;
+         const sensitivity = 5; // lower is more sensitive
+         $(document).bind({
+           'mousemove.hc touchdrag.hc': function(e) {
+             chart.options.chart.options3d.beta = beta + (posX - e.pageX) / sensitivity;
+             chart.options.chart.options3d.alpha = alpha + (e.pageY - posY) / sensitivity;;
+             chart.redraw(false);
+           },
+           'touchend mouseup': function() {
+             $(document).unbind('.hc');
+            let newPlot = new Array<Object>();
+            const RADIUS  = 5;
+            for (let i = 0; i < chart.series[0].data.length; i++){
+               const x = chart.series[0].data[i]['graphic']['x'] + RADIUS;
+               const y = chart.series[0].data[i]['graphic']['y'] + RADIUS * 2;
+               let z = chart.series[0].data[i]['z'];
+               const message = chart.series[0].data[i]['message'];
+               if (z == 0) z = 1;
+               const arrAux = [x,y,z];
+               const dictionary = { message : message, position : arrAux};
+               newPlot.push(dictionary);
+            }
+            const type = component._data.getSeletor();
+            component._http.requestRotation(newPlot, type).subscribe(
+               (result) => {
+                  component.reconfigurePoints(result);
+               },
+               (error) => {
+                  console.log("not success...");
+               }
+               );
+           }
+         });
+      });
    }
 } 

@@ -1,6 +1,10 @@
 # This file must be used with "source bin/activate" *from bash*
 # you cannot run it directly
-
+TK_LIBRARY=/usr/lib/python2.7/lib-tk:/usr/lib/python2.7/site-packages/PIL:/usr/lib
+TKPATH=/usr/lib/python2.7/lib-tk:/usr/lib/python2.7/site-packages/PIL:/usr/lib 
+TCL_LIBRARY=/usr/lib 
+export TCL_LIBRARY TK_LIBRARY TKPATH
+echo 'hello'
 deactivate () {
     unset -f pydoc >/dev/null 2>&1
 
@@ -39,6 +43,9 @@ deactivate () {
 
 # unset irrelevant variables
 deactivate nondestructive
+
+
+
 
 VIRTUAL_ENV="/home/labio/Área de Trabalho/WalkingMol/venv"
 export VIRTUAL_ENV

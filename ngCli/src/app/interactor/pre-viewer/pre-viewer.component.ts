@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/core/data-service/data-service.service';
+import { DataService} from '../../core/data-service/data-service.service'
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,5 +16,4 @@ export class PreViewerComponent implements OnInit {
       this._router.navigate(['/buscador']);
     
   }
-
 }

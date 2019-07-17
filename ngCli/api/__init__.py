@@ -5,6 +5,7 @@ from datetime import timedelta
 from functools import update_wrapper
 sys.path.append('Scripts')
 import dataTag
+import dataRotator
 import dataTest
 
 def crossdomain(origin=None, methods=None, headers=None,
@@ -62,6 +63,12 @@ def tagReturn():
 def testReturn():
     json_data = request.args
     return dataTest.getTests(json_data['name'])
+
+@app.route('/dataRotation', methods=['POST', 'GET', 'OPTIONS'])
+@crossdomain(origin='*')
+def rotationReturn():
+    json_data = request.args
+    return dataRotator.getRotation(json_data['data'],json_data['type'])
 
 if __name__ == '__main__':
     app.run(debug=True)

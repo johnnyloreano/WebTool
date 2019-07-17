@@ -36,7 +36,7 @@ get(option:string){
           enabled: true,
           alpha: 0,
           beta: 0,
-          depth: 0,
+          depth: 250,
           viewDistance: 100,
           frame:{
              bottom :{
@@ -85,8 +85,7 @@ get(option:string){
       series: {
           marker: {
               fillColor: 'black',
-              radius: 5 // inherit from series
-              
+              radius: 5 // inherit from series 
           },
           dataLabels: {
             enabled: true,
@@ -94,10 +93,8 @@ get(option:string){
               return this.point['init'];
           }
         }
-
       }
   },
-
     xAxis:{
        min:0,
        max:size,

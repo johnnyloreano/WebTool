@@ -1,17 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from pprint import pprint
 from Test import Test 
 from transcripter import generateTransitions
 from transcripter import generateFQuadrant
 from math_utils import quadrantOfPoint
-from json import dumps
 from math_utils import distanceOfPoints
+from json import dumps
 dataSet = dict()
 dataSet['quadrado'] = [[2,0,1],[4,0,1],[4,3,1],[2,3,1],[2,0,1]] # OK!
 dataSet['triangulo'] = [[2,0,1],[4,0,1],[3,3,1],[2,0,1]] # OK!
 dataSet['losango'] = [[1,1,1],[2,2,1],[3,1,1], [2,0,1], [1,1,1]] # OK!
-dataSet['junina'] = [[0,0,1],[0,3,1],[2,3,1], [2,0,1], [1,1,1], [0,0,1]] # OK!
 dataSet['trapezio'] = [[1,1,1],[1.5,1.5,1],[2,1.5,1], [2.5,1,1], [1,1,1]] # OK!
 def toJson(name):
     obj = generateTest(name)
@@ -31,8 +29,7 @@ def generateTest(name):
     listPointT.append(firstTest)
     for x in range(1,len(dataSet[name])):
         coords  = dataSet[name][x]
-        nTest = Test(coords)
-        listPointT.append(nTest)        
+        listPointT.append(Test(coords))        
         trans =  generateTransitions(listPointT[x].coords, listPointT[x-1].coords)
         distance = distanceOfPoints(listPointT[x].coords, listPointT[x-1].coords)
         interval = None
@@ -48,6 +45,6 @@ def generateTest(name):
     last = len(listPointT)-1
     listPointT[last].message = 'Você chegou ao final do desenho!'
     listPointT[last].transition = " Não existem mais transições"
-    for x in listPointT:
-        print(x.toJson())
+    # for x in listPointT:
+    #     print(x.toJson())
     return listPointT   
