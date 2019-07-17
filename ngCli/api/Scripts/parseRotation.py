@@ -36,8 +36,10 @@ def recreatePoints(points):
     listPointT.append(firstTest)
     for x in range(1,len(points)):
         coords  = points[x]
-        nTest = Test(coords)
+        listPointT.append(Test(coords))
+
         trans =  generateTransitions(listPointT[x].coords, listPointT[x-1].coords)
+
         distance = distanceOfPoints(listPointT[x].coords, listPointT[x-1].coords)
         interval = None
         if distance <= 1:
@@ -46,10 +48,10 @@ def recreatePoints(points):
             interval = 'Média'
         else:
             interval =  'Grande'
+
         listPointT[x-1].transition = trans + ". Distância " + interval 
         listPointT[x-1].message += "Ponto número " + str(x)+". "
 
-        listPointT.append(nTest)        
 
     last = len(listPointT)-1
     listPointT[last].message = 'Você chegou ao final do desenho!'
@@ -60,14 +62,15 @@ def recreatePoints(points):
 def recreateProtein(points):
     listPointR = list()
     firstRes = Test(points[0]['position'])
-    firstRes.message = defineMessage(points[0]['message']) + generateFQuadrant(quadrantOfPoint(firstRes.coords,50))
+    firstRes.message  = "Começando pelo "+ str( generateFQuadrant(quadrantOfPoint(firstRes.coords,50)) ) + ". "
     listPointR.append(firstRes)
     for x in range(1,len(points)):
         newRes = Test(points[x]['position'])
+        listPointR.append(newRes)
 
         trans =  generateTransitions(points[x]['position'], points[x-1]['position'])
-        distance = distanceOfPoints( points[x]['position'], points[x-1]['position'])
 
+        distance = distanceOfPoints( points[x]['position'], points[x-1]['position'])
         interval = None
         if distance <= 1:
             interval = 'Pequena'
@@ -78,9 +81,6 @@ def recreateProtein(points):
 
         listPointR[x-1].transition = trans + ". Distância " + interval 
         listPointR[x-1].message += defineMessage(points[x-1]['message'])
-
-        listPointR.append(newRes)
-
     
     last = len(listPointR)-1
     listPointR[last].message = 'Você chegou ao final da proteína!'
@@ -97,7 +97,7 @@ def defineMessage(message):
     message = "Resíduo número " + str(number) +  ". "
     message += aminoacid
     message += structure
-    print(message)
+    # print(message)
     return message
 
 def getNumberRes(message):

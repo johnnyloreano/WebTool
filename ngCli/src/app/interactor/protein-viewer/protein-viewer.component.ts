@@ -200,7 +200,7 @@ reconfigurePoints(data){
              chart.options.chart.options3d.alpha = alpha + (e.pageY - posY) / sensitivity;;
              chart.redraw(false);
            },
-           'mouseup touchend': function() {
+           'touchend mouseup': function() {
              $(document).unbind('.hc');
             let newPlot = new Array<Object>();
             const RADIUS  = 5;

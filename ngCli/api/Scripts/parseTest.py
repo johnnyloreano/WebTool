@@ -29,8 +29,7 @@ def generateTest(name):
     listPointT.append(firstTest)
     for x in range(1,len(dataSet[name])):
         coords  = dataSet[name][x]
-        nTest = Test(coords)
-        listPointT.append(nTest)        
+        listPointT.append(Test(coords))        
         trans =  generateTransitions(listPointT[x].coords, listPointT[x-1].coords)
         distance = distanceOfPoints(listPointT[x].coords, listPointT[x-1].coords)
         interval = None
@@ -46,6 +45,6 @@ def generateTest(name):
     last = len(listPointT)-1
     listPointT[last].message = 'Você chegou ao final do desenho!'
     listPointT[last].transition = " Não existem mais transições"
-    for x in listPointT:
-        print(x.toJson())
+    # for x in listPointT:
+    #     print(x.toJson())
     return listPointT   
