@@ -13,7 +13,7 @@ constructor(private http: HttpClient) {}
           pdbFile: file
       }
   };
-  return this.http.get('http://johnnyloreano.pythonanywhere.com/getProtein', config);
+  return this.http.get('https://johnnyloreano.pythonanywhere.com/getProtein', config);
   }
   requestTest(name:string) {
     const config = {
@@ -21,7 +21,7 @@ constructor(private http: HttpClient) {}
           name: name
       }
   };
-  return this.http.get('http://johnnyloreano.pythonanywhere.com/getTest', config);
+  return this.http.get('https://johnnyloreano.pythonanywhere.com/getTest', config);
   }
   requestRotation(points:Array<Object>, type:String){
     let headers = new HttpHeaders();
@@ -32,6 +32,6 @@ constructor(private http: HttpClient) {}
           type: JSON.stringify(type)
       }
   };
-    return this.http.get('http://johnnyloreano.pythonanywhere.com/getRotation', config)
+    return this.http.get('https://johnnyloreano.pythonanywhere.com/getRotation', config)
   }
 }
