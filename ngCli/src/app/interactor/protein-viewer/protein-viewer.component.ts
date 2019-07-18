@@ -77,7 +77,10 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
    }
 
    goTo(page){
-      this._router.navigate([page]);
+      this._router.navigate([page]).then(() =>{
+         if (page == "menu") 
+            window.location.reload();
+      });
    }
    tmpRemSVG(){
       document.getElementsByTagName("svg")[0].setAttribute("aria-hidden", "true");
