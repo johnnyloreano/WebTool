@@ -49,6 +49,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit{
    }
    ngAfterViewInit(){
       this.removeDefaultsAria();
+      this.configureRotation();
    }
    configureTestHTML(){
       const list = document.getElementsByTagName("ul")[0];
