@@ -28,7 +28,9 @@ export class TalkerService {
   }
   static toPortuguese(){
     let i :number;
-    for(i = 0;speechSynthesis.getVoices()[i].lang.toLowerCase() != "pt-br"; i++)
+    for(i = 0;speechSynthesis.getVoices()[i].lang.toLowerCase() != "pt-br"; i++){}
+      console.log(speechSynthesis.getVoices()[i]);
+
     return speechSynthesis.getVoices()[i];
   }
 }
