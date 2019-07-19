@@ -18,12 +18,17 @@ export class TalkerService {
         }
       // Good to go
       const msg = new SpeechSynthesisUtterance(message);
-      msg.volume = 0.5;
+      msg.volume = 1.0;
       msg.pitch = 1.0;
-      msg.rate = 0.7;
-      msg.voice = speechSynthesis.getVoices()[4]
+      msg.rate = 0.9;
+      msg.voice = TalkerService.toPortuguese();
       msg.lang = "pt-BR";
       speechSynthesis.speak(msg);
       console.log(message)
+  }
+  static toPortuguese(){
+    let i :number;
+    for(i = 0;speechSynthesis.getVoices()[i].lang.toLowerCase() != "pt-br"; i++)
+    return speechSynthesis.getVoices()[i];
   }
 }
