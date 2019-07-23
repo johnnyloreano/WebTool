@@ -224,7 +224,7 @@ reconfigurePoints(data){
                   component.reconfigurePoints(result);
                },
                (error) => {
-                  console.log("not success...");
+                  alert("Ocorreu um erro. Verifique sua internet e tente novamente");
                }
                );
            }
