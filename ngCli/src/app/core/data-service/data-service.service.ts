@@ -48,7 +48,6 @@ export class DataService {
       const nAmino = new Points();
       nAmino.index = i;
       nAmino.label = residues[i]['label'];
-      nAmino.name = residues[i]['name'];
       nAmino.transition = residues[i]['transition'];
       nAmino.message = residues[i]['message'];
       const loc = residues[i]['location']
@@ -57,6 +56,7 @@ export class DataService {
       nAmino.z = loc[2]
       residuesComp.push(nAmino)
     }
+    // residuesComp.forEach(element => {console.log(element);});
     return residuesComp;
   }
   parsePTest(pTest: any[]){

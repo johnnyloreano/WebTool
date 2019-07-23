@@ -138,6 +138,7 @@ configurePoints(){
          this.visited.add(data[x]);
          this.history.push(data[x]['name']);
       });
+      console.log(html.getAttribute("aria-label"));
    }
 }
 reconfigurePoints(data){
@@ -146,7 +147,7 @@ reconfigurePoints(data){
    for (let x = 0; x < data.length; x++) {
       const html = htmls[x]["graphic"].element as SVGAElement;
       html.setAttribute("aria-label", data[x]["message"] + data[x]["transition"]);
-      // console.log(html.getAttribute("aria-label"));
+      console.log(html.getAttribute("aria-label"));
    }
 }
 /**
