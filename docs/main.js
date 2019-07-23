@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n    <h1 tabindex=\"0\">\n        Ferramenta WalkingMol\n    </h1>\n    <div>\n        <img role=\"banner\" tabindex=\"0\"  src=\"../assets/labioLogo.PNG\" alt=\"Logo do LABIO Laboratório de BioInformática,Modelagem e Simulação de Biossistemas. FACIN PUCRS\" />\n        <router-outlet></router-outlet>\n    </div>\n</section> \n"
+module.exports = "<section>\n    <h1 tabindex=\"0\">\n        Ferramenta WalkingMol\n    </h1>\n    <div>\n        <img role=\"banner\" tabindex=\"0\"  src=\"/assets/labioLogo.png\" alt=\"Logo do LABIO Laboratório de BioInformática,Modelagem e Simulação de Biossistemas. FACIN PUCRS\" />\n        <router-outlet></router-outlet>\n    </div>\n</section> \n"
 
 /***/ }),
 
@@ -1104,7 +1104,7 @@ var ProteinViewerComponent = /** @class */ (function () {
                     component._http.requestRotation(newPlot, type).subscribe(function (result) {
                         component.reconfigurePoints(result);
                     }, function (error) {
-                        console.log("not success...");
+                        alert("Ocorreu um erro. Verifique sua internet e tente novamente");
                     });
                 }
             });
