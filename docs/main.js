@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n    <img role=\"banner\" tabindex=\"0\"  src=\"assets/labioLogo.png\" alt=\"Logo do LABIO Laboratório de BioInformática, Modelagem e Simulação de Biossistemas. Escola Politécnica PUCRS\" />\n    <h1 tabindex=\"0\">\n            WalkingMOL\n    </h1>\n    <p style=\"font-size: 1.2em\">\n        Bem vindo ao WalkingMOL, uma ferramenta acessível para navegação de estruturas tridimensionais de proteínas.\n    </p>\n    <div>\n        <router-outlet></router-outlet>\n    </div>\n</section> \n"
+module.exports = "<section>\n    <img role=\"banner\" tabindex=\"0\" style=\"width: 14vw;height: 40vh;\" src=\"assets/labioLogo.png\" alt=\"Logo do LABIO Laboratório de BioInformática, Modelagem e Simulação de Biossistemas. Escola Politécnica PUCRS\" />\n    <h1 tabindex=\"0\">\n            WalkingMOL\n    </h1>\n    <p style=\"font-size: 1.2em\">\n        Bem vindo ao WalkingMOL, uma ferramenta acessível para navegação de estruturas tridimensionais de proteínas.\n    </p>\n    <div>\n        <router-outlet></router-outlet>\n    </div>\n</section> \n"
 
 /***/ }),
 
@@ -175,7 +175,7 @@ var AppProviderRoute = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModul
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "section{\n    width:95%;\n    margin: 0 auto;\n    text-align: center;\n    min-height:100vh;\n}\nimg{\n    width: 14vw;\n    height: 40vh;\n}\n*{\n    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxTQUFTO0lBQ1QsY0FBYztJQUNkLGtCQUFrQjtJQUNsQixnQkFBZ0I7QUFDcEI7QUFDQTtJQUNJLFdBQVc7SUFDWCxZQUFZO0FBQ2hCO0FBQ0E7SUFDSSxzSEFBc0g7QUFDMUgiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbInNlY3Rpb257XG4gICAgd2lkdGg6OTUlO1xuICAgIG1hcmdpbjogMCBhdXRvO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBtaW4taGVpZ2h0OjEwMHZoO1xufVxuaW1ne1xuICAgIHdpZHRoOiAxNHZ3O1xuICAgIGhlaWdodDogNDB2aDtcbn1cbip7XG4gICAgZm9udC1mYW1pbHk6ICdMdWNpZGEgU2FucycsICdMdWNpZGEgU2FucyBSZWd1bGFyJywgJ0x1Y2lkYSBHcmFuZGUnLCAnTHVjaWRhIFNhbnMgVW5pY29kZScsIEdlbmV2YSwgVmVyZGFuYSwgc2Fucy1zZXJpZjtcbn0iXX0= */"
+module.exports = "section{\n    width:95%;\n    margin: 0 auto;\n    text-align: center;\n    min-height:100vh;\n}\n*{\n    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxTQUFTO0lBQ1QsY0FBYztJQUNkLGtCQUFrQjtJQUNsQixnQkFBZ0I7QUFDcEI7QUFDQTtJQUNJLHNIQUFzSDtBQUMxSCIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsic2VjdGlvbntcbiAgICB3aWR0aDo5NSU7XG4gICAgbWFyZ2luOiAwIGF1dG87XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIG1pbi1oZWlnaHQ6MTAwdmg7XG59XG4qe1xuICAgIGZvbnQtZmFtaWx5OiAnTHVjaWRhIFNhbnMnLCAnTHVjaWRhIFNhbnMgUmVndWxhcicsICdMdWNpZGEgR3JhbmRlJywgJ0x1Y2lkYSBTYW5zIFVuaWNvZGUnLCBHZW5ldmEsIFZlcmRhbmEsIHNhbnMtc2VyaWY7XG59Il19 */"
 
 /***/ }),
 
