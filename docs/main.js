@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n    <h1 tabindex=\"0\">\n        WalkingMol\n    </h1>\n    <h2>\n        Bem vindo ao WalkingMOL, uma ferramenta acessível para navegação de estruturas tridimensionais de proteínas.\n    </h2>\n    <div>\n        <img role=\"banner\" tabindex=\"0\"  src=\"assets/labioLogo.png\" alt=\"Logo do LABIO Laboratório de BioInformática,Modelagem e Simulação de Biossistemas. FACIN PUCRS\" />\n        <router-outlet></router-outlet>\n    </div>\n</section> \n"
+module.exports = "<section>\n    <h1 tabindex=\"0\">\n        WalkingMol\n    </h1>\n    <p style=\"font-size: 1.2em\">\n        Bem vindo ao WalkingMOL, uma ferramenta acessível para navegação de estruturas tridimensionais de proteínas.\n    </p>\n    <div>\n        <img role=\"banner\" tabindex=\"0\"  src=\"assets/labioLogo.png\" alt=\"Logo do LABIO Laboratório de BioInformática,Modelagem e Simulação de Biossistemas. Escola Politécnica PUCRS\" />\n        <router-outlet></router-outlet>\n    </div>\n</section> \n"
 
 /***/ }),
 
