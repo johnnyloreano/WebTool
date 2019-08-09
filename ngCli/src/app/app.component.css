@@ -4,10 +4,6 @@ section{
     text-align: center;
     min-height:100vh;
 }
-img{
-    width: 14vw;
-    height: 40vh;
-}
 *{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
