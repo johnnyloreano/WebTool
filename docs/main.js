@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n    <h1 tabindex=\"0\">\n        Ferramenta WalkingMol\n    </h1>\n    <div>\n        <img role=\"banner\" tabindex=\"0\"  src=\"assets/labioLogo.png\" alt=\"Logo do LABIO Laboratório de BioInformática,Modelagem e Simulação de Biossistemas. FACIN PUCRS\" />\n        <router-outlet></router-outlet>\n    </div>\n</section> \n"
+module.exports = "<section>\n    <h1 tabindex=\"0\">\n        WalkingMol\n    </h1>\n    <h2>\n        Bem vindo ao WalkingMOL, uma ferramenta acessível para navegação de estruturas tridimensionais de proteínas.\n    </h2>\n    <div>\n        <img role=\"banner\" tabindex=\"0\"  src=\"assets/labioLogo.png\" alt=\"Logo do LABIO Laboratório de BioInformática,Modelagem e Simulação de Biossistemas. FACIN PUCRS\" />\n        <router-outlet></router-outlet>\n    </div>\n</section> \n"
 
 /***/ }),
 
@@ -84,7 +84,7 @@ module.exports = "<h2 tabindex='0' id=\"principalTitle\" >\n  Manual da ferramen
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='text-center container'>\n    <h2 id=\"menuLock\" tabindex=\"0\" >\n      Menu principal \n    </h2>\n  <nav>\n    <ul  id=\"menuList\">\n      <li><button tabindex='0' class='btn bg-primary text-white' routerLink='/buscador' >Abrir buscador de proteína</button></li>\n      <li><button tabindex='0' class='btn bg-primary text-white' routerLink='/manual'>Abrir manual</button></li>\n      <li><button tabindex='0' class='btn bg-primary text-white' routerLink='/testes' >Abrir Testes</button></li>\n  </ul>\n  </nav>\n</div>"
+module.exports = "<div class='text-center container'>\n    <h2 id=\"menuLock\" tabindex=\"0\" >\n      Menu principal \n    </h2>\n  <nav>\n    <ul  id=\"menuList\">\n      <li><button tabindex='0' class='btn bg-primary text-white' routerLink='/buscador' >Abrir buscador de proteína</button></li>\n      <li><button tabindex='0' class='btn bg-primary text-white' routerLink='/manual'>Abrir manual</button></li>\n      <li><button tabindex='0' class='btn bg-primary text-white' routerLink='/testes' >Abrir Tutorial</button></li>\n  </ul>\n  </nav>\n</div>"
 
 /***/ }),
 
