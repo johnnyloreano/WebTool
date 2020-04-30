@@ -27,7 +27,7 @@
     "highcharts": "^7.1.1",
     "highcharts-angular": "^2.4.0",
     "highcharts-draggable-points": "^2.0.10",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "resolve": "^1.11.0",
     "rxjs": "^6.5.2",
     "rxjs-compat": "^6.5.2",
