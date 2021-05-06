@@ -2,7 +2,7 @@ biopython==1.73
 Click==7.0
 cycler==0.10.0
 Flask==1.0.3
-Flask-Cors==3.0.7
+Flask-Cors==3.0.9
 gunicorn==19.9.0
 itsdangerous==1.1.0
 Jinja2==2.10.1
